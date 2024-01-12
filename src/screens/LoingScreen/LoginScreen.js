@@ -6,7 +6,7 @@ import {
   View,
   SafeAreaView,
 } from 'react-native';
-import React from 'react';
+import React, {useState} from 'react';
 import styles from './styles';
 import ImagePath from '../../constants/ImagePath';
 import CustomButton from '../../components/CustomButton';
@@ -14,11 +14,11 @@ import {useNavigation} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
-import {moderateScale, scale} from 'react-native-size-matters';
-import CustomIcon from '../../components/CustomIcon';
 import CustomImage from '../../components/CustomImage';
+import CustomInput from '../../components/CustomInput';
 
 const LoginScreen = () => {
+  const [value, setValue] = useState('');
   const navigation = useNavigation();
 
   const NextScreen = () => {
@@ -42,6 +42,26 @@ const LoginScreen = () => {
           <CustomImage source={ImagePath.FACEBOOKICON} resizeMode="contain" />
           <CustomImage source={ImagePath.GOOGLEICON} resizeMode="contain" />
           <CustomImage source={ImagePath.INSTAGRAMICON} resizeMode="contain" />
+        </View>
+
+        <View style={styles.textinputView}>
+          <View style={styles.textinputTop}>
+            <CustomInput
+              placeholder="Email"
+              onchangeText={text => {
+                setValue(text);
+              }}
+            />
+          </View>
+          <View style={styles.textinputPassword}>
+            <CustomInput
+              secureTextEntry={true}
+              placeholder="Password"
+              onchangeText={text => {
+                setValue(text);
+              }}
+            />
+          </View>
         </View>
         <View>
           <CustomButton
