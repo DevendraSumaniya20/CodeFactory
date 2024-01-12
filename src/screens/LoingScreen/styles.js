@@ -8,13 +8,11 @@ import {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: moderateScale(10),
     backgroundColor: '#fff',
   },
 
   subcontainer: {
     flex: 1,
-    paddingBottom: moderateScale(16),
   },
   imageView: {
     alignItems: 'center',
