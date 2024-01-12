@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   textStyle: {
     color: '#fff',
     fontSize: scale(16),
-    fontFamily: 'NunitoSans-Black',
+    fontFamily: 'Rubik-Medium',
+    fontWeight: 'bold',
   },
 });

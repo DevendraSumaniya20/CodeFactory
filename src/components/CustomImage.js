@@ -27,7 +27,7 @@ const styles = StyleSheet.create({
     margin: moderateScale(6),
   },
   iconImage: {
-    width: moderateScale(40),
-    height: moderateScale(40),
+    width: moderateScale(24),
+    height: moderateScale(24),
   },
 });

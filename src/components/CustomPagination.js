@@ -3,23 +3,23 @@ import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 
 const CustomPagination = ({
-  paddingHorizontal = moderateScale(20),
   backgroundColor = '#65AAEA',
   borderRadius = 10,
   text,
-  marginRight,
-  marginLeft,
+  marginHorizontal,
+  height,
+  width,
 }) => {
   return (
     <TouchableOpacity
       style={[
         styles.paginationStyle,
         {
-          paddingHorizontal: paddingHorizontal,
           backgroundColor: backgroundColor,
           borderRadius: borderRadius,
-          marginRight: marginRight,
-          marginLeft: marginLeft,
+          marginHorizontal: marginHorizontal,
+          height: height,
+          width: width,
         },
       ]}>
       <Text>{text}</Text>

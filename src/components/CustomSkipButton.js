@@ -19,9 +19,13 @@ const styles = StyleSheet.create({
     // flex: 1,
     alignItems: 'flex-end',
     paddingRight: moderateScale(16),
+    marginTop: moderateScale(8),
   },
   textStyle: {
-    fontFamily: 'NunitoSans-Bold',
-    fontSize: moderateScale(24),
+    fontFamily: 'Rubik-Medium',
+    fontSize: moderateScale(16),
+    color: '#78746D',
+    fontWeight: '500',
+    lineHeight: 16,
   },
 });

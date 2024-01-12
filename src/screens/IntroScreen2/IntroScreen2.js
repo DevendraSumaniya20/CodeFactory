@@ -30,53 +30,58 @@ const IntroScreen2 = () => {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <CustomSkipButton
-          text={'skip'}
-          onPress={() => {
-            SKipScreen();
-          }}
-        />
-        <View style={styles.imageView}>
-          <Image source={ImagePath.INTRO1IMG2} style={styles.image} />
-        </View>
-        <View style={styles.welcomeTextView}>
-          <CustomWelcomeText text={'Find a course'} />
-          <CustomWelcomeText text={'for you'} />
-        </View>
-        <View style={styles.descriptionTextView}>
-          <CustomDescriptionText
-            text={
-              'Quarantine is the perfect time to spend your day learning something new, from anywhere! '
-            }
-          />
-        </View>
-        <View style={styles.paginationMainView}>
-          <CustomPagination
-            borderRadius={30}
-            paddingHorizontal={moderateScale(8)}
-            backgroundColor={'#AAA'}
-            marginRight={moderateScale(8)}
-          />
-          <CustomPagination
-            text={''}
-            paddingHorizontal={moderateScale(16)}
-            marginRight={moderateScale(8)}
-          />
-          <CustomPagination
-            paddingHorizontal={moderateScale(8)}
-            backgroundColor={'#AAA'}
-          />
-        </View>
-        <View>
-          <CustomButton
-            text={'Next'}
+      <View style={{flex: 1, backgroundColor: '#fff'}}>
+        <View style={styles.container}>
+          <CustomSkipButton
+            text={'skip'}
             onPress={() => {
-              NextScreen();
+              SKipScreen();
             }}
           />
+          <View style={styles.imageView}>
+            <Image source={ImagePath.INTRO1IMG2} style={styles.image} />
+          </View>
+          <View style={styles.welcomeTextView}>
+            <CustomWelcomeText text={'Find a course for you'} />
+          </View>
+          <View style={styles.descriptionTextView}>
+            <CustomDescriptionText
+              text={
+                'Quarantine is the perfect time to spend your day learning something new, from anywhere! '
+              }
+            />
+          </View>
+          <View style={styles.paginationMainView}>
+            <CustomPagination
+              borderRadius={50}
+              backgroundColor={'#AAA'}
+              width={moderateScale(6)}
+              height={moderateScale(6)}
+            />
+            <CustomPagination
+              text={''}
+              paddingHorizontal={moderateScale(16)}
+              marginHorizontal={moderateScale(12)}
+              width={moderateScale(16)}
+              height={moderateScale(6)}
+            />
+            <CustomPagination
+              borderRadius={50}
+              backgroundColor={'#AAA'}
+              width={moderateScale(6)}
+              height={moderateScale(6)}
+            />
+          </View>
+          <View>
+            <CustomButton
+              text={'Next'}
+              onPress={() => {
+                NextScreen();
+              }}
+            />
+          </View>
         </View>
-      </SafeAreaView>
+      </View>
     </>
   );
 };

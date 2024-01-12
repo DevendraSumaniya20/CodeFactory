@@ -1,5 +1,9 @@
 import {StyleSheet} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
 
 const styles = StyleSheet.create({
   container: {
@@ -14,16 +18,14 @@ const styles = StyleSheet.create({
     marginTop: moderateScale(36),
   },
   image: {
-    width: moderateScale(375),
-    height: moderateScale(264),
+    width: moderateScale(343),
+    height: moderateScale(253),
   },
   welcomeTextView: {
-    marginBottom: moderateScale(16),
-    marginTop: moderateScale(16),
+    marginTop: moderateScale(8),
   },
   descriptionTextView: {
-    marginBottom: moderateScale(26),
-    marginTop: moderateScale(16),
+    marginTop: moderateScale(8),
   },
   iconView: {
     alignItems: 'center',
@@ -31,7 +33,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   textinputView: {
-    flex: 1,
+    // flex: 1,
   },
   textinputTop: {
     margin: moderateScale(12),
@@ -39,6 +41,25 @@ const styles = StyleSheet.create({
 
   textinputPassword: {
     margin: moderateScale(12),
+  },
+  forgotPasswordView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: moderateVerticalScale(16),
+  },
+
+  forgotPasswordTextStyle: {
+    fontSize: scale(16),
+    fontWeight: '500',
+  },
+  SignUpView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginBottom: moderateVerticalScale(16),
+  },
+  signUpTextStyle: {
+    fontSize: scale(16),
+    fontWeight: '500',
   },
 });
 export default styles;

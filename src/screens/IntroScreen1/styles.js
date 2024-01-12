@@ -4,7 +4,7 @@ import {moderateScale} from 'react-native-size-matters';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: moderateScale(10),
+    margin: moderateScale(16),
   },
 
   imageView: {
@@ -18,16 +18,18 @@ const styles = StyleSheet.create({
     flexShrink: 0,
   },
   welcomeTextView: {
-    marginBottom: moderateScale(16),
+    marginTop: moderateScale(16),
+    marginBottom: moderateScale(8),
   },
   descriptionTextView: {
-    marginBottom: moderateScale(26),
+    marginBottom: moderateScale(16),
   },
   paginationMainView: {
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    marginVertical: moderateScale(24),
+    marginTop: moderateScale(36),
+    marginBottom: moderateScale(72),
   },
 });
 export default styles;
