@@ -11,6 +11,10 @@ const styles = StyleSheet.create({
     marginHorizontal: moderateScale(10),
   },
 
+  subcontainer: {
+    flex: 1,
+    paddingBottom: moderateScale(16),
+  },
   imageView: {
     flex: 1,
     justifyContent: 'center',

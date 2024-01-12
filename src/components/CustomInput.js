@@ -33,7 +33,7 @@ const CustomInput = ({
       {!!rightIcon && (
         <View style={styles.rightIconContainer}>
           <TouchableOpacity onPress={onPressRight}>
-            <CustomIcon name={rightIcon} size={20} color={'#000'} />
+            <CustomIcon name={rightIcon} size={20} color={'#000000'} />
           </TouchableOpacity>
         </View>
       )}
@@ -46,7 +46,7 @@ export default CustomInput;
 const styles = StyleSheet.create({
   inputStyle: {
     padding: moderateScale(12),
-    borderBottomColor: '#AAA',
+    borderColor: '#BEBAB3',
     fontSize: scale(16),
     height: moderateScale(52),
     fontFamily: 'Rubik-Regular',

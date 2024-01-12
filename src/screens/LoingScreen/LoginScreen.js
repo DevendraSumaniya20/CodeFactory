@@ -6,6 +6,7 @@ import {
   View,
   SafeAreaView,
   Alert,
+  KeyboardAvoidingView,
 } from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
@@ -31,74 +32,97 @@ const LoginScreen = () => {
 
   return (
     <>
-      <SafeAreaView style={styles.container}>
-        <View style={styles.imageView}>
-          <Image source={ImagePath.LOGINIMG} style={styles.image} />
-        </View>
-        <View style={styles.welcomeTextView}>
-          <CustomWelcomeText text={'Log in'} />
-        </View>
-        <View style={styles.descriptionTextView}>
-          <CustomDescriptionText text={'Login with social networks '} />
-        </View>
+      <KeyboardAvoidingView
+        behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+        style={styles.subcontainer}>
+        <SafeAreaView style={styles.container}>
+          <View style={styles.imageView}>
+            <Image source={ImagePath.LOGINIMG} style={styles.image} />
+          </View>
+          <View style={styles.welcomeTextView}>
+            <CustomWelcomeText text={'Log in'} />
+          </View>
+          <View style={styles.descriptionTextView}>
+            <CustomDescriptionText text={'Login with social networks '} />
+          </View>
 
-        <View style={styles.iconView}>
-          <CustomImage source={ImagePath.FACEBOOKICON} resizeMode="contain" />
-          <CustomImage source={ImagePath.GOOGLEICON} resizeMode="contain" />
-          <CustomImage source={ImagePath.INSTAGRAMICON} resizeMode="contain" />
-        </View>
-
-        <View style={styles.textinputView}>
-          <View style={styles.textinputTop}>
-            <CustomInput
-              autoFocus={true}
-              placeholder="Email"
-              onchangeText={text => {
-                setValue(text);
+          <View style={styles.iconView}>
+            <CustomImage
+              source={ImagePath.FACEBOOKICON}
+              resizeMode="contain"
+              onPress={() => {
+                Alert.alert('Facebook');
+              }}
+            />
+            <CustomImage
+              source={ImagePath.GOOGLEICON}
+              resizeMode="contain"
+              onPress={() => {
+                Alert.alert('Google');
+              }}
+            />
+            <CustomImage
+              source={ImagePath.INSTAGRAMICON}
+              resizeMode="contain"
+              onPress={() => {
+                Alert.alert('Instagram');
               }}
             />
           </View>
-          <View style={styles.textinputPassword}>
-            <CustomInput
-              inputStyle={{width: '90%'}}
-              secureTextEntry={secureTextEntry}
-              placeholder="Password"
-              onChangeText={text => {
-                setValue(text);
+
+          <View style={styles.textinputView}>
+            <View style={styles.textinputTop}>
+              <CustomInput
+                autoFocus={true}
+                placeholder="Email"
+                onchangeText={text => {
+                  setValue(text);
+                }}
+              />
+            </View>
+            <View style={styles.textinputPassword}>
+              <CustomInput
+                inputStyle={{width: '90%'}}
+                secureTextEntry={secureTextEntry}
+                placeholder="Password"
+                onChangeText={text => {
+                  setValue(text);
+                }}
+                rightIcon={secureTextEntry ? 'eye-off-outline' : 'eye-outline'}
+                onPressRight={() => setSecureTextEntry(!secureTextEntry)}
+              />
+            </View>
+          </View>
+
+          <View style={styles.forgotPasswordView}>
+            <TouchableOpacity
+              onPress={() => {
+                Alert.alert('Forgot');
+              }}>
+              <Text style={styles.forgotPasswordTextStyle}>
+                Forgot Password ?
+              </Text>
+            </TouchableOpacity>
+          </View>
+
+          <View>
+            <CustomButton
+              text={'Log in'}
+              onPress={() => {
+                NextScreen();
               }}
-              rightIcon={secureTextEntry ? 'eye-off-outline' : 'eye-outline'}
-              onPressRight={() => setSecureTextEntry(!secureTextEntry)}
             />
           </View>
-        </View>
-
-        <View style={styles.forgotPasswordView}>
-          <TouchableOpacity
-            onPress={() => {
-              Alert.alert('Forgot');
-            }}>
-            <Text style={styles.forgotPasswordTextStyle}>
-              Forgot Password ?
-            </Text>
-          </TouchableOpacity>
-        </View>
-        <View>
-          <CustomButton
-            text={'Log in'}
-            onPress={() => {
-              NextScreen();
-            }}
-          />
-        </View>
-        <View style={styles.SignUpView}>
-          <TouchableOpacity
-            onPress={() => {
-              Alert.alert('Sign Up');
-            }}>
-            <Text style={styles.signUpTextStyle}>Sign up</Text>
-          </TouchableOpacity>
-        </View>
-      </SafeAreaView>
+          <View style={styles.SignUpView}>
+            <TouchableOpacity
+              onPress={() => {
+                Alert.alert('Sign Up');
+              }}>
+              <Text style={styles.signUpTextStyle}>Sign up</Text>
+            </TouchableOpacity>
+          </View>
+        </SafeAreaView>
+      </KeyboardAvoidingView>
     </>
   );
 };

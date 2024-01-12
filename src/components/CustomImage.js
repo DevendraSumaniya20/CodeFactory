@@ -1,15 +1,17 @@
-import {Image, StyleSheet, Text, View} from 'react-native';
+import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
 
-const CustomImage = ({source, iconStyle, resizeMode}) => {
+const CustomImage = ({source, iconStyle, resizeMode, onPress}) => {
   return (
     <View style={styles.customImageView}>
-      <Image
-        source={source}
-        style={[styles.iconImage, iconStyle]}
-        resizeMode={resizeMode}
-      />
+      <TouchableOpacity onPress={onPress}>
+        <Image
+          source={source}
+          style={[styles.iconImage, iconStyle]}
+          resizeMode={resizeMode}
+        />
+      </TouchableOpacity>
     </View>
   );
 };
