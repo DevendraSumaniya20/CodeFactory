@@ -9,7 +9,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     marginHorizontal: moderateScale(10),
-    backgroundColor: '#fff',
   },
 
   subcontainer: {
@@ -17,37 +16,40 @@ const styles = StyleSheet.create({
     paddingBottom: moderateScale(16),
   },
   imageView: {
+    flex: 1,
+    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: moderateScale(52),
-    marginHorizontal: moderateScale(16),
-    marginBottom: moderateVerticalScale(16),
+    marginTop: moderateScale(36),
   },
   image: {
     width: moderateScale(343),
     height: moderateScale(253),
   },
   welcomeTextView: {
-    marginVertical: moderateVerticalScale(16),
+    marginTop: moderateScale(8),
   },
-
+  descriptionTextView: {
+    marginTop: moderateScale(8),
+  },
   iconView: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
   },
-
+  textinputView: {
+    // flex: 1,
+  },
   textinputTop: {
-    marginHorizontal: moderateScale(12),
+    margin: moderateScale(12),
   },
 
   textinputPassword: {
-    marginHorizontal: moderateScale(12),
-    marginTop: moderateScale(16),
+    margin: moderateScale(12),
   },
   forgotPasswordView: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: moderateScale(16),
+    marginTop: moderateVerticalScale(16),
   },
 
   forgotPasswordTextStyle: {
@@ -57,6 +59,7 @@ const styles = StyleSheet.create({
   SignUpView: {
     alignItems: 'center',
     justifyContent: 'center',
+    marginBottom: moderateVerticalScale(16),
   },
   signUpTextStyle: {
     fontSize: scale(16),

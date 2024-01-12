@@ -19,7 +19,7 @@ import CustomDescriptionText from '../../components/CustomDescriptionText';
 import CustomImage from '../../components/CustomImage';
 import CustomInput from '../../components/CustomInput';
 import CustomIcon from '../../components/CustomIcon';
-import {scale} from 'react-native-size-matters';
+import {moderateScale, scale} from 'react-native-size-matters';
 
 const LoginScreen = () => {
   const [value, setValue] = useState('');
@@ -41,39 +41,41 @@ const LoginScreen = () => {
           </View>
           <View style={styles.welcomeTextView}>
             <CustomWelcomeText text={'Log in'} />
-          </View>
-          <View style={styles.descriptionTextView}>
-            <CustomDescriptionText text={'Login with social networks '} />
-          </View>
 
-          <View style={styles.iconView}>
-            <CustomImage
-              source={ImagePath.FACEBOOKICON}
-              resizeMode="contain"
-              onPress={() => {
-                Alert.alert('Facebook');
-              }}
+            <CustomDescriptionText
+              text={'Login with social networks '}
+              // marginVertical={moderateScale(8)}
+              marginTop={moderateScale(8)}
             />
-            <CustomImage
-              source={ImagePath.GOOGLEICON}
-              resizeMode="contain"
-              onPress={() => {
-                Alert.alert('Google');
-              }}
-            />
-            <CustomImage
-              source={ImagePath.INSTAGRAMICON}
-              resizeMode="contain"
-              onPress={() => {
-                Alert.alert('Instagram');
-              }}
-            />
-          </View>
 
+            <View style={styles.iconView}>
+              <CustomImage
+                source={ImagePath.FACEBOOKICON}
+                resizeMode="contain"
+                onPress={() => {
+                  Alert.alert('Facebook');
+                }}
+              />
+              <CustomImage
+                source={ImagePath.GOOGLEICON}
+                resizeMode="contain"
+                onPress={() => {
+                  Alert.alert('Google');
+                }}
+              />
+              <CustomImage
+                source={ImagePath.INSTAGRAMICON}
+                resizeMode="contain"
+                onPress={() => {
+                  Alert.alert('Instagram');
+                }}
+              />
+            </View>
+          </View>
           <View style={styles.textinputView}>
             <View style={styles.textinputTop}>
               <CustomInput
-                autoFocus={true}
+                // autoFocus={true}
                 placeholder="Email"
                 onchangeText={text => {
                   setValue(text);
@@ -92,31 +94,31 @@ const LoginScreen = () => {
                 onPressRight={() => setSecureTextEntry(!secureTextEntry)}
               />
             </View>
-          </View>
 
-          <View style={styles.forgotPasswordView}>
-            <TouchableOpacity
-              onPress={() => {
-                Alert.alert('Forgot');
-              }}>
-              <Text style={styles.forgotPasswordTextStyle}>
-                Forgot Password ?
-              </Text>
-            </TouchableOpacity>
-          </View>
+            <View style={styles.forgotPasswordView}>
+              <TouchableOpacity
+                onPress={() => {
+                  Alert.alert('Forgot');
+                }}>
+                <Text style={styles.forgotPasswordTextStyle}>
+                  Forgot Password ?
+                </Text>
+              </TouchableOpacity>
+            </View>
 
-          <View>
-            <CustomButton
-              text={'Log in'}
-              onPress={() => {
-                NextScreen();
-              }}
-            />
+            <View style={{marginTop: moderateScale(0)}}>
+              <CustomButton
+                text={'Log in'}
+                onPress={() => {
+                  NextScreen();
+                }}
+              />
+            </View>
           </View>
           <View style={styles.SignUpView}>
             <TouchableOpacity
               onPress={() => {
-                Alert.alert('Sign Up');
+                navigation.navigate(NavigationStringPath.SIGNUPSCREEN);
               }}>
               <Text style={styles.signUpTextStyle}>Sign up</Text>
             </TouchableOpacity>

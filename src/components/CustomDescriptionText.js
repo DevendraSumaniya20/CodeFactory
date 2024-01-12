@@ -2,10 +2,25 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {moderateScale, scale} from 'react-native-size-matters';
 
-const CustomDescriptionText = ({text, fontsize = scale(14)}) => {
+const CustomDescriptionText = ({
+  text,
+  fontsize = scale(14),
+  marginVertical,
+  marginTop,
+}) => {
   return (
     <View style={styles.descriptionTextView}>
-      <Text style={[styles.textStyle, {fontSize: fontsize}]}>{text}</Text>
+      <Text
+        style={[
+          styles.textStyle,
+          {
+            fontSize: fontsize,
+            marginVertical: marginVertical,
+            marginTop: marginTop,
+          },
+        ]}>
+        {text}
+      </Text>
     </View>
   );
 };

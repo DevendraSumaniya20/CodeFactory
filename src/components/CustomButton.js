@@ -14,8 +14,8 @@ export default CustomButton;
 
 const styles = StyleSheet.create({
   CustombuttonView: {
-    width: moderateScale(311),
-    paddingHorizontal: moderateScale(8),
+    width: moderateScale(343),
+    paddingHorizontal: moderateScale(32),
     paddingVertical: moderateScale(16),
     backgroundColor: '#E3562A',
     borderRadius: moderateScale(16),
