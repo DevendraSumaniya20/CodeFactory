@@ -8,7 +8,6 @@ import {
 } from 'react-native';
 import React from 'react';
 import styles from './styles';
-import CustomSkipButton from '../../components/CustomSkipButton';
 import ImagePath from '../../constants/ImagePath';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
@@ -16,8 +15,8 @@ import NavigationStringPath from '../../constants/NavigationStringPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {moderateScale, scale} from 'react-native-size-matters';
-import CustomPagination from '../../components/CustomPagination';
 import CustomIcon from '../../components/CustomIcon';
+import CustomImage from '../../components/CustomImage';
 
 const LoginScreen = () => {
   const navigation = useNavigation();
@@ -40,10 +39,9 @@ const LoginScreen = () => {
         </View>
 
         <View style={styles.iconView}>
-          <CustomIcon
-            image={ImagePath.FACEBOOKICON}
-            imageStyle={styles.iconImage}
-          />
+          <CustomImage source={ImagePath.FACEBOOKICON} resizeMode="contain" />
+          <CustomImage source={ImagePath.GOOGLEICON} resizeMode="contain" />
+          <CustomImage source={ImagePath.INSTAGRAMICON} resizeMode="contain" />
         </View>
         <View>
           <CustomButton

@@ -25,11 +25,7 @@ const styles = StyleSheet.create({
   iconView: {
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: 'red',
-  },
-  iconImage: {
-    width: moderateScale(60),
-    height: moderateScale(60),
+    flexDirection: 'row',
   },
 });
 export default styles;
