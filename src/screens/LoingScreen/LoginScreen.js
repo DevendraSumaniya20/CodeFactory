@@ -51,6 +51,7 @@ const LoginScreen = () => {
         <View style={styles.textinputView}>
           <View style={styles.textinputTop}>
             <CustomInput
+              autoFocus={true}
               placeholder="Email"
               onchangeText={text => {
                 setValue(text);

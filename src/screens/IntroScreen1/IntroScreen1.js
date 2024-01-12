@@ -43,7 +43,12 @@ const IntroScreen1 = () => {
             <Image source={ImagePath.INTROIMG1} style={styles.image} />
           </View>
           <View style={styles.welcomeTextView}>
-            <CustomWelcomeText text={'Learn anytime and anywhere'} />
+            <CustomWelcomeText
+              text={'Learn anytime and anywhere'}
+              letterSpacing={0.5}
+              width={moderateScale(200)}
+              lineHeight={32}
+            />
           </View>
           <View style={styles.descriptionTextView}>
             <CustomDescriptionText

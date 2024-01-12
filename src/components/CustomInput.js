@@ -16,6 +16,7 @@ const CustomInput = ({
   secureTextEntry,
   onPressRight,
   rightIcon,
+  autoFocus,
 }) => {
   return (
     <View style={styles.textInput}>
@@ -24,6 +25,10 @@ const CustomInput = ({
         style={{...styles.inputStyle, ...inputStyle}}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
+        autoFocus={autoFocus}
+        autoCapitalize="none"
+        autoComplete="off"
+        autoCorrect={false}
       />
       {!!rightIcon && (
         <View style={styles.rightIconContainer}>
