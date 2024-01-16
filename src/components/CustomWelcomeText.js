@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {moderateScale, scale} from 'react-native-size-matters';
+import Color from '../constants/Color';
 
 const CustomWelcomeText = ({text, lineHeight, letterSpacing, width}) => {
   return (
@@ -23,10 +24,13 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textStyle: {
-    fontFamily: 'Rubik-Bold',
+    fontFamily: 'Rubik-Regular',
     fontSize: scale(24),
     fontWeight: '500',
-    color: '#3C3A36',
+    color: Color.BLACK,
     textAlign: 'center',
+    letterSpacing: -0.5,
+    lineHeight: 32,
+    fontStyle: 'normal',
   },
 });

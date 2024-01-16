@@ -1,6 +1,7 @@
 import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {moderateScale} from 'react-native-size-matters';
+import Color from '../constants/Color';
 
 const CustomImage = ({source, iconStyle, resizeMode, onPress}) => {
   return (
@@ -21,7 +22,7 @@ export default CustomImage;
 const styles = StyleSheet.create({
   customImageView: {
     // flex: 1,
-    backgroundColor: '#65AAEA',
+    backgroundColor: Color.BLUE,
     borderRadius: moderateScale(8),
     padding: moderateScale(8),
     justifyContent: 'center',

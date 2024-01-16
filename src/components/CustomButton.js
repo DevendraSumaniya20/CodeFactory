@@ -1,6 +1,7 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import {moderateScale, scale} from 'react-native-size-matters';
+import Color from '../constants/Color';
 
 const CustomButton = ({text, onPress}) => {
   return (
@@ -17,16 +18,18 @@ const styles = StyleSheet.create({
     width: moderateScale(343),
     paddingHorizontal: moderateScale(32),
     paddingVertical: moderateScale(16),
-    backgroundColor: '#E3562A',
+    backgroundColor: Color.THEMECOLOR,
     borderRadius: moderateScale(16),
     alignItems: 'center',
     alignSelf: 'center',
     marginVertical: moderateScale(16),
   },
   textStyle: {
-    color: '#fff',
+    color: Color.WHITE,
     fontSize: scale(16),
-    fontFamily: 'Rubik-Medium',
-    fontWeight: 'bold',
+    fontFamily: 'Rubik-Bold',
+    fontWeight: '500',
+    lineHeight: 18,
+    fontStyle: 'normal',
   },
 });

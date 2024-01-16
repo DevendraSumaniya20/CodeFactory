@@ -8,6 +8,7 @@ import {
 import React from 'react';
 import {moderateScale, scale} from 'react-native-size-matters';
 import CustomIcon from './CustomIcon';
+import Color from '../constants/Color';
 
 const CustomInput = ({
   placeholder = '',
@@ -46,16 +47,18 @@ export default CustomInput;
 const styles = StyleSheet.create({
   inputStyle: {
     padding: moderateScale(12),
-    borderColor: '#BEBAB3',
-    fontSize: scale(16),
+    borderColor: Color.LIGHTGRAY,
+    fontSize: scale(14),
     height: moderateScale(52),
     fontFamily: 'Rubik-Regular',
     fontWeight: '400',
+    fontStyle: 'normal',
+    lineHeight: 21,
   },
   textInput: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderRadius: moderateScale(10),
+    borderRadius: moderateScale(12),
     borderWidth: 0.5,
     justifyContent: 'space-between',
   },

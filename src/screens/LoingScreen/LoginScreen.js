@@ -46,8 +46,8 @@ const LoginScreen = () => {
 
                 <CustomDescriptionText
                   text={'Login with social networks '}
-                  // marginVertical={moderateScale(8)}
                   marginTop={moderateScale(8)}
+                  lineHeight={21}
                 />
 
                 <View style={styles.iconView}>

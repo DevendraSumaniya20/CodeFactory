@@ -17,6 +17,7 @@ import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {moderateScale, scale} from 'react-native-size-matters';
 import CustomPagination from '../../components/CustomPagination';
+import Color from '../../constants/Color';
 
 const IntroScreen2 = () => {
   const navigation = useNavigation();
@@ -44,7 +45,7 @@ const IntroScreen2 = () => {
           <View style={styles.welcomeTextView}>
             <CustomWelcomeText
               text={'Find a course for you'}
-              letterSpacing={0.5}
+              letterSpacing={-0.5}
               width={moderateScale(200)}
               lineHeight={32}
             />
@@ -59,7 +60,7 @@ const IntroScreen2 = () => {
           <View style={styles.paginationMainView}>
             <CustomPagination
               borderRadius={50}
-              backgroundColor={'#AAA'}
+              backgroundColor={Color.GRAY}
               width={moderateScale(6)}
               height={moderateScale(6)}
             />
@@ -72,7 +73,7 @@ const IntroScreen2 = () => {
             />
             <CustomPagination
               borderRadius={50}
-              backgroundColor={'#AAA'}
+              backgroundColor={Color.GRAY}
               width={moderateScale(6)}
               height={moderateScale(6)}
             />

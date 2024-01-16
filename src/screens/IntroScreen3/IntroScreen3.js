@@ -17,6 +17,7 @@ import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {moderateScale, scale} from 'react-native-size-matters';
 import CustomPagination from '../../components/CustomPagination';
+import Color from '../../constants/Color';
 
 const IntroScreen3 = () => {
   const navigation = useNavigation();
@@ -55,7 +56,7 @@ const IntroScreen3 = () => {
           <View style={styles.paginationMainView}>
             <CustomPagination
               borderRadius={50}
-              backgroundColor={'#AAA'}
+              backgroundColor={Color.GRAY}
               marginHorizontal={moderateScale(12)}
               width={moderateScale(6)}
               height={moderateScale(6)}
@@ -63,7 +64,7 @@ const IntroScreen3 = () => {
 
             <CustomPagination
               borderRadius={50}
-              backgroundColor={'#AAA'}
+              backgroundColor={Color.GRAY}
               width={moderateScale(6)}
               height={moderateScale(6)}
             />
