@@ -20,6 +20,7 @@ import CustomImage from '../../components/CustomImage';
 import CustomInput from '../../components/CustomInput';
 import CustomIcon from '../../components/CustomIcon';
 import {moderateScale, scale} from 'react-native-size-matters';
+import {LoginSvg} from '../../constants/SvgPath';
 
 const LoginScreen = () => {
   const [value, setValue] = useState('');
@@ -39,7 +40,10 @@ const LoginScreen = () => {
           <SafeAreaView style={styles.container}>
             <View style={{marginHorizontal: moderateScale(16)}}>
               <View style={styles.imageView}>
-                <Image source={ImagePath.LOGINIMG} style={styles.image} />
+                <LoginSvg
+                  width={moderateScale(375)}
+                  height={moderateScale(264)}
+                />
               </View>
               <View style={styles.welcomeTextView}>
                 <CustomWelcomeText text={'Log in'} />

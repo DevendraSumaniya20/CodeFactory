@@ -4,66 +4,59 @@ import {
   moderateVerticalScale,
   scale,
 } from 'react-native-size-matters';
+import Color from '../../constants/Color';
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginHorizontal: moderateScale(10),
+    backgroundColor: Color.WHITE,
   },
 
   subcontainer: {
     flex: 1,
-    paddingBottom: moderateScale(16),
   },
   imageView: {
-    flex: 1,
-    justifyContent: 'center',
     alignItems: 'center',
-    marginTop: moderateScale(36),
+    marginTop: moderateScale(52),
+    marginHorizontal: moderateScale(16),
+    marginBottom: moderateVerticalScale(16),
   },
   image: {
     width: moderateScale(343),
     height: moderateScale(253),
   },
   welcomeTextView: {
-    marginTop: moderateScale(8),
+    marginVertical: moderateVerticalScale(16),
   },
-  descriptionTextView: {
-    marginTop: moderateScale(8),
-  },
+
   iconView: {
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'row',
   },
-  textinputView: {
-    // flex: 1,
-  },
+
   textinputTop: {
-    margin: moderateScale(12),
+    marginHorizontal: moderateScale(12),
   },
 
+  textinputName: {
+    marginHorizontal: moderateScale(12),
+    marginTop: moderateScale(16),
+  },
   textinputPassword: {
-    margin: moderateScale(12),
-  },
-  forgotPasswordView: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    marginTop: moderateVerticalScale(16),
+    marginHorizontal: moderateScale(12),
+    marginTop: moderateScale(16),
   },
 
-  forgotPasswordTextStyle: {
-    fontSize: scale(16),
-    fontWeight: '500',
-  },
-  SignUpView: {
+  loginView: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginBottom: moderateVerticalScale(16),
   },
-  signUpTextStyle: {
-    fontSize: scale(16),
+  loginTextStyle: {
+    fontSize: scale(14),
     fontWeight: '500',
+    fontFamily: 'Rubik-Regular',
+    color: Color.GRAY,
   },
 });
 export default styles;

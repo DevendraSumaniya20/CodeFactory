@@ -18,6 +18,7 @@ import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {moderateScale, scale} from 'react-native-size-matters';
 import CustomPagination from '../../components/CustomPagination';
 import Color from '../../constants/Color';
+import {INTRO2} from '../../constants/SvgPath';
 
 const IntroScreen2 = () => {
   const navigation = useNavigation();
@@ -40,7 +41,7 @@ const IntroScreen2 = () => {
             }}
           />
           <View style={styles.imageView}>
-            <Image source={ImagePath.INTRO1IMG2} style={styles.image} />
+            <INTRO2 width={moderateScale(375)} height={moderateScale(264)} />
           </View>
           <View style={styles.welcomeTextView}>
             <CustomWelcomeText

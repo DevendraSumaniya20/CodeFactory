@@ -12,11 +12,12 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  image: {
-    width: moderateScale(375),
-    height: moderateScale(264),
-    flexShrink: 0,
-  },
+  // image: {
+  //   width: moderateScale(375),
+  //   height: moderateScale(264),
+  //   flexShrink: 0,
+  // }
+
   welcomeTextView: {
     marginTop: moderateScale(16),
     marginBottom: moderateScale(8),
