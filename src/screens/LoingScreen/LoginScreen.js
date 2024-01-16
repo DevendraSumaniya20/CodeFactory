@@ -28,7 +28,7 @@ const LoginScreen = () => {
   const navigation = useNavigation();
 
   const NextScreen = () => {
-    navigation.navigate(NavigationStringPath.INTROSCREEN2);
+    navigation.navigate(NavigationStringPath.TABSCREENS);
   };
 
   return (

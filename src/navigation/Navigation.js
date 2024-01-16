@@ -8,6 +8,7 @@ import IntroScreen2 from '../screens/IntroScreen2/IntroScreen2';
 import IntroScreen3 from '../screens/IntroScreen3/IntroScreen3';
 import LoginScreen from '../screens/LoingScreen/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen/SignUpScreen';
+import TabScreen from '../screens/TabScreens/TabScreen';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -33,6 +34,10 @@ const Navigation = () => {
         <Stack.Screen
           name={NavigationStringPath.SIGNUPSCREEN}
           component={SignUpScreen}
+        />
+        <Stack.Screen
+          name={NavigationStringPath.TABSCREENS}
+          component={TabScreen}
         />
       </Stack.Navigator>
     </NavigationContainer>

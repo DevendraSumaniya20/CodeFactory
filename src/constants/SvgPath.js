@@ -5,5 +5,19 @@ import LoginSvg from '../assets/svgs/LoginSvg.svg';
 import ProfileSvg from '../assets/svgs/ProfileSvg.svg';
 import SignupSvg from '../assets/svgs/SignupSvg.svg';
 import SettingSvg from '../assets/svgs/SettingSvg.svg';
+import SettingTab from '../assets/svgs/SettingTab.svg';
+import CoursesTab from '../assets/svgs/CoursesTab.svg';
+import ProfileTab from '../assets/svgs/ProfileTab.svg';
 
-export {INTRO1, INTRO2, INTRO3, LoginSvg, ProfileSvg, SignupSvg, SettingSvg};
+export {
+  INTRO1,
+  INTRO2,
+  INTRO3,
+  LoginSvg,
+  ProfileSvg,
+  SignupSvg,
+  SettingSvg,
+  CoursesTab,
+  SettingTab,
+  ProfileTab,
+};

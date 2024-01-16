@@ -10,15 +10,13 @@ import {
 } from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
-import ImagePath from '../../constants/ImagePath';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
-import CustomImage from '../../components/CustomImage';
 import CustomInput from '../../components/CustomInput';
-import CustomIcon from '../../components/CustomIcon';
+
 import {moderateScale, scale} from 'react-native-size-matters';
 import {SignupSvg} from '../../constants/SvgPath';
 

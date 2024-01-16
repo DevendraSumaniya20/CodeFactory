@@ -15,4 +15,5 @@ export default {
   COURSE_TESTSCREEN: 'CourseTestScreen',
   TEST_QUESTIONSCREEN: 'TestQuestionScreen',
   TEST_RESULTSCREEN: 'TestResultScreen',
+  TABSCREENS: 'TabScreens',
 };
