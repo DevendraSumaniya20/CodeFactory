@@ -1,3 +1,4 @@
+import React from 'react';
 import {
   StyleSheet,
   Text,
@@ -5,7 +6,6 @@ import {
   View,
   TouchableOpacity,
 } from 'react-native';
-import React from 'react';
 import {moderateScale, scale} from 'react-native-size-matters';
 import CustomIcon from './CustomIcon';
 import Color from '../constants/Color';

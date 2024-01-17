@@ -8,6 +8,8 @@ import SettingSvg from '../assets/svgs/SettingSvg.svg';
 import SettingTab from '../assets/svgs/SettingTab.svg';
 import CoursesTab from '../assets/svgs/CoursesTab.svg';
 import ProfileTab from '../assets/svgs/ProfileTab.svg';
+import SearchIcon from '../assets/svgs/SearchIcon.svg';
+import BellIcon from '../assets/svgs/Bell.svg';
 
 export {
   INTRO1,
@@ -20,4 +22,6 @@ export {
   CoursesTab,
   SettingTab,
   ProfileTab,
+  BellIcon,
+  SearchIcon,
 };

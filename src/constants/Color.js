@@ -2,7 +2,7 @@ export default {
   BLACK: '#3C3A36',
   GRAY: '#78746D',
   LIGHTGRAY: '#BEBAB3',
-  WHITE: '#F8F2EE',
+  WHITE: '#FFF',
   THEMECOLOR: '#E3562A',
   BLUE: '#65AAEA',
   LIGHTGREEEN: '#5BA092',

@@ -9,7 +9,6 @@ import {
 import React from 'react';
 import styles from './styles';
 import CustomSkipButton from '../../components/CustomSkipButton';
-import ImagePath from '../../constants/ImagePath';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
@@ -28,7 +27,7 @@ const IntroScreen1 = () => {
   };
 
   const SKipScreen = () => {
-    navigation.navigate(NavigationStringPath.LOGINSCREEN);
+    navigation.navigate(NavigationStringPath.TABSCREENS);
   };
 
   return (

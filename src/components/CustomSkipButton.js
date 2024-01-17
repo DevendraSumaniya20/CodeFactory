@@ -16,7 +16,6 @@ export default CustomSkipButton;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
     alignItems: 'flex-end',
     paddingRight: moderateScale(16),
     marginTop: moderateScale(8),
