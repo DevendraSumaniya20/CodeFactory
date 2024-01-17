@@ -14,7 +14,9 @@ const Stack = createNativeStackNavigator();
 const Navigation = () => {
   return (
     <NavigationContainer>
-      <Stack.Navigator screenOptions={{headerShown: false}}>
+      <Stack.Navigator
+        screenOptions={{headerShown: false}}
+        initialRouteName={NavigationStringPath.TABSCREENS}>
         <Stack.Screen
           name={NavigationStringPath.INTROSCREEN1}
           component={IntroScreen1}

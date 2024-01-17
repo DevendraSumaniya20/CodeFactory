@@ -10,6 +10,7 @@ import CoursesTab from '../assets/svgs/CoursesTab.svg';
 import ProfileTab from '../assets/svgs/ProfileTab.svg';
 import SearchIcon from '../assets/svgs/SearchIcon.svg';
 import BellIcon from '../assets/svgs/Bell.svg';
+import CoolKid from '../assets/svgs/CoolKidsDiscussion.svg';
 
 export {
   INTRO1,
@@ -24,4 +25,5 @@ export {
   ProfileTab,
   BellIcon,
   SearchIcon,
+  CoolKid,
 };

@@ -1,25 +1,11 @@
 import React, {useState} from 'react';
-import {
-  SafeAreaView,
-  View,
-  Text,
-  FlatList,
-  TouchableOpacity,
-} from 'react-native';
-import {
-  moderateScale,
-  moderateVerticalScale,
-  scale,
-} from 'react-native-size-matters';
+import {SafeAreaView, View, Text} from 'react-native';
+import {moderateScale} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
-import Color from '../../constants/Color';
 import styles from './Styles';
-import {BellIcon} from '../../constants/SvgPath';
-import CustomDescriptionText from '../../components/CustomDescriptionText';
-import CustomWelcomeText from '../../components/CustomWelcomeText';
-import CustomButton from '../../components/CustomButton';
-import {moderateScaleVertical} from '../../constants/responsiveSize';
+import {BellIcon, CoolKid} from '../../constants/SvgPath';
 import CustomCategoryButton from '../../components/CustomCategoryButton';
+import CustomSvg from '../../components/CustomSvg';
 
 const HomeScreen = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -86,30 +72,30 @@ const HomeScreen = () => {
               </View>
             )} */}
           </View>
+
+          <View style={styles.categoryView}>
+            <Text style={styles.categoryTextStyle}>Category :</Text>
+            <CustomCategoryButton text={'#CSS'} />
+            <CustomCategoryButton text={'#UX'} />
+            <CustomCategoryButton text={'#Swift'} />
+            <CustomCategoryButton text={'#UI'} />
+          </View>
+
           <View>
-            <View
-              style={{
-                backgroundColor: '#fff',
-                flexDirection: 'row',
-                alignItems: 'center',
-                gap: 16,
-                marginHorizontal: moderateScale(16),
-                marginTop: moderateVerticalScale(12),
-              }}>
-              <Text
-                style={{
-                  fontFamily: 'Rubik-Regular',
-                  fontSize: scale(14),
-                  fontStyle: 'normal',
-                  fontWeight: '400',
-                  lineHeight: 21,
-                }}>
-                Category :
-              </Text>
-              <CustomCategoryButton text={'#CSS'} />
-              <CustomCategoryButton text={'#UX'} />
-              <CustomCategoryButton text={'#Swift'} />
-              <CustomCategoryButton text={'#UI'} />
+            <View style={{alignItems: 'center'}}>
+              <CustomSvg
+                source={CoolKid}
+                iconStyle={{width: 24, height: 24}}
+                color={'red'}
+              />
+
+              <CoolKid width={250} height={245} />
+              <Text>Button</Text>
+            </View>
+            <View>
+              <Text>3 h 30 min</Text>
+              <Text>Course</Text>
+              <Text>advance</Text>
             </View>
           </View>
         </SafeAreaView>
