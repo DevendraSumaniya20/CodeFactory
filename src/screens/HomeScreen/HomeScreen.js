@@ -6,13 +6,20 @@ import {
   FlatList,
   TouchableOpacity,
 } from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
 import Color from '../../constants/Color';
 import styles from './Styles';
 import {BellIcon} from '../../constants/SvgPath';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
+import CustomButton from '../../components/CustomButton';
+import {moderateScaleVertical} from '../../constants/responsiveSize';
+import CustomCategoryButton from '../../components/CustomCategoryButton';
 
 const HomeScreen = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -38,43 +45,32 @@ const HomeScreen = () => {
 
   return (
     <>
-      <View style={{flex: 1, backgroundColor: Color.WHITE}}>
+      <View style={styles.container}>
         <SafeAreaView style={styles.subContainer}>
-          <View style={{marginHorizontal: moderateScale(16)}}>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'space-between',
-              }}>
-              <View
-                style={{alignItems: 'flex-start', justifyContent: 'center'}}>
-                <CustomDescriptionText text={'Hello'} />
-                <CustomWelcomeText text={'Juana Antonieta'} />
+          <View style={styles.marginContainer}>
+            <View style={styles.topHeaderView}>
+              <View style={{alignItems: 'flex-start'}}>
+                <Text style={styles.helloTextStyle}>Hello,</Text>
+
+                <Text style={styles.userTextStyle}>Juana Antonieta</Text>
               </View>
-              <View
-                style={{
-                  borderRadius: moderateScale(100),
-                  borderWidth: 1,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  padding: moderateScale(5),
-                }}>
+
+              <View style={styles.notificationView}>
                 <BellIcon
-                  width={moderateScale(25)}
+                  width={moderateScale(24)}
                   height={moderateScale(24)}
                 />
               </View>
             </View>
             <CustomSearch
-              inputStyle={{width: '90%'}}
+              inputStyle={{width: '90%', padding: moderateScale(16)}}
               placeholder="Search"
               onChangeText={handleSearch}
               value={searchValue}
               rightIcon={!showSuggestions ? 'search-outline' : ''}
               onPressRight={() => {}}
             />
-            {showSuggestions && searchValue !== '' ? (
+            {/* {showSuggestions && searchValue !== '' ? (
               <FlatList
                 data={suggestions}
                 keyExtractor={(item, index) => index.toString()}
@@ -88,7 +84,33 @@ const HomeScreen = () => {
               <View>
                 <Text>No results found</Text>
               </View>
-            )}
+            )} */}
+          </View>
+          <View>
+            <View
+              style={{
+                backgroundColor: '#fff',
+                flexDirection: 'row',
+                alignItems: 'center',
+                gap: 16,
+                marginHorizontal: moderateScale(16),
+                marginTop: moderateVerticalScale(12),
+              }}>
+              <Text
+                style={{
+                  fontFamily: 'Rubik-Regular',
+                  fontSize: scale(14),
+                  fontStyle: 'normal',
+                  fontWeight: '400',
+                  lineHeight: 21,
+                }}>
+                Category :
+              </Text>
+              <CustomCategoryButton text={'#CSS'} />
+              <CustomCategoryButton text={'#UX'} />
+              <CustomCategoryButton text={'#Swift'} />
+              <CustomCategoryButton text={'#UI'} />
+            </View>
           </View>
         </SafeAreaView>
       </View>

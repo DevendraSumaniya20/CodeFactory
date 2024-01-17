@@ -27,7 +27,7 @@ const IntroScreen1 = () => {
   };
 
   const SKipScreen = () => {
-    navigation.navigate(NavigationStringPath.TABSCREENS);
+    navigation.navigate(NavigationStringPath.LOGINSCREEN);
   };
 
   return (
