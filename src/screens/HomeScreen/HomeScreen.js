@@ -8,21 +8,21 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {
-  moderateScale,
-  moderateVerticalScale,
-  scale,
-} from 'react-native-size-matters';
+import {moderateScale} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
 import styles from './Styles';
-import {BellIcon, CoolKid} from '../../constants/SvgPath';
+import {BellIcon} from '../../constants/SvgPath';
 import CustomCategoryButton from '../../components/CustomCategoryButton';
 import data from '../../constants/Data';
 import {moderateScaleVertical} from '../../constants/responsiveSize';
-import Color from '../../constants/Color';
+
 import _ from 'lodash';
+import {useNavigation} from '@react-navigation/native';
+import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
+
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
 
@@ -35,6 +35,10 @@ const HomeScreen = () => {
     });
 
     setFilteredData(filteredData);
+
+    navigation.navigate(NavigationStringPath.RESULTSCREEN, {
+      searchValue: formattedSearchValue,
+    });
   };
 
   const renderItem = ({item}) => {
