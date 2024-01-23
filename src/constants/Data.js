@@ -36,7 +36,7 @@ const data = [
     duration: '3 h 15 min',
     type: 'Graphic Design',
     otherDetails: 'Fundamentals of digital graphic design',
-    backgroundColor: Color.LIGHTGRAY,
+    backgroundColor: Color.DETAILSBACKGROUND,
   },
   {
     id: 5,

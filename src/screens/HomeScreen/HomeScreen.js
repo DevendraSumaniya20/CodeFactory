@@ -20,27 +20,23 @@ import CustomCategoryButton from '../../components/CustomCategoryButton';
 import data from '../../constants/Data';
 import {moderateScaleVertical} from '../../constants/responsiveSize';
 import Color from '../../constants/Color';
+import _ from 'lodash';
 
 const HomeScreen = () => {
   const [searchValue, setSearchValue] = useState('');
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [suggestions, setSuggestions] = useState([]);
+  const [filteredData, setFilteredData] = useState(data);
 
   const handleSearch = text => {
     setSearchValue(text);
+    const formattedSearchValue = text.toLowerCase();
 
-    const predefinedSuggestions = ['Apple', 'Banana', 'Cherry', 'Date'];
-    const filteredSuggestions = predefinedSuggestions.filter(suggestion =>
-      suggestion.toLowerCase().includes(text.toLowerCase()),
-    );
+    const filteredData = _.filter(data, item => {
+      return item.type.toLowerCase().includes(formattedSearchValue);
+    });
 
-    setSuggestions(filteredSuggestions);
-    setShowSuggestions(filteredSuggestions.length > 0);
-  };
-
-  const handleSuggestionPress = suggestion => {
-    setSearchValue(suggestion);
-    setShowSuggestions(false);
+    setFilteredData(filteredData);
   };
 
   const renderItem = ({item}) => {
@@ -171,21 +167,6 @@ const HomeScreen = () => {
                 onPressRight={() => {}}
               />
             </View>
-            {/* {showSuggestions && searchValue !== '' ? (
-              <FlatList
-                data={suggestions}
-                keyExtractor={(item, index) => index.toString()}
-                renderItem={({item}) => (
-                  <TouchableOpacity onPress={() => handleSuggestionPress(item)}>
-                    <Text>{item}</Text>
-                  </TouchableOpacity>
-                )}
-              />
-            ) : (
-              <View>
-                <Text>No results found</Text>
-              </View>
-            )} */}
 
             <View style={styles.categoryView}>
               <Text style={styles.categoryTextStyle}>Category :</Text>
@@ -199,7 +180,7 @@ const HomeScreen = () => {
 
             <View style={{backgroundColor: '#FFF'}}>
               <FlatList
-                data={data}
+                data={filteredData}
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
