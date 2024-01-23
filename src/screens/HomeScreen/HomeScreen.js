@@ -24,8 +24,6 @@ import _ from 'lodash';
 
 const HomeScreen = () => {
   const [searchValue, setSearchValue] = useState('');
-  const [showSuggestions, setShowSuggestions] = useState(false);
-  const [suggestions, setSuggestions] = useState([]);
   const [filteredData, setFilteredData] = useState(data);
 
   const handleSearch = text => {
@@ -43,91 +41,32 @@ const HomeScreen = () => {
     return (
       <>
         <TouchableOpacity activeOpacity={0.5}>
-          <View
-            style={{
-              justifyContent: 'center',
-              borderWidth: 0.8,
-              marginVertical: moderateVerticalScale(8),
-              borderRadius: moderateScale(8),
-            }}>
-            <View style={{justifyContent: 'center'}}>
-              <View
-                style={{
-                  alignItems: 'flex-start',
-                  height: moderateScaleVertical(194),
-                  paddingTop: moderateScale(8),
-                  backgroundColor: item.backgroundColor,
-                  borderRadius: moderateScale(8),
-                }}>
-                <Image
-                  source={item.image}
-                  resizeMode="cover"
-                  style={{
-                    height: moderateScale(138),
-                    width: moderateScale(343),
-                  }}
-                />
+          <View style={styles.renderMainView}>
+            <View
+              style={{
+                alignItems: 'flex-start',
+                height: moderateScaleVertical(194),
+                paddingTop: moderateScale(8),
+                backgroundColor: item.backgroundColor,
+                borderRadius: moderateScale(8),
+              }}>
+              <Image
+                source={item.image}
+                resizeMode="cover"
+                style={styles.renderItemImage}
+              />
 
-                <TouchableOpacity
-                  style={{
-                    alignItems: 'center',
-                    backgroundColor: Color.BLUE,
-                    borderRadius: moderateScale(20),
-                    paddingHorizontal: moderateScale(16),
-                    paddingVertical: moderateScale(8),
-                    marginLeft: moderateScale(260),
-                  }}>
-                  <Text
-                    style={{
-                      fontFamily: 'Rubik-Regular',
-                      fontSize: scale(14),
-                      fontWeight: '500',
-                      lineHeight: 16,
-                      textAlign: 'right',
-                      color: Color.WHITE,
-                    }}>
-                    {item.Price}
-                  </Text>
-                </TouchableOpacity>
-              </View>
+              <TouchableOpacity style={styles.renderTouchableOpacity}>
+                <Text style={styles.renderTouchableText}>{item.Price}</Text>
+              </TouchableOpacity>
+            </View>
 
-              <View
-                style={{
-                  marginHorizontal: moderateScale(16),
-                  marginTop: moderateVerticalScale(16),
-                  marginBottom: moderateVerticalScale(8),
-                }}>
-                <Text
-                  style={{
-                    color: Color.LIGHTGREEEN,
-                    fontSize: scale(12),
-                    fontWeight: '500',
-                    fontFamily: 'Rubik-Bold',
-                    marginBottom: moderateVerticalScale(4),
-                  }}>
-                  {item.duration}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: scale(24),
-                    fontWeight: '500',
-                    fontFamily: 'Rubik-Bold',
-                    letterSpacing: -0.5,
-                    lineHeight: 32,
-                  }}>
-                  {item.type}
-                </Text>
-                <Text
-                  style={{
-                    fontSize: scale(14),
-                    fontWeight: '400',
-                    fontFamily: 'Rubik-Regular',
-                    lineHeight: 21,
-                    color: Color.BLACK,
-                  }}>
-                  {item.otherDetails}
-                </Text>
-              </View>
+            <View style={styles.renderSecondView}>
+              <Text style={styles.renderDurationText}>{item.duration}</Text>
+              <Text style={styles.renderTypeText}>{item.type}</Text>
+              <Text style={styles.renderOtherDetailsText}>
+                {item.otherDetails}
+              </Text>
             </View>
           </View>
         </TouchableOpacity>
@@ -163,8 +102,7 @@ const HomeScreen = () => {
                 placeholder="Search"
                 onChangeText={handleSearch}
                 value={searchValue}
-                rightIcon={!showSuggestions ? 'search-outline' : ''}
-                onPressRight={() => {}}
+                rightIcon={'search-outline'}
               />
             </View>
 
