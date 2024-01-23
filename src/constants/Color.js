@@ -8,4 +8,5 @@ export default {
   LIGHTGREEEN: '#5BA092',
   RED: '#EF4949',
   YELLOW: '#F2A03F',
+  DETAILSBACKGROUND: '#AAC',
 };

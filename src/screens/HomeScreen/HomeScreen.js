@@ -1,11 +1,25 @@
 import React, {useState} from 'react';
-import {SafeAreaView, View, Text} from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  FlatList,
+  ScrollView,
+  Image,
+  TouchableOpacity,
+} from 'react-native';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
 import styles from './Styles';
 import {BellIcon, CoolKid} from '../../constants/SvgPath';
 import CustomCategoryButton from '../../components/CustomCategoryButton';
-import CustomSvg from '../../components/CustomSvg';
+import data from '../../constants/Data';
+import {moderateScaleVertical} from '../../constants/responsiveSize';
+import Color from '../../constants/Color';
 
 const HomeScreen = () => {
   const [searchValue, setSearchValue] = useState('');
@@ -29,13 +43,112 @@ const HomeScreen = () => {
     setShowSuggestions(false);
   };
 
+  const renderItem = ({item}) => {
+    return (
+      <>
+        <TouchableOpacity activeOpacity={0.5}>
+          <View
+            style={{
+              justifyContent: 'center',
+              borderWidth: 0.8,
+              marginVertical: moderateVerticalScale(8),
+              borderRadius: moderateScale(8),
+            }}>
+            <View style={{justifyContent: 'center'}}>
+              <View
+                style={{
+                  alignItems: 'flex-start',
+                  height: moderateScaleVertical(194),
+                  paddingTop: moderateScale(8),
+                  backgroundColor: item.backgroundColor,
+                  borderRadius: moderateScale(8),
+                }}>
+                <Image
+                  source={item.image}
+                  resizeMode="cover"
+                  style={{
+                    height: moderateScale(138),
+                    width: moderateScale(343),
+                  }}
+                />
+
+                <TouchableOpacity
+                  style={{
+                    alignItems: 'center',
+                    backgroundColor: Color.BLUE,
+                    borderRadius: moderateScale(20),
+                    paddingHorizontal: moderateScale(16),
+                    paddingVertical: moderateScale(8),
+                    marginLeft: moderateScale(260),
+                  }}>
+                  <Text
+                    style={{
+                      fontFamily: 'Rubik-Regular',
+                      fontSize: scale(14),
+                      fontWeight: '500',
+                      lineHeight: 16,
+                      textAlign: 'right',
+                      color: Color.WHITE,
+                    }}>
+                    {item.Price}
+                  </Text>
+                </TouchableOpacity>
+              </View>
+
+              <View
+                style={{
+                  marginHorizontal: moderateScale(16),
+                  marginTop: moderateVerticalScale(16),
+                  marginBottom: moderateVerticalScale(8),
+                }}>
+                <Text
+                  style={{
+                    color: Color.LIGHTGREEEN,
+                    fontSize: scale(12),
+                    fontWeight: '500',
+                    fontFamily: 'Rubik-Bold',
+                    marginBottom: moderateVerticalScale(4),
+                  }}>
+                  {item.duration}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: scale(24),
+                    fontWeight: '500',
+                    fontFamily: 'Rubik-Bold',
+                    letterSpacing: -0.5,
+                    lineHeight: 32,
+                  }}>
+                  {item.type}
+                </Text>
+                <Text
+                  style={{
+                    fontSize: scale(14),
+                    fontWeight: '400',
+                    fontFamily: 'Rubik-Regular',
+                    lineHeight: 21,
+                    color: Color.BLACK,
+                  }}>
+                  {item.otherDetails}
+                </Text>
+              </View>
+            </View>
+          </View>
+        </TouchableOpacity>
+      </>
+    );
+  };
+
   return (
     <>
       <View style={styles.container}>
         <SafeAreaView style={styles.subContainer}>
           <View style={styles.marginContainer}>
             <View style={styles.topHeaderView}>
-              <View style={{alignItems: 'flex-start'}}>
+              <View
+                style={{
+                  alignItems: 'flex-start',
+                }}>
                 <Text style={styles.helloTextStyle}>Hello,</Text>
 
                 <Text style={styles.userTextStyle}>Juana Antonieta</Text>
@@ -48,14 +161,16 @@ const HomeScreen = () => {
                 />
               </View>
             </View>
-            <CustomSearch
-              inputStyle={{width: '90%', padding: moderateScale(16)}}
-              placeholder="Search"
-              onChangeText={handleSearch}
-              value={searchValue}
-              rightIcon={!showSuggestions ? 'search-outline' : ''}
-              onPressRight={() => {}}
-            />
+            <View style={{marginTop: moderateScale(12)}}>
+              <CustomSearch
+                inputStyle={{width: '90%', padding: moderateScale(16)}}
+                placeholder="Search"
+                onChangeText={handleSearch}
+                value={searchValue}
+                rightIcon={!showSuggestions ? 'search-outline' : ''}
+                onPressRight={() => {}}
+              />
+            </View>
             {/* {showSuggestions && searchValue !== '' ? (
               <FlatList
                 data={suggestions}
@@ -71,31 +186,26 @@ const HomeScreen = () => {
                 <Text>No results found</Text>
               </View>
             )} */}
-          </View>
 
-          <View style={styles.categoryView}>
-            <Text style={styles.categoryTextStyle}>Category :</Text>
-            <CustomCategoryButton text={'#CSS'} />
-            <CustomCategoryButton text={'#UX'} />
-            <CustomCategoryButton text={'#Swift'} />
-            <CustomCategoryButton text={'#UI'} />
-          </View>
-
-          <View>
-            <View style={{alignItems: 'center'}}>
-              <CustomSvg
-                source={CoolKid}
-                iconStyle={{width: 24, height: 24}}
-                color={'red'}
-              />
-
-              <CoolKid width={250} height={245} />
-              <Text>Button</Text>
+            <View style={styles.categoryView}>
+              <Text style={styles.categoryTextStyle}>Category :</Text>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                <CustomCategoryButton text={'#CSS'} />
+                <CustomCategoryButton text={'#UX'} />
+                <CustomCategoryButton text={'#Swift'} />
+                <CustomCategoryButton text={'#UI'} />
+              </ScrollView>
             </View>
-            <View>
-              <Text>3 h 30 min</Text>
-              <Text>Course</Text>
-              <Text>advance</Text>
+
+            <View style={{backgroundColor: '#FFF'}}>
+              <FlatList
+                data={data}
+                renderItem={renderItem}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                  paddingBottom: moderateScale(350),
+                }}
+              />
             </View>
           </View>
         </SafeAreaView>

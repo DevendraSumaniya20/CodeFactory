@@ -1,6 +1,10 @@
 import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import {moderateScale, scale} from 'react-native-size-matters';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
 import {moderateScaleVertical} from '../constants/responsiveSize';
 import Color from '../constants/Color';
 
@@ -21,11 +25,12 @@ const styles = StyleSheet.create({
     marginVertical: moderateScaleVertical(3),
     backgroundColor: Color.BLUE,
     borderRadius: moderateScale(12),
-    width: 'auto',
-    height: moderateScaleVertical(26),
     alignItems: 'center',
     justifyContent: 'center',
-    paddingHorizontal: 'auto',
+    paddingHorizontal: moderateScale(11),
+    paddingVertical: moderateVerticalScale(3),
+
+    marginHorizontal: moderateScale(8),
   },
   cardTextStyle: {
     fontFamily: 'Rubik-Regular',

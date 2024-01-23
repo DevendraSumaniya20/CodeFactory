@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     lineHeight: 42,
     letterSpacing: -1,
     color: Color.BLACK,
+    marginTop: moderateScale(4),
   },
   notificationView: {
     borderRadius: moderateScale(100),
@@ -48,8 +49,7 @@ const styles = StyleSheet.create({
   categoryView: {
     flexDirection: 'row',
     alignItems: 'center',
-    gap: 16,
-    marginHorizontal: moderateScale(16),
+    // marginHorizontal: moderateScale(16),
     marginTop: moderateVerticalScale(12),
   },
   categoryTextStyle: {
