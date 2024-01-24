@@ -106,7 +106,6 @@ const ResultsScreen = () => {
               style={{
                 justifyContent: 'space-between',
                 flexDirection: 'row',
-                gap: 10,
               }}>
               <TouchableOpacity
                 style={{
@@ -118,8 +117,9 @@ const ResultsScreen = () => {
                   justifyContent: 'center',
                 }}
                 onPress={handleBackToHome}>
-                <CustomIcon name={'chevron-back'} size={24} />
+                <CustomIcon name={'chevron-back'} size={16} />
               </TouchableOpacity>
+              <View style={{marginLeft: moderateScale(8)}} />
               <CustomSearch
                 inputStyle={{
                   width: moderateScale(270),
