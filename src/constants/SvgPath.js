@@ -11,7 +11,12 @@ import ProfileTab from '../assets/svgs/ProfileTab.svg';
 import SearchIcon from '../assets/svgs/SearchIcon.svg';
 import BellIcon from '../assets/svgs/Bell.svg';
 import CoolKid from '../assets/svgs/CoolKidsDiscussion.svg';
-
+import On from '../assets/svgs/On.svg';
+import Off from '../assets/svgs/Off.svg';
+import Person from '../assets/svgs/Person.svg';
+import Bell from '../assets/svgs/Bell.svg';
+import Lock from '../assets/svgs/Password.svg';
+import Email from '../assets/svgs/Email.svg';
 export {
   INTRO1,
   INTRO2,
@@ -26,4 +31,10 @@ export {
   BellIcon,
   SearchIcon,
   CoolKid,
+  On,
+  Off,
+  Person,
+  Lock,
+  Email,
+  Bell,
 };
