@@ -19,6 +19,7 @@ import CustomInput from '../../components/CustomInput';
 
 import {moderateScale, scale} from 'react-native-size-matters';
 import {SignupSvg} from '../../constants/SvgPath';
+import CustomHeader from '../../components/CustomHeader';
 
 const SignUpScreen = () => {
   const [value, setValue] = useState('');
@@ -37,6 +38,13 @@ const SignUpScreen = () => {
           style={styles.subcontainer}>
           <SafeAreaView style={styles.container}>
             <View style={{marginHorizontal: moderateScale(16)}}>
+              <CustomHeader
+                iconName={'chevron-back'}
+                color={'#000'}
+                onPress={() => {
+                  navigation.navigate(NavigationStringPath.HOMESCREEN);
+                }}
+              />
               <View style={styles.imageView}>
                 <SignupSvg
                   width={moderateScale(375)}

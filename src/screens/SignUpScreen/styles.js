@@ -5,6 +5,7 @@ import {
   scale,
 } from 'react-native-size-matters';
 import Color from '../../constants/Color';
+import {moderateScaleVertical} from '../../constants/responsiveSize';
 
 const styles = StyleSheet.create({
   container: {
@@ -17,14 +18,10 @@ const styles = StyleSheet.create({
   },
   imageView: {
     alignItems: 'center',
-    marginTop: moderateScale(52),
     marginHorizontal: moderateScale(16),
     marginBottom: moderateVerticalScale(16),
   },
-  image: {
-    width: moderateScale(343),
-    height: moderateScale(253),
-  },
+
   welcomeTextView: {
     marginVertical: moderateVerticalScale(16),
   },

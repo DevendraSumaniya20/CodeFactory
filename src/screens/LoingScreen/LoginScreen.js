@@ -56,24 +56,24 @@ const LoginScreen = () => {
 
                 <View style={styles.iconView}>
                   <CustomImage
-                    source={ImagePath.FACEBOOKICON}
+                    source={ImagePath.FACEBOOKIMG}
                     resizeMode="contain"
                     onPress={() => {
                       Alert.alert('Facebook');
                     }}
                   />
                   <CustomImage
-                    source={ImagePath.GOOGLEICON}
-                    resizeMode="contain"
-                    onPress={() => {
-                      Alert.alert('Google');
-                    }}
-                  />
-                  <CustomImage
-                    source={ImagePath.INSTAGRAMICON}
+                    source={ImagePath.INSTAGRAMIMG}
                     resizeMode="contain"
                     onPress={() => {
                       Alert.alert('Instagram');
+                    }}
+                  />
+                  <CustomImage
+                    source={ImagePath.GOOGLEIMG}
+                    resizeMode="cover"
+                    onPress={() => {
+                      Alert.alert('Google');
                     }}
                   />
                 </View>
