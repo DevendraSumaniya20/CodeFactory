@@ -19,31 +19,18 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'space-between',
   },
-  helloTextStyle: {
-    fontFamily: 'Rubik-Regular',
-    fontSize: scale(16),
-    fontStyle: 'normal',
-    fontWeight: '400',
-    lineHeight: 26,
-    letterSpacing: -0.5,
-    color: Color.GRAY,
+
+  resultContainer: {
+    marginTop: moderateVerticalScale(12),
+    marginBottom: moderateVerticalScale(16),
   },
-  userTextStyle: {
+  resultText: {
     fontFamily: 'Rubik-Regular',
-    fontSize: scale(32),
-    fontStyle: 'normal',
-    fontWeight: '700',
-    lineHeight: 42,
-    letterSpacing: -1,
+    fontSize: scale(24),
+    fontWeight: '500',
+    lineHeight: 32,
     color: Color.BLACK,
-    marginTop: moderateScale(4),
-  },
-  notificationView: {
-    borderRadius: moderateScale(100),
-    borderWidth: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
-    padding: moderateScale(5),
+    letterSpacing: -0.5,
   },
 
   renderMainView: {

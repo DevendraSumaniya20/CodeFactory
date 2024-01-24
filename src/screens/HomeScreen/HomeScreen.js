@@ -7,6 +7,7 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
+  Alert,
 } from 'react-native';
 import {moderateScale} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
@@ -26,19 +27,30 @@ const HomeScreen = () => {
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
 
-  const handleSearch = text => {
-    setSearchValue(text);
-    const formattedSearchValue = text.toLowerCase();
+  const handleSearch = () => {
+    const formattedSearchValue = searchValue.toLowerCase();
+
+    if (!searchValue.trim()) {
+      setFilteredData(data);
+      return;
+    }
 
     const filteredData = _.filter(data, item => {
-      return item.type.toLowerCase().includes(formattedSearchValue);
+      return (
+        item.type && item.type.toLowerCase().includes(formattedSearchValue)
+      );
     });
 
     setFilteredData(filteredData);
 
     navigation.navigate(NavigationStringPath.RESULTSCREEN, {
       searchValue: formattedSearchValue,
+      filteredData: filteredData,
     });
+  };
+
+  const handleInputChange = text => {
+    setSearchValue(text);
   };
 
   const renderItem = ({item}) => {
@@ -104,9 +116,10 @@ const HomeScreen = () => {
               <CustomSearch
                 inputStyle={{width: '90%', padding: moderateScale(16)}}
                 placeholder="Search"
-                onChangeText={handleSearch}
+                onChangeText={handleInputChange}
                 value={searchValue}
                 rightIcon={'search-outline'}
+                onPressRight={handleSearch}
               />
             </View>
 
@@ -122,7 +135,7 @@ const HomeScreen = () => {
 
             <View style={{backgroundColor: '#FFF'}}>
               <FlatList
-                data={filteredData}
+                data={data}
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{

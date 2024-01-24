@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   SafeAreaView,
   View,
@@ -15,7 +15,6 @@ import {moderateScaleVertical} from '../../constants/responsiveSize';
 import _ from 'lodash';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import CustomIcon from '../../components/CustomIcon';
-import Navigation from '../../navigation/Navigation';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const ResultsScreen = () => {
@@ -24,18 +23,35 @@ const ResultsScreen = () => {
 
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
+  const [resultCount, setResultCount] = useState(data.length);
 
   const routeSearchValue = route.params?.searchValue || '';
+  const routeFilteredData = route.params?.filteredData || [];
+
+  useEffect(() => {
+    handleSearch(routeSearchValue);
+  }, [routeSearchValue]);
 
   const handleSearch = text => {
     setSearchValue(text);
     const formattedSearchValue = text.toLowerCase();
+
+    if (!text.trim()) {
+      setFilteredData(data);
+      setResultCount(data.length);
+      return;
+    }
 
     const filteredData = _.filter(data, item => {
       return item.type.toLowerCase().includes(formattedSearchValue);
     });
 
     setFilteredData(filteredData);
+    setResultCount(filteredData.length);
+  };
+
+  const handleBackToHome = () => {
+    navigation.navigate(NavigationStringPath.HOMESCREEN);
   };
 
   const renderItem = ({item}) => {
@@ -74,14 +90,11 @@ const ResultsScreen = () => {
   };
 
   const renderHeader = () => {
-    if (filteredData.length > 0) {
-      return (
-        <View style={styles.headerContainer}>
-          <Text style={styles.headerText}>Results: {filteredData.length}</Text>
-        </View>
-      );
-    }
-    return null;
+    return (
+      <View style={styles.resultContainer}>
+        <Text style={styles.resultText}> {resultCount} Results</Text>
+      </View>
+    );
   };
 
   return (
@@ -95,7 +108,7 @@ const ResultsScreen = () => {
                 flexDirection: 'row',
                 gap: 10,
               }}>
-              <View
+              <TouchableOpacity
                 style={{
                   borderWidth: 1,
                   borderRadius: 50,
@@ -103,20 +116,16 @@ const ResultsScreen = () => {
                   height: moderateScale(48),
                   alignItems: 'center',
                   justifyContent: 'center',
-                }}>
-                <TouchableOpacity
-                  onPress={() => {
-                    navigation.navigate(NavigationStringPath.HOMESCREEN);
-                  }}>
-                  <CustomIcon name={'chevron-back'} size={16} />
-                </TouchableOpacity>
-              </View>
+                }}
+                onPress={handleBackToHome}>
+                <CustomIcon name={'chevron-back'} size={24} />
+              </TouchableOpacity>
               <CustomSearch
                 inputStyle={{
-                  width: moderateScale(280),
+                  width: moderateScale(270),
                   padding: moderateScale(16),
                 }}
-                placeholder="Search"
+                placeholder="Search Your Favorite Course"
                 onChangeText={handleSearch}
                 value={searchValue}
                 rightIcon={'search-outline'}
