@@ -1,24 +1,26 @@
-import {
-  SafeAreaView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
-import React from 'react';
+import {SafeAreaView, View} from 'react-native';
+import React, {useState} from 'react';
 import styles from './Styles';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import Color from '../../constants/Color';
 import CustomHeader from '../../components/CustomHeader';
 import {useNavigation} from '@react-navigation/native';
-import {Bell, SettingSvg} from '../../constants/SvgPath';
-import {moderateScale, scale} from 'react-native-size-matters';
+import {Bell, Off, On, SettingSvg} from '../../constants/SvgPath';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
 import CustomSettingComponent from '../../components/CustomSettingComponent';
-import CustomBorderComponent from '../../components/CustomBorderComponent';
-import CustomIcon from '../../components/CustomIcon';
-import {moderateScaleVertical} from '../../constants/responsiveSize';
+import CustomWelcomeText from '../../components/CustomWelcomeText';
 
 const SettingScreen = () => {
+  const [notificationToggle, setNotificationToggle] = useState(false);
+
+  const handleNotificationToggle = () => {
+    setNotificationToggle(!notificationToggle);
+  };
+
   const navigation = useNavigation();
 
   return (
@@ -43,46 +45,24 @@ const SettingScreen = () => {
             }}>
             <SettingSvg />
           </View>
+          <CustomSettingComponent
+            text={'Notifications'}
+            icon={<Bell />}
+            onToggle={handleNotificationToggle}
+            isOn={notificationToggle}
+            icon2={notificationToggle ? <On /> : <Off />}
+          />
           <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              borderWidth: 1,
-              borderRadius: moderateScale(16),
-              paddingHorizontal: moderateScale(16),
-              paddingVertical: moderateScaleVertical(8),
-            }}>
-            <TouchableOpacity onPress={() => {}} style={{flexDirection: 'row'}}>
-              <View
-                style={{
-                  backgroundColor: Color.BLUE,
-                  borderRadius: moderateScale(56),
-                  alignItems: 'center',
-                  width: moderateScale(32),
-                  height: moderateScaleVertical(32),
-                  justifyContent: 'center',
-                }}>
-                <CustomIcon
-                  name={'bell-outline'}
-                  type={'MaterialCommunityIcons'}
-                  size={14}
-                  color="#fff"
-                />
-              </View>
-              <Text
-                style={{
-                  marginRight: moderateScale(12),
-                  marginLeft: moderateScale(8),
-                  fontFamily: 'Rubik-Regular',
-                  fontSize: scale(20),
-                  fontWeight: '500',
-                  lineHeight: 26,
-                  letterSpacing: -0.5,
-                  textAlign: 'center',
-                }}>
-                Notification
-              </Text>
-            </TouchableOpacity>
+            style={{alignItems: 'baseline', height: moderateVerticalScale(21)}}>
+            <CustomWelcomeText
+              text={'Account information'}
+              letterSpacing={-0.5}
+              lineHeight={26}
+              fontFamily={'Rubik-Regular'}
+              fontWeight={'500'}
+              color={Color.BLACK}
+              fontSize={scale(20)}
+            />
           </View>
         </View>
       </SafeAreaView>

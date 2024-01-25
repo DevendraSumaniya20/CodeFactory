@@ -14,7 +14,7 @@ import CoolKid from '../assets/svgs/CoolKidsDiscussion.svg';
 import On from '../assets/svgs/On.svg';
 import Off from '../assets/svgs/Off.svg';
 import Person from '../assets/svgs/Person.svg';
-import Bell from '../assets/svgs/Bell.svg';
+import Bell from '../assets/svgs/Notification.svg';
 import Lock from '../assets/svgs/Password.svg';
 import Email from '../assets/svgs/Email.svg';
 export {

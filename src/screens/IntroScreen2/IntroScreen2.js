@@ -47,7 +47,7 @@ const IntroScreen2 = () => {
             <CustomWelcomeText
               text={'Find a course for you'}
               letterSpacing={-0.5}
-              width={moderateScale(200)}
+              width={moderateScale(180)}
               lineHeight={32}
             />
           </View>

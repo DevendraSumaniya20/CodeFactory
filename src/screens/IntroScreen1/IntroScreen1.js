@@ -5,6 +5,7 @@ import {
   TouchableOpacity,
   View,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import React from 'react';
 import styles from './styles';
@@ -30,16 +31,26 @@ const IntroScreen1 = () => {
     navigation.navigate(NavigationStringPath.LOGINSCREEN);
   };
 
+  const gotoHomeScreen = () => {
+    navigation.navigate(NavigationStringPath.LOGINSCREEN);
+  };
+
   return (
     <>
       <View style={{flex: 1, backgroundColor: '#fff'}}>
         <View style={styles.container}>
-          <CustomSkipButton
-            text={'skip'}
+          <TouchableOpacity
             onPress={() => {
               SKipScreen();
-            }}
-          />
+            }}>
+            <CustomSkipButton
+              text={'skip'}
+              onPress={() => {
+                gotoHomeScreen();
+                Alert.alert('Skip');
+              }}
+            />
+          </TouchableOpacity>
           <View style={styles.imageView}>
             <INTRO1 width={moderateScale(375)} height={moderateScale(264)} />
           </View>
