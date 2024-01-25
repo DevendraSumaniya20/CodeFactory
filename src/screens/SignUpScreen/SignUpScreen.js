@@ -96,7 +96,7 @@ const SignUpScreen = () => {
               iconName={'chevron-back'}
               color={'#000'}
               onPress={() => {
-                navigation.navigate(NavigationStringPath.HOMESCREEN);
+                navigation.goBack();
               }}
             />
             <View style={styles.imageView}>
