@@ -41,12 +41,12 @@ const styles = StyleSheet.create({
 
   textinputPassword: {
     marginHorizontal: moderateScale(12),
-    marginTop: moderateScale(16),
+    marginTop: moderateScale(8),
   },
   forgotPasswordView: {
     alignItems: 'center',
     justifyContent: 'center',
-    marginTop: moderateScale(16),
+    marginTop: moderateScale(8),
   },
 
   forgotPasswordTextStyle: {
