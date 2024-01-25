@@ -17,7 +17,7 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName={NavigationStringPath.INTROSCREEN1}>
+        initialRouteName={NavigationStringPath.TABSCREENS}>
         <Stack.Screen
           name={NavigationStringPath.INTROSCREEN1}
           component={IntroScreen1}

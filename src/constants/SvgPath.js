@@ -17,6 +17,8 @@ import Person from '../assets/svgs/Person.svg';
 import Bell from '../assets/svgs/Notification.svg';
 import Lock from '../assets/svgs/Password.svg';
 import Email from '../assets/svgs/Email.svg';
+import RightArrow from '../assets/svgs/RightArrow.svg';
+
 export {
   INTRO1,
   INTRO2,
@@ -37,4 +39,5 @@ export {
   Lock,
   Email,
   Bell,
+  RightArrow,
 };
