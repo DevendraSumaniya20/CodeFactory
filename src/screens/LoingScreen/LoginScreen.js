@@ -20,7 +20,6 @@ import CustomImage from '../../components/CustomImage';
 import CustomInput from '../../components/CustomInput';
 import {moderateScale, scale} from 'react-native-size-matters';
 import {LoginSvg} from '../../constants/SvgPath';
-import Color from '../../constants/Color';
 import CustomErrorMessage from '../../components/CustomErrorMessage';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 

@@ -37,12 +37,12 @@ const styles = StyleSheet.create({
   },
 
   textinputName: {
-    marginHorizontal: moderateScale(12),
-    marginTop: moderateScale(16),
+    marginHorizontal: moderateScale(8),
+    marginTop: moderateScale(8),
   },
   textinputPassword: {
-    marginHorizontal: moderateScale(12),
-    marginTop: moderateScale(16),
+    marginHorizontal: moderateScale(8),
+    marginTop: moderateScale(8),
   },
 
   loginView: {
