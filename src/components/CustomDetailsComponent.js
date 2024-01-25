@@ -7,7 +7,7 @@ import {
   scale,
 } from 'react-native-size-matters';
 
-const CustomDetailsComponent = ({text1, text2, icon1, icon2}) => {
+const CustomDetailsComponent = ({text1, text2, icon1, icon2, onPress}) => {
   return (
     <View style={styles.container}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
@@ -19,7 +19,7 @@ const CustomDetailsComponent = ({text1, text2, icon1, icon2}) => {
           <Text style={styles.text2}>{text2}</Text>
         </View>
       </View>
-      <TouchableOpacity>{icon2}</TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>{icon2}</TouchableOpacity>
     </View>
   );
 };
