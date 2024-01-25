@@ -150,7 +150,7 @@ const LoginScreen = () => {
                 <View style={styles.forgotPasswordView}>
                   <TouchableOpacity
                     onPress={() => {
-                      Alert.alert('Forgot');
+                      navigation.navigate(NavigationStringPath.FORGOTSCREEN);
                     }}>
                     <Text style={styles.forgotPasswordTextStyle}>
                       Forgot Password ?
@@ -162,8 +162,8 @@ const LoginScreen = () => {
                   <CustomButton
                     text={'Log in'}
                     onPress={() => {
-                      // NextScreen();
-                      validation();
+                      NextScreen();
+                      // validation();
                     }}
                   />
                 </View>

@@ -1,6 +1,6 @@
 import {Alert, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import styles from './Styles';
+import styles from './Styles'; // Importing the external style sheet
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
@@ -8,7 +8,6 @@ import NavigationStringPath from '../../constants/NavigationStringPath';
 import {ProfileSvg} from '../../constants/SvgPath';
 import {moderateScale, moderateVerticalScale} from 'react-native-size-matters';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
-import {moderateScaleVertical} from '../../constants/responsiveSize';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -22,39 +21,19 @@ const ProfileScreen = () => {
             size={16}
             color={Color.BLACK}
             onPress={() => {
-              navigation.navigate(NavigationStringPath.SIGNUPSCREEN);
+              navigation.goBack();
             }}
             text={'Profile'}
           />
 
-          <View
-            style={{
-              borderRadius: moderateScale(50),
-              overflow: 'hidden',
-              padding: moderateScale(16),
-              alignItems: 'center',
-              justifyContent: 'center',
-              marginTop: moderateVerticalScale(32),
-            }}>
-            <View
-              style={{
-                borderWidth: 4,
-                borderColor: Color.BLUE,
-                borderRadius: 100,
-                overflow: 'hidden',
-                width: moderateScale(140),
-                height: moderateVerticalScale(140),
-                alignItems: 'center',
-                justifyContent: 'center',
-              }}>
-              <ProfileSvg
-                width={moderateScale(156)}
-                height={moderateVerticalScale(131)}
-              />
+          <View style={styles.profileImageContainer}>
+            <View style={styles.profileImageBorder}>
+              <ProfileSvg />
             </View>
           </View>
-          <View style={{marginTop: moderateScaleVertical(16)}}>
-            <View style={{marginVertical: moderateScaleVertical(16)}}>
+
+          <View style={styles.menuContainer}>
+            <View style={styles.menuItem}>
               <CustomBorderComponent
                 text={'Your Courses'}
                 onPress={() => {
@@ -63,7 +42,7 @@ const ProfileScreen = () => {
               />
             </View>
 
-            <View style={{marginVertical: moderateScaleVertical(16)}}>
+            <View style={styles.menuItem}>
               <CustomBorderComponent
                 text={'Saved'}
                 onPress={() => {
@@ -71,7 +50,8 @@ const ProfileScreen = () => {
                 }}
               />
             </View>
-            <View style={{marginVertical: moderateScaleVertical(16)}}>
+
+            <View style={styles.menuItem}>
               <CustomBorderComponent
                 text={'Payment'}
                 onPress={() => {
@@ -80,6 +60,7 @@ const ProfileScreen = () => {
               />
             </View>
           </View>
+
           <View style={styles.logoutView}>
             <TouchableOpacity
               onPress={() => {

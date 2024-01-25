@@ -35,7 +35,7 @@ const SignUpScreen = () => {
   const navigation = useNavigation();
 
   const NextScreen = () => {
-    navigation.navigate(NavigationStringPath.PROFILESCREEN);
+    navigation.navigate(NavigationStringPath.TABSCREENS);
   };
 
   const validation = () => {
@@ -79,7 +79,7 @@ const SignUpScreen = () => {
     }
 
     if (!nameError && !emailError && !passwordError) {
-      // NextScreen();
+      NextScreen();
     }
   };
 
@@ -149,8 +149,8 @@ const SignUpScreen = () => {
                 <CustomButton
                   text={'Sign up'}
                   onPress={() => {
-                    // NextScreen();
-                    validation();
+                    NextScreen();
+                    // validation();
                   }}
                 />
               </View>

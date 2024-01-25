@@ -16,4 +16,5 @@ export default {
   TEST_QUESTIONSCREEN: 'TestQuestionScreen',
   TEST_RESULTSCREEN: 'TestResultScreen',
   TABSCREENS: 'TabScreens',
+  FORGOTSCREEN: 'ForgotScreen',
 };

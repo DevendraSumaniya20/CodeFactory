@@ -14,6 +14,30 @@ const styles = StyleSheet.create({
   marginContainer: {
     marginHorizontal: moderateScale(16),
   },
+  profileImageContainer: {
+    borderRadius: moderateScale(50),
+    overflow: 'hidden',
+    padding: moderateScale(16),
+    alignItems: 'center',
+    justifyContent: 'center',
+    marginTop: moderateVerticalScale(32),
+  },
+  profileImageBorder: {
+    borderWidth: 4,
+    borderColor: Color.BLUE,
+    borderRadius: 100,
+    overflow: 'hidden',
+    width: moderateScale(140),
+    height: moderateVerticalScale(140),
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  menuContainer: {
+    marginTop: moderateVerticalScale(16),
+  },
+  menuItem: {
+    marginVertical: moderateVerticalScale(16),
+  },
   logoutView: {
     alignItems: 'center',
     justifyContent: 'center',
