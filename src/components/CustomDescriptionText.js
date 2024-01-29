@@ -9,6 +9,9 @@ const CustomDescriptionText = ({
   marginVertical,
   marginTop,
   lineHeight,
+  fontWeight,
+  fontFamily,
+  color,
 }) => {
   return (
     <View style={styles.descriptionTextView}>
@@ -20,6 +23,9 @@ const CustomDescriptionText = ({
             marginVertical: marginVertical,
             marginTop: marginTop,
             lineHeight: lineHeight,
+            fontWeight: fontWeight,
+            fontFamily: fontFamily,
+            color: color,
           },
         ]}>
         {text}
@@ -36,11 +42,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: moderateScale(16),
   },
   textStyle: {
-    fontFamily: 'Rubik-Regular',
-    fontWeight: '400',
-    lineHeight: 21,
     fontStyle: 'normal',
-    fontSize: scale(14),
-    color: Color.GRAY,
   },
 });

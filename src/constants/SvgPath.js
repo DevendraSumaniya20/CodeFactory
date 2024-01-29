@@ -18,6 +18,11 @@ import Bell from '../assets/svgs/Notification.svg';
 import Lock from '../assets/svgs/Password.svg';
 import Email from '../assets/svgs/Email.svg';
 import RightArrow from '../assets/svgs/RightArrow.svg';
+import NoPaymentSvg from '../assets/svgs/NoPaymentSvg.svg';
+import NotFoundSearchSvg from '../assets/svgs/NotFoundSearchSvg.svg';
+import CourseSavedSvg from '../assets/svgs/CourseSavedSvg.svg';
+import NotSavedSvg from '../assets/svgs/NotSavedSvg.svg';
+import PaymentAddedSvg from '../assets/svgs/PaymentAddedSvg.svg';
 
 export {
   INTRO1,
@@ -40,4 +45,9 @@ export {
   Email,
   Bell,
   RightArrow,
+  NoPaymentSvg,
+  NotFoundSearchSvg,
+  CourseSavedSvg,
+  NotSavedSvg,
+  PaymentAddedSvg,
 };

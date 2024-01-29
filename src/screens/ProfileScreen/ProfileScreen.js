@@ -37,7 +37,7 @@ const ProfileScreen = () => {
               <CustomBorderComponent
                 text={'Your Courses'}
                 onPress={() => {
-                  Alert.alert('Warning');
+                  navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN);
                 }}
               />
             </View>

@@ -12,6 +12,7 @@ import TabScreen from '../screens/TabScreens/TabScreen';
 import ResultsScreen from '../screens/ResultsScreen/ResultsScreen';
 import ForgotScreen from '../screens/ForgotScreen/ForgotScreen';
 import ProductScreen from '../screens/ProductScreen/ProductScreen';
+import YourCourseScreen from '../screens/YourCourseScreen/YourCourseScreen';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -54,6 +55,11 @@ const Navigation = () => {
         <Stack.Screen
           name={NavigationStringPath.PRODUCTSCREEN}
           component={ProductScreen}
+        />
+
+        <Stack.Screen
+          name={NavigationStringPath.YOUR_COURSESSCREEN}
+          component={YourCourseScreen}
         />
 
         <Stack.Screen

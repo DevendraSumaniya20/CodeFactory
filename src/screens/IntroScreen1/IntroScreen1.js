@@ -27,30 +27,10 @@ const IntroScreen1 = () => {
     navigation.navigate(NavigationStringPath.INTROSCREEN2);
   };
 
-  const SKipScreen = () => {
-    navigation.navigate(NavigationStringPath.LOGINSCREEN);
-  };
-
-  const gotoHomeScreen = () => {
-    navigation.navigate(NavigationStringPath.LOGINSCREEN);
-  };
-
   return (
     <>
       <View style={{flex: 1, backgroundColor: '#fff'}}>
         <View style={styles.container}>
-          {/* <TouchableOpacity
-            onPress={() => {
-              SKipScreen();
-            }}>
-            <CustomSkipButton
-              text={'skip'}
-              onPress={() => {
-                gotoHomeScreen();
-                Alert.alert('Skip');
-              }}
-            />
-          </TouchableOpacity> */}
           <View style={styles.imageView}>
             <INTRO1 width={moderateScale(375)} height={moderateScale(264)} />
           </View>
