@@ -39,7 +39,7 @@ const IntroScreen1 = () => {
     <>
       <View style={{flex: 1, backgroundColor: '#fff'}}>
         <View style={styles.container}>
-          <TouchableOpacity
+          {/* <TouchableOpacity
             onPress={() => {
               SKipScreen();
             }}>
@@ -50,7 +50,7 @@ const IntroScreen1 = () => {
                 Alert.alert('Skip');
               }}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
           <View style={styles.imageView}>
             <INTRO1 width={moderateScale(375)} height={moderateScale(264)} />
           </View>

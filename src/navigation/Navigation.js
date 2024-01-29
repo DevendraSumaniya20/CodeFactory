@@ -11,6 +11,7 @@ import SignUpScreen from '../screens/SignUpScreen/SignUpScreen';
 import TabScreen from '../screens/TabScreens/TabScreen';
 import ResultsScreen from '../screens/ResultsScreen/ResultsScreen';
 import ForgotScreen from '../screens/ForgotScreen/ForgotScreen';
+import ProductScreen from '../screens/ProductScreen/ProductScreen';
 
 const Stack = createNativeStackNavigator();
 const Navigation = () => {
@@ -18,7 +19,7 @@ const Navigation = () => {
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName={NavigationStringPath.LOGINSCREEN}>
+        initialRouteName={NavigationStringPath.TABSCREENS}>
         <Stack.Screen
           name={NavigationStringPath.INTROSCREEN1}
           component={IntroScreen1}
@@ -48,6 +49,11 @@ const Navigation = () => {
         <Stack.Screen
           name={NavigationStringPath.RESULTSCREEN}
           component={ResultsScreen}
+        />
+
+        <Stack.Screen
+          name={NavigationStringPath.PRODUCTSCREEN}
+          component={ProductScreen}
         />
 
         <Stack.Screen
