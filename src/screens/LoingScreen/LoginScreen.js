@@ -162,8 +162,8 @@ const LoginScreen = () => {
                   <CustomButton
                     text={'Log in'}
                     onPress={() => {
-                      NextScreen();
-                      // validation();
+                      // NextScreen();
+                      validation();
                     }}
                   />
                 </View>

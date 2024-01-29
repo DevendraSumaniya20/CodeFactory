@@ -7,14 +7,16 @@ import {moderateScaleVertical} from '../constants/responsiveSize';
 
 const CustomHeader = ({text, iconName, size, color, onPress}) => {
   return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        <CustomIcon name={iconName} size={size} color={color} />
-      </TouchableOpacity>
-      <View style={{width: '100%'}}>
-        <Text style={styles.headerTextTitle}>{text}</Text>
+    <TouchableOpacity>
+      <View style={styles.container}>
+        <TouchableOpacity style={styles.button} onPress={onPress}>
+          <CustomIcon name={iconName} size={size} color={color} />
+        </TouchableOpacity>
+        <View style={{width: '100%'}}>
+          <Text style={styles.headerTextTitle}>{text}</Text>
+        </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
