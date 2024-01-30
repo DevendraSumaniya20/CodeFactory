@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -18,10 +18,36 @@ import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomButton from '../../components/CustomButton';
+import NavigationStringPath from '../../constants/NavigationStringPath';
+import {storeData, getData} from '../../utils/AsyncStorage';
 
 const ProductScreen = ({route}) => {
+  const [storedCourses, setStoredCourses] = useState([]);
+
   const {item} = route.params;
   const navigation = useNavigation();
+
+  const addToCart = async () => {
+    try {
+      await storeData('savedCourses', JSON.stringify([...storedCourses, item]));
+
+      navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN, {
+        addedCourses: [...storedCourses, item],
+      });
+    } catch (error) {
+      console.error('Error adding course to cart:', error);
+    }
+  };
+
+  useEffect(() => {
+    const retrieveStoredCourses = async () => {
+      const storedData = await getData('savedCourses');
+      if (storedData) {
+        setStoredCourses(JSON.parse(storedData));
+      }
+    };
+    retrieveStoredCourses();
+  }, []);
 
   return (
     <View style={styles.container}>
@@ -99,7 +125,12 @@ const ProductScreen = ({route}) => {
             <Text style={styles.renderDurationText}>{item.duration}</Text>
           </View>
           <View style={{marginVertical: moderateVerticalScale(21)}}>
-            <CustomButton text={'Add to cart'} onPress={() => {}} />
+            <CustomButton
+              text={'Add to cart'}
+              onPress={() => {
+                addToCart();
+              }}
+            />
           </View>
         </View>
       </SafeAreaView>
