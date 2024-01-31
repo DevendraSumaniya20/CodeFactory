@@ -6,6 +6,7 @@ import {
   Image,
   TouchableOpacity,
   SafeAreaView,
+  Alert,
 } from 'react-native';
 import styles from './Styles';
 import {
@@ -20,24 +21,34 @@ import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomButton from '../../components/CustomButton';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import {storeData, getData} from '../../utils/AsyncStorage';
+import {Heart, HeartFill} from '../../constants/SvgPath';
 
 const ProductScreen = ({route}) => {
   const [storedCourses, setStoredCourses] = useState([]);
+  const [like, setLike] = useState(false);
 
   const {item} = route.params;
   const navigation = useNavigation();
 
-  const addToCart = async () => {
-    try {
-      await storeData('savedCourses', JSON.stringify([...storedCourses, item]));
-
-      navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN, {
-        addedCourses: [...storedCourses, item],
-      });
-    } catch (error) {
-      console.error('Error adding course to cart:', error);
+  const onClickLike = async () => {
+    if (!like) {
+      Alert.alert('Item added in Saved Course');
+      setLike(true);
+      try {
+        await storeData(
+          'savedCourses',
+          JSON.stringify([...storedCourses, item]),
+        );
+      } catch (error) {
+        console.error('Error adding course to cart:', error);
+      }
+    } else {
+      Alert.alert('Item removed from Saved Course');
+      setLike(false);
     }
   };
+
+  const addToCart = async () => {};
 
   useEffect(() => {
     const retrieveStoredCourses = async () => {
@@ -124,13 +135,46 @@ const ProductScreen = ({route}) => {
 
             <Text style={styles.renderDurationText}>{item.duration}</Text>
           </View>
-          <View style={{marginVertical: moderateVerticalScale(21)}}>
+          <View
+            style={{
+              marginVertical: moderateVerticalScale(16),
+              alignItems: 'center',
+              flexDirection: 'row',
+              justifyContent: 'space-evenly',
+              gap: moderateScale(6),
+            }}>
             <CustomButton
+              inlineStyle={{width: moderateScale(320)}}
+              width={300}
               text={'Add to cart'}
               onPress={() => {
                 addToCart();
               }}
             />
+
+            <TouchableOpacity
+              onPress={() => {
+                onClickLike();
+              }}
+              style={{
+                borderRadius: moderateScale(6),
+                alignItems: 'center',
+                justifyContent: 'center',
+                borderColor: Color.GRAY,
+                borderWidth: 1,
+                padding: moderateScale(6),
+                marginLeft: moderateScale(12),
+              }}>
+              {like ? (
+                <>
+                  <HeartFill height={30} width={30} fill={Color.THEMECOLOR} />
+                </>
+              ) : (
+                <>
+                  <Heart height={30} width={30} fill={'#000'} />
+                </>
+              )}
+            </TouchableOpacity>
           </View>
         </View>
       </SafeAreaView>

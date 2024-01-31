@@ -46,7 +46,7 @@ const ProfileScreen = () => {
               <CustomBorderComponent
                 text={'Saved'}
                 onPress={() => {
-                  Alert.alert('Warning');
+                  navigation.navigate(NavigationStringPath.COURSE_SAVED_SCREEN);
                 }}
               />
             </View>

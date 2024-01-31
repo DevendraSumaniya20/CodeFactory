@@ -17,4 +17,5 @@ export default {
   TEST_RESULTSCREEN: 'TestResultScreen',
   TABSCREENS: 'TabScreens',
   FORGOTSCREEN: 'ForgotScreen',
+  COURSE_SAVED_SCREEN: 'CourseSavedScreen',
 };

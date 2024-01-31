@@ -3,9 +3,11 @@ import React from 'react';
 import {moderateScale, scale} from 'react-native-size-matters';
 import Color from '../constants/Color';
 
-const CustomButton = ({text, onPress}) => {
+const CustomButton = ({text, onPress, width, inlineStyle}) => {
   return (
-    <TouchableOpacity onPress={onPress} style={styles.CustombuttonView}>
+    <TouchableOpacity
+      onPress={onPress}
+      style={[styles.CustombuttonView, inlineStyle]}>
       <Text style={styles.textStyle}>{text}</Text>
     </TouchableOpacity>
   );

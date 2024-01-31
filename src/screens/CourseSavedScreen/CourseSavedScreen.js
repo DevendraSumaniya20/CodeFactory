@@ -12,7 +12,7 @@ import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
-import {NotSavedSvg} from '../../constants/SvgPath';
+import {CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {
@@ -23,7 +23,7 @@ import {
 import CustomButton from '../../components/CustomButton';
 import {getData} from '../../utils/AsyncStorage';
 
-const YourCourseScreen = ({route}) => {
+const CourseSavedScreen = ({route}) => {
   const navigation = useNavigation();
   const {addedCourses} = route.params || {addedCourses: []};
 
@@ -101,7 +101,7 @@ const YourCourseScreen = ({route}) => {
             ) : (
               <>
                 <View style={styles.imageView}>
-                  <NotSavedSvg />
+                  <CourseSavedSvg />
                 </View>
                 <View style={styles.welcomeTextView}>
                   <CustomWelcomeText
@@ -144,4 +144,4 @@ const YourCourseScreen = ({route}) => {
   );
 };
 
-export default YourCourseScreen;
+export default CourseSavedScreen;

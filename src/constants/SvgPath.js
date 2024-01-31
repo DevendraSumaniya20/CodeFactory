@@ -23,6 +23,8 @@ import NotFoundSearchSvg from '../assets/svgs/NotFoundSearchSvg.svg';
 import CourseSavedSvg from '../assets/svgs/CourseSavedSvg.svg';
 import NotSavedSvg from '../assets/svgs/NotSavedSvg.svg';
 import PaymentAddedSvg from '../assets/svgs/PaymentAddedSvg.svg';
+import Heart from '../assets/svgs/heart.svg';
+import HeartFill from '../assets/svgs/heartFill.svg';
 
 export {
   INTRO1,
@@ -50,4 +52,6 @@ export {
   CourseSavedSvg,
   NotSavedSvg,
   PaymentAddedSvg,
+  Heart,
+  HeartFill,
 };
