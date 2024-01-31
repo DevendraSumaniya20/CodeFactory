@@ -19,9 +19,11 @@ import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomButton from '../../components/CustomButton';
-import NavigationStringPath from '../../constants/NavigationStringPath';
 import {storeData, getData} from '../../utils/AsyncStorage';
-import {Heart, HeartFill} from '../../constants/SvgPath';
+import {Heart, HeartFill, Logo1} from '../../constants/SvgPath';
+import RazorpayCheckout from 'react-native-razorpay';
+import {APIKey} from '../../config/APIKey';
+import ImagePath from '../../constants/ImagePath';
 
 const ProductScreen = ({route}) => {
   const [storedCourses, setStoredCourses] = useState([]);
@@ -48,7 +50,40 @@ const ProductScreen = ({route}) => {
     }
   };
 
-  const addToCart = async () => {};
+  const addToCart = async () => {
+    try {
+      const itemPriceInDollars = item.Price;
+
+      const conversionRate = 75;
+
+      const amountInINR = itemPriceInDollars * conversionRate;
+
+      var options = {
+        description: 'Credits towards consultation',
+        image: require('../../assets/images/Logo1.png'),
+        currency: 'INR',
+        key: APIKey,
+        // amount: amountInINR.toString(),
+        amount: '100000',
+
+        name: 'Acme Corp',
+        order_id: '',
+        prefill: {
+          email: 'gaurav.kumar@example.com',
+          contact: '9191919191',
+          name: 'Gaurav Kumar',
+        },
+        theme: {color: '#53a20e'},
+      };
+
+      const data = await RazorpayCheckout.open(options);
+
+      Alert.alert(`Success: ${data.razorpay_payment_id}`);
+    } catch (error) {
+      Alert.alert(`Error: ${error.code} | ${error.description}`);
+      console.log(error.description);
+    }
+  };
 
   useEffect(() => {
     const retrieveStoredCourses = async () => {
@@ -79,7 +114,7 @@ const ProductScreen = ({route}) => {
             <View
               style={{
                 alignItems: 'flex-start',
-                paddingTop: moderateScale(8),
+                paddingTop: moderateVerticalScale(8),
                 backgroundColor: item.backgroundColor,
                 borderRadius: moderateScale(8),
               }}>
@@ -147,9 +182,7 @@ const ProductScreen = ({route}) => {
               inlineStyle={{width: moderateScale(320)}}
               width={300}
               text={'Add to cart'}
-              onPress={() => {
-                addToCart();
-              }}
+              onPress={addToCart}
             />
 
             <TouchableOpacity

@@ -7,4 +7,5 @@ export default {
   FACEBOOKIMG: require('../assets/images/Facebook.png'),
   INSTAGRAMIMG: require('../assets/images/Instagram.png'),
   GOOGLEIMG: require('../assets/images/Google.png'),
+  LOGO1: require('../assets/images/Logo1.png'),
 };
