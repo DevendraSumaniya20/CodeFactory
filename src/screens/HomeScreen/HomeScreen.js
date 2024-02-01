@@ -64,7 +64,6 @@ const HomeScreen = () => {
         <View style={styles.renderMainView}>
           <View
             style={{
-              alignItems: 'flex-start',
               height: moderateScaleVertical(194),
               paddingTop: moderateScale(8),
               backgroundColor: item.backgroundColor,
@@ -76,9 +75,17 @@ const HomeScreen = () => {
               style={styles.renderItemImage}
             />
 
-            <TouchableOpacity style={styles.renderTouchableOpacity}>
-              <Text style={styles.renderTouchableText}> ₹ {item.Price}</Text>
-            </TouchableOpacity>
+            <View>
+              <TouchableOpacity
+                style={styles.renderTouchableOpacity}
+                onPress={() => {
+                  navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {
+                    item,
+                  });
+                }}>
+                <Text style={styles.renderTouchableText}> ₹ {item.Price}</Text>
+              </TouchableOpacity>
+            </View>
           </View>
 
           <View style={styles.renderSecondView}>

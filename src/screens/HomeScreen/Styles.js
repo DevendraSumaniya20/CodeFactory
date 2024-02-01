@@ -63,7 +63,8 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(20),
     paddingHorizontal: moderateScale(16),
     paddingVertical: moderateScale(8),
-    marginLeft: moderateScale(260),
+    marginLeft: moderateScale(230),
+    width: moderateScale(90),
   },
 
   renderTouchableText: {
