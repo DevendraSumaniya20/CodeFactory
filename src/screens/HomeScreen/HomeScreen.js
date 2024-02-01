@@ -56,7 +56,10 @@ const HomeScreen = () => {
       <TouchableOpacity
         activeOpacity={0.5}
         onPress={() =>
-          navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {item})
+          navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {
+            item,
+            price: filteredData[0].Price,
+          })
         }>
         <View style={styles.renderMainView}>
           <View
@@ -74,7 +77,7 @@ const HomeScreen = () => {
             />
 
             <TouchableOpacity style={styles.renderTouchableOpacity}>
-              <Text style={styles.renderTouchableText}>{item.Price}</Text>
+              <Text style={styles.renderTouchableText}> ₹ {item.Price}</Text>
             </TouchableOpacity>
           </View>
 

@@ -1,2 +1,2 @@
-export const APIKey = 'rzp_test_USrXC26qZBaPrZ';
-export const SECRET_KEY = 'j9ZChEBUo6p9AnCnmfcs0E42';
+export const APIKey = 'rzp_test_s19kFIg1uZT8kS';
+export const SECRET_KEY = 'TKbfNA53lua9HZ3moyYVXwfD';

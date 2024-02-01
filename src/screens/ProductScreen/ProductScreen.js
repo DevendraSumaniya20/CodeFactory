@@ -52,36 +52,32 @@ const ProductScreen = ({route}) => {
 
   const addToCart = async () => {
     try {
-      const itemPriceInDollars = item.Price;
-
-      const conversionRate = 75;
-
-      const amountInINR = itemPriceInDollars * conversionRate;
-
-      var options = {
-        description: 'Credits towards consultation',
+      let options = {
+        description: `Purchase of ${item.type}`,
         image: require('../../assets/images/Logo1.png'),
         currency: 'INR',
         key: APIKey,
-        // amount: amountInINR.toString(),
-        amount: '100000',
-
-        name: 'Acme Corp',
+        amount: item.Price * 100,
+        name: 'User',
         order_id: '',
         prefill: {
           email: 'gaurav.kumar@example.com',
           contact: '9191919191',
           name: 'Gaurav Kumar',
         },
-        theme: {color: '#53a20e'},
+        theme: {color: Color.THEMECOLOR},
       };
 
-      const data = await RazorpayCheckout.open(options);
-
-      Alert.alert(`Success: ${data.razorpay_payment_id}`);
+      RazorpayCheckout.open(options)
+        .then(data => {
+          Alert.alert(`Success: ${data.razorpay_payment_id}`);
+        })
+        .catch(error => {
+          Alert.alert(`Error: ${error.code} | ${error.description}`);
+          console.log(error.description);
+        });
     } catch (error) {
-      Alert.alert(`Error: ${error.code} | ${error.description}`);
-      console.log(error.description);
+      Alert.alert(`Error: ${error.message}`);
     }
   };
 
@@ -125,7 +121,7 @@ const ProductScreen = ({route}) => {
               />
 
               <TouchableOpacity style={styles.renderTouchableOpacity}>
-                <Text style={styles.renderTouchableText}>{item.Price}</Text>
+                <Text style={styles.renderTouchableText}> ₹ {item.Price}</Text>
               </TouchableOpacity>
             </View>
 
@@ -182,7 +178,9 @@ const ProductScreen = ({route}) => {
               inlineStyle={{width: moderateScale(320)}}
               width={300}
               text={'Add to cart'}
-              onPress={addToCart}
+              onPress={() => {
+                addToCart();
+              }}
             />
 
             <TouchableOpacity

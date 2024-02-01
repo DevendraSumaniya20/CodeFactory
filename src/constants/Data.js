@@ -5,7 +5,7 @@ const data = [
   {
     id: 1,
     image: ImagePath.DATAIMG1,
-    Price: '$50',
+    Price: 3700,
     duration: '3 h 30 min',
     type: 'UI',
     otherDetails: 'Advanced mobile interface design',
@@ -16,7 +16,7 @@ const data = [
   {
     id: 2,
     image: ImagePath.DATAIMG2,
-    Price: '$60',
+    Price: 4440,
     duration: '4 h',
     type: 'Web Development',
     otherDetails: 'Responsive website design and development',
@@ -27,7 +27,7 @@ const data = [
   {
     id: 3,
     image: ImagePath.DATAIMG3,
-    Price: '$45',
+    Price: 3330,
     duration: '2 h 45 min',
     type: 'Data Science',
     otherDetails: 'Introduction to data analysis and visualization',
@@ -38,7 +38,7 @@ const data = [
   {
     id: 4,
     image: ImagePath.DATAIMG4,
-    Price: '$55',
+    Price: 4070,
     duration: '3 h 15 min',
     type: 'Graphic Design',
     otherDetails: 'Fundamentals of digital graphic design',
@@ -49,7 +49,7 @@ const data = [
   {
     id: 5,
     image: ImagePath.DATAIMG5,
-    Price: '$70',
+    Price: 5180,
     duration: '5 h',
     type: 'Programming',
     otherDetails: 'Comprehensive introduction to programming concepts',
@@ -60,7 +60,7 @@ const data = [
   {
     id: 6,
     image: ImagePath.DATAIMG1,
-    Price: '$50',
+    Price: 3700,
     duration: '3 h 30 min',
     type: 'UI',
     otherDetails: 'Advanced mobile interface design',
@@ -71,7 +71,7 @@ const data = [
   {
     id: 7,
     image: ImagePath.DATAIMG2,
-    Price: '$60',
+    Price: 4440,
     duration: '4 h',
     type: 'Web Development',
     otherDetails: 'Responsive website design and development',
@@ -82,7 +82,7 @@ const data = [
   {
     id: 8,
     image: ImagePath.DATAIMG3,
-    Price: '$45',
+    Price: 3330,
     duration: '2 h 45 min',
     type: 'Data Science',
     otherDetails: 'Introduction to data analysis and visualization',
@@ -93,7 +93,7 @@ const data = [
   {
     id: 9,
     image: ImagePath.DATAIMG4,
-    Price: '$55',
+    Price: 4070,
     duration: '3 h 15 min',
     type: 'Graphic Design',
     otherDetails: 'Fundamentals of digital graphic design',
@@ -104,7 +104,7 @@ const data = [
   {
     id: 10,
     image: ImagePath.DATAIMG5,
-    Price: '$70',
+    Price: 5180,
     duration: '5 h',
     type: 'Programming',
     otherDetails: 'Comprehensive introduction to programming concepts',

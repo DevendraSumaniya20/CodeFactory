@@ -73,7 +73,7 @@ const ResultsScreen = () => {
             />
 
             <TouchableOpacity style={styles.renderTouchableOpacity}>
-              <Text style={styles.renderTouchableText}>{item.Price}</Text>
+              <Text style={styles.renderTouchableText}>₹ {item.Price}</Text>
             </TouchableOpacity>
           </View>
 
