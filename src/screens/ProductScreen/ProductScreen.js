@@ -32,9 +32,14 @@ const ProductScreen = ({route}) => {
   const {item} = route.params;
   const navigation = useNavigation();
 
+  useEffect(() => {
+    const isLiked = storedCourses.some(course => course.id === item.id);
+    setLike(isLiked);
+  }, [storedCourses, item]);
+
   const onClickLike = async () => {
     if (!like) {
-      Alert.alert('Item added in Saved Course');
+      Alert.alert('Item added to Saved Courses');
       setLike(true);
       try {
         await storeData(
@@ -42,11 +47,19 @@ const ProductScreen = ({route}) => {
           JSON.stringify([...storedCourses, item]),
         );
       } catch (error) {
-        console.error('Error adding course to cart:', error);
+        console.error('Error adding course to saved courses:', error);
       }
     } else {
-      Alert.alert('Item removed from Saved Course');
+      Alert.alert('Item removed from Saved Courses');
       setLike(false);
+      try {
+        const updatedCourses = storedCourses.filter(
+          course => course.id !== item.id,
+        );
+        await storeData('savedCourses', JSON.stringify(updatedCourses));
+      } catch (error) {
+        console.error('Error removing course from saved courses:', error);
+      }
     }
   };
 
