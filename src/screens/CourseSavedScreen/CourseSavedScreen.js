@@ -22,6 +22,7 @@ import {
 } from 'react-native-size-matters';
 import CustomButton from '../../components/CustomButton';
 import {getData} from '../../utils/AsyncStorage';
+import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const CourseSavedScreen = ({route}) => {
   const navigation = useNavigation();
@@ -84,7 +85,7 @@ const CourseSavedScreen = ({route}) => {
             onPress={() => {
               navigation.goBack();
             }}
-            text={'Saved'}
+            text={'Saved Courses'}
           />
 
           <View style={{backgroundColor: '#FFF'}}>
@@ -101,7 +102,7 @@ const CourseSavedScreen = ({route}) => {
             ) : (
               <>
                 <View style={styles.imageView}>
-                  <CourseSavedSvg />
+                  <NotSavedSvg />
                 </View>
                 <View style={styles.welcomeTextView}>
                   <CustomWelcomeText
@@ -128,12 +129,17 @@ const CourseSavedScreen = ({route}) => {
                     color={Color.GRAY}
                     fontFamily="Rubik-Regular"
                     fontWeight="400"
-                    text={'again in a few minutes '}
+                    text={'after you will see Courses  '}
                   />
                 </View>
 
                 <View style={styles.continueToubleView}>
-                  <CustomButton text={'Save Course'} onPress={() => {}} />
+                  <CustomButton
+                    text={'Save Course'}
+                    onPress={() => {
+                      navigation.navigate(NavigationStringPath.HOMESCREEN);
+                    }}
+                  />
                 </View>
               </>
             )}

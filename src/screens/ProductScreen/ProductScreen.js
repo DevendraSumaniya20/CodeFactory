@@ -65,6 +65,24 @@ const ProductScreen = ({route}) => {
 
   const addToCart = async () => {
     try {
+      const existingCourses = await getData('purchaseCourse');
+      let updatedCourses = [];
+
+      if (existingCourses) {
+        updatedCourses = JSON.parse(existingCourses);
+
+        const isAlreadyPurchased = updatedCourses.some(
+          course => course.id === item.id,
+        );
+        if (isAlreadyPurchased) {
+          Alert.alert(
+            'Already Purchased',
+            'You have already purchased this course.',
+          );
+          return;
+        }
+      }
+
       let options = {
         description: `Purchase of ${item.type}`,
         image: require('../../assets/images/Logo1.png'),
@@ -84,18 +102,9 @@ const ProductScreen = ({route}) => {
       RazorpayCheckout.open(options)
         .then(async data => {
           Alert.alert(`Success: ${data.razorpay_payment_id}`);
-          try {
-            const existingCourses = await getData('purchaseCourse');
-            let updatedCourses = [];
-            if (existingCourses) {
-              updatedCourses = JSON.parse(existingCourses);
-            }
-            updatedCourses.push(item);
 
-            await storeData('purchaseCourse', JSON.stringify(updatedCourses));
-          } catch (error) {
-            console.error('Error storing purchased course:', error);
-          }
+          updatedCourses.push(item);
+          await storeData('purchaseCourse', JSON.stringify(updatedCourses));
         })
         .catch(error => {
           Alert.alert(`Error: ${error.code} | ${error.description}`);

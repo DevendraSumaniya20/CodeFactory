@@ -12,7 +12,7 @@ import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
-import {NotSavedSvg} from '../../constants/SvgPath';
+import {CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {
@@ -22,6 +22,7 @@ import {
 } from 'react-native-size-matters';
 import CustomButton from '../../components/CustomButton';
 import {getData} from '../../utils/AsyncStorage';
+import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const YourCourseScreen = ({route}) => {
   const navigation = useNavigation();
@@ -84,7 +85,7 @@ const YourCourseScreen = ({route}) => {
             onPress={() => {
               navigation.goBack();
             }}
-            text={'Saved'}
+            text={'Your Courses'}
           />
 
           <View style={{backgroundColor: '#FFF'}}>
@@ -101,11 +102,11 @@ const YourCourseScreen = ({route}) => {
             ) : (
               <>
                 <View style={styles.imageView}>
-                  <NotSavedSvg />
+                  <CourseSavedSvg />
                 </View>
                 <View style={styles.welcomeTextView}>
                   <CustomWelcomeText
-                    text={' Course not saved'}
+                    text={' Course not Added'}
                     fontFamily="Rubik-Regular"
                     fontSize={scale(24)}
                     letterSpacing={-0.5}
@@ -120,7 +121,7 @@ const YourCourseScreen = ({route}) => {
                     color={Color.GRAY}
                     fontFamily="Rubik-Regular"
                     fontWeight="400"
-                    text={'Try saving the course  '}
+                    text={'Try to Add the course  '}
                   />
                   <CustomDescriptionText
                     fontsize={scale(14)}
@@ -128,12 +129,17 @@ const YourCourseScreen = ({route}) => {
                     color={Color.GRAY}
                     fontFamily="Rubik-Regular"
                     fontWeight="400"
-                    text={'again in a few minutes '}
+                    text={'after you will see your Courses '}
                   />
                 </View>
 
                 <View style={styles.continueToubleView}>
-                  <CustomButton text={'Save Course'} onPress={() => {}} />
+                  <CustomButton
+                    text={'Check Courses'}
+                    onPress={() => {
+                      navigation.navigate(NavigationStringPath.HOMESCREEN);
+                    }}
+                  />
                 </View>
               </>
             )}
