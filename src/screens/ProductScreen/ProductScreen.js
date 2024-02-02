@@ -188,8 +188,9 @@ const ProductScreen = ({route}) => {
               gap: moderateScale(6),
             }}>
             <CustomButton
-              inlineStyle={{width: moderateScale(320)}}
-              width={300}
+              inlineStyle={{
+                width: moderateScale(290),
+              }}
               text={'Add to cart'}
               onPress={() => {
                 addToCart();
