@@ -82,8 +82,20 @@ const ProductScreen = ({route}) => {
       };
 
       RazorpayCheckout.open(options)
-        .then(data => {
+        .then(async data => {
           Alert.alert(`Success: ${data.razorpay_payment_id}`);
+          try {
+            const existingCourses = await getData('purchaseCourse');
+            let updatedCourses = [];
+            if (existingCourses) {
+              updatedCourses = JSON.parse(existingCourses);
+            }
+            updatedCourses.push(item);
+
+            await storeData('purchaseCourse', JSON.stringify(updatedCourses));
+          } catch (error) {
+            console.error('Error storing purchased course:', error);
+          }
         })
         .catch(error => {
           Alert.alert(`Error: ${error.code} | ${error.description}`);

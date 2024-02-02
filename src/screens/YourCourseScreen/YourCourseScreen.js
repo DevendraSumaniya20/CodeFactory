@@ -34,7 +34,7 @@ const YourCourseScreen = ({route}) => {
 
   useEffect(() => {
     const retrieveStoredCourses = async () => {
-      const storedData = await getData('savedCourses');
+      const storedData = await getData('purchaseCourse');
       if (storedData) {
         setStoredCourses(JSON.parse(storedData));
       }
