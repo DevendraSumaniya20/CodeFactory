@@ -5,6 +5,8 @@
 @implementation AppDelegate
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
+
+
 {
   self.moduleName = @"CodeFactory";
   // You can add your custom initial props in the dictionary below.
@@ -12,6 +14,7 @@
   self.initialProps = @{};
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
+  [FIRApp configure];
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge

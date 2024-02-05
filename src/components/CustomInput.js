@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(12),
     borderWidth: 0.5,
     justifyContent: 'space-between',
+    textAlign: 'left',
   },
   rightIconContainer: {
     marginRight: moderateScale(8),

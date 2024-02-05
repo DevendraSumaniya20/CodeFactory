@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "1083208379281",
+    "project_id": "codefactrory",
+    "storage_bucket": "codefactrory.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1083208379281:android:d40ebc1660de78a9ef8830",
+        "android_client_info": {
+          "package_name": "com.codefactory"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDP0Xq68sRGc2YjhrvOxQRE1bsJe3wTbwY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

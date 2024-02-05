@@ -8,7 +8,7 @@ import {
   Alert,
   KeyboardAvoidingView,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import ImagePath from '../../constants/ImagePath';
 import CustomButton from '../../components/CustomButton';
@@ -22,8 +22,10 @@ import {moderateScale, scale} from 'react-native-size-matters';
 import {LoginSvg} from '../../constants/SvgPath';
 import CustomErrorMessage from '../../components/CustomErrorMessage';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
+import {signInWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../../config/FirebaseAuth';
 
-const LoginScreen = () => {
+const LoginScreen = ({}) => {
   const [value, setValue] = useState('');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [email, setEmail] = useState('');
@@ -70,7 +72,23 @@ const LoginScreen = () => {
     }
 
     if (!emailError && !passwordError) {
-      // NextScreen();
+      FirebaseLogin();
+    }
+  };
+
+  const FirebaseLogin = async () => {
+    try {
+      const userLoginCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password,
+      );
+      navigation.navigate(NavigationStringPath.TABSCREENS, {
+        screen: NavigationStringPath.HOMESCREEN,
+        params: {name: userLoginCredential.user.displayName},
+      });
+    } catch (error) {
+      console.error('Login failed:', error);
     }
   };
 
@@ -129,6 +147,7 @@ const LoginScreen = () => {
                     // autoFocus={true}
                     placeholder="Email"
                     onChangeText={text => setEmail(text)}
+                    inputStyle={{width: '100%'}}
                   />
                 </View>
 

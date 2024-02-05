@@ -7,6 +7,7 @@ import {
   SafeAreaView,
   Alert,
   KeyboardAvoidingView,
+  Platform,
 } from 'react-native';
 import React, {useState} from 'react';
 import styles from './styles';
@@ -21,9 +22,10 @@ import {SignupSvg} from '../../constants/SvgPath';
 import CustomHeader from '../../components/CustomHeader';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CustomErrorMessage from '../../components/CustomErrorMessage';
+import {createUserWithEmailAndPassword} from 'firebase/auth';
+import {auth} from '../../config/FirebaseAuth';
 
 const SignUpScreen = () => {
-  const [value, setValue] = useState('');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -33,10 +35,6 @@ const SignUpScreen = () => {
   const [nameError, setNameError] = useState('');
 
   const navigation = useNavigation();
-
-  const NextScreen = () => {
-    navigation.navigate(NavigationStringPath.TABSCREENS);
-  };
 
   const validation = () => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -79,7 +77,31 @@ const SignUpScreen = () => {
     }
 
     if (!nameError && !emailError && !passwordError) {
-      NextScreen();
+      FirebaseSignUp();
+    }
+  };
+
+  const FirebaseSignUp = async () => {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        email,
+        password,
+        name,
+      );
+
+      navigation.navigate(NavigationStringPath.TABSCREENS, {
+        screen: NavigationStringPath.HOMESCREEN,
+        params: {userId: userCredential.user.uid, name: name},
+      });
+    } catch (error) {
+      if (error.code === 'auth/email-already-in-use') {
+        console.log('That email address is already in use!');
+      } else if (error.code === 'auth/invalid-email') {
+        console.log('That email address is invalid!');
+      } else {
+        console.error('Error creating user:', error.message);
+      }
     }
   };
 
@@ -118,6 +140,7 @@ const SignUpScreen = () => {
             <View style={styles.textinputView}>
               <View style={styles.textinputName}>
                 <CustomInput
+                  inputStyle={{width: '100%'}}
                   placeholder="Name"
                   onChangeText={text => setName(text)}
                 />
@@ -125,6 +148,7 @@ const SignUpScreen = () => {
               <CustomErrorMessage text={nameError} />
               <View style={styles.textinputName}>
                 <CustomInput
+                  inputStyle={{width: '100%'}}
                   placeholder="Email"
                   onChangeText={text => setEmail(text)}
                 />
@@ -149,8 +173,7 @@ const SignUpScreen = () => {
                 <CustomButton
                   text={'Sign up'}
                   onPress={() => {
-                    NextScreen();
-                    // validation();
+                    validation();
                   }}
                 />
               </View>

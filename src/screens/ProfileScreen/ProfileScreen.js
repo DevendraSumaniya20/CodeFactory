@@ -1,16 +1,15 @@
 import {Alert, SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import styles from './Styles'; // Importing the external style sheet
+import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import {ProfileSvg} from '../../constants/SvgPath';
-import {moderateScale, moderateVerticalScale} from 'react-native-size-matters';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
 
-const ProfileScreen = () => {
-  const navigation = useNavigation();
+const ProfileScreen = ({navigation}) => {
+  // const navigation = useNavigation();
 
   return (
     <View style={styles.container}>

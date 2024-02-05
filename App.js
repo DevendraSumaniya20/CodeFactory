@@ -1,7 +1,8 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
-import React from 'react';
-import Navigation from './src/navigation/Navigation';
+import React, {useEffect} from 'react';
 import {Provider} from 'react-redux';
+import {SafeAreaView, StyleSheet} from 'react-native';
+
+import Navigation from './src/navigation/Navigation';
 import store from './src/redux/store';
 
 const App = () => {

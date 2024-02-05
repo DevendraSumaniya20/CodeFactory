@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {
   SafeAreaView,
   View,
@@ -17,13 +17,31 @@ import CustomCategoryButton from '../../components/CustomCategoryButton';
 import data from '../../constants/Data';
 import {moderateScaleVertical} from '../../constants/responsiveSize';
 import _ from 'lodash';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
+import {auth} from '../../config/FirebaseAuth';
 
 const HomeScreen = () => {
+  const route = useRoute();
+
   const navigation = useNavigation();
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
+  const [name, setName] = useState(route.params?.name ?? '');
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        console.log('User logged in:', JSON.stringify(user));
+        setName(user.email || 'Anonymous');
+      } else {
+        console.log('User logged out');
+        setName('');
+      }
+    });
+
+    return () => unsubscribe();
+  }, []);
 
   const handleSearch = () => {
     const formattedSearchValue = searchValue.toLowerCase();
@@ -110,7 +128,7 @@ const HomeScreen = () => {
                 alignItems: 'flex-start',
               }}>
               <Text style={styles.helloTextStyle}>Hello,</Text>
-              <Text style={styles.userTextStyle}>Juana Antonieta</Text>
+              <Text style={styles.userTextStyle}>{name}</Text>
             </View>
             <View style={styles.notificationView}>
               <BellIcon width={moderateScale(24)} height={moderateScale(24)} />

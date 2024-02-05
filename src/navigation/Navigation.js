@@ -1,12 +1,11 @@
-import {StyleSheet, Text, View} from 'react-native';
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import NavigationStringPath from '../constants/NavigationStringPath';
 import IntroScreen1 from '../screens/IntroScreen1/IntroScreen1';
 import IntroScreen2 from '../screens/IntroScreen2/IntroScreen2';
 import IntroScreen3 from '../screens/IntroScreen3/IntroScreen3';
-import LoginScreen from '../screens/LoingScreen/LoginScreen';
+import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen/SignUpScreen';
 import TabScreen from '../screens/TabScreens/TabScreen';
 import ResultsScreen from '../screens/ResultsScreen/ResultsScreen';
@@ -16,12 +15,13 @@ import YourCourseScreen from '../screens/YourCourseScreen/YourCourseScreen';
 import CourseSavedScreen from '../screens/CourseSavedScreen/CourseSavedScreen';
 
 const Stack = createNativeStackNavigator();
+
 const Navigation = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator
         screenOptions={{headerShown: false}}
-        initialRouteName={NavigationStringPath.TABSCREENS}>
+        initialRouteName={NavigationStringPath.LOGINSCREEN}>
         <Stack.Screen
           name={NavigationStringPath.INTROSCREEN1}
           component={IntroScreen1}
