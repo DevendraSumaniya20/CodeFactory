@@ -9,7 +9,7 @@ import {ProfileSvg} from '../../constants/SvgPath';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
 import {auth} from '../../config/FirebaseAuth';
 
-const ProfileScreen = ({}) => {
+const ProfileScreen = () => {
   const navigation = useNavigation();
 
   const route = useRoute();
