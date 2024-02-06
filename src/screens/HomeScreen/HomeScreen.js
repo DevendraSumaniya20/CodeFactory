@@ -28,12 +28,13 @@ const HomeScreen = () => {
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
   const [name, setName] = useState(route.params?.name ?? '');
+  const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        console.log('User logged in:', JSON.stringify(user));
-        setName(user.email || 'Anonymous');
+        const name = user.email ? user.email.split('@')[0] : 'Anonymous';
+        setName(name);
       } else {
         console.log('User logged out');
         setName('');
@@ -41,6 +42,22 @@ const HomeScreen = () => {
     });
 
     return () => unsubscribe();
+  }, []);
+
+  useEffect(() => {
+    const GetCurrentGreeting = () => {
+      let today = new Date();
+      let currentHour = today.getHours();
+
+      if (currentHour < 12) {
+        setGreeting('Good Morning');
+      } else if (currentHour < 18) {
+        setGreeting('Good Afternoon');
+      } else {
+        setGreeting('Good Evening');
+      }
+    };
+    GetCurrentGreeting();
   }, []);
 
   const handleSearch = () => {
@@ -127,7 +144,7 @@ const HomeScreen = () => {
               style={{
                 alignItems: 'flex-start',
               }}>
-              <Text style={styles.helloTextStyle}>Hello,</Text>
+              <Text style={styles.helloTextStyle}>{greeting}</Text>
               <Text style={styles.userTextStyle}>{name}</Text>
             </View>
             <View style={styles.notificationView}>
