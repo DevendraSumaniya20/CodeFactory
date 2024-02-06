@@ -27,6 +27,7 @@ import Heart from '../assets/svgs/heart.svg';
 import HeartFill from '../assets/svgs/heartFill.svg';
 import Logo1 from '../assets/svgs/Logo1.svg';
 import Logo2 from '../assets/svgs/Logo2.svg';
+import GoogleSvg from '../assets/svgs/Google.svg';
 
 export {
   INTRO1,
@@ -58,4 +59,5 @@ export {
   HeartFill,
   Logo1,
   Logo2,
+  GoogleSvg,
 };

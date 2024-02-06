@@ -19,11 +19,17 @@ import CustomDescriptionText from '../../components/CustomDescriptionText';
 import CustomImage from '../../components/CustomImage';
 import CustomInput from '../../components/CustomInput';
 import {moderateScale, scale} from 'react-native-size-matters';
-import {LoginSvg} from '../../constants/SvgPath';
+import {GoogleSvg, LoginSvg} from '../../constants/SvgPath';
 import CustomErrorMessage from '../../components/CustomErrorMessage';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../../config/FirebaseAuth';
+import {
+  GoogleSignin,
+  GoogleSigninButton,
+  statusCodes,
+} from '@react-native-google-signin/google-signin';
+import {GoogleClientId} from '../../utils/GoogleLogin';
 
 const LoginScreen = ({}) => {
   const [value, setValue] = useState('');
@@ -32,12 +38,19 @@ const LoginScreen = ({}) => {
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [userInfromation, setUserInformation] = useState(null);
 
   const navigation = useNavigation();
 
   const NextScreen = () => {
     navigation.navigate(NavigationStringPath.TABSCREENS);
   };
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: GoogleClientId,
+    });
+  }, []);
 
   const validation = () => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -92,6 +105,31 @@ const LoginScreen = ({}) => {
     }
   };
 
+  const handleGoogleSignIn = async () => {
+    try {
+      await GoogleSignin.hasPlayServices();
+      const userInfo = await GoogleSignin.signIn();
+      setUserInformation(userInfo);
+
+      navigation.navigate(NavigationStringPath.TABSCREENS, {
+        screen: NavigationStringPath.PROFILESCREEN,
+        params: {userInfo},
+      });
+
+      Alert.alert('Success', 'Google sign-in successful');
+    } catch (error) {
+      if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+        console.log('User cancelled the sign-in flow');
+      } else if (error.code === statusCodes.IN_PROGRESS) {
+        console.log('Another sign-in operation is in progress');
+      } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+        console.log('Play services not available or outdated');
+      } else {
+        console.error('Error in Google sign-in:', error);
+      }
+    }
+  };
+
   return (
     <>
       <KeyboardAwareScrollView
@@ -125,18 +163,19 @@ const LoginScreen = ({}) => {
                       Alert.alert('Facebook');
                     }}
                   />
-                  <CustomImage
+                  {/* <CustomImage
                     source={ImagePath.INSTAGRAMIMG}
                     resizeMode="contain"
                     onPress={() => {
                       Alert.alert('Instagram');
                     }}
-                  />
+                  /> */}
+
                   <CustomImage
                     source={ImagePath.GOOGLEIMG}
                     resizeMode="cover"
                     onPress={() => {
-                      Alert.alert('Google');
+                      handleGoogleSignIn();
                     }}
                   />
                 </View>

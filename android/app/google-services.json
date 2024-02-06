@@ -12,7 +12,20 @@
           "package_name": "com.codefactory"
         }
       },
-      "oauth_client": [],
+      "oauth_client": [
+        {
+          "client_id": "1083208379281-au4qtfv9befeau2k8sl5e3t3puljqit2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.codefactory",
+            "certificate_hash": "42fed9e930c30e06c730d1c57ec09c363468d0ec"
+          }
+        },
+        {
+          "client_id": "1083208379281-eerpgcppo090h78meqol57amvhav0nm0.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
       "api_key": [
         {
           "current_key": "AIzaSyDP0Xq68sRGc2YjhrvOxQRE1bsJe3wTbwY"
@@ -20,7 +33,19 @@
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": []
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1083208379281-eerpgcppo090h78meqol57amvhav0nm0.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "1083208379281-268q9gtuppoo6qbfsoo5nva9g574mlam.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.reactjs.native.example.CodeFactory"
+              }
+            }
+          ]
         }
       }
     }

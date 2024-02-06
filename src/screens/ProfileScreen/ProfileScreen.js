@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import {ProfileSvg} from '../../constants/SvgPath';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
@@ -11,6 +11,13 @@ import {auth} from '../../config/FirebaseAuth';
 
 const ProfileScreen = ({}) => {
   const navigation = useNavigation();
+
+  const route = useRoute();
+  const userInfo = route.params.userInfo;
+  console.log(userInfo);
+
+  const userName = userInfo ? userInfo.user.name : 'User';
+  console.log(userName);
 
   const handleLogoutButtonClick = () => {
     Alert.alert('Confirm Logout', 'Are you sure you want to log out?', [
