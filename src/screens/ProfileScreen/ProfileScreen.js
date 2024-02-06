@@ -7,9 +7,26 @@ import {useNavigation} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import {ProfileSvg} from '../../constants/SvgPath';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
+import {auth} from '../../config/FirebaseAuth';
 
-const ProfileScreen = ({navigation}) => {
-  // const navigation = useNavigation();
+const ProfileScreen = ({}) => {
+  const navigation = useNavigation();
+
+  const handleLogoutButtonClick = () => {
+    Alert.alert('Confirm Logout', 'Are you sure you want to log out?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: () => {
+          auth.signOut();
+          navigation.navigate(NavigationStringPath.LOGINSCREEN);
+        },
+      },
+    ]);
+  };
 
   return (
     <View style={styles.container}>
@@ -63,7 +80,7 @@ const ProfileScreen = ({navigation}) => {
           <View style={styles.logoutView}>
             <TouchableOpacity
               onPress={() => {
-                navigation.navigate(NavigationStringPath.LOGINSCREEN);
+                handleLogoutButtonClick();
               }}>
               <Text style={styles.logoutTextStyle}>Log out</Text>
             </TouchableOpacity>
