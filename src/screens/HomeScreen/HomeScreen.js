@@ -24,6 +24,7 @@ import {auth} from '../../config/FirebaseAuth';
 const HomeScreen = () => {
   const route = useRoute();
 
+  const {userGoggleInfo} = route.params;
   const navigation = useNavigation();
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
@@ -34,10 +35,19 @@ const HomeScreen = () => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         const name = user.email ? user.email.split('@')[0] : 'Anonymous';
-        setName(name);
+        setName(
+          name.length > 15
+            ? `${name.substring(0, 15)}..`
+            : name.charAt(0).toUpperCase() + name.slice(1),
+        );
       } else {
-        console.log('User logged out');
-        setName('');
+        const {userGoggleInfo} = route.params;
+        const googleName = userGoggleInfo?.user?.name;
+        setName(
+          googleName.length > 15
+            ? `${googleName.substring(0, 15)}..`
+            : googleName.charAt(0).toUpperCase() + googleName.slice(1),
+        );
       }
     });
 
@@ -145,6 +155,7 @@ const HomeScreen = () => {
                 alignItems: 'flex-start',
               }}>
               <Text style={styles.helloTextStyle}>{greeting}</Text>
+
               <Text style={styles.userTextStyle}>{name}</Text>
             </View>
             <View style={styles.notificationView}>

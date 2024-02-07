@@ -48,8 +48,7 @@ const LoginScreen = ({}) => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId:
-        '1083208379281-eerpgcppo090h78meqol57amvhav0nm0.apps.googleusercontent.com',
+      webClientId: GoogleClientId,
     });
   }, []);
 
@@ -102,17 +101,20 @@ const LoginScreen = ({}) => {
         params: {name: userLoginCredential.user.displayName},
       });
     } catch (error) {
-      console.error('Login failed:', error);
+      Alert.alert('Please add Login Details.');
     }
   };
 
   const handleGoogleSignIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
-      const userInfo = await GoogleSignin.signIn();
-      setUserInformation(userInfo);
-      console.log(userInfo.idToken);
-      Alert.alert('Success', 'Google sign-in successful');
+      const userGoggleInfo = await GoogleSignin.signIn();
+      setUserInformation(userGoggleInfo);
+
+      navigation.navigate(NavigationStringPath.TABSCREENS, {
+        screen: NavigationStringPath.HOMESCREEN,
+        params: {userGoggleInfo: userGoggleInfo},
+      });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
         console.log('User cancelled the sign-in flow');

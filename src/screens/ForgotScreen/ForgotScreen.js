@@ -1,4 +1,10 @@
-import {SafeAreaView, StyleSheet, Text, View} from 'react-native';
+import {
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import React, {useState} from 'react';
 import styles from './Styles';
 import {moderateScale, scale} from 'react-native-size-matters';
@@ -64,6 +70,8 @@ const ForgotScreen = () => {
         <View style={styles.textinputView}>
           <View style={styles.textinputName}>
             <CustomInput
+              inputStyle={{width: moderateScale(250)}}
+              autoFocus={true}
               placeholder="Email"
               onChangeText={text => setEmail(text)}
             />

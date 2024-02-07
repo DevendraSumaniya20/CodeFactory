@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'space-between',
+    marginTop: moderateVerticalScale(4),
   },
   helloTextStyle: {
     fontFamily: 'Rubik-Regular',
@@ -30,11 +31,11 @@ const styles = StyleSheet.create({
   },
   userTextStyle: {
     fontFamily: 'Rubik-Regular',
-    fontSize: scale(32),
+    fontSize: scale(24),
     fontStyle: 'normal',
-    fontWeight: '700',
-    lineHeight: 42,
-    letterSpacing: -1,
+    fontWeight: 'bold',
+    lineHeight: 32,
+    letterSpacing: 0.2,
     color: Color.BLACK,
     marginTop: moderateScale(4),
   },

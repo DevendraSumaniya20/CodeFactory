@@ -91,7 +91,7 @@ const SignUpScreen = () => {
       );
 
       navigation.navigate(NavigationStringPath.TABSCREENS, {
-        screen: NavigationStringPath.HOMESCREEN,
+        screen: NavigationStringPath.PROFILESCREEN,
         params: {userId: userCredential.user.uid, name: name},
       });
     } catch (error) {
