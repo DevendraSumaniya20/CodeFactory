@@ -41,7 +41,6 @@ const HomeScreen = () => {
             : name.charAt(0).toUpperCase() + name.slice(1),
         );
       } else {
-        const {userGoggleInfo} = route.params;
         const googleName = userGoggleInfo?.user?.name;
         setName(
           googleName.length > 15
