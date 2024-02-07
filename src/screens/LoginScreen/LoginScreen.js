@@ -48,7 +48,8 @@ const LoginScreen = ({}) => {
 
   useEffect(() => {
     GoogleSignin.configure({
-      webClientId: GoogleClientId,
+      webClientId:
+        '1083208379281-eerpgcppo090h78meqol57amvhav0nm0.apps.googleusercontent.com',
     });
   }, []);
 
@@ -110,12 +111,7 @@ const LoginScreen = ({}) => {
       await GoogleSignin.hasPlayServices();
       const userInfo = await GoogleSignin.signIn();
       setUserInformation(userInfo);
-
-      navigation.navigate(NavigationStringPath.TABSCREENS, {
-        screen: NavigationStringPath.PROFILESCREEN,
-        params: {userInfo},
-      });
-
+      console.log(userInfo.idToken);
       Alert.alert('Success', 'Google sign-in successful');
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

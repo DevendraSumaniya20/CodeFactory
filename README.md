@@ -81,3 +81,13 @@ To learn more about React Native, take a look at the following resources:
 keytool -genkeypair -v -keystore my-release-key.keystore -alias my-key-alias -keyalg RSA -keysize 2048 -validity 10000
 
 keytool -genkeypair -v -keystore CodeFactory.keystore -alias CodeFactory -keyalg RSA -keysize 2048 -validity 10000
+
+const signOut = async () => {
+try {
+await GoogleSignin.revokeAccess();
+await GoogleSignin.signOut();
+setUser(null);
+} catch (error) {
+console.error('Google sign out error:', error);
+}
+};
