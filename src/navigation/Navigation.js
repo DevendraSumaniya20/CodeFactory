@@ -41,8 +41,6 @@ const Navigation = () => {
     checkLoginStatus();
   }, []);
 
-  console.log('Initial route:', initialRoute);
-
   return (
     <Stack.Navigator
       screenOptions={{headerShown: false}}
