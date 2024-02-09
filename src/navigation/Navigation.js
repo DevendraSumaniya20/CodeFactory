@@ -11,8 +11,6 @@ import YourCourseScreen from '../screens/YourCourseScreen/YourCourseScreen';
 import CourseSavedScreen from '../screens/CourseSavedScreen/CourseSavedScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import {GoogleClientId} from '../utils/GoogleLogin';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,12 +22,6 @@ const Navigation = () => {
   );
 
   useEffect(() => {
-    GoogleSignin.configure({
-      webClientId: GoogleClientId,
-    });
-  }, []);
-
-  useEffect(() => {
     const checkLoginStatus = async () => {
       try {
         console.log('Checking login status...');
@@ -37,18 +29,9 @@ const Navigation = () => {
 
         if (token) {
           console.log('Token found. Redirecting to TabScreen.');
-          setInitialRoute(NavigationStringPath.TABSCREENS);
+          setInitialRoute(navigation.navigate(NavigationStringPath.TABSCREENS));
         } else {
-          const isSignedIn = await GoogleSignin.isSignedIn();
-
-          if (isSignedIn) {
-            console.log(
-              'User logged in with Google. Redirecting to TabScreen.',
-            );
-            setInitialRoute(NavigationStringPath.TABSCREENS);
-          } else {
-            console.log('No token found. Redirecting to LoginScreen.');
-          }
+          console.log('No token found. Redirecting to LoginScreen.');
         }
       } catch (error) {
         console.error('Error checking login status:', error);
