@@ -123,7 +123,6 @@ const LoginScreen = ({}) => {
       await AsyncStorage.setItem('email', reduxAuth.email);
       await AsyncStorage.setItem('password', reduxAuth.password);
       await AsyncStorage.setItem('token', JSON.stringify({value: authToken}));
-      console.log(authToken, 'AuthToken hain bro');
 
       navigation.navigate(NavigationStringPath.TABSCREENS, {
         screen: NavigationStringPath.HOMESCREEN,
