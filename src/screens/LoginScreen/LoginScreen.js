@@ -1,3 +1,4 @@
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import {
   Image,
   StyleSheet,
@@ -26,30 +27,32 @@ import {signInWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../../config/FirebaseAuth';
 import {
   GoogleSignin,
-  GoogleSigninButton,
   statusCodes,
 } from '@react-native-google-signin/google-signin';
 import {GoogleClientId} from '../../utils/GoogleLogin';
+import {useDispatch, useSelector} from 'react-redux';
+import {setEmail, setPassword} from '../../redux/Slices/authSlice';
 
 const LoginScreen = ({}) => {
-  const [value, setValue] = useState('');
   const [secureTextEntry, setSecureTextEntry] = useState(true);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
-  const [userInfromation, setUserInformation] = useState(null);
 
   const navigation = useNavigation();
+  const dispatch = useDispatch();
 
-  const NextScreen = () => {
-    navigation.navigate(NavigationStringPath.TABSCREENS);
-  };
+  const reduxAuth = useSelector(state => state.auth);
+  console.log(reduxAuth, '........');
 
   useEffect(() => {
     GoogleSignin.configure({
       webClientId: GoogleClientId,
     });
+  }, []);
+
+  useEffect(() => {
+    // Load saved credentials when component mounts
+    getCredentials();
   }, []);
 
   const validation = () => {
@@ -62,23 +65,23 @@ const LoginScreen = ({}) => {
     setEmailError('');
     setPasswordError('');
 
-    if (!email) {
+    if (!reduxAuth.email) {
       setEmailError('Please enter Email Address');
-    } else if (!emailRegex.test(email)) {
+    } else if (!emailRegex.test(reduxAuth.email)) {
       setEmailError('Invalid Email Address');
-    } else if (email.length > emailMaxLength) {
+    } else if (reduxAuth.email.length > emailMaxLength) {
       setEmailError(
         `Email Address must be less than ${emailMaxLength} characters`,
       );
     }
 
-    if (!password) {
+    if (!reduxAuth.password) {
       setPasswordError('Please enter Password');
-    } else if (!passwordRegex.test(password)) {
+    } else if (!passwordRegex.test(reduxAuth.password)) {
       setPasswordError(
         'Password must contain at least 8 characters, one uppercase letter, one lowercase letter, one digit, and one special character',
       );
-    } else if (password.length > passwordMaxLength) {
+    } else if (reduxAuth.password.length > passwordMaxLength) {
       setPasswordError(
         `Password must be less than ${passwordMaxLength} characters`,
       );
@@ -89,13 +92,39 @@ const LoginScreen = ({}) => {
     }
   };
 
+  useEffect(() => {
+    checkSavedCredentials();
+  }, []);
+
+  const checkSavedCredentials = async () => {
+    try {
+      const savedEmail = await AsyncStorage.getItem('email');
+      const savedPassword = await AsyncStorage.getItem('password');
+
+      if (savedEmail && savedPassword) {
+        dispatch(setEmail(savedEmail));
+        dispatch(setPassword(savedPassword));
+      }
+    } catch (error) {
+      console.error('Error checking saved credentials:', error);
+    }
+  };
+
   const FirebaseLogin = async () => {
     try {
       const userLoginCredential = await signInWithEmailAndPassword(
         auth,
-        email,
-        password,
+        reduxAuth.email,
+        reduxAuth.password,
       );
+
+      const authToken = userLoginCredential.user.getIdToken();
+
+      await AsyncStorage.setItem('email', reduxAuth.email);
+      await AsyncStorage.setItem('password', reduxAuth.password);
+      await AsyncStorage.setItem('token', JSON.stringify({value: authToken}));
+      console.log(authToken, 'AuthToken hain bro');
+
       navigation.navigate(NavigationStringPath.TABSCREENS, {
         screen: NavigationStringPath.HOMESCREEN,
         params: {name: userLoginCredential.user.displayName},
@@ -108,12 +137,18 @@ const LoginScreen = ({}) => {
   const handleGoogleSignIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
-      const userGoggleInfo = await GoogleSignin.signIn();
-      setUserInformation(userGoggleInfo);
+      const userGoogleInfo = await GoogleSignin.signIn();
+
+      await AsyncStorage.setItem(
+        'googleUserInfo',
+        JSON.stringify(userGoogleInfo),
+      );
+      const authToken = userGoogleInfo.idToken;
+      await AsyncStorage.setItem('googleAuthToken', authToken);
 
       navigation.navigate(NavigationStringPath.TABSCREENS, {
         screen: NavigationStringPath.HOMESCREEN,
-        params: {userGoggleInfo: userGoggleInfo},
+        params: {userGoogleInfo: userGoogleInfo},
       });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -125,6 +160,20 @@ const LoginScreen = ({}) => {
       } else {
         console.error('Error in Google sign-in:', error);
       }
+    }
+  };
+
+  const getCredentials = async () => {
+    try {
+      const savedEmail = await AsyncStorage.getItem('email');
+      const savedPassword = await AsyncStorage.getItem('password');
+
+      if (savedEmail !== null && savedPassword !== null) {
+        dispatch(setEmail(savedEmail));
+        dispatch(setPassword(savedPassword));
+      }
+    } catch (error) {
+      console.error('Error getting credentials:', error);
     }
   };
 
@@ -161,13 +210,6 @@ const LoginScreen = ({}) => {
                       Alert.alert('Facebook');
                     }}
                   />
-                  {/* <CustomImage
-                    source={ImagePath.INSTAGRAMIMG}
-                    resizeMode="contain"
-                    onPress={() => {
-                      Alert.alert('Instagram');
-                    }}
-                  /> */}
 
                   <CustomImage
                     source={ImagePath.GOOGLEIMG}
@@ -181,10 +223,10 @@ const LoginScreen = ({}) => {
               <View style={styles.textinputView}>
                 <View style={styles.textinputTop}>
                   <CustomInput
-                    // autoFocus={true}
                     placeholder="Email"
-                    onChangeText={text => setEmail(text)}
+                    onChangeText={text => dispatch(setEmail(text))}
                     inputStyle={{width: '100%'}}
+                    value={reduxAuth.email}
                   />
                 </View>
 
@@ -194,7 +236,8 @@ const LoginScreen = ({}) => {
                     inputStyle={{width: '90%'}}
                     secureTextEntry={secureTextEntry}
                     placeholder="Password"
-                    onChangeText={text => setPassword(text)}
+                    onChangeText={text => dispatch(setPassword(text))}
+                    value={reduxAuth.password}
                     rightIcon={
                       secureTextEntry ? 'eye-off-outline' : 'eye-outline'
                     }
@@ -218,7 +261,6 @@ const LoginScreen = ({}) => {
                   <CustomButton
                     text={'Log in'}
                     onPress={() => {
-                      // NextScreen();
                       validation();
                     }}
                   />

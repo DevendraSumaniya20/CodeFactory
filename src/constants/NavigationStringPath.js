@@ -1,7 +1,4 @@
 export default {
-  INTROSCREEN1: 'IntroScreen1',
-  INTROSCREEN2: 'IntroScreen2',
-  INTROSCREEN3: 'IntroScreen3',
   LOGINSCREEN: 'LoginScreen',
   SIGNUPSCREEN: 'SignUpScreen',
   PROFILESCREEN: 'ProfileScreen',

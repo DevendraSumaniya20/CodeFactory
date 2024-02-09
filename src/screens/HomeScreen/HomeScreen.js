@@ -24,8 +24,8 @@ import {auth} from '../../config/FirebaseAuth';
 const HomeScreen = () => {
   const route = useRoute();
 
-  const {userGoggleInfo} = route.params;
   const navigation = useNavigation();
+  // const {userGoggleInfo} = route?.params;
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
   const [name, setName] = useState(route.params?.name ?? '');
@@ -41,7 +41,7 @@ const HomeScreen = () => {
             : name.charAt(0).toUpperCase() + name.slice(1),
         );
       } else {
-        const googleName = userGoggleInfo?.user?.name;
+        const googleName = route.params?.userGoggleInfo?.user?.name ?? '';
         setName(
           googleName.length > 15
             ? `${googleName.substring(0, 15)}..`
@@ -51,7 +51,7 @@ const HomeScreen = () => {
     });
 
     return () => unsubscribe();
-  }, []);
+  }, [route.params]);
 
   useEffect(() => {
     const GetCurrentGreeting = () => {

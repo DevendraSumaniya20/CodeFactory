@@ -1,10 +1,6 @@
 import React, {useEffect, useState} from 'react';
-import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import NavigationStringPath from '../constants/NavigationStringPath';
-import IntroScreen1 from '../screens/IntroScreen1/IntroScreen1';
-import IntroScreen2 from '../screens/IntroScreen2/IntroScreen2';
-import IntroScreen3 from '../screens/IntroScreen3/IntroScreen3';
 import LoginScreen from '../screens/LoginScreen/LoginScreen';
 import SignUpScreen from '../screens/SignUpScreen/SignUpScreen';
 import TabScreen from '../screens/TabScreens/TabScreen';
@@ -13,66 +9,94 @@ import ForgotScreen from '../screens/ForgotScreen/ForgotScreen';
 import ProductScreen from '../screens/ProductScreen/ProductScreen';
 import YourCourseScreen from '../screens/YourCourseScreen/YourCourseScreen';
 import CourseSavedScreen from '../screens/CourseSavedScreen/CourseSavedScreen';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {useNavigation} from '@react-navigation/native';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {GoogleClientId} from '../utils/GoogleLogin';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
+  const navigation = useNavigation();
+
+  const [initialRoute, setInitialRoute] = useState(
+    NavigationStringPath.LOGINSCREEN,
+  );
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: GoogleClientId,
+    });
+  }, []);
+
+  useEffect(() => {
+    const checkLoginStatus = async () => {
+      try {
+        console.log('Checking login status...');
+        const token = await AsyncStorage.getItem('token');
+
+        if (token) {
+          console.log('Token found. Redirecting to TabScreen.');
+          setInitialRoute(NavigationStringPath.TABSCREENS);
+        } else {
+          const isSignedIn = await GoogleSignin.isSignedIn();
+
+          if (isSignedIn) {
+            console.log(
+              'User logged in with Google. Redirecting to TabScreen.',
+            );
+            setInitialRoute(NavigationStringPath.TABSCREENS);
+          } else {
+            console.log('No token found. Redirecting to LoginScreen.');
+          }
+        }
+      } catch (error) {
+        console.error('Error checking login status:', error);
+      }
+    };
+
+    checkLoginStatus();
+  }, []);
+
+  console.log('Initial route:', initialRoute);
+
   return (
-    <NavigationContainer>
-      <Stack.Navigator
-        screenOptions={{headerShown: false}}
-        initialRouteName={NavigationStringPath.LOGINSCREEN}>
-        <Stack.Screen
-          name={NavigationStringPath.INTROSCREEN1}
-          component={IntroScreen1}
-        />
-        <Stack.Screen
-          name={NavigationStringPath.INTROSCREEN2}
-          component={IntroScreen2}
-        />
-        <Stack.Screen
-          name={NavigationStringPath.INTROSCREEN3}
-          component={IntroScreen3}
-        />
-        <Stack.Screen
-          name={NavigationStringPath.LOGINSCREEN}
-          component={LoginScreen}
-        />
-        <Stack.Screen
-          name={NavigationStringPath.SIGNUPSCREEN}
-          component={SignUpScreen}
-        />
-
-        <Stack.Screen
-          name={NavigationStringPath.FORGOTSCREEN}
-          component={ForgotScreen}
-        />
-
-        <Stack.Screen
-          name={NavigationStringPath.RESULTSCREEN}
-          component={ResultsScreen}
-        />
-
-        <Stack.Screen
-          name={NavigationStringPath.PRODUCTSCREEN}
-          component={ProductScreen}
-        />
-
-        <Stack.Screen
-          name={NavigationStringPath.YOUR_COURSESSCREEN}
-          component={YourCourseScreen}
-        />
-        <Stack.Screen
-          name={NavigationStringPath.COURSE_SAVED_SCREEN}
-          component={CourseSavedScreen}
-        />
-
-        <Stack.Screen
-          name={NavigationStringPath.TABSCREENS}
-          component={TabScreen}
-        />
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Stack.Navigator
+      screenOptions={{headerShown: false}}
+      initialRouteName={initialRoute}>
+      <Stack.Screen
+        name={NavigationStringPath.LOGINSCREEN}
+        component={LoginScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.SIGNUPSCREEN}
+        component={SignUpScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.FORGOTSCREEN}
+        component={ForgotScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.RESULTSCREEN}
+        component={ResultsScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.PRODUCTSCREEN}
+        component={ProductScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.YOUR_COURSESSCREEN}
+        component={YourCourseScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.COURSE_SAVED_SCREEN}
+        component={CourseSavedScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.TABSCREENS}
+        component={TabScreen}
+      />
+    </Stack.Navigator>
   );
 };
 

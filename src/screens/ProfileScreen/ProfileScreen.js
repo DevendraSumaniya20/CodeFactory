@@ -8,6 +8,7 @@ import NavigationStringPath from '../../constants/NavigationStringPath';
 import {ProfileSvg} from '../../constants/SvgPath';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
 import {auth} from '../../config/FirebaseAuth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
@@ -16,7 +17,7 @@ const ProfileScreen = () => {
 
   const userName = userInfo ? userInfo.user.name : 'User';
 
-  const handleLogoutButtonClick = () => {
+  const handleLogoutButtonClick = async () => {
     Alert.alert('Confirm Logout', 'Are you sure you want to log out?', [
       {
         text: 'Cancel',
@@ -24,9 +25,14 @@ const ProfileScreen = () => {
       },
       {
         text: 'Yes',
-        onPress: () => {
-          auth.signOut();
-          navigation.navigate(NavigationStringPath.LOGINSCREEN);
+        onPress: async () => {
+          try {
+            await AsyncStorage.clear();
+            await auth.signOut();
+            navigation.navigate(NavigationStringPath.LOGINSCREEN);
+          } catch (error) {
+            console.error('Error clearing AsyncStorage:', error);
+          }
         },
       },
     ]);

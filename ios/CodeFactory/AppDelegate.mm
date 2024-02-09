@@ -15,6 +15,9 @@
 
   return [super application:application didFinishLaunchingWithOptions:launchOptions];
   [FIRApp configure];
+
+//  [RNSplashScreen show];
+  
 }
 
 - (NSURL *)sourceURLForBridge:(RCTBridge *)bridge
