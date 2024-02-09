@@ -20,6 +20,7 @@ import _ from 'lodash';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import {auth} from '../../config/FirebaseAuth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = () => {
   const route = useRoute();
@@ -34,25 +35,18 @@ const HomeScreen = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        const name = user.email ? user.email.split('@')[0] : 'Anonymous';
-        setName(
-          name.length > 15
-            ? `${name.substring(0, 15)}..`
-            : name.charAt(0).toUpperCase() + name.slice(1),
-        );
+        const displayName = user.displayName || user.email.split('@')[0];
+        setName(displayName);
+        AsyncStorage.setItem('name', displayName);
       } else {
-        const googleName = route.params?.userGoggleInfo?.user?.name ?? '';
-        setName(
-          googleName.length > 15
-            ? `${googleName.substring(0, 15)}..`
-            : googleName.charAt(0).toUpperCase() + googleName.slice(1),
-        );
+        const googleName = route.params?.userGoggleInfo?.user?.name || '';
+        setName(googleName);
+        AsyncStorage.setItem('name', googleName);
       }
     });
 
     return () => unsubscribe();
   }, [route.params]);
-
   useEffect(() => {
     const GetCurrentGreeting = () => {
       let today = new Date();
