@@ -42,17 +42,13 @@ const LoginScreen = ({}) => {
   const dispatch = useDispatch();
 
   const reduxAuth = useSelector(state => state.auth);
-  console.log(reduxAuth, '........');
 
   useEffect(() => {
     GoogleSignin.configure({
       webClientId: GoogleClientId,
     });
-  }, []);
-
-  useEffect(() => {
-    // Load saved credentials when component mounts
-    getCredentials();
+    checkSavedCredentials();
+    checkGoogleLogin();
   }, []);
 
   const validation = () => {
@@ -92,9 +88,20 @@ const LoginScreen = ({}) => {
     }
   };
 
-  useEffect(() => {
-    checkSavedCredentials();
-  }, []);
+  const checkGoogleLogin = async () => {
+    try {
+      const googleLoginInfo = await AsyncStorage.getItem('googleLoginInfo');
+      if (googleLoginInfo) {
+        const googleLoginData = JSON.parse(googleLoginInfo);
+        navigation.navigate(NavigationStringPath.TABSCREENS, {
+          screen: NavigationStringPath.HOMESCREEN,
+          params: {userGoogleInfo: googleLoginData},
+        });
+      }
+    } catch (error) {
+      console.error('Error checking Google login:', error);
+    }
+  };
 
   const checkSavedCredentials = async () => {
     try {
@@ -104,6 +111,10 @@ const LoginScreen = ({}) => {
       if (savedEmail && savedPassword) {
         dispatch(setEmail(savedEmail));
         dispatch(setPassword(savedPassword));
+
+        navigation.navigate(NavigationStringPath.TABSCREENS, {
+          screen: NavigationStringPath.HOMESCREEN,
+        });
       }
     } catch (error) {
       console.error('Error checking saved credentials:', error);
@@ -124,6 +135,8 @@ const LoginScreen = ({}) => {
       await AsyncStorage.setItem('password', reduxAuth.password);
       await AsyncStorage.setItem('token', JSON.stringify({value: authToken}));
 
+      await AsyncStorage.removeItem('googleLoginInfo');
+
       navigation.navigate(NavigationStringPath.TABSCREENS, {
         screen: NavigationStringPath.HOMESCREEN,
         params: {name: userLoginCredential.user.displayName},
@@ -136,11 +149,16 @@ const LoginScreen = ({}) => {
   const handleGoogleSignIn = async () => {
     try {
       await GoogleSignin.hasPlayServices();
-      const userGoggleInfo = await GoogleSignin.signIn();
+      const userGoogleInfo = await GoogleSignin.signIn();
 
+      console.log(userGoogleInfo.user.name);
+      await AsyncStorage.setItem(
+        'googleLoginInfo',
+        JSON.stringify(userGoogleInfo),
+      );
       navigation.navigate(NavigationStringPath.TABSCREENS, {
         screen: NavigationStringPath.HOMESCREEN,
-        params: {userGoggleInfo: userGoggleInfo},
+        params: {userGoogleInfo: userGoogleInfo},
       });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {
@@ -152,20 +170,6 @@ const LoginScreen = ({}) => {
       } else {
         console.error('Error in Google sign-in:', error);
       }
-    }
-  };
-
-  const getCredentials = async () => {
-    try {
-      const savedEmail = await AsyncStorage.getItem('email');
-      const savedPassword = await AsyncStorage.getItem('password');
-
-      if (savedEmail !== null && savedPassword !== null) {
-        dispatch(setEmail(savedEmail));
-        dispatch(setPassword(savedPassword));
-      }
-    } catch (error) {
-      console.error('Error getting credentials:', error);
     }
   };
 

@@ -9,13 +9,11 @@ import {ProfileSvg} from '../../constants/SvgPath';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
 import {auth} from '../../config/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
 
 const ProfileScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
-  const userInfo = route.params?.userInfo;
-
-  const userName = userInfo ? userInfo.user.name : 'User';
 
   const handleLogoutButtonClick = async () => {
     Alert.alert('Confirm Logout', 'Are you sure you want to log out?', [
@@ -27,11 +25,19 @@ const ProfileScreen = () => {
         text: 'Yes',
         onPress: async () => {
           try {
-            await AsyncStorage.clear();
+            const isSignedIn = await GoogleSignin.isSignedIn();
+            if (isSignedIn) {
+              await GoogleSignin.revokeAccess();
+              await GoogleSignin.signOut();
+            }
+
             await auth.signOut();
+
+            await AsyncStorage.clear();
+
             navigation.navigate(NavigationStringPath.LOGINSCREEN);
           } catch (error) {
-            console.error('Error clearing AsyncStorage:', error);
+            console.error('Error during logout:', error);
           }
         },
       },

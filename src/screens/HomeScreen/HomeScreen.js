@@ -26,20 +26,22 @@ const HomeScreen = () => {
   const route = useRoute();
 
   const navigation = useNavigation();
-  // const {userGoggleInfo} = route?.params;
+  const {userGoogleInfo} = route.params ?? {};
+
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
   const [name, setName] = useState(route.params?.name ?? '');
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
+    console.log('Name received from params....... :', route.params?.name);
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         const displayName = user.displayName || user.email.split('@')[0];
         setName(displayName);
         AsyncStorage.setItem('name', displayName);
       } else {
-        const googleName = route.params?.userGoggleInfo?.user?.name || '';
+        const googleName = userGoogleInfo?.user?.name ?? '';
         setName(googleName);
         AsyncStorage.setItem('name', googleName);
       }
@@ -47,6 +49,7 @@ const HomeScreen = () => {
 
     return () => unsubscribe();
   }, [route.params]);
+
   useEffect(() => {
     const GetCurrentGreeting = () => {
       let today = new Date();

@@ -9,7 +9,7 @@ import {
   KeyboardAvoidingView,
   Platform,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import CustomButton from '../../components/CustomButton';
 import {useNavigation} from '@react-navigation/native';
@@ -24,6 +24,7 @@ import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import CustomErrorMessage from '../../components/CustomErrorMessage';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../../config/FirebaseAuth';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUpScreen = () => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -35,6 +36,19 @@ const SignUpScreen = () => {
   const [nameError, setNameError] = useState('');
 
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const checkUserData = async () => {
+      const storedEmail = await AsyncStorage.getItem('email');
+      const storedName = await AsyncStorage.getItem('name');
+      const storePassword = await AsyncStorage.getItem('password');
+      if (storedEmail && storedName && storePassword) {
+        navigation.navigate(NavigationStringPath.TABSCREENS);
+      }
+    };
+
+    checkUserData();
+  }, []);
 
   const validation = () => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -87,8 +101,11 @@ const SignUpScreen = () => {
         auth,
         email,
         password,
-        name,
       );
+
+      await AsyncStorage.setItem('email', email);
+      await AsyncStorage.setItem('name', name);
+      await AsyncStorage.setItem('password', password);
 
       navigation.navigate(NavigationStringPath.TABSCREENS, {
         screen: NavigationStringPath.PROFILESCREEN,

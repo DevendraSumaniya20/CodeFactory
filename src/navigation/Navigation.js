@@ -29,7 +29,7 @@ const Navigation = () => {
 
         if (token) {
           console.log('Token found. Redirecting to TabScreen.');
-          setInitialRoute(navigation.navigate(NavigationStringPath.TABSCREENS));
+          setInitialRoute(NavigationStringPath.TABSCREENS);
         } else {
           console.log('No token found. Redirecting to LoginScreen.');
         }
@@ -43,8 +43,8 @@ const Navigation = () => {
 
   return (
     <Stack.Navigator
-      screenOptions={{headerShown: false}}
-      initialRouteName={initialRoute}>
+      initialRouteName={initialRoute}
+      screenOptions={{headerShown: false}}>
       <Stack.Screen
         name={NavigationStringPath.LOGINSCREEN}
         component={LoginScreen}
