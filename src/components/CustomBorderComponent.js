@@ -9,11 +9,13 @@ import {
 
 const CustomBorderComponent = ({text, onPress}) => {
   return (
-    <View style={styles.customBorderComponentView}>
-      <TouchableOpacity onPress={onPress}>
+    <TouchableOpacity
+      style={styles.customBorderComponentView}
+      onPress={onPress}>
+      <TouchableOpacity>
         <Text style={styles.customBorderComponentText}>{text}</Text>
       </TouchableOpacity>
-    </View>
+    </TouchableOpacity>
   );
 };
 

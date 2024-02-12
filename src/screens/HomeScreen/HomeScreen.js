@@ -34,7 +34,6 @@ const HomeScreen = () => {
   const [greeting, setGreeting] = useState('');
 
   useEffect(() => {
-    console.log('Name received from params....... :', route.params?.name);
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         const displayName = user.displayName || user.email.split('@')[0];

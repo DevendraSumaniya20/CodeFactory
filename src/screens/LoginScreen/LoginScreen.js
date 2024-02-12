@@ -151,14 +151,15 @@ const LoginScreen = ({}) => {
       await GoogleSignin.hasPlayServices();
       const userGoogleInfo = await GoogleSignin.signIn();
 
-      console.log(userGoogleInfo.user.name);
       await AsyncStorage.setItem(
         'googleLoginInfo',
         JSON.stringify(userGoogleInfo),
       );
       navigation.navigate(NavigationStringPath.TABSCREENS, {
-        screen: NavigationStringPath.HOMESCREEN,
-        params: {userGoogleInfo: userGoogleInfo},
+        // screen: NavigationStringPath.HOMESCREEN,
+        params: {
+          userGoogleInfo: userGoogleInfo,
+        },
       });
     } catch (error) {
       if (error.code === statusCodes.SIGN_IN_CANCELLED) {

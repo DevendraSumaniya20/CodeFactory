@@ -24,14 +24,14 @@ const Navigation = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        console.log('Checking login status...');
+        // console.log('Checking login status...');
         const token = await AsyncStorage.getItem('token');
 
         if (token) {
-          console.log('Token found. Redirecting to TabScreen.');
+          // console.log('Token found. Redirecting to TabScreen.');
           setInitialRoute(NavigationStringPath.TABSCREENS);
         } else {
-          console.log('No token found. Redirecting to LoginScreen.');
+          // console.log('No token found. Redirecting to LoginScreen.');
         }
       } catch (error) {
         console.error('Error checking login status:', error);

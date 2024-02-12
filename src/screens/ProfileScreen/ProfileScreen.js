@@ -1,5 +1,12 @@
-import React from 'react';
-import {SafeAreaView, View, Text, TouchableOpacity, Alert} from 'react-native';
+import React, {useEffect, useState} from 'react';
+import {
+  SafeAreaView,
+  View,
+  Text,
+  TouchableOpacity,
+  Alert,
+  Image,
+} from 'react-native';
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
@@ -10,10 +17,16 @@ import CustomBorderComponent from '../../components/CustomBorderComponent';
 import {auth} from '../../config/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import ImagePicker from 'react-native-image-crop-picker';
+import ImagePath from '../../constants/ImagePath';
 
 const ProfileScreen = () => {
+  const [image, setImage] = useState(ImagePath.DATAIMG3);
+
   const navigation = useNavigation();
   const route = useRoute();
+
+  const {userGoogleInfo} = route.params || {};
 
   const handleLogoutButtonClick = async () => {
     Alert.alert('Confirm Logout', 'Are you sure you want to log out?', [
@@ -44,6 +57,30 @@ const ProfileScreen = () => {
     ]);
   };
 
+  const takePhotoFromCamera = () => {
+    ImagePicker.openCamera({
+      compressImageMaxWidth: 300,
+      compressImageMaxHeight: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    }).then(image => {
+      console.log(image);
+      setImage(image.path);
+    });
+  };
+
+  const choosePhotoFromLibrary = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    }).then(image => {
+      console.log(image);
+      setImage(image.path);
+    });
+  };
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.subContainer}>
@@ -60,7 +97,12 @@ const ProfileScreen = () => {
 
           <View style={styles.profileImageContainer}>
             <View style={styles.profileImageBorder}>
-              <ProfileSvg />
+              <TouchableOpacity
+                onPress={() => {
+                  takePhotoFromCamera();
+                }}>
+                <Image source={image} />
+              </TouchableOpacity>
             </View>
           </View>
 

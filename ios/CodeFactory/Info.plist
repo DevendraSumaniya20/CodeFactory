@@ -42,8 +42,47 @@
 		<key>NSAllowsLocalNetworking</key>
 		<true/>
 	</dict>
+	<key>NSAppleMusicUsageDescription</key>
+	<string>Allow access to Apple Music for creating playlists and playing music.</string>
+	<key>NSBluetoothAlwaysUsageDescription</key>
+	<string>Allow your app to connect to Bluetooth devices for extended periods.</string>
+	<key>NSBluetoothPeripheralUsageDescription</key>
+	<string>Allow your app to connect to Bluetooth accessories.</string>
+	<key>NSCalendarsFullAccessUsageDescription</key>
+	<string>Allow access to your calendar for creating and managing events.</string>
+	<key>NSCalendarsWriteOnlyAccessUsageDescription</key>
+	<string>Allow your app to add events to your calendar.</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow access to the camera for capturing photos and videos.</string>
+	<key>NSContactsUsageDescription</key>
+	<string>Allow access to your contacts for syncing and sharing.</string>
+	<key>NSFaceIDUsageDescription</key>
+	<string>Allow your app to use Face ID for authentication.</string>
+	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
+	<string>Allow access to your location for tracking and navigation.</string>
+	<key>NSLocationTemporaryUsageDescriptionDictionary</key>
+	<dict>
+		<key>YOUR-PURPOSE-KEY</key>
+		<string>Temporary access to your location for specific purposes.</string>
+	</dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string></string>
+	<string>Allow access to your location for tracking while using the app.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>Allow access to the microphone for recording audio.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Allow access to motion data for fitness tracking and analysis.</string>
+	<key>NSPhotoLibraryAddUsageDescription</key>
+	<string>Allow your app to save photos to your photo library.</string>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Allow access to your photo library for importing and exporting media.</string>
+	<key>NSRemindersFullAccessUsageDescription</key>
+	<string>Allow access to reminders for managing tasks and to-dos.</string>
+	<key>NSSiriUsageDescription</key>
+	<string>Allow your app to integrate with Siri for voice commands and control.</string>
+	<key>NSSpeechRecognitionUsageDescription</key>
+	<string>Allow your app to recognize speech for voice commands and dictation.</string>
+	<key>NSUserTrackingUsageDescription</key>
+	<string>Allow tracking of your activity across apps and websites owned by other companies.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>AntDesign.ttf</string>
