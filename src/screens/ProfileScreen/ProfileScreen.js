@@ -91,7 +91,9 @@ const ProfileScreen = () => {
               <TouchableOpacity onPress={() => {}}>
                 <Image
                   source={image}
-                  style={styles.profileImage}
+                  style={
+                    image.uri ? styles.profileGoogleImage : styles.profileImage
+                  }
                   resizeMode="contain"
                   resizeMethod="auto"
                 />

@@ -33,10 +33,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 
-  profileImage: {
+  profileGoogleImage: {
     height: moderateVerticalScale(150),
     width: moderateScale(140),
   },
+  profileImage: {
+    height: moderateVerticalScale(300),
+    width: moderateScale(300),
+  },
+
   menuContainer: {
     marginTop: moderateVerticalScale(16),
   },
