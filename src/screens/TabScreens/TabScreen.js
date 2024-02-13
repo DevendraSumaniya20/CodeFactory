@@ -4,20 +4,15 @@ import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
 import {moderateScale, scale} from 'react-native-size-matters';
-import {StyleSheet} from 'react-native';
 import Color from '../../constants/Color';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import HomeScreen from '../HomeScreen/HomeScreen';
 import SettingScreen from '../SettingScreen/SettingScreen';
 import ProfileScreen from '../ProfileScreen/ProfileScreen';
-import {useRoute} from '@react-navigation/native';
 
 const Tab = createBottomTabNavigator();
 
-const TabScreen = () => {
-  const route = useRoute();
-  const {userGoogleInfo} = route.params || {};
-
+const TabScreen = ({userGoogleInfo}) => {
   return (
     <Tab.Navigator
       screenOptions={{
@@ -36,7 +31,6 @@ const TabScreen = () => {
       <Tab.Screen
         name={NavigationStringPath.HOMESCREEN}
         component={HomeScreen}
-        initialParams={{userGoogleInfo: userGoogleInfo}}
         options={{
           tabBarIcon: ({color}) => (
             <FontAwesome6 name="book-bookmark" color={color} size={24} />
@@ -47,7 +41,6 @@ const TabScreen = () => {
       <Tab.Screen
         name={NavigationStringPath.PROFILESCREEN}
         component={ProfileScreen}
-        initialParams={{userGoogleInfo: userGoogleInfo}}
         options={{
           tabBarIcon: ({color}) => (
             <Entypo name="user" color={color} size={24} />
@@ -58,7 +51,6 @@ const TabScreen = () => {
       <Tab.Screen
         name={NavigationStringPath.SETTINGSCREEN}
         component={SettingScreen}
-        initialParams={{userGoogleInfo: userGoogleInfo}}
         options={{
           tabBarIcon: ({color}) => (
             <Feather name="settings" color={color} size={24} />

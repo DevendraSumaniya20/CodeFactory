@@ -32,6 +32,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
+
+  profileImage: {
+    height: moderateVerticalScale(150),
+    width: moderateScale(140),
+  },
   menuContainer: {
     marginTop: moderateVerticalScale(16),
   },

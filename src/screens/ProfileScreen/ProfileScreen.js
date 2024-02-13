@@ -7,26 +7,42 @@ import {
   Alert,
   Image,
 } from 'react-native';
+import {useNavigation, useRoute} from '@react-navigation/native';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import {auth} from '../../config/FirebaseAuth';
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
-import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
-import {ProfileSvg} from '../../constants/SvgPath';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
-import {auth} from '../../config/FirebaseAuth';
-import AsyncStorage from '@react-native-async-storage/async-storage';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
-import ImagePicker from 'react-native-image-crop-picker';
 import ImagePath from '../../constants/ImagePath';
 
 const ProfileScreen = () => {
   const [image, setImage] = useState(ImagePath.DATAIMG3);
-
   const navigation = useNavigation();
   const route = useRoute();
 
-  const {userGoogleInfo} = route.params || {};
+  useEffect(() => {
+    loadGooglePhoto();
+  }, []);
+
+  const loadGooglePhoto = async () => {
+    try {
+      const storedPhoto = await AsyncStorage.getItem('googlePhoto');
+      if (storedPhoto) {
+        setImage({uri: storedPhoto});
+      } else {
+        const googlePhoto = route.params?.googlePhoto;
+        if (googlePhoto) {
+          setImage({uri: googlePhoto});
+          await AsyncStorage.setItem('googlePhoto', googlePhoto);
+        }
+      }
+    } catch (error) {
+      console.error('Error loading Google photo:', error);
+    }
+  };
 
   const handleLogoutButtonClick = async () => {
     Alert.alert('Confirm Logout', 'Are you sure you want to log out?', [
@@ -45,7 +61,6 @@ const ProfileScreen = () => {
             }
 
             await auth.signOut();
-
             await AsyncStorage.clear();
 
             navigation.navigate(NavigationStringPath.LOGINSCREEN);
@@ -55,30 +70,6 @@ const ProfileScreen = () => {
         },
       },
     ]);
-  };
-
-  const takePhotoFromCamera = () => {
-    ImagePicker.openCamera({
-      compressImageMaxWidth: 300,
-      compressImageMaxHeight: 300,
-      cropping: true,
-      compressImageQuality: 0.7,
-    }).then(image => {
-      console.log(image);
-      setImage(image.path);
-    });
-  };
-
-  const choosePhotoFromLibrary = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      height: 300,
-      cropping: true,
-      compressImageQuality: 0.7,
-    }).then(image => {
-      console.log(image);
-      setImage(image.path);
-    });
   };
 
   return (
@@ -97,11 +88,13 @@ const ProfileScreen = () => {
 
           <View style={styles.profileImageContainer}>
             <View style={styles.profileImageBorder}>
-              <TouchableOpacity
-                onPress={() => {
-                  takePhotoFromCamera();
-                }}>
-                <Image source={image} />
+              <TouchableOpacity onPress={() => {}}>
+                <Image
+                  source={image}
+                  style={styles.profileImage}
+                  resizeMode="contain"
+                  resizeMethod="auto"
+                />
               </TouchableOpacity>
             </View>
           </View>

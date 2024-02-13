@@ -1,14 +1,5 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-  SafeAreaView,
-  Alert,
-  KeyboardAvoidingView,
-} from 'react-native';
+import {Text, TouchableOpacity, View, SafeAreaView, Alert} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import ImagePath from '../../constants/ImagePath';
@@ -20,7 +11,7 @@ import CustomDescriptionText from '../../components/CustomDescriptionText';
 import CustomImage from '../../components/CustomImage';
 import CustomInput from '../../components/CustomInput';
 import {moderateScale, scale} from 'react-native-size-matters';
-import {GoogleSvg, LoginSvg} from '../../constants/SvgPath';
+import {LoginSvg} from '../../constants/SvgPath';
 import CustomErrorMessage from '../../components/CustomErrorMessage';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {signInWithEmailAndPassword} from 'firebase/auth';
@@ -156,9 +147,16 @@ const LoginScreen = ({}) => {
         JSON.stringify(userGoogleInfo),
       );
       navigation.navigate(NavigationStringPath.TABSCREENS, {
-        // screen: NavigationStringPath.HOMESCREEN,
+        screen: NavigationStringPath.HOMESCREEN,
         params: {
           userGoogleInfo: userGoogleInfo,
+        },
+      });
+
+      navigation.navigate(NavigationStringPath.TABSCREENS, {
+        screen: NavigationStringPath.PROFILESCREEN,
+        params: {
+          googlePhoto: userGoogleInfo.user.photo,
         },
       });
     } catch (error) {

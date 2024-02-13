@@ -12,7 +12,7 @@ const CustomBorderComponent = ({text, onPress}) => {
     <TouchableOpacity
       style={styles.customBorderComponentView}
       onPress={onPress}>
-      <TouchableOpacity>
+      <TouchableOpacity onPress={onPress}>
         <Text style={styles.customBorderComponentText}>{text}</Text>
       </TouchableOpacity>
     </TouchableOpacity>
