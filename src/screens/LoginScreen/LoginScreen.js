@@ -192,20 +192,12 @@ const LoginScreen = ({}) => {
                 <CustomWelcomeText text={'Log in'} />
 
                 <CustomDescriptionText
-                  text={'Login with social networks '}
+                  text={'Login with social network '}
                   marginTop={moderateScale(8)}
                   lineHeight={21}
                 />
 
                 <View style={styles.iconView}>
-                  <CustomImage
-                    source={ImagePath.FACEBOOKIMG}
-                    resizeMode="contain"
-                    onPress={() => {
-                      Alert.alert('Facebook');
-                    }}
-                  />
-
                   <CustomImage
                     source={ImagePath.GOOGLEIMG}
                     resizeMode="cover"

@@ -8,4 +8,7 @@ export default {
   INSTAGRAMIMG: require('../assets/images/Instagram.png'),
   GOOGLEIMG: require('../assets/images/Google.png'),
   LOGO1: require('../assets/images/Logo1.png'),
+  GALLERY: require('../assets/images/gallery.png'),
+  CAMERA: require('../assets/images/camera.png'),
+  STUDENT: require('../assets/images/student.png'),
 };

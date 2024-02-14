@@ -38,8 +38,8 @@ const styles = StyleSheet.create({
     width: moderateScale(140),
   },
   profileImage: {
-    height: moderateVerticalScale(300),
-    width: moderateScale(300),
+    height: moderateVerticalScale(150),
+    width: moderateScale(120),
   },
 
   menuContainer: {

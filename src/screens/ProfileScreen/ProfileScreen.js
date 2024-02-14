@@ -6,6 +6,7 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  Modal,
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import {GoogleSignin} from '@react-native-google-signin/google-signin';
@@ -17,15 +18,76 @@ import Color from '../../constants/Color';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
 import ImagePath from '../../constants/ImagePath';
+import {useDispatch, useSelector} from 'react-redux';
+import {cameraPermissionGiven} from '../../redux/Slices/cameraPermissionSlice';
+import ImagePicker from 'react-native-image-crop-picker';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
+import CustomIcon from '../../components/CustomIcon';
+import CustomButton from '../../components/CustomButton';
+import CustomImage from '../../components/CustomImage';
 
 const ProfileScreen = () => {
-  const [image, setImage] = useState(ImagePath.DATAIMG3);
+  const [image, setImage] = useState(ImagePath.STUDENT);
+  const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
   const route = useRoute();
+  const dispatch = useDispatch();
+
+  const cameraPermission = useSelector(state => state.cameraPermission);
+
+  const requestForCameraUse = () => {
+    dispatch(cameraPermissionGiven());
+  };
+
+  useEffect(() => {
+    if (!cameraPermission) {
+      requestForCameraUse();
+    }
+  }, [cameraPermission]);
 
   useEffect(() => {
     loadGooglePhoto();
   }, []);
+
+  const takePhotoFromGallery = async () => {
+    try {
+      const selectedImage = await ImagePicker.openPicker({
+        width: 300,
+        height: 400,
+        cropping: true,
+        waitAnimationEnd: true,
+        useFrontCamera: true,
+      });
+      setImage({uri: selectedImage.path});
+
+      await AsyncStorage.setItem('selectedImage', selectedImage.path);
+
+      setModalVisible(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const takePhotoFromCamera = async () => {
+    try {
+      const selectedImage = await ImagePicker.openCamera({
+        width: 300,
+        height: 400,
+        cropping: true,
+      });
+      setImage({uri: selectedImage.path});
+
+      await AsyncStorage.setItem('selectedImage', selectedImage.path);
+
+      setModalVisible(false);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   const loadGooglePhoto = async () => {
     try {
@@ -36,8 +98,14 @@ const ProfileScreen = () => {
         const googlePhoto = route.params?.googlePhoto;
         if (googlePhoto) {
           setImage({uri: googlePhoto});
+
           await AsyncStorage.setItem('googlePhoto', googlePhoto);
         }
+      }
+
+      const selectedImage = await AsyncStorage.getItem('selectedImage');
+      if (selectedImage) {
+        setImage({uri: selectedImage});
       }
     } catch (error) {
       console.error('Error loading Google photo:', error);
@@ -88,7 +156,10 @@ const ProfileScreen = () => {
 
           <View style={styles.profileImageContainer}>
             <View style={styles.profileImageBorder}>
-              <TouchableOpacity onPress={() => {}}>
+              <TouchableOpacity
+                onPress={() => {
+                  setModalVisible(true);
+                }}>
                 <Image
                   source={image}
                   style={
@@ -124,7 +195,7 @@ const ProfileScreen = () => {
               <CustomBorderComponent
                 text={'Payment'}
                 onPress={() => {
-                  Alert.alert('Warning');
+                  setModalVisible(true);
                 }}
               />
             </View>
@@ -139,6 +210,85 @@ const ProfileScreen = () => {
             </TouchableOpacity>
           </View>
         </View>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}>
+          <View
+            style={{
+              backgroundColor: 'transparent',
+              flex: 1,
+              alignItems: 'center',
+              flexDirection: 'column-reverse',
+              marginBottom: moderateVerticalScale(8),
+            }}>
+            <View
+              style={{
+                backgroundColor: Color.BLUE,
+                paddingHorizontal: moderateScale(26),
+                paddingVertical: moderateScale(20),
+                borderRadius: moderateScale(20),
+                width: moderateScale(350),
+              }}>
+              <TouchableOpacity
+                style={{
+                  alignItems: 'flex-end',
+                  marginBottom: moderateVerticalScale(12),
+                }}
+                onPress={() => {
+                  setModalVisible(false);
+                }}>
+                <CustomIcon
+                  name={'close'}
+                  size={40}
+                  type="Ionicons"
+                  color={Color.WHITE}
+                />
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  borderWidth: 1,
+                  borderRadius: moderateScale(16),
+                  borderColor: Color.WHITE,
+                  marginBottom: moderateVerticalScale(8),
+                }}
+                onPress={() => {
+                  takePhotoFromCamera();
+                }}>
+                <CustomImage source={ImagePath.CAMERA} resizeMode={'contain'} />
+
+                <Text style={{fontSize: scale(16), color: Color.WHITE}}>
+                  Take a photo
+                </Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  borderWidth: 1,
+                  borderRadius: moderateScale(16),
+                  borderColor: Color.WHITE,
+                }}
+                onPress={() => {
+                  takePhotoFromGallery();
+                }}>
+                <CustomImage
+                  source={ImagePath.GALLERY}
+                  resizeMode={'contain'}
+                />
+
+                <Text style={{fontSize: scale(16), color: Color.WHITE}}>
+                  Choose From Gallery
+                </Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </Modal>
       </SafeAreaView>
     </View>
   );
