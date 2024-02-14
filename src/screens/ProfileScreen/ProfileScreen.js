@@ -27,8 +27,8 @@ import {
   scale,
 } from 'react-native-size-matters';
 import CustomIcon from '../../components/CustomIcon';
-import CustomButton from '../../components/CustomButton';
 import CustomImage from '../../components/CustomImage';
+import {clearCredentials} from '../../redux/Slices/authSlice';
 
 const ProfileScreen = () => {
   const [image, setImage] = useState(ImagePath.STUDENT);
@@ -130,6 +130,7 @@ const ProfileScreen = () => {
 
             await auth.signOut();
             await AsyncStorage.clear();
+            dispatch(clearCredentials());
 
             navigation.navigate(NavigationStringPath.LOGINSCREEN);
           } catch (error) {
