@@ -132,6 +132,15 @@ const LoginScreen = ({}) => {
         screen: NavigationStringPath.HOMESCREEN,
         params: {name: userLoginCredential.user.displayName},
       });
+
+      navigation.navigate(NavigationStringPath.TABSCREENS, {
+        screen: NavigationStringPath.SETTINGSCREEN,
+        params: {
+          userEmail: userLoginCredential.user.email,
+        },
+      });
+
+      console.log('Email:', userLoginCredential.user.email);
     } catch (error) {
       Alert.alert('Please add Login Details.');
     }
@@ -150,6 +159,14 @@ const LoginScreen = ({}) => {
         screen: NavigationStringPath.HOMESCREEN,
         params: {
           userGoogleInfo: userGoogleInfo,
+        },
+      });
+
+      navigation.navigate(NavigationStringPath.TABSCREENS, {
+        screen: NavigationStringPath.SETTINGSCREEN,
+        params: {
+          userGoogleEmail: userGoogleInfo.user.email,
+          userGoogleName: userGoogleInfo.user.name,
         },
       });
 
