@@ -1,5 +1,12 @@
 import React, {useEffect, useState} from 'react';
-import {SafeAreaView, ScrollView, View, Text, Alert} from 'react-native';
+import {
+  SafeAreaView,
+  ScrollView,
+  View,
+  Text,
+  Alert,
+  Platform,
+} from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import styles from './Styles';
@@ -23,6 +30,7 @@ import {
   RightArrow,
   SettingSvg,
 } from '../../constants/SvgPath';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const SettingScreen = ({route}) => {
   const navigation = useNavigation();
@@ -126,75 +134,81 @@ const SettingScreen = ({route}) => {
   }, [userDisplayName, userEmailState]);
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.subContainer}>
-        <View style={styles.marginContainer}>
-          <CustomHeader
-            iconName={'chevron-back'}
-            size={16}
-            color={Color.BLACK}
-            onPress={() => {
-              navigation.goBack();
-            }}
-            text={'Settings'}
-          />
-
-          <View
-            style={{
-              alignItems: 'center',
-              marginTop: moderateScale(24),
-            }}>
-            <SettingSvg />
-          </View>
-          <ScrollView>
-            <CustomSettingComponent
-              text={'Notifications'}
-              icon={<Bell />}
-              onToggle={handleNotificationToggle}
-              isOn={notificationToggle}
-              icon2={notificationToggle ? <On /> : <Off />}
+    <KeyboardAwareScrollView
+      behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
+      contentContainerStyle={{flex: 1}}
+      scrollEnabled={true}
+      showsVerticalScrollIndicator={false}>
+      <View style={styles.container}>
+        <SafeAreaView style={styles.subContainer}>
+          <View style={styles.marginContainer}>
+            <CustomHeader
+              iconName={'chevron-back'}
+              size={16}
+              color={Color.BLACK}
+              onPress={() => {
+                navigation.goBack();
+              }}
+              text={'Settings'}
             />
 
             <View
               style={{
-                alignItems: 'baseline',
-                height: moderateVerticalScale(21),
-                marginBottom: moderateVerticalScale(16),
+                alignItems: 'center',
+                marginTop: moderateScale(24),
               }}>
-              <CustomWelcomeText
-                text={'Account information'}
-                letterSpacing={-0.5}
-                lineHeight={26}
-                fontFamily={'Rubik-Regular'}
-                fontWeight={'500'}
-                color={Color.BLACK}
-                fontSize={scale(20)}
-              />
+              <SettingSvg />
             </View>
-            <View>
-              <CustomDetailsComponent
-                icon1={<Person />}
-                text1={'Name'}
-                text2={userDisplayName}
-                icon2={<RightArrow />}
+            <ScrollView>
+              <CustomSettingComponent
+                text={'Notifications'}
+                icon={<Bell />}
+                onToggle={handleNotificationToggle}
+                isOn={notificationToggle}
+                icon2={notificationToggle ? <On /> : <Off />}
               />
-              <CustomDetailsComponent
-                icon1={<Email />}
-                text1={'Email'}
-                text2={userEmailState}
-                icon2={<RightArrow />}
-              />
-              <CustomDetailsComponent
-                icon1={<Lock />}
-                text1={'Password'}
-                text2={'changed 2 weeks ago'}
-                icon2={<RightArrow />}
-              />
-            </View>
-          </ScrollView>
-        </View>
-      </SafeAreaView>
-    </View>
+
+              <View
+                style={{
+                  alignItems: 'baseline',
+                  height: moderateVerticalScale(21),
+                  marginBottom: moderateVerticalScale(16),
+                }}>
+                <CustomWelcomeText
+                  text={'Account information'}
+                  letterSpacing={-0.5}
+                  lineHeight={26}
+                  fontFamily={'Rubik-Regular'}
+                  fontWeight={'500'}
+                  color={Color.BLACK}
+                  fontSize={scale(20)}
+                />
+              </View>
+              <View>
+                <CustomDetailsComponent
+                  icon1={<Person />}
+                  text1={'Name'}
+                  text2={userDisplayName}
+                  icon2={<RightArrow />}
+                />
+                <CustomDetailsComponent
+                  icon1={<Email />}
+                  text1={'Email'}
+                  text2={userEmailState}
+                  icon2={<RightArrow />}
+                />
+                <CustomDetailsComponent
+                  icon1={<Lock />}
+                  text1={'Password'}
+                  text2={'changed 2 weeks ago'}
+                  icon2={<RightArrow />}
+                />
+              </View>
+            </ScrollView>
+          </View>
+        </SafeAreaView>
+      </View>
+    </KeyboardAwareScrollView>
   );
 };
 
