@@ -12,14 +12,15 @@ import {useNavigation} from '@react-navigation/native';
 import styles from './Styles';
 import Color from '../../constants/Color';
 import CustomHeader from '../../components/CustomHeader';
+import CustomWelcomeText from '../../components/CustomWelcomeText';
+import CustomDetailsComponent from '../../components/CustomDetailsComponent';
 import {
   moderateScale,
   moderateVerticalScale,
   scale,
 } from 'react-native-size-matters';
 import CustomSettingComponent from '../../components/CustomSettingComponent';
-import CustomWelcomeText from '../../components/CustomWelcomeText';
-import CustomDetailsComponent from '../../components/CustomDetailsComponent';
+import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   Bell,
   Email,
@@ -30,7 +31,6 @@ import {
   RightArrow,
   SettingSvg,
 } from '../../constants/SvgPath';
-import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 
 const SettingScreen = ({route}) => {
   const navigation = useNavigation();
@@ -52,6 +52,9 @@ const SettingScreen = ({route}) => {
   const getUserInfo = async () => {
     try {
       const userInfo = await AsyncStorage.getItem('userInfo');
+      const storedName = await AsyncStorage.getItem('name');
+      const storedEmail = await AsyncStorage.getItem('email');
+
       if (userInfo) {
         const {displayName, email} = JSON.parse(userInfo);
         setUserDisplayName(displayName);
@@ -151,7 +154,6 @@ const SettingScreen = ({route}) => {
               }}
               text={'Settings'}
             />
-
             <View
               style={{
                 alignItems: 'center',
@@ -167,7 +169,6 @@ const SettingScreen = ({route}) => {
                 isOn={notificationToggle}
                 icon2={notificationToggle ? <On /> : <Off />}
               />
-
               <View
                 style={{
                   alignItems: 'baseline',

@@ -1,12 +1,8 @@
 import {
-  Image,
-  StyleSheet,
   Text,
   TouchableOpacity,
   View,
   SafeAreaView,
-  Alert,
-  KeyboardAvoidingView,
   Platform,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
@@ -106,6 +102,11 @@ const SignUpScreen = () => {
       await AsyncStorage.setItem('email', email);
       await AsyncStorage.setItem('name', name);
       await AsyncStorage.setItem('password', password);
+
+      navigation.navigate(NavigationStringPath.TABSCREENS, {
+        screen: NavigationStringPath.SETTINGSCREEN,
+        params: {userEmail: email, userName: name},
+      });
 
       navigation.navigate(NavigationStringPath.TABSCREENS, {
         screen: NavigationStringPath.PROFILESCREEN,
