@@ -12,6 +12,12 @@ const data = [
     backgroundColor: Color.DETAILSBACKGROUND,
     aboutCourseDetails:
       'Learn to create stunning user interfaces for mobile applications with advanced techniques and design principles. Dive deep into usability, accessibility, and aesthetics to craft seamless user experiences that elevate your app to the next level.',
+    topics: {
+      topic1: 'design principles',
+      topic2: 'accessibility',
+      topic3: 'color theory',
+      topic4: 'typography',
+    },
   },
   {
     id: 2,
@@ -23,6 +29,12 @@ const data = [
     backgroundColor: Color.DETAILSBACKGROUND,
     aboutCourseDetails:
       'Master the art of building responsive websites that adapt flawlessly to various devices and screen sizes. Explore the latest web technologies and best practices in front-end development to create engaging and dynamic web experiences.',
+    topics: {
+      topic1: 'HTML',
+      topic2: 'CSS',
+      topic3: 'JavaScript',
+      topic4: 'Responsive Design',
+    },
   },
   {
     id: 3,
@@ -34,6 +46,12 @@ const data = [
     backgroundColor: Color.LIGHTGRAY,
     aboutCourseDetails:
       'Unlock the power of data through fundamental analysis and visualization techniques. Gain insights into the world of data science, from collecting and cleaning data to interpreting patterns and trends for informed decision-making.',
+    topics: {
+      topic1: 'data analysis',
+      topic2: 'data visualization',
+      topic3: 'machine learning',
+      topic4: 'statistics',
+    },
   },
   {
     id: 4,
@@ -45,6 +63,12 @@ const data = [
     backgroundColor: Color.DETAILSBACKGROUND,
     aboutCourseDetails:
       'Delve into the core principles of digital graphic design and unleash your creativity. Learn essential design concepts, tools, and workflows to create visually captivating graphics for various digital platforms and mediums.',
+    topics: {
+      topic1: 'visual hierarchy',
+      topic2: 'image editing',
+      topic3: 'typography',
+      topic4: 'branding',
+    },
   },
   {
     id: 5,
@@ -56,6 +80,12 @@ const data = [
     backgroundColor: Color.LIGHTGRAY,
     aboutCourseDetails:
       'Embark on a comprehensive journey through the fundamental concepts of programming. From basic syntax to advanced algorithms, this course equips you with the knowledge and skills needed to kickstart your programming career.',
+    topics: {
+      topic1: 'programming fundamentals',
+      topic2: 'algorithms',
+      topic3: 'data structures',
+      topic4: 'debugging',
+    },
   },
   {
     id: 6,
@@ -67,6 +97,12 @@ const data = [
     backgroundColor: Color.DETAILSBACKGROUND,
     aboutCourseDetails:
       'Learn to create stunning user interfaces for mobile applications with advanced techniques and design principles. Dive deep into usability, accessibility, and aesthetics to craft seamless user experiences that elevate your app to the next level.',
+    topics: {
+      topic1: 'design principles',
+      topic2: 'accessibility',
+      topic3: 'color theory',
+      topic4: 'typography',
+    },
   },
   {
     id: 7,
@@ -78,6 +114,12 @@ const data = [
     backgroundColor: Color.DETAILSBACKGROUND,
     aboutCourseDetails:
       'Master the art of building responsive websites that adapt flawlessly to various devices and screen sizes. Explore the latest web technologies and best practices in front-end development to create engaging and dynamic web experiences.',
+    topics: {
+      topic1: 'HTML',
+      topic2: 'CSS',
+      topic3: 'JavaScript',
+      topic4: 'Responsive Design',
+    },
   },
   {
     id: 8,
@@ -89,6 +131,12 @@ const data = [
     backgroundColor: Color.LIGHTGRAY,
     aboutCourseDetails:
       'Unlock the power of data through fundamental analysis and visualization techniques. Gain insights into the world of data science, from collecting and cleaning data to interpreting patterns and trends for informed decision-making.',
+    topics: {
+      topic1: 'data analysis',
+      topic2: 'data visualization',
+      topic3: 'machine learning',
+      topic4: 'statistics',
+    },
   },
   {
     id: 9,
@@ -100,6 +148,12 @@ const data = [
     backgroundColor: Color.DETAILSBACKGROUND,
     aboutCourseDetails:
       'Delve into the core principles of digital graphic design and unleash your creativity. Learn essential design concepts, tools, and workflows to create visually captivating graphics for various digital platforms and mediums.',
+    topics: {
+      topic1: 'visual hierarchy',
+      topic2: 'image editing',
+      topic3: 'typography',
+      topic4: 'branding',
+    },
   },
   {
     id: 10,
@@ -111,6 +165,12 @@ const data = [
     backgroundColor: Color.LIGHTGRAY,
     aboutCourseDetails:
       'Embark on a comprehensive journey through the fundamental concepts of programming. From basic syntax to advanced algorithms, this course equips you with the knowledge and skills needed to kickstart your programming career.',
+    topics: {
+      topic1: 'programming fundamentals',
+      topic2: 'algorithms',
+      topic3: 'data structures',
+      topic4: 'debugging',
+    },
   },
 ];
 

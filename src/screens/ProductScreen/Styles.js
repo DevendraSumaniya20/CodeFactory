@@ -34,11 +34,12 @@ const styles = StyleSheet.create({
   renderTouchableOpacity: {
     alignItems: 'center',
     backgroundColor: Color.BLUE,
-    borderRadius: moderateScale(20),
+    borderRadius: moderateScale(16),
     paddingHorizontal: moderateScale(16),
-    paddingVertical: moderateScale(8),
-    marginLeft: moderateScale(260),
+    paddingVertical: moderateScale(16),
+    marginLeft: moderateScale(250),
     marginBottom: moderateVerticalScale(8),
+    justifyContent: 'center',
   },
 
   renderTouchableText: {
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     fontWeight: '500',
     lineHeight: 16,
-    textAlign: 'right',
+    textAlign: 'center',
     color: Color.WHITE,
   },
   renderSecondView: {

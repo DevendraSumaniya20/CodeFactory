@@ -11,6 +11,7 @@ import YourCourseScreen from '../screens/YourCourseScreen/YourCourseScreen';
 import CourseSavedScreen from '../screens/CourseSavedScreen/CourseSavedScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
+import SelectedCourseScreen from '../screens/SelectedCourseScreen/SelectedCourseScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -24,14 +25,11 @@ const Navigation = () => {
   useEffect(() => {
     const checkLoginStatus = async () => {
       try {
-        // console.log('Checking login status...');
         const token = await AsyncStorage.getItem('token');
 
         if (token) {
-          // console.log('Token found. Redirecting to TabScreen.');
           setInitialRoute(NavigationStringPath.TABSCREENS);
         } else {
-          // console.log('No token found. Redirecting to LoginScreen.');
         }
       } catch (error) {
         console.error('Error checking login status:', error);
@@ -73,6 +71,11 @@ const Navigation = () => {
         name={NavigationStringPath.COURSE_SAVED_SCREEN}
         component={CourseSavedScreen}
       />
+      <Stack.Screen
+        name={NavigationStringPath.SELECTED_COURSE_SCREEN}
+        component={SelectedCourseScreen}
+      />
+
       <Stack.Screen
         name={NavigationStringPath.TABSCREENS}
         component={TabScreen}

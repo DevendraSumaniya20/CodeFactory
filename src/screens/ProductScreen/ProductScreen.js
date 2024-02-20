@@ -32,6 +32,8 @@ const ProductScreen = ({route}) => {
   const {item} = route.params;
   const navigation = useNavigation();
 
+  const {userGoogleInfo, name} = route.params;
+
   useEffect(() => {
     const isLiked = storedCourses.some(course => course.id === item.id);
     setLike(isLiked);
@@ -94,7 +96,7 @@ const ProductScreen = ({route}) => {
         prefill: {
           email: 'gaurav.kumar@example.com',
           contact: '9191919191',
-          name: 'Gaurav Kumar',
+          name: name,
         },
         theme: {color: Color.THEMECOLOR},
       };

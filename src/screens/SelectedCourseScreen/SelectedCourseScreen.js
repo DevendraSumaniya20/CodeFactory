@@ -1,0 +1,184 @@
+import React, {useState, useEffect} from 'react';
+import {
+  Alert,
+  FlatList,
+  Image,
+  SafeAreaView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
+import styles from './Styles';
+import CustomHeader from '../../components/CustomHeader';
+import Color from '../../constants/Color';
+import {useNavigation} from '@react-navigation/native';
+import {CoolKid, CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
+import CustomWelcomeText from '../../components/CustomWelcomeText';
+import CustomDescriptionText from '../../components/CustomDescriptionText';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
+import CustomButton from '../../components/CustomButton';
+import NavigationStringPath from '../../constants/NavigationStringPath';
+import Video from 'react-native-video';
+import CustomIcon from '../../components/CustomIcon';
+import CustomTopics from '../../components/CustomTopics';
+import CustomSvg from '../../components/CustomSvg';
+import CustomImage from '../../components/CustomImage';
+import ImagePath from '../../constants/ImagePath';
+
+const SelectedCourseScreen = ({route}) => {
+  const navigation = useNavigation();
+
+  const [selectedCourse, setSelectedCourse] = useState(
+    route.params.selectedCourse,
+  );
+  console.log(selectedCourse);
+  return (
+    <View style={styles.container}>
+      <SafeAreaView style={styles.subContainer}>
+        <View style={styles.marginContainer}>
+          <CustomHeader
+            iconName={'chevron-back'}
+            size={24}
+            color={Color.BLACK}
+            onPress={() => {
+              navigation.goBack();
+            }}
+            text={selectedCourse?.type}
+          />
+
+          <View
+            style={{
+              backgroundColor: '#FFF',
+              alignItems: 'center',
+              justifyContent: 'center',
+            }}>
+            <View
+              style={{
+                width: moderateScale(343),
+                height: moderateVerticalScale(334),
+                borderRadius: moderateScale(8),
+                borderColor: Color.BLACK,
+                borderWidth: 1,
+              }}>
+              <Image
+                source={selectedCourse.image}
+                style={{
+                  width: moderateScale(343),
+                  height: moderateVerticalScale(278),
+                  borderRadius: moderateScale(8),
+                  resizeMode: 'cover',
+                }}
+              />
+              <View
+                style={{
+                  alignItems: 'flex-end',
+                  marginRight: moderateScale(8),
+                }}>
+                <CustomIcon
+                  name={'caret-forward-circle-outline'}
+                  size={scale(48)}
+                  color={Color.LIGHTGREEEN}
+                />
+
+                <View
+                  style={{
+                    marginTop: moderateScale(4),
+                  }}>
+                  <Text
+                    style={{
+                      fontSize: scale(24),
+                      fontWeight: '600',
+                      fontFamily: 'Rubik-Regular',
+                      color: Color.BLACK,
+                      marginVertical: moderateVerticalScale(8),
+                    }}>
+                    {selectedCourse.type}
+                  </Text>
+                  <Text
+                    style={{
+                      fontSize: scale(16),
+                      fontWeight: '400',
+                      fontFamily: 'Rubik-Regular',
+                      color: Color.BLACK,
+                    }}>
+                    {selectedCourse.aboutCourseDetails}
+                  </Text>
+                </View>
+              </View>
+              <View>
+                <View>
+                  <Image
+                    source={ImagePath.LOGO1}
+                    style={{
+                      height: moderateVerticalScale(72),
+                      width: moderateScale(78),
+                    }}
+                    resizeMethod="auto"
+                    resizeMode="contain"
+                  />
+                </View>
+                <View>
+                  <Text style={styles.topicHeader}>
+                    {selectedCourse.topics.topic1}
+                  </Text>
+                </View>
+              </View>
+            </View>
+          </View>
+
+          {selectedCourse ? null : (
+            <>
+              <View style={styles.imageView}>
+                <CourseSavedSvg />
+              </View>
+              <View style={styles.welcomeTextView}>
+                <CustomWelcomeText
+                  text={' Course not Added'}
+                  fontFamily="Rubik-Regular"
+                  fontSize={scale(24)}
+                  letterSpacing={-0.5}
+                  lineHeight={32}
+                  color={Color.BLACK}
+                />
+              </View>
+              <View style={styles.descriptionTextView}>
+                <CustomDescriptionText
+                  fontsize={scale(14)}
+                  lineHeight={21}
+                  color={Color.GRAY}
+                  fontFamily="Rubik-Regular"
+                  fontWeight="400"
+                  text={'Try to Add the course  '}
+                />
+                <CustomDescriptionText
+                  fontsize={scale(14)}
+                  lineHeight={21}
+                  color={Color.GRAY}
+                  fontFamily="Rubik-Regular"
+                  fontWeight="400"
+                  text={'after you will see your Courses '}
+                />
+              </View>
+
+              <View style={styles.continueToubleView}>
+                <CustomButton
+                  text={'Check Courses'}
+                  onPress={() => {
+                    navigation.navigate(NavigationStringPath.HOMESCREEN);
+                  }}
+                />
+              </View>
+            </>
+          )}
+        </View>
+      </SafeAreaView>
+    </View>
+  );
+};
+
+export default SelectedCourseScreen;

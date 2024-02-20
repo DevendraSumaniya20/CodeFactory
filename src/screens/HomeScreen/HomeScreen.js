@@ -19,7 +19,7 @@ import {moderateScaleVertical} from '../../constants/responsiveSize';
 import _ from 'lodash';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
-import {auth} from '../../config/FirebaseAuth';
+import {auth, db} from '../../config/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const HomeScreen = () => {
@@ -32,6 +32,8 @@ const HomeScreen = () => {
   const [filteredData, setFilteredData] = useState(data);
   const [name, setName] = useState(route.params?.name ?? '');
   const [greeting, setGreeting] = useState('');
+
+  // console.log('Full data..........', data);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -99,6 +101,9 @@ const HomeScreen = () => {
           navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {
             item,
             price: filteredData[0].Price,
+            userGoogleInfo,
+            name,
+            data,
           })
         }>
         <View style={styles.renderMainView}>

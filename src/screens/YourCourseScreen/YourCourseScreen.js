@@ -24,6 +24,8 @@ import CustomButton from '../../components/CustomButton';
 import {getData} from '../../utils/AsyncStorage';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 
+import CustomIcon from '../../components/CustomIcon';
+
 const YourCourseScreen = ({route}) => {
   const navigation = useNavigation();
   const {addedCourses} = route.params || {addedCourses: []};
@@ -45,10 +47,17 @@ const YourCourseScreen = ({route}) => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => {
+          navigation.navigate(NavigationStringPath.SELECTED_COURSE_SCREEN, {
+            selectedCourse: item,
+          });
+        }}>
         <View style={styles.renderMainView}>
           <View
             style={{
+              position: 'relative',
               alignItems: 'flex-start',
               height: moderateVerticalScale(194),
               paddingTop: moderateScale(8),
@@ -60,8 +69,22 @@ const YourCourseScreen = ({route}) => {
               resizeMode="cover"
               style={styles.renderItemImage}
             />
+            <TouchableOpacity
+              style={styles.iconContainer}
+              onPress={() => {
+                navigation.navigate(
+                  NavigationStringPath.SELECTED_COURSE_SCREEN,
+                  {selectedCourse: item},
+                );
+              }}>
+              <CustomIcon
+                name={'caret-forward-circle-outline'}
+                size={scale(60)}
+                color="#FFF"
+                style={styles.iconStyle}
+              />
+            </TouchableOpacity>
           </View>
-
           <View style={styles.renderSecondView}>
             <Text style={styles.renderDurationText}>{item.duration}</Text>
             <Text style={styles.renderTypeText}>{item.type}</Text>
