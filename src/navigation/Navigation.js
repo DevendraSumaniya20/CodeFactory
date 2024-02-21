@@ -12,6 +12,7 @@ import CourseSavedScreen from '../screens/CourseSavedScreen/CourseSavedScreen';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
 import SelectedCourseScreen from '../screens/SelectedCourseScreen/SelectedCourseScreen';
+import CourseLessonScreen from '../screens/CourseLessonScreen/CourseLessonScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -74,6 +75,10 @@ const Navigation = () => {
       <Stack.Screen
         name={NavigationStringPath.SELECTED_COURSE_SCREEN}
         component={SelectedCourseScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.COURSE_LESSONSCREEN}
+        component={CourseLessonScreen}
       />
 
       <Stack.Screen

@@ -194,9 +194,9 @@ const ProfileScreen = () => {
 
             <View style={styles.menuItem}>
               <CustomBorderComponent
-                text={'Payment'}
+                text={'Result'}
                 onPress={() => {
-                  setModalVisible(true);
+                  Alert.alert('Your result ');
                 }}
               />
             </View>

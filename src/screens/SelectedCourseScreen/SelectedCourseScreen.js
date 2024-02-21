@@ -123,22 +123,42 @@ const SelectedCourseScreen = ({route}) => {
                   <CustomTopics
                     topicImage={selectedCourse.image}
                     topicName={selectedCourse.topics.topic1}
-                    onPress={() => {}}
+                    onPress={() => {
+                      navigation.navigate(
+                        NavigationStringPath.COURSE_LESSONSCREEN,
+                        {selectedCourse},
+                      );
+                    }}
                   />
                   <CustomTopics
                     topicImage={selectedCourse.image}
                     topicName={selectedCourse.topics.topic2}
-                    onPress={() => {}}
+                    onPress={() => {
+                      navigation.navigate(
+                        NavigationStringPath.COURSE_LESSONSCREEN,
+                        {selectedCourse},
+                      );
+                    }}
                   />
                   <CustomTopics
                     topicImage={selectedCourse.image}
                     topicName={selectedCourse.topics.topic3}
-                    onPress={() => {}}
+                    onPress={() => {
+                      navigation.navigate(
+                        NavigationStringPath.COURSE_LESSONSCREEN,
+                        {selectedCourse},
+                      );
+                    }}
                   />
                   <CustomTopics
                     topicImage={selectedCourse.image}
                     topicName={selectedCourse.topics.topic4}
-                    onPress={() => {}}
+                    onPress={() => {
+                      navigation.navigate(
+                        NavigationStringPath.COURSE_LESSONSCREEN,
+                        {selectedCourse},
+                      );
+                    }}
                   />
                 </View>
               </View>
