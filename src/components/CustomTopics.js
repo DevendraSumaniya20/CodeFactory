@@ -1,29 +1,34 @@
 import React from 'react';
-import {View, Image, Text, StyleSheet} from 'react-native';
+import {View, Image, Text, StyleSheet, TouchableOpacity} from 'react-native';
 import {
   moderateScale,
   moderateVerticalScale,
   scale,
 } from 'react-native-size-matters';
 
-const CustomTopics = ({topicImage, topicName, progress}) => {
+const CustomTopics = ({topicImage, topicName, progress, onPress}) => {
   return (
-    <View style={styles.container}>
-      <View>
-        <Image
-          resizeMethod="auto"
-          resizeMode="contain"
-          source={topicImage}
-          style={styles.topicImageStyle}
-        />
-      </View>
-      <View style={styles.topicDetails}>
-        <Text style={styles.topicNameTextStyle}>{topicName}</Text>
-        <View style={styles.progressBarContainer}>
-          <View style={[styles.progressBar, {width: `${progress * 100}%`}]} />
+    <TouchableOpacity onPress={onPress}>
+      <View style={styles.container}>
+        <View>
+          <Image
+            resizeMethod="auto"
+            resizeMode="contain"
+            source={topicImage}
+            style={styles.topicImageStyle}
+          />
+        </View>
+        <View style={styles.topicDetails}>
+          <Text
+            style={[styles.topicNameTextStyle, {textTransform: 'capitalize'}]}>
+            {topicName}
+          </Text>
+          <View style={styles.progressBarContainer}>
+            <View style={[styles.progressBar, {width: `${progress * 100}%`}]} />
+          </View>
         </View>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
@@ -31,7 +36,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 1,
+    borderWidth: 0.2,
     marginVertical: moderateVerticalScale(8),
     borderRadius: moderateScale(8),
   },
@@ -56,7 +61,7 @@ const styles = StyleSheet.create({
   },
   topicNameTextStyle: {
     fontSize: scale(18),
-    fontWeight: '700',
+    fontWeight: '500',
     fontFamily: 'Rubik-Regular',
   },
 });

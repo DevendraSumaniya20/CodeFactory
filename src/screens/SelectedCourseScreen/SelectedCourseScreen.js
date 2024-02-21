@@ -1,16 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {
-  Alert,
-  FlatList,
-  Image,
-  Platform,
-  SafeAreaView,
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from 'react-native';
+import {Image, SafeAreaView, ScrollView, Text, View} from 'react-native';
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
@@ -134,18 +123,22 @@ const SelectedCourseScreen = ({route}) => {
                   <CustomTopics
                     topicImage={selectedCourse.image}
                     topicName={selectedCourse.topics.topic1}
+                    onPress={() => {}}
                   />
                   <CustomTopics
                     topicImage={selectedCourse.image}
                     topicName={selectedCourse.topics.topic2}
+                    onPress={() => {}}
                   />
                   <CustomTopics
                     topicImage={selectedCourse.image}
                     topicName={selectedCourse.topics.topic3}
+                    onPress={() => {}}
                   />
                   <CustomTopics
                     topicImage={selectedCourse.image}
                     topicName={selectedCourse.topics.topic4}
+                    onPress={() => {}}
                   />
                 </View>
               </View>
