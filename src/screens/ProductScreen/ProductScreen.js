@@ -24,6 +24,7 @@ import {Heart, HeartFill, Logo1} from '../../constants/SvgPath';
 import RazorpayCheckout from 'react-native-razorpay';
 import {APIKey} from '../../config/APIKey';
 import ImagePath from '../../constants/ImagePath';
+import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const ProductScreen = ({route}) => {
   const [storedCourses, setStoredCourses] = useState([]);
@@ -91,7 +92,7 @@ const ProductScreen = ({route}) => {
         currency: 'INR',
         key: APIKey,
         amount: item.Price * 100,
-        name: 'User',
+        name: name,
         order_id: '',
         prefill: {
           email: 'gaurav.kumar@example.com',
@@ -107,6 +108,9 @@ const ProductScreen = ({route}) => {
 
           updatedCourses.push(item);
           await storeData('purchaseCourse', JSON.stringify(updatedCourses));
+          navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN, {
+            item,
+          });
         })
         .catch(error => {
           Alert.alert(`Error: ${error.code} | ${error.description}`);

@@ -12,7 +12,7 @@ import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
-import {CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
+import {CourseSavedSvg} from '../../constants/SvgPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {
@@ -28,12 +28,8 @@ import CustomIcon from '../../components/CustomIcon';
 
 const YourCourseScreen = ({route}) => {
   const navigation = useNavigation();
-  const {addedCourses} = route.params || {addedCourses: []};
 
   const [storedCourses, setStoredCourses] = useState([]);
-  const [courseAvailable, setCourseAvailable] = useState(
-    addedCourses.length > 0,
-  );
 
   useEffect(() => {
     const retrieveStoredCourses = async () => {

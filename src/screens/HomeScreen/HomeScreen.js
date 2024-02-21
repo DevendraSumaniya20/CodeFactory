@@ -33,8 +33,6 @@ const HomeScreen = () => {
   const [name, setName] = useState(route.params?.name ?? '');
   const [greeting, setGreeting] = useState('');
 
-  // console.log('Full data..........', data);
-
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
@@ -103,7 +101,6 @@ const HomeScreen = () => {
             price: filteredData[0].Price,
             userGoogleInfo,
             name,
-            data,
           })
         }>
         <View style={styles.renderMainView}>

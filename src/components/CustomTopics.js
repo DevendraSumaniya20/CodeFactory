@@ -1,63 +1,64 @@
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
-import Color from '../constants/Color';
+import {View, Image, Text, StyleSheet} from 'react-native';
 import {
   moderateScale,
   moderateVerticalScale,
   scale,
 } from 'react-native-size-matters';
 
-const CustomTopics = ({text1, icon1, onPress}) => {
+const CustomTopics = ({topicImage, topicName, progress}) => {
   return (
-    <TouchableOpacity style={styles.container}>
-      <View style={{alignItems: 'center', justifyContent: 'center'}}>
-        <View>{icon1}</View>
+    <View style={styles.container}>
+      <View>
+        <Image
+          resizeMethod="auto"
+          resizeMode="contain"
+          source={topicImage}
+          style={styles.topicImageStyle}
+        />
       </View>
-    </TouchableOpacity>
+      <View style={styles.topicDetails}>
+        <Text style={styles.topicNameTextStyle}>{topicName}</Text>
+        <View style={styles.progressBarContainer}>
+          <View style={[styles.progressBar, {width: `${progress * 100}%`}]} />
+        </View>
+      </View>
+    </View>
   );
 };
-
-export default CustomTopics;
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
     borderWidth: 1,
-    borderRadius: moderateScale(16),
-    paddingVertical: moderateVerticalScale(17),
-    paddingHorizontal: moderateScale(16),
-    justifyContent: 'space-between',
-    marginBottom: moderateVerticalScale(16),
+    marginVertical: moderateVerticalScale(8),
+    borderRadius: moderateScale(8),
+  },
+  topicDetails: {
+    marginLeft: moderateScale(8),
   },
 
-  iconContainer: {
-    backgroundColor: Color.BLUE,
-    borderRadius: moderateScale(56),
-    alignItems: 'center',
-    width: moderateScale(32),
-    height: moderateVerticalScale(32),
-    justifyContent: 'center',
+  topicImageStyle: {
+    height: moderateScale(72),
+    width: moderateVerticalScale(78),
   },
-
-  textContainer: {
-    marginRight: moderateScale(8),
-    marginLeft: moderateScale(12),
+  progressBarContainer: {
+    backgroundColor: '#e0e0e0',
+    borderRadius: moderateScale(8),
+    marginTop: moderateVerticalScale(8),
+    width: moderateScale(240),
   },
-  text1: {
+  progressBar: {
+    height: moderateVerticalScale(8),
+    backgroundColor: '#2196f3',
+    borderRadius: moderateScale(8),
+  },
+  topicNameTextStyle: {
+    fontSize: scale(18),
+    fontWeight: '700',
     fontFamily: 'Rubik-Regular',
-    fontSize: scale(20),
-    fontWeight: '500',
-    lineHeight: 26,
-    letterSpacing: -0.5,
-    color: Color.BLACK,
-  },
-  text2: {
-    fontFamily: 'Rubik-Regular',
-    fontSize: scale(14),
-    fontWeight: '500',
-    lineHeight: 26,
-    letterSpacing: -0.5,
-    color: Color.GRAY,
   },
 });
+
+export default CustomTopics;
