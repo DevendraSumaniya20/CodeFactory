@@ -151,12 +151,12 @@ const ProductScreen = ({route}) => {
               style={{
                 alignItems: 'flex-start',
                 paddingTop: moderateVerticalScale(8),
-                backgroundColor: item.backgroundColor,
                 borderRadius: moderateScale(8),
               }}>
               <Image
                 source={item.image}
-                resizeMode="cover"
+                resizeMode="contain"
+                resizeMethod="auto"
                 style={styles.renderItemImage}
               />
 

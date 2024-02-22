@@ -4,7 +4,7 @@ import ImagePath from './ImagePath';
 const data = [
   {
     id: 1,
-    image: ImagePath.DATAIMG1,
+    image: ImagePath.UI_IMG,
     Price: 3700,
     duration: '3 h 30 min',
     type: 'UI',
@@ -21,7 +21,7 @@ const data = [
   },
   {
     id: 2,
-    image: ImagePath.DATAIMG2,
+    image: ImagePath.WEB_IMG,
     Price: 4440,
     duration: '4 h',
     type: 'Web Development',
@@ -38,7 +38,7 @@ const data = [
   },
   {
     id: 3,
-    image: ImagePath.DATAIMG3,
+    image: ImagePath.DATA_SCIENCE_IMG,
     Price: 3330,
     duration: '2 h 45 min',
     type: 'Data Science',
@@ -55,7 +55,7 @@ const data = [
   },
   {
     id: 4,
-    image: ImagePath.DATAIMG4,
+    image: ImagePath.GRAPHICS_IMG,
     Price: 4070,
     duration: '3 h 15 min',
     type: 'Graphic Design',
@@ -72,7 +72,7 @@ const data = [
   },
   {
     id: 5,
-    image: ImagePath.DATAIMG5,
+    image: ImagePath.PROGRAMING_IMG,
     Price: 5180,
     duration: '5 h',
     type: 'Programming',
@@ -89,7 +89,7 @@ const data = [
   },
   {
     id: 6,
-    image: ImagePath.DATAIMG1,
+    image: ImagePath.UI_IMG,
     Price: 3700,
     duration: '3 h 30 min',
     type: 'UI',
@@ -106,7 +106,7 @@ const data = [
   },
   {
     id: 7,
-    image: ImagePath.DATAIMG2,
+    image: ImagePath.WEB_IMG,
     Price: 4440,
     duration: '4 h',
     type: 'Web Development',
@@ -123,7 +123,7 @@ const data = [
   },
   {
     id: 8,
-    image: ImagePath.DATAIMG3,
+    image: ImagePath.DATA_SCIENCE_IMG,
     Price: 3330,
     duration: '2 h 45 min',
     type: 'Data Science',
@@ -140,7 +140,7 @@ const data = [
   },
   {
     id: 9,
-    image: ImagePath.DATAIMG4,
+    image: ImagePath.GRAPHICS_IMG,
     Price: 4070,
     duration: '3 h 15 min',
     type: 'Graphic Design',
@@ -157,7 +157,7 @@ const data = [
   },
   {
     id: 10,
-    image: ImagePath.DATAIMG5,
+    image: ImagePath.PROGRAMING_IMG,
     Price: 5180,
     duration: '5 h',
     type: 'Programming',

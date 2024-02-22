@@ -25,6 +25,8 @@ const SelectedCourseScreen = ({route}) => {
     route.params.selectedCourse,
   );
 
+  // console.log('Selected COurseScreen data', selectedCourse);
+
   const [progress, setProgress] = useState(0.5);
 
   useEffect(() => {
@@ -62,7 +64,6 @@ const SelectedCourseScreen = ({route}) => {
 
               <View
                 style={{
-                  backgroundColor: '#FFF',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}>
@@ -73,14 +74,15 @@ const SelectedCourseScreen = ({route}) => {
                     borderRadius: moderateScale(8),
                     borderColor: Color.BLACK,
                     borderWidth: 1,
+                    alignItems: 'center',
                   }}>
                   <Image
                     source={selectedCourse.image}
                     style={{
                       width: moderateScale(343),
-                      height: moderateVerticalScale(278),
+                      height: moderateVerticalScale(190),
                       borderRadius: moderateScale(8),
-                      resizeMode: 'cover',
+                      resizeMode: 'contain',
                     }}
                   />
                   <View
@@ -96,7 +98,7 @@ const SelectedCourseScreen = ({route}) => {
 
                     <View
                       style={{
-                        marginTop: moderateScale(4),
+                        marginTop: moderateVerticalScale(90),
                       }}>
                       <Text
                         style={{
@@ -126,7 +128,10 @@ const SelectedCourseScreen = ({route}) => {
                     onPress={() => {
                       navigation.navigate(
                         NavigationStringPath.COURSE_LESSONSCREEN,
-                        {selectedCourse},
+                        {
+                          selectedCourse,
+                          topicName: selectedCourse.topics.topic1,
+                        },
                       );
                     }}
                   />
@@ -136,7 +141,10 @@ const SelectedCourseScreen = ({route}) => {
                     onPress={() => {
                       navigation.navigate(
                         NavigationStringPath.COURSE_LESSONSCREEN,
-                        {selectedCourse},
+                        {
+                          selectedCourse,
+                          topicName: selectedCourse.topics.topic2,
+                        },
                       );
                     }}
                   />
@@ -146,7 +154,10 @@ const SelectedCourseScreen = ({route}) => {
                     onPress={() => {
                       navigation.navigate(
                         NavigationStringPath.COURSE_LESSONSCREEN,
-                        {selectedCourse},
+                        {
+                          selectedCourse,
+                          topicName: selectedCourse.topics.topic3,
+                        },
                       );
                     }}
                   />
@@ -156,7 +167,10 @@ const SelectedCourseScreen = ({route}) => {
                     onPress={() => {
                       navigation.navigate(
                         NavigationStringPath.COURSE_LESSONSCREEN,
-                        {selectedCourse},
+                        {
+                          selectedCourse,
+                          topicName: selectedCourse.topics.topic4,
+                        },
                       );
                     }}
                   />

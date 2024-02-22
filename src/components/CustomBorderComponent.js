@@ -7,13 +7,20 @@ import {
   scale,
 } from 'react-native-size-matters';
 
-const CustomBorderComponent = ({text, onPress}) => {
+const CustomBorderComponent = ({
+  text,
+  onPress,
+  inLineStyle,
+  inLineTextStyle,
+}) => {
   return (
     <TouchableOpacity
-      style={styles.customBorderComponentView}
+      style={[styles.customBorderComponentView, inLineStyle]}
       onPress={onPress}>
       <TouchableOpacity onPress={onPress}>
-        <Text style={styles.customBorderComponentText}>{text}</Text>
+        <Text style={[styles.customBorderComponentText, inLineTextStyle]}>
+          {text}
+        </Text>
       </TouchableOpacity>
     </TouchableOpacity>
   );
@@ -37,5 +44,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 32,
     letterSpacing: -0.5,
+    color: Color.BLACK,
   },
 });

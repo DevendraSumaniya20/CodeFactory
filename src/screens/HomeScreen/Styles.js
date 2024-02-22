@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   },
 
   renderItemImage: {
-    height: moderateScale(138),
+    height: moderateScale(180),
     width: moderateScale(343),
   },
   renderTouchableOpacity: {

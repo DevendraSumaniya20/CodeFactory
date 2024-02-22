@@ -22,14 +22,13 @@ const styles = StyleSheet.create({
 
   renderMainView: {
     justifyContent: 'center',
-    // borderWidth: 0.8,
     marginVertical: moderateVerticalScale(8),
     borderRadius: moderateScale(8),
   },
 
   renderItemImage: {
-    height: moderateVerticalScale(257),
-    width: moderateScale(375),
+    height: moderateScale(275),
+    width: moderateScale(343),
   },
   renderTouchableOpacity: {
     alignItems: 'center',

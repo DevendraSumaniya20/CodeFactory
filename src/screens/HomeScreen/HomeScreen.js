@@ -108,12 +108,12 @@ const HomeScreen = () => {
             style={{
               height: moderateScaleVertical(194),
               paddingTop: moderateScale(8),
-              backgroundColor: item.backgroundColor,
               borderRadius: moderateScale(8),
             }}>
             <Image
               source={item.image}
-              resizeMode="cover"
+              resizeMode="contain"
+              resizeMethod="auto"
               style={styles.renderItemImage}
             />
 

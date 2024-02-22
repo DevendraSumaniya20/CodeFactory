@@ -34,7 +34,7 @@ const styles = StyleSheet.create({
   },
 
   renderItemImage: {
-    height: moderateScale(138),
+    height: moderateScale(190),
     width: moderateScale(343),
   },
 

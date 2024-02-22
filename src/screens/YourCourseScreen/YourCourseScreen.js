@@ -29,6 +29,10 @@ import CustomIcon from '../../components/CustomIcon';
 const YourCourseScreen = ({route}) => {
   const navigation = useNavigation();
 
+  const {item} = route.params || {};
+
+  // console.log('YourCourse Screen data ', item);
+
   const [storedCourses, setStoredCourses] = useState([]);
 
   useEffect(() => {
@@ -57,12 +61,12 @@ const YourCourseScreen = ({route}) => {
               alignItems: 'flex-start',
               height: moderateVerticalScale(194),
               paddingTop: moderateScale(8),
-              backgroundColor: item.backgroundColor,
               borderRadius: moderateScale(8),
             }}>
             <Image
               source={item.image}
-              resizeMode="cover"
+              resizeMode="contain"
+              resizeMethod="auto"
               style={styles.renderItemImage}
             />
             <TouchableOpacity
