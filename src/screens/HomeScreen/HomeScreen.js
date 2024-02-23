@@ -91,6 +91,21 @@ const HomeScreen = () => {
     setSearchValue(text);
   };
 
+  const getUniqueCategories = () => {
+    const uniqueCategories = [...new Set(data.map(item => item.type))];
+    return uniqueCategories;
+  };
+
+  const handleCategoryPress = category => {
+    const filteredCategoryData = data.filter(
+      item => item.type.toLowerCase() === category.toLowerCase(),
+    );
+    navigation.navigate(NavigationStringPath.RESULTSCREEN, {
+      searchValue: category,
+      filteredData: filteredCategoryData,
+    });
+  };
+
   const renderItem = ({item}) => {
     return (
       <TouchableOpacity
@@ -172,10 +187,13 @@ const HomeScreen = () => {
           <View style={styles.categoryView}>
             <Text style={styles.categoryTextStyle}>Category :</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              <CustomCategoryButton text={'#CSS'} />
-              <CustomCategoryButton text={'#UX'} />
-              <CustomCategoryButton text={'#Swift'} />
-              <CustomCategoryButton text={'#UI'} />
+              {getUniqueCategories().map(category => (
+                <CustomCategoryButton
+                  key={category}
+                  text={`#${category}`}
+                  onPress={() => handleCategoryPress(category)}
+                />
+              ))}
             </ScrollView>
           </View>
           <View style={{backgroundColor: '#FFF'}}>

@@ -8,10 +8,10 @@ import {
 import {moderateScaleVertical} from '../constants/responsiveSize';
 import Color from '../constants/Color';
 
-const CustomCategoryButton = ({text}) => {
+const CustomCategoryButton = ({text, onPress}) => {
   return (
     <View style={{flex: 1}}>
-      <TouchableOpacity style={styles.cardTouchble}>
+      <TouchableOpacity style={styles.cardTouchble} onPress={onPress}>
         <Text style={styles.cardTextStyle}>{text}</Text>
       </TouchableOpacity>
     </View>
