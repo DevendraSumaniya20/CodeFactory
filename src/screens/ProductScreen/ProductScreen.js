@@ -30,7 +30,7 @@ const ProductScreen = ({route}) => {
   const [storedCourses, setStoredCourses] = useState([]);
   const [like, setLike] = useState(false);
 
-  const {item} = route.params;
+  const {item} = route.params || {};
   const navigation = useNavigation();
 
   const {userGoogleInfo, name} = route.params;

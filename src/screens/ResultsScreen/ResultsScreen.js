@@ -26,7 +26,7 @@ const ResultsScreen = () => {
   const [resultCount, setResultCount] = useState(data.length);
 
   const routeSearchValue = route.params?.searchValue || '';
-  const routeFilteredData = route.params?.filteredData || [];
+  // const routeFilteredData = route.params?.filteredData || [];
 
   useEffect(() => {
     handleSearch(routeSearchValue);
@@ -56,7 +56,11 @@ const ResultsScreen = () => {
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity activeOpacity={0.5}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => {
+          navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {item: item});
+        }}>
         <View style={styles.renderMainView}>
           <View
             style={{
@@ -117,13 +121,13 @@ const ResultsScreen = () => {
                   justifyContent: 'center',
                 }}
                 onPress={handleBackToHome}>
-                <CustomIcon name={'chevron-back'} size={16} />
+                <CustomIcon name={'chevron-back'} size={24} />
               </TouchableOpacity>
-              <View style={{marginLeft: moderateScale(8)}} />
+              <View style={{paddingLeft: moderateScale(6)}} />
               <CustomSearch
                 inputStyle={{
-                  width: moderateScale(270),
-                  padding: moderateScale(16),
+                  width: moderateScale(260),
+                  padding: moderateScale(10),
                 }}
                 placeholder="Search Your Favorite Course"
                 onChangeText={handleSearch}
