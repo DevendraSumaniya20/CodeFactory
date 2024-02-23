@@ -28,6 +28,8 @@ import HeartFill from '../assets/svgs/heartFill.svg';
 import Logo1 from '../assets/svgs/Logo1.svg';
 import Logo2 from '../assets/svgs/Logo2.svg';
 import GoogleSvg from '../assets/svgs/Google.svg';
+import FaceHappy from '../assets/svgs/HappyFace.svg';
+import FaceSad from '../assets/svgs/SadFace.svg';
 
 export {
   INTRO1,
@@ -60,4 +62,6 @@ export {
   Logo1,
   Logo2,
   GoogleSvg,
+  FaceHappy,
+  FaceSad,
 };

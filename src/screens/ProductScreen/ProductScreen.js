@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   SafeAreaView,
   Alert,
+  ActivityIndicator,
 } from 'react-native';
 import styles from './Styles';
 import {
@@ -20,10 +21,10 @@ import {useNavigation} from '@react-navigation/native';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomButton from '../../components/CustomButton';
 import {storeData, getData} from '../../utils/AsyncStorage';
-import {Heart, HeartFill, Logo1} from '../../constants/SvgPath';
+import {Heart, HeartFill} from '../../constants/SvgPath';
 import RazorpayCheckout from 'react-native-razorpay';
 import {APIKey} from '../../config/APIKey';
-import ImagePath from '../../constants/ImagePath';
+
 import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const ProductScreen = ({route}) => {
@@ -104,13 +105,20 @@ const ProductScreen = ({route}) => {
 
       RazorpayCheckout.open(options)
         .then(async data => {
-          Alert.alert(`Success: ${data.razorpay_payment_id}`);
+          Alert.alert(
+            // `Your Course Purchase is Success:
+            //   ${data.razorpay_payment_id}
+            //  `,
+            'Your Cousre is successfully Purchase you can check in Your Course',
+          );
 
-          updatedCourses.push(item);
-          await storeData('purchaseCourse', JSON.stringify(updatedCourses));
-          navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN, {
-            item,
-          });
+          setTimeout(() => {
+            updatedCourses.push(item);
+            storeData('purchaseCourse', JSON.stringify(updatedCourses));
+            navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN, {
+              item,
+            });
+          }, 3000);
         })
         .catch(error => {
           Alert.alert(`Error: ${error.code} | ${error.description}`);

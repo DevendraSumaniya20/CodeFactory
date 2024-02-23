@@ -7,7 +7,9 @@ import {
   Text,
   TouchableOpacity,
   View,
+  Alert, // Add this import
 } from 'react-native';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
@@ -21,7 +23,7 @@ import {
   scale,
 } from 'react-native-size-matters';
 import CustomButton from '../../components/CustomButton';
-import {getData} from '../../utils/AsyncStorage';
+import {getData, removeData} from '../../utils/AsyncStorage';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 
 import CustomIcon from '../../components/CustomIcon';
@@ -29,7 +31,7 @@ import CustomIcon from '../../components/CustomIcon';
 const YourCourseScreen = ({route}) => {
   const navigation = useNavigation();
 
-  const {item} = route.params || {};
+  // const {item} = route.params || {};
 
   // console.log('YourCourse Screen data ', item);
 
@@ -44,6 +46,34 @@ const YourCourseScreen = ({route}) => {
     };
     retrieveStoredCourses();
   }, []);
+
+  const handleDelete = async course => {
+    Alert.alert(
+      'Delete Course',
+      `Are you sure you want to delete ${course.type}?`,
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'OK',
+          onPress: async () => {
+            const updatedCourses = storedCourses.filter(
+              storedCourse => storedCourse.id !== course.id,
+            );
+            setStoredCourses(updatedCourses);
+
+            await removeData('purchaseCourse');
+            await AsyncStorage.setItem(
+              'purchaseCourse',
+              JSON.stringify(updatedCourses),
+            );
+          },
+        },
+      ],
+    );
+  };
 
   const renderItem = ({item}) => {
     return (
@@ -92,6 +122,11 @@ const YourCourseScreen = ({route}) => {
               {item.otherDetails}
             </Text>
           </View>
+          <CustomButton
+            onPress={() => handleDelete(item)}
+            inlineStyle={{width: moderateScale(300)}}
+            text={'Delete'}
+          />
         </View>
       </TouchableOpacity>
     );
