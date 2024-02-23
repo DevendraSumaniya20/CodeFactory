@@ -9,4 +9,5 @@ export default {
   RED: '#EF4949',
   YELLOW: '#F2A03F',
   DETAILSBACKGROUND: '#AAC',
+  Black: 'rgba(0, 0, 0, 0.5)',
 };

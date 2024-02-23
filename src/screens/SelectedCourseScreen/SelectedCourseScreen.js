@@ -1,5 +1,13 @@
 import React, {useState, useEffect} from 'react';
-import {Image, SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
@@ -70,7 +78,7 @@ const SelectedCourseScreen = ({route}) => {
                 <View
                   style={{
                     width: moderateScale(343),
-                    height: moderateVerticalScale(334),
+                    height: moderateVerticalScale(270),
                     borderRadius: moderateScale(8),
                     borderColor: Color.BLACK,
                     borderWidth: 1,
@@ -90,15 +98,19 @@ const SelectedCourseScreen = ({route}) => {
                       alignItems: 'flex-end',
                       marginRight: moderateScale(8),
                     }}>
-                    <CustomIcon
-                      name={'caret-forward-circle-outline'}
-                      size={scale(48)}
-                      color={Color.LIGHTGREEEN}
-                    />
-
+                    <TouchableOpacity
+                      onPress={() => {
+                        Alert.alert('You can continue Course ');
+                      }}>
+                      <CustomIcon
+                        name={'caret-forward-circle-outline'}
+                        size={scale(70)}
+                        color={Color.LIGHTGREEEN}
+                      />
+                    </TouchableOpacity>
                     <View
                       style={{
-                        marginTop: moderateVerticalScale(90),
+                        marginTop: moderateVerticalScale(16),
                       }}>
                       <Text
                         style={{

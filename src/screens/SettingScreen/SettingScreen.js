@@ -168,6 +168,9 @@ const SettingScreen = ({route}) => {
                 onToggle={handleNotificationToggle}
                 isOn={notificationToggle}
                 icon2={notificationToggle ? <On /> : <Off />}
+                inlineTextStyle={{
+                  color: notificationToggle ? '#000' : '#AAA',
+                }}
               />
               <View
                 style={{

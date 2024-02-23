@@ -1,30 +1,31 @@
 import React, {useState, useEffect} from 'react';
-import {Alert, Image, SafeAreaView, ScrollView, Text, View} from 'react-native';
+import {
+  Alert,
+  Image,
+  SafeAreaView,
+  ScrollView,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
-import {CoolKid, CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
-import CustomWelcomeText from '../../components/CustomWelcomeText';
-import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {
   moderateScale,
   moderateVerticalScale,
   scale,
 } from 'react-native-size-matters';
-import CustomButton from '../../components/CustomButton';
-import NavigationStringPath from '../../constants/NavigationStringPath';
 
-import CustomIcon from '../../components/CustomIcon';
-import CustomTopics from '../../components/CustomTopics';
 import CustomBorderComponent from '../../components/CustomBorderComponent';
+import CustomIcon from '../../components/CustomIcon';
 
 const CourseLessonScreen = ({route}) => {
   const navigation = useNavigation();
 
   const {selectedCourse, topicName} = route.params || {};
 
-  console.log('........................>>>>>>', topicName);
   return (
     <>
       <ScrollView
@@ -47,9 +48,27 @@ const CourseLessonScreen = ({route}) => {
                 text={selectedCourse?.type}
               />
 
-              <View>
-                <Text>{topicName}</Text>
-                <Text>3 of 11 Leassons</Text>
+              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+                <Text
+                  style={{
+                    fontSize: scale(24),
+                    fontWeight: '500',
+                    textTransform: 'capitalize',
+                    color: Color.BLACK,
+                    marginTop: moderateVerticalScale(16),
+                    marginBottom: moderateVerticalScale(8),
+                  }}>
+                  {topicName}
+                </Text>
+                <Text
+                  style={{
+                    marginBottom: moderateVerticalScale(8),
+                    color: Color.GRAY,
+                    fontWeight: '300',
+                    fontSize: scale(14),
+                  }}>
+                  3 of 11 Leassons
+                </Text>
               </View>
 
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -57,12 +76,17 @@ const CourseLessonScreen = ({route}) => {
                   style={{
                     flexDirection: 'row',
                     justifyContent: 'space-evenly',
-                    gap: 15,
+                    gap: moderateScale(4),
+                    flex: 1,
+                    width: 'auto',
                   }}>
                   <CustomBorderComponent
                     text={'Lessons'}
                     inLineStyle={{
-                      borderRadius: 10,
+                      borderTopLeftRadius: moderateScale(20),
+                      borderBottomLeftRadius: moderateScale(20),
+                      borderTopRightRadius: moderateScale(1),
+                      borderBottomRightRadius: moderateScale(1),
                       paddingVertical: moderateScale(12),
                       backgroundColor: '#F8F2EE',
                       width: moderateScale(120),
@@ -77,7 +101,7 @@ const CourseLessonScreen = ({route}) => {
                   <CustomBorderComponent
                     text={'Tests'}
                     inLineStyle={{
-                      borderRadius: 10,
+                      borderRadius: 1,
                       paddingVertical: moderateScale(12),
                       backgroundColor: '#F8F2EE',
                       width: moderateScale(120),
@@ -92,10 +116,13 @@ const CourseLessonScreen = ({route}) => {
                   <CustomBorderComponent
                     text={'Discussion'}
                     inLineStyle={{
-                      borderRadius: 10,
+                      borderTopLeftRadius: moderateScale(1),
+                      borderBottomLeftRadius: moderateScale(1),
+                      borderTopRightRadius: moderateScale(20),
+                      borderBottomRightRadius: moderateScale(20),
                       paddingVertical: moderateScale(12),
                       backgroundColor: '#F8F2EE',
-                      width: moderateScale(120),
+                      width: moderateScale(170),
                       height: moderateVerticalScale(50),
                     }}
                     inLineTextStyle={{
@@ -105,6 +132,43 @@ const CourseLessonScreen = ({route}) => {
                   />
                 </View>
               </ScrollView>
+
+              <View
+                style={{
+                  width: moderateScale(343),
+                  height: moderateVerticalScale(250),
+                  borderRadius: moderateScale(8),
+                  borderColor: Color.BLACK,
+                  borderWidth: 1,
+                  alignItems: 'center',
+                  marginTop: moderateVerticalScale(8),
+                }}>
+                <Image
+                  source={selectedCourse.image}
+                  style={{
+                    width: moderateScale(343),
+                    height: moderateVerticalScale(194),
+                    borderRadius: moderateScale(8),
+                    resizeMode: 'contain',
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  alignItems: 'flex-end',
+                  marginRight: moderateScale(8),
+                }}>
+                <TouchableOpacity
+                  onPress={() => {
+                    Alert.alert('You can continue Course ');
+                  }}>
+                  <CustomIcon
+                    name={'caret-forward-circle-outline'}
+                    size={scale(70)}
+                    color={Color.LIGHTGREEEN}
+                  />
+                </TouchableOpacity>
+              </View>
             </View>
           </SafeAreaView>
         </View>

@@ -7,7 +7,7 @@ import {moderateScaleVertical} from '../constants/responsiveSize';
 
 const CustomHeader = ({text, iconName, size, color, onPress}) => {
   return (
-    <TouchableOpacity>
+    <TouchableOpacity activeOpacity={0.5}>
       <View style={styles.container}>
         <TouchableOpacity style={styles.button} onPress={onPress}>
           <CustomIcon name={iconName} size={size} color={color} />

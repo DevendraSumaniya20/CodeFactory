@@ -7,15 +7,22 @@ import {
 } from 'react-native-size-matters';
 import Color from '../constants/Color';
 
-const CustomSettingComponent = ({text, icon, onToggle, icon2}) => {
+const CustomSettingComponent = ({
+  text,
+  icon,
+  onToggle,
+  icon2,
+  inlineStyle,
+  inlineTextStyle,
+}) => {
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, inlineStyle]}>
       <View style={styles.content}>
         <View style={styles.iconContainer}>
           <View style={styles.iconBackground}>{icon}</View>
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text}>{text}</Text>
+        <View style={[styles.textContainer]}>
+          <Text style={[styles.text, inlineTextStyle]}>{text}</Text>
         </View>
       </View>
 

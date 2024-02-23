@@ -212,7 +212,7 @@ const ProfileScreen = () => {
           </View>
         </View>
         <Modal
-          animationType="slide"
+          animationType="fade"
           transparent={true}
           visible={modalVisible}
           onRequestClose={() => {
@@ -220,7 +220,7 @@ const ProfileScreen = () => {
           }}>
           <View
             style={{
-              backgroundColor: 'transparent',
+              backgroundColor: Color.Black,
               flex: 1,
               alignItems: 'center',
               flexDirection: 'column-reverse',
@@ -228,11 +228,13 @@ const ProfileScreen = () => {
             }}>
             <View
               style={{
-                backgroundColor: Color.BLUE,
+                backgroundColor: Color.WHITE,
                 paddingHorizontal: moderateScale(26),
                 paddingVertical: moderateScale(20),
-                borderRadius: moderateScale(20),
-                width: moderateScale(350),
+                width: moderateScale(400),
+
+                borderTopLeftRadius: moderateScale(40),
+                borderTopRightRadius: moderateScale(40),
               }}>
               <TouchableOpacity
                 style={{
@@ -244,49 +246,61 @@ const ProfileScreen = () => {
                 }}>
                 <CustomIcon
                   name={'close'}
-                  size={40}
+                  size={scale(20)}
                   type="Ionicons"
-                  color={Color.WHITE}
+                  color={Color.BLACK}
                 />
               </TouchableOpacity>
-              <TouchableOpacity
-                style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderWidth: 1,
-                  borderRadius: moderateScale(16),
-                  borderColor: Color.WHITE,
-                  marginBottom: moderateVerticalScale(8),
-                }}
-                onPress={() => {
-                  takePhotoFromCamera();
-                }}>
-                <CustomImage source={ImagePath.CAMERA} resizeMode={'contain'} />
 
-                <Text style={{fontSize: scale(16), color: Color.WHITE}}>
-                  Take a photo
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
+              <View
                 style={{
-                  flexDirection: 'row',
-                  alignItems: 'center',
-                  borderWidth: 1,
-                  borderRadius: moderateScale(16),
-                  borderColor: Color.WHITE,
-                }}
-                onPress={() => {
-                  takePhotoFromGallery();
+                  paddingHorizontal: moderateScale(10),
                 }}>
-                <CustomImage
-                  source={ImagePath.GALLERY}
-                  resizeMode={'contain'}
-                />
+                <TouchableOpacity
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    borderWidth: 1,
+                    borderRadius: moderateScale(16),
+                    borderColor: Color.BLACK,
+                    marginBottom: moderateVerticalScale(16),
+                    gap: 10,
+                  }}
+                  onPress={() => {
+                    takePhotoFromCamera();
+                  }}>
+                  <CustomImage
+                    source={ImagePath.CAMERA}
+                    resizeMode={'contain'}
+                  />
 
-                <Text style={{fontSize: scale(16), color: Color.WHITE}}>
-                  Choose From Gallery
-                </Text>
-              </TouchableOpacity>
+                  <Text style={{fontSize: scale(16), color: Color.BLACK}}>
+                    Take a photo
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={{
+                    flexDirection: 'row',
+                    alignItems: 'center',
+                    borderWidth: 1,
+                    borderRadius: moderateScale(16),
+                    borderColor: Color.BLACK,
+                    marginBottom: moderateVerticalScale(12),
+                    gap: 10,
+                  }}
+                  onPress={() => {
+                    takePhotoFromGallery();
+                  }}>
+                  <CustomImage
+                    source={ImagePath.GALLERY}
+                    resizeMode={'contain'}
+                  />
+
+                  <Text style={{fontSize: scale(16), color: Color.BLACK}}>
+                    Choose From Gallery
+                  </Text>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
         </Modal>
