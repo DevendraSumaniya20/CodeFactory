@@ -12,7 +12,7 @@ import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
 import {useNavigation} from '@react-navigation/native';
-import {CoolKid, CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
+import {CourseSavedSvg} from '../../constants/SvgPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {
@@ -33,7 +33,7 @@ const SelectedCourseScreen = ({route}) => {
     route.params.selectedCourse,
   );
 
-  // console.log('Selected COurseScreen data', selectedCourse);
+  // console.log('Selected CourseScreen data', selectedCourse);
 
   const [progress, setProgress] = useState(0.5);
 
@@ -86,6 +86,7 @@ const SelectedCourseScreen = ({route}) => {
                     borderColor: Color.BLACK,
                     borderWidth: 1,
                     alignItems: 'center',
+                    marginTop: moderateVerticalScale(8),
                   }}>
                   <Image
                     source={selectedCourse.image}
@@ -138,58 +139,26 @@ const SelectedCourseScreen = ({route}) => {
                   </View>
 
                   <View style={{paddingBottom: moderateScale(8)}}>
-                    <CustomTopics
-                      topicImage={selectedCourse.image}
-                      topicName={selectedCourse.topics.topic1}
-                      onPress={() => {
-                        navigation.navigate(
-                          NavigationStringPath.COURSE_LESSONSCREEN,
-                          {
-                            selectedCourse,
-                            topicName: selectedCourse.topics.topic1,
-                          },
-                        );
-                      }}
-                    />
-                    <CustomTopics
-                      topicImage={selectedCourse.image}
-                      topicName={selectedCourse.topics.topic2}
-                      onPress={() => {
-                        navigation.navigate(
-                          NavigationStringPath.COURSE_LESSONSCREEN,
-                          {
-                            selectedCourse,
-                            topicName: selectedCourse.topics.topic2,
-                          },
-                        );
-                      }}
-                    />
-                    <CustomTopics
-                      topicImage={selectedCourse.image}
-                      topicName={selectedCourse.topics.topic3}
-                      onPress={() => {
-                        navigation.navigate(
-                          NavigationStringPath.COURSE_LESSONSCREEN,
-                          {
-                            selectedCourse,
-                            topicName: selectedCourse.topics.topic3,
-                          },
-                        );
-                      }}
-                    />
-                    <CustomTopics
-                      topicImage={selectedCourse.image}
-                      topicName={selectedCourse.topics.topic4}
-                      onPress={() => {
-                        navigation.navigate(
-                          NavigationStringPath.COURSE_LESSONSCREEN,
-                          {
-                            selectedCourse,
-                            topicName: selectedCourse.topics.topic4,
-                          },
-                        );
-                      }}
-                    />
+                    {Object.entries(selectedCourse.topics).map(
+                      ([topicKey, topicName]) => (
+                        <CustomTopics
+                          key={topicKey}
+                          topicImage={selectedCourse.image}
+                          topicName={topicName}
+                          onPress={() => {
+                            navigation.navigate(
+                              NavigationStringPath.COURSE_LESSONSCREEN,
+                              {
+                                selectedCourse,
+                                topicName,
+                                totalTopics: Object.keys(selectedCourse.topics)
+                                  .length,
+                              },
+                            );
+                          }}
+                        />
+                      ),
+                    )}
                   </View>
                 </View>
               </View>

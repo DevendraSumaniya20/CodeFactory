@@ -10,8 +10,6 @@ export default {
   CHOOSE_LESSONNSCREEN: 'ChooseLessonScreen',
   COURSE_LESSONSCREEN: 'CourseLessonScreen',
   COURSE_TESTSCREEN: 'CourseTestScreen',
-  TEST_QUESTIONSCREEN: 'TestQuestionScreen',
-  TEST_RESULTSCREEN: 'TestResultScreen',
   TABSCREENS: 'TabScreens',
   FORGOTSCREEN: 'ForgotScreen',
   COURSE_SAVED_SCREEN: 'CourseSavedScreen',

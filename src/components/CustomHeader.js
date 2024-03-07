@@ -3,7 +3,6 @@ import React from 'react';
 import CustomIcon from './CustomIcon';
 import {moderateScale, scale} from 'react-native-size-matters';
 import Color from '../constants/Color';
-import {moderateScaleVertical} from '../constants/responsiveSize';
 
 const CustomHeader = ({text, iconName, size, color, onPress}) => {
   return (
@@ -30,7 +29,7 @@ const styles = StyleSheet.create({
     padding: moderateScale(6),
   },
   button: {
-    borderWidth: 1,
+    borderWidth: 0.5,
     borderRadius: 50,
     width: moderateScale(48),
     height: moderateScale(48),

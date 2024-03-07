@@ -19,19 +19,21 @@ import {
 } from 'react-native-size-matters';
 
 import CustomBorderComponent from '../../components/CustomBorderComponent';
-import CustomIcon from '../../components/CustomIcon';
+import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const CourseLessonScreen = ({route}) => {
   const navigation = useNavigation();
 
-  const {selectedCourse, topicName} = route.params || {};
+  const {selectedCourse, topicName, totalTopics} = route.params || {};
+  const [selectedComponent, setSelectedComponent] = useState('Lessons');
+  console.log('..........>>>>>>>>>', selectedCourse);
 
   return (
     <>
       <ScrollView
-        style={{flex: 1}}
+        style={{flex: 1, backgroundColor: '#fff'}}
         contentContainerStyle={{
-          paddingBottom: moderateVerticalScale(800),
+          paddingBottom: moderateVerticalScale(400),
         }}
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}>
@@ -60,15 +62,15 @@ const CourseLessonScreen = ({route}) => {
                   }}>
                   {topicName}
                 </Text>
-                <Text
+                {/* <Text
                   style={{
                     marginBottom: moderateVerticalScale(8),
                     color: Color.GRAY,
                     fontWeight: '300',
                     fontSize: scale(14),
                   }}>
-                  3 of 11 Leassons
-                </Text>
+                  3 of 4 Leassons
+                </Text> */}
               </View>
 
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -95,7 +97,9 @@ const CourseLessonScreen = ({route}) => {
                     inLineTextStyle={{
                       fontWeight: '500',
                       textTransform: 'capitalize',
+                      color: selectedComponent === 'Lessons' ? 'black' : 'gray',
                     }}
+                    onPress={() => setSelectedComponent('Lessons')}
                   />
 
                   <CustomBorderComponent
@@ -110,6 +114,12 @@ const CourseLessonScreen = ({route}) => {
                     inLineTextStyle={{
                       fontWeight: '500',
                       textTransform: 'capitalize',
+                      color: selectedComponent === 'Tests' ? 'black' : 'gray',
+                    }}
+                    onPress={() => {
+                      navigation.navigate(
+                        NavigationStringPath.COURSE_TESTSCREEN,
+                      );
                     }}
                   />
 
@@ -128,7 +138,10 @@ const CourseLessonScreen = ({route}) => {
                     inLineTextStyle={{
                       fontWeight: '500',
                       textTransform: 'capitalize',
+                      color:
+                        selectedComponent === 'Discussion' ? 'black' : 'gray',
                     }}
+                    onPress={() => setSelectedComponent('Discussion')}
                   />
                 </View>
               </ScrollView>
@@ -153,7 +166,7 @@ const CourseLessonScreen = ({route}) => {
                   }}
                 />
               </View>
-              <View
+              {/* <View
                 style={{
                   alignItems: 'flex-end',
                   marginRight: moderateScale(8),
@@ -164,11 +177,31 @@ const CourseLessonScreen = ({route}) => {
                   }}>
                   <CustomIcon
                     name={'caret-forward-circle-outline'}
-                    size={scale(70)}
+                    size={scale(60)}
                     color={Color.LIGHTGREEEN}
                   />
                 </TouchableOpacity>
-              </View>
+              </View> */}
+              <Text
+                style={{
+                  fontSize: scale(20),
+                  marginTop: moderateVerticalScale(8),
+                  fontWeight: '800',
+                  fontFamily: 'Rubik-Regular',
+                  color: Color.BLACK,
+                }}>
+                Intoduction
+              </Text>
+              <Text
+                style={{
+                  fontSize: scale(14),
+                  marginTop: moderateVerticalScale(4),
+                  fontWeight: '400',
+                  fontFamily: 'Rubik-Regular',
+                  color: Color.GRAY,
+                }}>
+                {selectedCourse.aboutCourseDetails}
+              </Text>
             </View>
           </SafeAreaView>
         </View>
