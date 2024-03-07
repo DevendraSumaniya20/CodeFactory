@@ -36,23 +36,27 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     alignItems: 'center',
-    borderWidth: 0.2,
+    borderWidth: 1,
     marginVertical: moderateVerticalScale(8),
     borderRadius: moderateScale(8),
+    paddingHorizontal: moderateScale(8),
+    paddingVertical: moderateVerticalScale(8),
+    justifyContent: 'space-evenly',
+    width: moderateScale(350),
   },
   topicDetails: {
     marginLeft: moderateScale(8),
   },
 
   topicImageStyle: {
-    height: moderateScale(72),
+    height: moderateScale(78),
     width: moderateVerticalScale(78),
   },
   progressBarContainer: {
     backgroundColor: '#e0e0e0',
     borderRadius: moderateScale(8),
     marginTop: moderateVerticalScale(8),
-    width: moderateScale(240),
+    width: moderateScale(200),
   },
   progressBar: {
     height: moderateVerticalScale(8),
@@ -60,7 +64,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(8),
   },
   topicNameTextStyle: {
-    fontSize: scale(18),
+    fontSize: scale(16),
     fontWeight: '500',
     fontFamily: 'Rubik-Regular',
   },

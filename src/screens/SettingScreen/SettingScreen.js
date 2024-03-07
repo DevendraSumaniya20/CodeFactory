@@ -204,7 +204,7 @@ const SettingScreen = ({route}) => {
                 <CustomDetailsComponent
                   icon1={<Lock />}
                   text1={'Password'}
-                  text2={'changed 2 weeks ago'}
+                  text2={'Click here to change Password'}
                   icon2={<RightArrow />}
                 />
               </View>

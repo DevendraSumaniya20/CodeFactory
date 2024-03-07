@@ -51,9 +51,12 @@ const SelectedCourseScreen = ({route}) => {
   return (
     <>
       <ScrollView
-        style={{flex: 1}}
+        style={{
+          flex: 1,
+          backgroundColor: '#fff',
+        }}
         contentContainerStyle={{
-          paddingBottom: moderateVerticalScale(600),
+          paddingBottom: moderateVerticalScale(700),
         }}
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}>
@@ -110,7 +113,7 @@ const SelectedCourseScreen = ({route}) => {
                     </TouchableOpacity>
                     <View
                       style={{
-                        marginTop: moderateVerticalScale(16),
+                        marginTop: moderateVerticalScale(8),
                       }}>
                       <Text
                         style={{
@@ -134,58 +137,60 @@ const SelectedCourseScreen = ({route}) => {
                     </View>
                   </View>
 
-                  <CustomTopics
-                    topicImage={selectedCourse.image}
-                    topicName={selectedCourse.topics.topic1}
-                    onPress={() => {
-                      navigation.navigate(
-                        NavigationStringPath.COURSE_LESSONSCREEN,
-                        {
-                          selectedCourse,
-                          topicName: selectedCourse.topics.topic1,
-                        },
-                      );
-                    }}
-                  />
-                  <CustomTopics
-                    topicImage={selectedCourse.image}
-                    topicName={selectedCourse.topics.topic2}
-                    onPress={() => {
-                      navigation.navigate(
-                        NavigationStringPath.COURSE_LESSONSCREEN,
-                        {
-                          selectedCourse,
-                          topicName: selectedCourse.topics.topic2,
-                        },
-                      );
-                    }}
-                  />
-                  <CustomTopics
-                    topicImage={selectedCourse.image}
-                    topicName={selectedCourse.topics.topic3}
-                    onPress={() => {
-                      navigation.navigate(
-                        NavigationStringPath.COURSE_LESSONSCREEN,
-                        {
-                          selectedCourse,
-                          topicName: selectedCourse.topics.topic3,
-                        },
-                      );
-                    }}
-                  />
-                  <CustomTopics
-                    topicImage={selectedCourse.image}
-                    topicName={selectedCourse.topics.topic4}
-                    onPress={() => {
-                      navigation.navigate(
-                        NavigationStringPath.COURSE_LESSONSCREEN,
-                        {
-                          selectedCourse,
-                          topicName: selectedCourse.topics.topic4,
-                        },
-                      );
-                    }}
-                  />
+                  <View style={{paddingBottom: moderateScale(8)}}>
+                    <CustomTopics
+                      topicImage={selectedCourse.image}
+                      topicName={selectedCourse.topics.topic1}
+                      onPress={() => {
+                        navigation.navigate(
+                          NavigationStringPath.COURSE_LESSONSCREEN,
+                          {
+                            selectedCourse,
+                            topicName: selectedCourse.topics.topic1,
+                          },
+                        );
+                      }}
+                    />
+                    <CustomTopics
+                      topicImage={selectedCourse.image}
+                      topicName={selectedCourse.topics.topic2}
+                      onPress={() => {
+                        navigation.navigate(
+                          NavigationStringPath.COURSE_LESSONSCREEN,
+                          {
+                            selectedCourse,
+                            topicName: selectedCourse.topics.topic2,
+                          },
+                        );
+                      }}
+                    />
+                    <CustomTopics
+                      topicImage={selectedCourse.image}
+                      topicName={selectedCourse.topics.topic3}
+                      onPress={() => {
+                        navigation.navigate(
+                          NavigationStringPath.COURSE_LESSONSCREEN,
+                          {
+                            selectedCourse,
+                            topicName: selectedCourse.topics.topic3,
+                          },
+                        );
+                      }}
+                    />
+                    <CustomTopics
+                      topicImage={selectedCourse.image}
+                      topicName={selectedCourse.topics.topic4}
+                      onPress={() => {
+                        navigation.navigate(
+                          NavigationStringPath.COURSE_LESSONSCREEN,
+                          {
+                            selectedCourse,
+                            topicName: selectedCourse.topics.topic4,
+                          },
+                        );
+                      }}
+                    />
+                  </View>
                 </View>
               </View>
 
