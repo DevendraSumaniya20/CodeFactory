@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Rubik-Regular',
     fontWeight: '400',
     fontStyle: 'normal',
-    lineHeight: 21,
+    alignItems: 'center',
   },
   textInput: {
     flexDirection: 'row',
@@ -61,6 +61,7 @@ const styles = StyleSheet.create({
     borderRadius: moderateScale(12),
     borderWidth: 0.5,
     justifyContent: 'space-between',
+    textAlign: 'center',
   },
   rightIconContainer: {
     marginRight: moderateScale(8),

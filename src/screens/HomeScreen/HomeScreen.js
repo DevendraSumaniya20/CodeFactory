@@ -37,11 +37,12 @@ const HomeScreen = () => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
         const displayName = user.displayName || user.email.split('@')[0];
-        setName(displayName);
+        setName(displayName.charAt(0).toUpperCase() + displayName.slice(1));
         AsyncStorage.setItem('name', displayName);
       } else {
         const googleName = userGoogleInfo?.user?.name ?? '';
-        setName(googleName);
+        setName(googleName.charAt(0).toUpperCase() + googleName.slice(1));
+        // setName(googleName)
         AsyncStorage.setItem('name', googleName);
       }
     });
@@ -174,9 +175,15 @@ const HomeScreen = () => {
               <BellIcon width={moderateScale(24)} height={moderateScale(24)} />
             </View>
           </View>
-          <View style={{marginTop: moderateScale(12)}}>
+          <View
+            style={{
+              marginTop: moderateScale(12),
+            }}>
             <CustomSearch
-              inputStyle={{width: '90%', padding: moderateScale(16)}}
+              inputStyle={{
+                width: '90%',
+                paddingHorizontal: moderateScale(16),
+              }}
               placeholder="Search"
               onChangeText={handleInputChange}
               value={searchValue}
