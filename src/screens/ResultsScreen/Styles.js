@@ -47,17 +47,17 @@ const styles = StyleSheet.create({
   renderTouchableOpacity: {
     alignItems: 'center',
     backgroundColor: Color.BLUE,
-    borderRadius: moderateScale(20),
+    borderRadius: moderateScale(16),
     paddingHorizontal: moderateScale(16),
     paddingVertical: moderateScale(8),
-    marginLeft: moderateScale(260),
+    marginLeft: moderateScale(245),
   },
 
   renderTouchableText: {
     fontFamily: 'Rubik-Regular',
     fontSize: scale(14),
-    fontWeight: '500',
-    lineHeight: 16,
+    fontWeight: '700',
+    lineHeight: 20,
     textAlign: 'right',
     color: Color.WHITE,
   },

@@ -139,7 +139,9 @@ const SettingScreen = ({route}) => {
   return (
     <KeyboardAwareScrollView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-      contentContainerStyle={{flex: 1}}
+      contentContainerStyle={{
+        paddingBottom: moderateVerticalScale(50),
+      }}
       scrollEnabled={true}
       showsVerticalScrollIndicator={false}>
       <View style={styles.container}>
