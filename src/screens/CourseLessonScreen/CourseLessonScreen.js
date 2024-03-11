@@ -24,9 +24,9 @@ import NavigationStringPath from '../../constants/NavigationStringPath';
 const CourseLessonScreen = ({route}) => {
   const navigation = useNavigation();
 
-  const {selectedCourse, topicName, totalTopics} = route.params || {};
+  const {selectedCourse, topicName, totalTopics, questions} =
+    route.params || {};
   const [selectedComponent, setSelectedComponent] = useState('Lessons');
-  console.log('..........>>>>>>>>>', selectedCourse);
 
   return (
     <>
@@ -119,6 +119,11 @@ const CourseLessonScreen = ({route}) => {
                     onPress={() => {
                       navigation.navigate(
                         NavigationStringPath.COURSE_TESTSCREEN,
+                        {
+                          selectedCourse,
+                          topicName,
+                          questions: questions,
+                        },
                       );
                     }}
                   />

@@ -1,5 +1,6 @@
 import Color from './Color';
 import ImagePath from './ImagePath';
+import questions from './Questions';
 
 const data = [
   {
@@ -13,10 +14,22 @@ const data = [
     aboutCourseDetails:
       'Learn to create stunning user interfaces for mobile applications with advanced techniques and design principles. Dive deep into usability, accessibility, and aesthetics to craft seamless user experiences that elevate your app to the next level.',
     topics: {
-      topic1: 'design principles',
-      topic2: 'accessibility',
-      topic3: 'color theory',
-      topic4: 'typography',
+      topic1: {
+        name: 'design principles',
+        questions: questions.design_principles,
+      },
+      topic2: {
+        name: 'accessibility',
+        questions: questions.accessibility,
+      },
+      topic3: {
+        name: 'color theory',
+        questions: questions.color_theory,
+      },
+      topic4: {
+        name: 'typography',
+        questions: questions.typography,
+      },
     },
   },
   {
@@ -30,10 +43,22 @@ const data = [
     aboutCourseDetails:
       'Master the art of building responsive websites that adapt flawlessly to various devices and screen sizes. Explore the latest web technologies and best practices in front-end development to create engaging and dynamic web experiences.',
     topics: {
-      topic1: 'HTML',
-      topic2: 'CSS',
-      topic3: 'JavaScript',
-      topic4: 'Responsive Design',
+      topic1: {
+        name: 'HTML',
+        questions: questions.HTML,
+      },
+      topic2: {
+        name: 'CSS',
+        questions: questions.CSS,
+      },
+      topic3: {
+        name: 'JavaScript',
+        questions: questions.JavaScript,
+      },
+      topic4: {
+        name: 'Responsive Design',
+        questions: questions.Responsive_Design,
+      },
     },
   },
   {

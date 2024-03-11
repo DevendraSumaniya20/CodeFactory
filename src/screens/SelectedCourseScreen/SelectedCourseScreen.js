@@ -140,19 +140,21 @@ const SelectedCourseScreen = ({route}) => {
 
                   <View style={{paddingBottom: moderateScale(8)}}>
                     {Object.entries(selectedCourse.topics).map(
-                      ([topicKey, topicName]) => (
+                      ([topicKey, topicData]) => (
                         <CustomTopics
                           key={topicKey}
                           topicImage={selectedCourse.image}
-                          topicName={topicName}
+                          topicName={topicData.name}
+                          questions={topicData.questions}
                           onPress={() => {
                             navigation.navigate(
                               NavigationStringPath.COURSE_LESSONSCREEN,
                               {
                                 selectedCourse,
-                                topicName,
+                                topicName: topicData.name,
                                 totalTopics: Object.keys(selectedCourse.topics)
                                   .length,
+                                questions: topicData.questions,
                               },
                             );
                           }}
