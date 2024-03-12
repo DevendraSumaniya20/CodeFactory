@@ -4,18 +4,19 @@ import CustomIcon from './CustomIcon';
 import {moderateScale, scale} from 'react-native-size-matters';
 import Color from '../constants/Color';
 
-const CustomHeader = ({text, iconName, size, color, onPress}) => {
+const CustomHeader = ({text, iconName, size = scale(16), color, onPress}) => {
   return (
-    <TouchableOpacity activeOpacity={0.5}>
-      <View style={styles.container}>
-        <TouchableOpacity style={styles.button} onPress={onPress}>
-          <CustomIcon name={iconName} size={size} color={color} />
-        </TouchableOpacity>
-        <View style={{width: '100%'}}>
-          <Text style={styles.headerTextTitle}>{text}</Text>
-        </View>
+    <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={onPress}
+        activeOpacity={0.5}>
+        <CustomIcon name={iconName} size={size} color={color} />
+      </TouchableOpacity>
+      <View style={{width: '100%'}}>
+        <Text style={styles.headerTextTitle}>{text}</Text>
       </View>
-    </TouchableOpacity>
+    </View>
   );
 };
 

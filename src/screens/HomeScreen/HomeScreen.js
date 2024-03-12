@@ -17,6 +17,7 @@ import CustomCategoryButton from '../../components/CustomCategoryButton';
 import data from '../../constants/Data';
 import {moderateScaleVertical} from '../../constants/responsiveSize';
 import _ from 'lodash';
+import {debounce} from 'lodash';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import {auth, db} from '../../config/FirebaseAuth';
@@ -32,6 +33,7 @@ const HomeScreen = () => {
   const [filteredData, setFilteredData] = useState(data);
   const [name, setName] = useState(route.params?.name ?? '');
   const [greeting, setGreeting] = useState('');
+  const [showSearchInput, setShowSearchInput] = useState(false);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -65,6 +67,22 @@ const HomeScreen = () => {
     };
     GetCurrentGreeting();
   }, []);
+
+  const delayedHandleInputChange = debounce(text => {
+    setSearchValue(text);
+    setShowSearchInput(true);
+  }, 1000);
+
+  const handleInputWithDebounce = text => {
+    setShowSearchInput(false);
+    delayedHandleInputChange(text);
+  };
+
+  const handleClearSearch = () => {
+    setSearchValue('');
+    setShowSearchInput(false);
+    setFilteredData(data);
+  };
 
   const handleSearch = () => {
     const formattedSearchValue = searchValue.toLowerCase();
@@ -175,22 +193,22 @@ const HomeScreen = () => {
               <BellIcon width={moderateScale(24)} height={moderateScale(24)} />
             </View>
           </View>
-          <View
-            style={{
-              marginTop: moderateScale(12),
-            }}>
+          <View style={{marginTop: moderateScale(12)}}>
             <CustomSearch
               inputStyle={{
                 width: '90%',
                 paddingHorizontal: moderateScale(16),
               }}
               placeholder="Search"
-              onChangeText={handleInputChange}
+              onChangeText={handleInputWithDebounce}
               value={searchValue}
               rightIcon={'search-outline'}
               onPressRight={handleSearch}
+              onPressClear={handleClearSearch}
+              visible={showSearchInput}
             />
           </View>
+
           <View style={styles.categoryView}>
             <Text style={styles.categoryTextStyle}>Category :</Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>

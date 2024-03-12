@@ -115,13 +115,13 @@ const ResultsScreen = () => {
                 style={{
                   borderWidth: 1,
                   borderRadius: 50,
-                  width: moderateScale(48),
-                  height: moderateScale(48),
+                  width: moderateScale(46),
+                  height: moderateScale(46),
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
                 onPress={handleBackToHome}>
-                <CustomIcon name={'chevron-back'} size={24} />
+                <CustomIcon name={'chevron-back'} size={16} />
               </TouchableOpacity>
               <View style={{paddingLeft: moderateScale(6)}} />
               <CustomSearch

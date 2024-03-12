@@ -11,7 +11,7 @@ import {
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useIsFocused} from '@react-navigation/native'; // Import useIsFocused
 import {CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
@@ -26,6 +26,7 @@ import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const CourseSavedScreen = ({route}) => {
   const navigation = useNavigation();
+  const isFocused = useIsFocused();
   const {addedCourses} = route.params || {addedCourses: []};
 
   const [storedCourses, setStoredCourses] = useState([]);
@@ -41,11 +42,15 @@ const CourseSavedScreen = ({route}) => {
       }
     };
     retrieveStoredCourses();
-  }, []);
+  }, [isFocused]);
 
   const renderItem = ({item}) => {
     return (
-      <TouchableOpacity activeOpacity={0.5} onPress={() => {}}>
+      <TouchableOpacity
+        activeOpacity={0.5}
+        onPress={() => {
+          navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {item: item});
+        }}>
         <View style={styles.renderMainView}>
           <View
             style={{
@@ -80,7 +85,6 @@ const CourseSavedScreen = ({route}) => {
         <View style={styles.marginContainer}>
           <CustomHeader
             iconName={'chevron-back'}
-            size={24}
             color={Color.BLACK}
             onPress={() => {
               navigation.goBack();
