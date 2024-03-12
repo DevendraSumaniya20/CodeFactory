@@ -13,7 +13,7 @@ import NavigationStringPath from '../../constants/NavigationStringPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import CustomInput from '../../components/CustomInput';
-import {moderateScale, scale} from 'react-native-size-matters';
+import {moderateScale, moderateVerticalScale} from 'react-native-size-matters';
 import {SignupSvg} from '../../constants/SvgPath';
 import CustomHeader from '../../components/CustomHeader';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -24,10 +24,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const SignUpScreen = () => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
+  const [secureConfirmTextEntry, setSecureConfirmTextEntry] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
   const [emailError, setEmailError] = useState('');
   const [passwordError, setPasswordError] = useState('');
+  const [confirmPasswordError, setConfirmPasswordError] = useState('');
   const [name, setName] = useState('');
   const [nameError, setNameError] = useState('');
 
@@ -56,6 +59,7 @@ const SignUpScreen = () => {
 
     setEmailError('');
     setPasswordError('');
+    setConfirmPasswordError('');
     setNameError('');
 
     if (!name) {
@@ -86,7 +90,13 @@ const SignUpScreen = () => {
       );
     }
 
-    if (!nameError && !emailError && !passwordError) {
+    if (!confirmPassword) {
+      setConfirmPasswordError('Please confirm your Password');
+    } else if (confirmPassword !== password) {
+      setConfirmPasswordError('Passwords do not match');
+    }
+
+    if (!nameError && !emailError && !passwordError && !confirmPasswordError) {
       FirebaseSignUp();
     }
   };
@@ -127,7 +137,10 @@ const SignUpScreen = () => {
     <>
       <KeyboardAwareScrollView
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
-        contentContainerStyle={{flex: 1}}
+        contentContainerStyle={{
+          paddingBottom: moderateVerticalScale(100),
+          backgroundColor: '#fff',
+        }}
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}>
         <SafeAreaView style={styles.container}>
@@ -142,7 +155,7 @@ const SignUpScreen = () => {
             <View style={styles.imageView}>
               <SignupSvg
                 width={moderateScale(310)}
-                height={moderateScale(210)}
+                height={moderateScale(200)}
               />
             </View>
             <View style={styles.welcomeTextView}>
@@ -159,7 +172,7 @@ const SignUpScreen = () => {
               <View style={styles.textinputName}>
                 <CustomInput
                   inputStyle={{width: '100%'}}
-                  placeholder="Name"
+                  placeholder="Full Name"
                   onChangeText={text => setName(text)}
                 />
               </View>
@@ -187,6 +200,24 @@ const SignUpScreen = () => {
               </View>
               <CustomErrorMessage text={passwordError} />
 
+              <View style={styles.textinputPassword}>
+                <CustomInput
+                  inputStyle={{width: '90%'}}
+                  secureTextEntry={secureConfirmTextEntry}
+                  placeholder="Confirm Password"
+                  rightIcon={
+                    setSecureConfirmTextEntry
+                      ? 'eye-off-outline'
+                      : 'eye-outline'
+                  }
+                  onChangeText={text => setConfirmPassword(text)}
+                  onPressRight={() =>
+                    setSecureConfirmTextEntry(!secureConfirmTextEntry)
+                  }
+                />
+              </View>
+              <CustomErrorMessage text={confirmPasswordError} />
+
               <View style={{marginTop: moderateScale(0)}}>
                 <CustomButton
                   text={'Sign up'}
@@ -202,7 +233,8 @@ const SignUpScreen = () => {
                 onPress={() => {
                   navigation.navigate(NavigationStringPath.LOGINSCREEN);
                 }}>
-                <Text style={styles.loginTextStyle}>Log in</Text>
+                {/* <Text style={styles.loginTextStyle}>Log in</Text> */}
+                <Text style={styles.loginTextStyle}>back</Text>
               </TouchableOpacity>
             </View>
           </View>
