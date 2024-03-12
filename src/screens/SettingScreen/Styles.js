@@ -14,6 +14,16 @@ const styles = StyleSheet.create({
   marginContainer: {
     marginHorizontal: moderateScale(16),
   },
+  logoutView: {
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  logoutTextStyle: {
+    fontSize: scale(20),
+    fontWeight: '700',
+    fontFamily: 'Rubik-Regular',
+    color: Color.GRAY,
+  },
 });
 
 export default styles;

@@ -6,6 +6,7 @@ import {
   Text,
   Alert,
   Platform,
+  TouchableOpacity,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import {useNavigation} from '@react-navigation/native';
@@ -31,6 +32,15 @@ import {
   RightArrow,
   SettingSvg,
 } from '../../constants/SvgPath';
+import {GoogleSignin} from '@react-native-google-signin/google-signin';
+import {auth} from '../../config/FirebaseAuth';
+import {useDispatch} from 'react-redux';
+import NavigationStringPath from '../../constants/NavigationStringPath';
+import {
+  clearCredentials,
+  setEmail,
+  setPassword,
+} from '../../redux/Slices/authSlice';
 
 const SettingScreen = ({route}) => {
   const navigation = useNavigation();
@@ -39,6 +49,8 @@ const SettingScreen = ({route}) => {
   const [userEmailState, setUserEmailState] = useState('');
 
   const {userEmail, userGoogleEmail, userGoogleName} = route?.params ?? {};
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
     getUserInfo();
@@ -91,6 +103,38 @@ const SettingScreen = ({route}) => {
     }
   };
 
+  const handleLogoutButtonClick = async () => {
+    Alert.alert('Confirm Logout', 'Are you sure you want to log out?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Yes',
+        onPress: async () => {
+          try {
+            const isSignedIn = await GoogleSignin.isSignedIn();
+            if (isSignedIn) {
+              await GoogleSignin.revokeAccess();
+              await GoogleSignin.signOut();
+            }
+
+            await auth.signOut();
+            await AsyncStorage.clear();
+            dispatch(clearCredentials());
+            dispatch(setEmail(''));
+            dispatch(setPassword(''));
+
+            navigation.push(NavigationStringPath.LOGINSCREEN);
+            // navigation.navigate(NavigationStringPath.LOGINSCREEN);
+          } catch (error) {
+            console.error('Error during logout:', error);
+          }
+        },
+      },
+    ]);
+  };
+
   const handleNotificationToggle = () => {
     const newNotificationToggle = !notificationToggle;
     setNotificationToggle(newNotificationToggle);
@@ -140,7 +184,8 @@ const SettingScreen = ({route}) => {
     <KeyboardAwareScrollView
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       contentContainerStyle={{
-        paddingBottom: moderateVerticalScale(50),
+        paddingBottom: moderateVerticalScale(150),
+        backgroundColor: '#fff',
       }}
       scrollEnabled={true}
       showsVerticalScrollIndicator={false}>
@@ -209,6 +254,15 @@ const SettingScreen = ({route}) => {
                   text2={'Click here to change Password'}
                   icon2={<RightArrow />}
                 />
+              </View>
+
+              <View style={styles.logoutView}>
+                <TouchableOpacity
+                  onPress={() => {
+                    handleLogoutButtonClick();
+                  }}>
+                  <Text style={styles.logoutTextStyle}>Log out</Text>
+                </TouchableOpacity>
               </View>
             </ScrollView>
           </View>

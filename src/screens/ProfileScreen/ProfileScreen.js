@@ -9,9 +9,7 @@ import {
   Modal,
 } from 'react-native';
 import {useNavigation, useRoute} from '@react-navigation/native';
-import {GoogleSignin} from '@react-native-google-signin/google-signin';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {auth} from '../../config/FirebaseAuth';
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
@@ -28,7 +26,6 @@ import {
 } from 'react-native-size-matters';
 import CustomIcon from '../../components/CustomIcon';
 import CustomImage from '../../components/CustomImage';
-import {clearCredentials} from '../../redux/Slices/authSlice';
 
 const ProfileScreen = () => {
   const [image, setImage] = useState(ImagePath.STUDENT);
@@ -112,35 +109,6 @@ const ProfileScreen = () => {
     }
   };
 
-  const handleLogoutButtonClick = async () => {
-    Alert.alert('Confirm Logout', 'Are you sure you want to log out?', [
-      {
-        text: 'Cancel',
-        style: 'cancel',
-      },
-      {
-        text: 'Yes',
-        onPress: async () => {
-          try {
-            const isSignedIn = await GoogleSignin.isSignedIn();
-            if (isSignedIn) {
-              await GoogleSignin.revokeAccess();
-              await GoogleSignin.signOut();
-            }
-
-            await auth.signOut();
-            await AsyncStorage.clear();
-            dispatch(clearCredentials());
-
-            navigation.navigate(NavigationStringPath.LOGINSCREEN);
-          } catch (error) {
-            console.error('Error during logout:', error);
-          }
-        },
-      },
-    ]);
-  };
-
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.subContainer}>
@@ -200,15 +168,6 @@ const ProfileScreen = () => {
                 }}
               />
             </View>
-          </View>
-
-          <View style={styles.logoutView}>
-            <TouchableOpacity
-              onPress={() => {
-                handleLogoutButtonClick();
-              }}>
-              <Text style={styles.logoutTextStyle}>Log out</Text>
-            </TouchableOpacity>
           </View>
         </View>
         <Modal
