@@ -71,7 +71,7 @@ const ForgotScreen = () => {
           <View style={styles.textinputName}>
             <CustomInput
               inputStyle={{width: moderateScale(250)}}
-              autoFocus={true}
+              // autoFocus={true}
               placeholder="Email"
               onChangeText={text => setEmail(text)}
             />

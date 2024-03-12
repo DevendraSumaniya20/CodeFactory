@@ -115,7 +115,6 @@ const ProfileScreen = () => {
         <View style={styles.marginContainer}>
           <CustomHeader
             iconName={'chevron-back'}
-            size={16}
             color={Color.BLACK}
             onPress={() => {
               navigation.goBack();

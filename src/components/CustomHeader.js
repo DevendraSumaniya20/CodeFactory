@@ -4,7 +4,7 @@ import CustomIcon from './CustomIcon';
 import {moderateScale, scale} from 'react-native-size-matters';
 import Color from '../constants/Color';
 
-const CustomHeader = ({text, iconName, size = scale(16), color, onPress}) => {
+const CustomHeader = ({text, iconName, size = scale(24), color, onPress}) => {
   return (
     <View style={styles.container}>
       <TouchableOpacity

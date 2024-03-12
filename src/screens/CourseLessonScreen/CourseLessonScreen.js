@@ -42,7 +42,6 @@ const CourseLessonScreen = ({route}) => {
             <View style={styles.marginContainer}>
               <CustomHeader
                 iconName={'chevron-back'}
-                size={24}
                 color={Color.BLACK}
                 onPress={() => {
                   navigation.goBack();
