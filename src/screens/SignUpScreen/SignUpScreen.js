@@ -4,6 +4,7 @@ import {
   View,
   SafeAreaView,
   Platform,
+  Alert, // Added Alert import
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './styles';
@@ -124,11 +125,11 @@ const SignUpScreen = () => {
       });
     } catch (error) {
       if (error.code === 'auth/email-already-in-use') {
-        console.log('That email address is already in use!');
+        Alert.alert('Error', 'That email address is already in use!');
       } else if (error.code === 'auth/invalid-email') {
-        console.log('That email address is invalid!');
+        Alert.alert('Error', 'That email address is invalid!');
       } else {
-        console.error('Error creating user:', error.message);
+        Alert.alert('Error', 'Error creating user: ' + error.message);
       }
     }
   };
