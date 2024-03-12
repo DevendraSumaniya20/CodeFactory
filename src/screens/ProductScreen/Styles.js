@@ -33,12 +33,10 @@ const styles = StyleSheet.create({
   renderTouchableOpacity: {
     alignItems: 'center',
     backgroundColor: Color.BLUE,
-    borderRadius: moderateScale(16),
+    borderRadius: moderateScale(20),
     paddingHorizontal: moderateScale(16),
-    paddingVertical: moderateScale(16),
-    marginLeft: moderateScale(250),
-    marginBottom: moderateVerticalScale(8),
-    justifyContent: 'center',
+    paddingVertical: moderateScale(8),
+    marginLeft: moderateScale(230),
   },
 
   renderTouchableText: {

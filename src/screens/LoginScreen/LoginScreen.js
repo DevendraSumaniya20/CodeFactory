@@ -90,7 +90,7 @@ const LoginScreen = ({}) => {
         });
       }
     } catch (error) {
-      console.error('Error checking Google login:', error);
+      Alert.alert('Error', 'Error checking Google login');
     }
   };
 
@@ -108,7 +108,7 @@ const LoginScreen = ({}) => {
         });
       }
     } catch (error) {
-      console.error('Error checking saved credentials:', error);
+      Alert.alert('Error', 'Error checking saved credentials');
     }
   };
 
@@ -142,7 +142,7 @@ const LoginScreen = ({}) => {
 
       // console.log('Email:', userLoginCredential.user.email);
     } catch (error) {
-      Alert.alert('Please add Login Details.');
+      Alert.alert('Error', 'Please add Login Details.');
     }
   };
 

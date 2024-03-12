@@ -68,14 +68,24 @@ const HomeScreen = () => {
     GetCurrentGreeting();
   }, []);
 
-  const delayedHandleInputChange = debounce(text => {
-    setSearchValue(text);
-    setShowSearchInput(true);
-  }, 1000);
+  const filterData = searchText => {
+    const formattedSearchValue = searchText.toLowerCase().trim();
+
+    const filteredData = data.filter(item =>
+      item.type.toLowerCase().includes(formattedSearchValue),
+    );
+
+    setFilteredData(filteredData);
+  };
 
   const handleInputWithDebounce = text => {
     setShowSearchInput(false);
-    delayedHandleInputChange(text);
+    setSearchValue(text);
+    if (text.length >= 2) {
+      filterData(text);
+    } else {
+      setFilteredData(data);
+    }
   };
 
   const handleClearSearch = () => {

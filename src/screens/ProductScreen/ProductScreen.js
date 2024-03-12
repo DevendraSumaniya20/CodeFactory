@@ -106,10 +106,8 @@ const ProductScreen = ({route}) => {
       RazorpayCheckout.open(options)
         .then(async data => {
           Alert.alert(
-            // `Your Course Purchase is Success:
-            //   ${data.razorpay_payment_id}
-            //  `,
-            'Your Cousre is successfully Purchase you can check in Your Course',
+            'Purchase Successful',
+            'Your course purchase was successful. You can now find it in Your Courses.',
           );
 
           setTimeout(() => {
@@ -121,11 +119,14 @@ const ProductScreen = ({route}) => {
           }, 3000);
         })
         .catch(error => {
-          Alert.alert(`Error: ${error.code} | ${error.description}`);
+          Alert.alert(
+            'Error',
+            `There was an error processing your payment: ${error.code} | ${error.description}`,
+          );
           console.log(error.description);
         });
     } catch (error) {
-      Alert.alert(`Error: ${error.message}`);
+      Alert.alert('Error', `An unexpected error occurred: ${error.message}`);
     }
   };
 
@@ -216,15 +217,15 @@ const ProductScreen = ({route}) => {
           </View>
           <View
             style={{
-              marginVertical: moderateVerticalScale(16),
+              marginTop: moderateVerticalScale(36),
               alignItems: 'center',
               flexDirection: 'row',
               justifyContent: 'space-evenly',
-              gap: moderateScale(6),
+              gap: moderateScale(8),
             }}>
             <CustomButton
               inlineStyle={{
-                width: moderateScale(290),
+                width: moderateScale(300),
               }}
               text={'Add to cart'}
               onPress={() => {
@@ -237,13 +238,13 @@ const ProductScreen = ({route}) => {
                 onClickLike();
               }}
               style={{
-                borderRadius: moderateScale(6),
+                borderRadius: moderateScale(8),
                 alignItems: 'center',
                 justifyContent: 'center',
                 borderColor: Color.GRAY,
-                borderWidth: 1,
+                // borderWidth: 0.2,
                 padding: moderateScale(6),
-                marginLeft: moderateScale(12),
+                marginLeft: moderateScale(8),
               }}>
               {like ? (
                 <>
