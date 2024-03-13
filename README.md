@@ -91,3 +91,27 @@ setUser(null);
 console.error('Google sign out error:', error);
 }
 };
+
+const loadGooglePhoto = async () => {
+try {
+const storedPhoto = await AsyncStorage.getItem('googlePhoto');
+if (storedPhoto) {
+setImage({uri: storedPhoto});
+} else {
+const googlePhoto = route.params?.googlePhoto;
+if (googlePhoto) {
+setImage({uri: googlePhoto});
+
+          await AsyncStorage.setItem('googlePhoto', googlePhoto);
+        }
+      }
+
+      const selectedImage = await AsyncStorage.getItem('selectedImage');
+      if (selectedImage) {
+        setImage({uri: selectedImage});
+      }
+    } catch (error) {
+      console.error('Error loading Google photo:', error);
+    }
+
+};
