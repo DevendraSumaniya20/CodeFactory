@@ -168,6 +168,7 @@ const LoginScreen = ({}) => {
         screen: NavigationStringPath.PROFILESCREEN,
         params: {
           googlePhoto: userGoogleInfo.user.photo,
+          userGoogleName: userGoogleInfo.user.name,
         },
       });
       navigation.navigate(NavigationStringPath.TABSCREENS, {

@@ -194,7 +194,7 @@ const YourCourseScreen = ({route}) => {
                   <CustomButton
                     text={'Check Courses'}
                     onPress={() => {
-                      navigation.navigate(NavigationStringPath.HOMESCREEN);
+                      navigation.navigate(NavigationStringPath.HOMESCREEN, {});
                     }}
                   />
                 </View>
