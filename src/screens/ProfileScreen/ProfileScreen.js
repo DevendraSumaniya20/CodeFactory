@@ -178,11 +178,11 @@ const ProfileScreen = () => {
           }}>
           <View
             style={{
-              backgroundColor: Color.Black,
+              backgroundColor: 'rgba(0, 0, 0, 0.5)',
               flex: 1,
               alignItems: 'center',
               flexDirection: 'column-reverse',
-              marginBottom: moderateVerticalScale(8),
+              marginBottom: moderateVerticalScale(80),
             }}>
             <View
               style={{
