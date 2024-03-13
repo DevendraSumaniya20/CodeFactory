@@ -18,6 +18,7 @@ const CustomSearch = ({
   onPressRight,
   rightIcon,
   autoFocus,
+  onSubmitEditing,
 }) => {
   return (
     <View style={styles.textInput}>
@@ -30,6 +31,7 @@ const CustomSearch = ({
         autoCapitalize="none"
         autoComplete="off"
         autoCorrect={false}
+        onSubmitEditing={onSubmitEditing}
       />
       {!!rightIcon && (
         <View style={styles.rightIconContainer}>

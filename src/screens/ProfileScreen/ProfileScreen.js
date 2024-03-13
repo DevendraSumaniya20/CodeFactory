@@ -27,13 +27,11 @@ import {
 import CustomIcon from '../../components/CustomIcon';
 import CustomImage from '../../components/CustomImage';
 
-const ProfileScreen = ({route}) => {
+const ProfileScreen = () => {
   const [image, setImage] = useState(ImagePath.STUDENT);
   const [modalVisible, setModalVisible] = useState(false);
   const navigation = useNavigation();
-
-  const {userGoogleName} = route.params || {};
-
+  const route = useRoute();
   const dispatch = useDispatch();
 
   const cameraPermission = useSelector(state => state.cameraPermission);
@@ -147,9 +145,7 @@ const ProfileScreen = ({route}) => {
               <CustomBorderComponent
                 text={'Your Courses'}
                 onPress={() => {
-                  navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN, {
-                    userGoogleName,
-                  });
+                  navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN);
                 }}
               />
             </View>
@@ -158,10 +154,7 @@ const ProfileScreen = ({route}) => {
               <CustomBorderComponent
                 text={'Saved'}
                 onPress={() => {
-                  navigation.navigate(
-                    NavigationStringPath.COURSE_SAVED_SCREEN,
-                    {userGoogleName},
-                  );
+                  navigation.navigate(NavigationStringPath.COURSE_SAVED_SCREEN);
                 }}
               />
             </View>

@@ -1,5 +1,12 @@
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import {Text, TouchableOpacity, View, SafeAreaView, Alert} from 'react-native';
+import {
+  Text,
+  TouchableOpacity,
+  View,
+  SafeAreaView,
+  Alert,
+  Keyboard,
+} from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './styles';
 import ImagePath from '../../constants/ImagePath';
@@ -168,7 +175,6 @@ const LoginScreen = ({}) => {
         screen: NavigationStringPath.PROFILESCREEN,
         params: {
           googlePhoto: userGoogleInfo.user.photo,
-          userGoogleName: userGoogleInfo.user.name,
         },
       });
       navigation.navigate(NavigationStringPath.TABSCREENS, {

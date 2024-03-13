@@ -11,7 +11,7 @@ import {
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
-import {useNavigation, useIsFocused} from '@react-navigation/native';
+import {useNavigation, useIsFocused} from '@react-navigation/native'; // Import useIsFocused
 import {CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
@@ -30,6 +30,9 @@ const CourseSavedScreen = ({route}) => {
   const {addedCourses} = route.params || {addedCourses: []};
 
   const [storedCourses, setStoredCourses] = useState([]);
+  const [courseAvailable, setCourseAvailable] = useState(
+    addedCourses.length > 0,
+  );
 
   useEffect(() => {
     const retrieveStoredCourses = async () => {
@@ -90,7 +93,7 @@ const CourseSavedScreen = ({route}) => {
           />
 
           <View style={{backgroundColor: '#FFF'}}>
-            {storedCourses && storedCourses.length > 0 ? (
+            {storedCourses.length > 0 ? (
               <FlatList
                 data={storedCourses}
                 renderItem={renderItem}

@@ -43,9 +43,10 @@ const HomeScreen = () => {
         AsyncStorage.setItem('name', displayName);
       } else {
         const googleName = userGoogleInfo?.user?.name ?? '';
-        setName(googleName.charAt(0).toUpperCase() + googleName.slice(1));
-        // setName(googleName)
-        AsyncStorage.setItem('name', googleName);
+        if (googleName) {
+          setName(googleName.charAt(0).toUpperCase() + googleName.slice(1));
+          AsyncStorage.setItem('name', googleName);
+        }
       }
     });
 
@@ -186,6 +187,8 @@ const HomeScreen = () => {
     );
   };
 
+  const onSubmitted = () => {};
+
   return (
     <View style={styles.container}>
       <SafeAreaView style={styles.subContainer}>
@@ -216,6 +219,9 @@ const HomeScreen = () => {
               onPressRight={handleSearch}
               onPressClear={handleClearSearch}
               visible={showSearchInput}
+              onSubmitEditing={() => {
+                handleSearch();
+              }}
             />
           </View>
 
