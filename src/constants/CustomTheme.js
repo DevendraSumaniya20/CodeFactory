@@ -5,7 +5,7 @@ const CustomTheme = () => {
   const colorScheme = useColorScheme();
 
   const darkmodeColor = colorScheme === 'dark' ? '#fff' : '#000';
-  const darkBorderColor = colorScheme === 'dark' ? 'red' : 'blue';
+  const darkBorderColor = colorScheme === 'dark' ? '#fff' : '#000';
   const darkBackgroundColor = colorScheme === 'dark' ? '#000' : '#fff';
 
   const handleColorSchemeChange = newColorScheme => {
