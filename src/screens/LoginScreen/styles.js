@@ -9,7 +9,6 @@ import Color from '../../constants/Color';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.WHITE,
   },
 
   subcontainer: {
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     fontWeight: '500',
     fontFamily: 'Rubik-Regular',
-    color: Color.GRAY,
   },
   SignUpView: {
     alignItems: 'center',
@@ -63,7 +61,6 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     fontWeight: '500',
     fontFamily: 'Rubik-Regular',
-    color: Color.GRAY,
   },
 });
 export default styles;

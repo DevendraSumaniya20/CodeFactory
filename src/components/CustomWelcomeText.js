@@ -1,7 +1,6 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
-import {moderateScale, scale} from 'react-native-size-matters';
-import Color from '../constants/Color';
+import {scale} from 'react-native-size-matters';
 
 const CustomWelcomeText = ({
   text,
@@ -11,13 +10,14 @@ const CustomWelcomeText = ({
   fontWeight = '500',
   fontFamily = 'Rubik-Regular',
   fontSize = scale(24),
-  color,
+  inlineStyle,
 }) => {
   return (
     <View style={styles.welcomeTextView}>
       <Text
         style={[
           styles.textStyle,
+          inlineStyle,
           {
             lineHeight: lineHeight,
             letterSpacing: letterSpacing,
@@ -25,7 +25,6 @@ const CustomWelcomeText = ({
             fontWeight: fontWeight,
             fontFamily: fontFamily,
             fontSize: fontSize,
-            color: color,
           },
         ]}>
         {text}

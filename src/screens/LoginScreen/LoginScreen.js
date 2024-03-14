@@ -6,6 +6,9 @@ import {
   SafeAreaView,
   Alert,
   Keyboard,
+  useColorScheme,
+  Platform,
+  Appearance,
 } from 'react-native';
 import React, {useEffect, useState} from 'react';
 import styles from './styles';
@@ -17,7 +20,7 @@ import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import CustomImage from '../../components/CustomImage';
 import CustomInput from '../../components/CustomInput';
-import {moderateScale, scale} from 'react-native-size-matters';
+import {moderateScale} from 'react-native-size-matters';
 import {LoginSvg} from '../../constants/SvgPath';
 import CustomErrorMessage from '../../components/CustomErrorMessage';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
@@ -30,6 +33,7 @@ import {
 import {GoogleClientId} from '../../utils/GoogleLogin';
 import {useDispatch, useSelector} from 'react-redux';
 import {setEmail, setPassword} from '../../redux/Slices/authSlice';
+import CustomTheme from '../../constants/CustomTheme';
 
 const LoginScreen = ({}) => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -40,6 +44,15 @@ const LoginScreen = ({}) => {
   const dispatch = useDispatch();
 
   const reduxAuth = useSelector(state => state.auth);
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
+
+  useEffect(() => {
+    GoogleSignin.configure({
+      webClientId: GoogleClientId,
+    });
+    checkSavedCredentials();
+    checkGoogleLogin();
+  }, []);
 
   useEffect(() => {
     GoogleSignin.configure({
@@ -203,7 +216,11 @@ const LoginScreen = ({}) => {
         contentContainerStyle={{flex: 1}}
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}>
-        <View style={{flex: 1, backgroundColor: 'red'}}>
+        <View
+          style={{
+            flex: 1,
+            backgroundColor: darkBackgroundColor,
+          }}>
           <SafeAreaView style={styles.container}>
             <View style={{marginHorizontal: moderateScale(16)}}>
               <View style={styles.imageView}>
@@ -213,12 +230,16 @@ const LoginScreen = ({}) => {
                 />
               </View>
               <View style={styles.welcomeTextView}>
-                <CustomWelcomeText text={'Log in'} />
+                <CustomWelcomeText
+                  text={'Log in'}
+                  inlineStyle={{color: darkmodeColor}}
+                />
 
                 <CustomDescriptionText
                   text={'Login with social network '}
                   marginTop={moderateScale(8)}
                   lineHeight={21}
+                  inlineStyle={{color: darkmodeColor}}
                 />
 
                 <View style={styles.iconView}>
@@ -236,15 +257,20 @@ const LoginScreen = ({}) => {
                   <CustomInput
                     placeholder="Email"
                     onChangeText={text => dispatch(setEmail(text))}
-                    inputStyle={{width: '100%'}}
+                    inputStyle={{
+                      width: '100%',
+                    }}
                     value={reduxAuth.email}
                   />
                 </View>
 
-                <CustomErrorMessage text={emailError} />
+                <CustomErrorMessage text={emailError} style={{color: 'red'}} />
                 <View style={styles.textinputPassword}>
                   <CustomInput
-                    inputStyle={{width: '90%'}}
+                    inputStyle={{
+                      width: '90%',
+                      color: darkmodeColor,
+                    }}
                     secureTextEntry={secureTextEntry}
                     placeholder="Password"
                     onChangeText={text => dispatch(setPassword(text))}
@@ -255,14 +281,21 @@ const LoginScreen = ({}) => {
                     onPressRight={() => setSecureTextEntry(!secureTextEntry)}
                   />
                 </View>
-                <CustomErrorMessage text={passwordError} />
+                <CustomErrorMessage
+                  text={passwordError}
+                  style={{color: 'red'}}
+                />
 
                 <View style={styles.forgotPasswordView}>
                   <TouchableOpacity
                     onPress={() => {
                       navigation.navigate(NavigationStringPath.FORGOTSCREEN);
                     }}>
-                    <Text style={styles.forgotPasswordTextStyle}>
+                    <Text
+                      style={[
+                        styles.forgotPasswordTextStyle,
+                        {color: darkmodeColor},
+                      ]}>
                       Forgot Password ?
                     </Text>
                   </TouchableOpacity>
@@ -274,6 +307,9 @@ const LoginScreen = ({}) => {
                     onPress={() => {
                       validation();
                     }}
+                    style={{
+                      backgroundColor: darkBackgroundColor,
+                    }}
                   />
                 </View>
               </View>
@@ -282,7 +318,10 @@ const LoginScreen = ({}) => {
                   onPress={() => {
                     navigation.navigate(NavigationStringPath.SIGNUPSCREEN);
                   }}>
-                  <Text style={styles.signUpTextStyle}>Sign up</Text>
+                  <Text
+                    style={[styles.signUpTextStyle, {color: darkmodeColor}]}>
+                    Sign up
+                  </Text>
                 </TouchableOpacity>
               </View>
             </View>

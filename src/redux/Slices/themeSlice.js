@@ -4,10 +4,12 @@ const themeSlice = createSlice({
   name: 'theme',
   initialState: {
     isDarkmode: false,
+    colorScheme: 'light',
   },
   reducers: {
     toggleTheme: state => {
       state.isDarkmode = !state.isDarkmode;
+      state.colorScheme = state.isDarkmode ? 'dark' : 'light';
     },
   },
 });

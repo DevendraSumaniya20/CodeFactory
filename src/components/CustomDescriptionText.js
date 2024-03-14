@@ -11,13 +11,14 @@ const CustomDescriptionText = ({
   lineHeight,
   fontWeight,
   fontFamily,
-  color,
+  inlineStyle,
 }) => {
   return (
     <View style={styles.descriptionTextView}>
       <Text
         style={[
           styles.textStyle,
+          inlineStyle,
           {
             fontSize: fontsize,
             marginVertical: marginVertical,
@@ -25,7 +26,6 @@ const CustomDescriptionText = ({
             lineHeight: lineHeight,
             fontWeight: fontWeight,
             fontFamily: fontFamily,
-            color: color,
           },
         ]}>
         {text}

@@ -9,6 +9,7 @@ import React from 'react';
 import {moderateScale, scale} from 'react-native-size-matters';
 import CustomIcon from './CustomIcon';
 import Color from '../constants/Color';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomInput = ({
   placeholder = '',
@@ -19,11 +20,13 @@ const CustomInput = ({
   rightIcon,
   autoFocus,
 }) => {
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
+
   return (
-    <View style={styles.textInput}>
+    <View style={[styles.textInput, {borderColor: darkBorderColor}]}>
       <TextInput
         placeholder={placeholder}
-        style={{...styles.inputStyle, ...inputStyle}}
+        style={[styles.inputStyle, inputStyle, {color: darkmodeColor}]}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
         autoFocus={autoFocus}
@@ -47,7 +50,6 @@ export default CustomInput;
 const styles = StyleSheet.create({
   inputStyle: {
     padding: moderateScale(12),
-    borderColor: Color.LIGHTGRAY,
     fontSize: scale(14),
     height: moderateScale(52),
     fontFamily: 'Rubik-Regular',
@@ -59,7 +61,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     borderRadius: moderateScale(12),
-    borderWidth: 0.5,
+    borderWidth: 1,
     justifyContent: 'space-between',
     textAlign: 'left',
   },
