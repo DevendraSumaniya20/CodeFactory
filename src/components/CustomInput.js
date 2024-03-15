@@ -19,6 +19,7 @@ const CustomInput = ({
   onPressRight,
   rightIcon,
   autoFocus,
+  placeholderTextColor,
 }) => {
   const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
@@ -33,11 +34,12 @@ const CustomInput = ({
         autoCapitalize="none"
         autoComplete="off"
         autoCorrect={false}
+        placeholderTextColor={placeholderTextColor}
       />
       {!!rightIcon && (
         <View style={styles.rightIconContainer}>
           <TouchableOpacity onPress={onPressRight}>
-            <CustomIcon name={rightIcon} size={20} color={'#000000'} />
+            <CustomIcon name={rightIcon} size={20} color={darkmodeColor} />
           </TouchableOpacity>
         </View>
       )}

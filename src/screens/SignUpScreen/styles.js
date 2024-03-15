@@ -10,7 +10,6 @@ import {moderateScaleVertical} from '../../constants/responsiveSize';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.WHITE,
   },
 
   subcontainer: {
@@ -53,7 +52,6 @@ const styles = StyleSheet.create({
     fontSize: scale(14),
     fontWeight: '500',
     fontFamily: 'Rubik-Regular',
-    color: Color.GRAY,
   },
 });
 export default styles;

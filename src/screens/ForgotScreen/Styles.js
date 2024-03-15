@@ -10,7 +10,6 @@ import {moderateScaleVertical} from '../../constants/responsiveSize';
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: Color.WHITE,
   },
 
   subcontainer: {

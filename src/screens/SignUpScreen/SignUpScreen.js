@@ -22,6 +22,7 @@ import CustomErrorMessage from '../../components/CustomErrorMessage';
 import {createUserWithEmailAndPassword} from 'firebase/auth';
 import {auth} from '../../config/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomTheme from '../../constants/CustomTheme';
 
 const SignUpScreen = () => {
   const [secureTextEntry, setSecureTextEntry] = useState(true);
@@ -36,6 +37,8 @@ const SignUpScreen = () => {
   const [nameError, setNameError] = useState('');
 
   const navigation = useNavigation();
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   useEffect(() => {
     const checkUserData = async () => {
@@ -140,7 +143,7 @@ const SignUpScreen = () => {
         behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
         contentContainerStyle={{
           paddingBottom: moderateVerticalScale(100),
-          backgroundColor: '#fff',
+          backgroundColor: darkBackgroundColor,
         }}
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}>
@@ -148,11 +151,12 @@ const SignUpScreen = () => {
           <View style={{marginHorizontal: moderateScale(16)}}>
             <CustomHeader
               iconName={'chevron-back'}
-              color={'#000'}
+              color={darkmodeColor}
               onPress={() => {
                 navigation.goBack();
               }}
             />
+
             <View style={styles.imageView}>
               <SignupSvg
                 width={moderateScale(310)}
@@ -175,6 +179,7 @@ const SignUpScreen = () => {
                   inputStyle={{width: '100%'}}
                   placeholder="Full Name"
                   onChangeText={text => setName(text)}
+                  placeholderTextColor={darkmodeColor}
                 />
               </View>
               <CustomErrorMessage text={nameError} />
@@ -183,6 +188,7 @@ const SignUpScreen = () => {
                   inputStyle={{width: '100%'}}
                   placeholder="Email"
                   onChangeText={text => setEmail(text)}
+                  placeholderTextColor={darkmodeColor}
                 />
               </View>
               <CustomErrorMessage text={emailError} />
@@ -197,12 +203,14 @@ const SignUpScreen = () => {
                     secureTextEntry ? 'eye-off-outline' : 'eye-outline'
                   }
                   onPressRight={() => setSecureTextEntry(!secureTextEntry)}
+                  placeholderTextColor={darkmodeColor}
                 />
               </View>
               <CustomErrorMessage text={passwordError} />
 
               <View style={styles.textinputPassword}>
                 <CustomInput
+                  placeholderTextColor={darkmodeColor}
                   inputStyle={{width: '90%'}}
                   secureTextEntry={secureConfirmTextEntry}
                   placeholder="Confirm Password"
@@ -235,7 +243,9 @@ const SignUpScreen = () => {
                   navigation.navigate(NavigationStringPath.LOGINSCREEN);
                 }}>
                 {/* <Text style={styles.loginTextStyle}>Log in</Text> */}
-                <Text style={styles.loginTextStyle}>back</Text>
+                <Text style={[styles.loginTextStyle, {color: darkmodeColor}]}>
+                  back
+                </Text>
               </TouchableOpacity>
             </View>
           </View>

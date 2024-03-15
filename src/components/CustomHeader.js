@@ -2,19 +2,35 @@ import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import React from 'react';
 import CustomIcon from './CustomIcon';
 import {moderateScale, scale} from 'react-native-size-matters';
+import CustomTheme from '../constants/CustomTheme';
 import Color from '../constants/Color';
 
-const CustomHeader = ({text, iconName, size = scale(24), color, onPress}) => {
+const CustomHeader = ({
+  text,
+  iconName,
+  size = scale(24),
+  color,
+  onPress,
+  inlineStyle,
+}) => {
+  const {darkmodeColor, darkBorderColor} = CustomTheme();
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {borderColor: darkBorderColor}]}>
       <TouchableOpacity
-        style={styles.button}
+        style={[styles.button, {borderColor: darkBorderColor}]}
         onPress={onPress}
         activeOpacity={0.5}>
-        <CustomIcon name={iconName} size={size} color={color} />
+        <CustomIcon
+          name={iconName}
+          size={size}
+          color={color || darkmodeColor}
+          inlineStyle={inlineStyle}
+        />
       </TouchableOpacity>
       <View style={{width: '100%'}}>
-        <Text style={styles.headerTextTitle}>{text}</Text>
+        <Text style={[styles.headerTextTitle, {color: darkmodeColor}]}>
+          {text}
+        </Text>
       </View>
     </View>
   );
@@ -44,6 +60,5 @@ const styles = StyleSheet.create({
     fontSize: scale(24),
     lineHeight: 32,
     letterSpacing: -0.5,
-    color: Color.BLACK,
   },
 });

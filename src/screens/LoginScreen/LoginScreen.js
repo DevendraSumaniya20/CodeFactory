@@ -261,6 +261,7 @@ const LoginScreen = ({}) => {
                       width: '100%',
                     }}
                     value={reduxAuth.email}
+                    placeholderTextColor={darkmodeColor}
                   />
                 </View>
 
@@ -279,6 +280,7 @@ const LoginScreen = ({}) => {
                       secureTextEntry ? 'eye-off-outline' : 'eye-outline'
                     }
                     onPressRight={() => setSecureTextEntry(!secureTextEntry)}
+                    placeholderTextColor={darkmodeColor}
                   />
                 </View>
                 <CustomErrorMessage

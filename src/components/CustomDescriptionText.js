@@ -2,6 +2,7 @@ import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {moderateScale, scale} from 'react-native-size-matters';
 import Color from '../constants/Color';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomDescriptionText = ({
   text,
@@ -13,6 +14,7 @@ const CustomDescriptionText = ({
   fontFamily,
   inlineStyle,
 }) => {
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
   return (
     <View style={styles.descriptionTextView}>
       <Text
@@ -27,6 +29,7 @@ const CustomDescriptionText = ({
             fontWeight: fontWeight,
             fontFamily: fontFamily,
           },
+          {color: darkmodeColor},
         ]}>
         {text}
       </Text>

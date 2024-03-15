@@ -16,12 +16,15 @@ import CustomDescriptionText from '../../components/CustomDescriptionText';
 import CustomInput from '../../components/CustomInput';
 import CustomErrorMessage from '../../components/CustomErrorMessage';
 import CustomButton from '../../components/CustomButton';
+import CustomTheme from '../../constants/CustomTheme';
 
 const ForgotScreen = () => {
   const [email, setEmail] = useState('');
   const [emailError, setEmailError] = useState('');
 
   const navigation = useNavigation();
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   const validation = () => {
     const emailRegex = /\S+@\S+\.\S+/;
@@ -47,11 +50,12 @@ const ForgotScreen = () => {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView
+      style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
       <View style={{marginHorizontal: moderateScale(16)}}>
         <CustomHeader
           iconName={'chevron-back'}
-          color={'#000'}
+          color={darkmodeColor}
           onPress={() => {
             navigation.goBack();
           }}
@@ -74,6 +78,7 @@ const ForgotScreen = () => {
               // autoFocus={true}
               placeholder="Email"
               onChangeText={text => setEmail(text)}
+              placeholderTextColor={darkmodeColor}
             />
           </View>
           <CustomErrorMessage text={emailError} />

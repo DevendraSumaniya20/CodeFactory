@@ -1,6 +1,7 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
 import {scale} from 'react-native-size-matters';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomWelcomeText = ({
   text,
@@ -12,11 +13,13 @@ const CustomWelcomeText = ({
   fontSize = scale(24),
   inlineStyle,
 }) => {
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
   return (
-    <View style={styles.welcomeTextView}>
+    <View style={[styles.welcomeTextView, {}]}>
       <Text
         style={[
           styles.textStyle,
+
           inlineStyle,
           {
             lineHeight: lineHeight,
@@ -26,6 +29,7 @@ const CustomWelcomeText = ({
             fontFamily: fontFamily,
             fontSize: fontSize,
           },
+          {color: darkmodeColor},
         ]}>
         {text}
       </Text>
