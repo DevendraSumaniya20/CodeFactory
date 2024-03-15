@@ -9,7 +9,7 @@ import {
   TouchableOpacity,
   Alert,
 } from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {moderateScale, moderateVerticalScale} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
 import styles from './Styles';
 import {BellIcon} from '../../constants/SvgPath';
@@ -22,6 +22,7 @@ import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import {auth, db} from '../../config/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import CustomTheme from '../../constants/CustomTheme';
 
 const HomeScreen = () => {
   const route = useRoute();
@@ -34,6 +35,8 @@ const HomeScreen = () => {
   const [name, setName] = useState(route.params?.name ?? '');
   const [greeting, setGreeting] = useState('');
   const [showSearchInput, setShowSearchInput] = useState(false);
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
@@ -148,33 +151,30 @@ const HomeScreen = () => {
             name,
           })
         }>
-        <View style={styles.renderMainView}>
-          <View
-            style={{
-              height: moderateScaleVertical(194),
-              paddingTop: moderateScale(8),
-              borderRadius: moderateScale(8),
-            }}>
+        <View
+          style={[
+            styles.renderMainView,
+            {backgroundColor: darkBackgroundColor},
+          ]}>
+          <View style={{alignItems: 'center'}}>
             <Image
               source={item.image}
-              resizeMode="contain"
-              resizeMethod="auto"
-              style={styles.renderItemImage}
+              resizeMode="cover"
+              style={[
+                styles.renderItemImage,
+                {marginTop: moderateVerticalScale(8)},
+              ]}
             />
-
-            <View>
-              <TouchableOpacity
-                style={styles.renderTouchableOpacity}
-                onPress={() => {
-                  navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {
-                    item,
-                  });
-                }}>
-                <Text style={styles.renderTouchableText}> ₹ {item.Price}</Text>
-              </TouchableOpacity>
-            </View>
+            <TouchableOpacity
+              style={styles.renderTouchableOpacity}
+              onPress={() => {
+                navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {
+                  item,
+                });
+              }}>
+              <Text style={styles.renderTouchableText}> ₹ {item.Price}</Text>
+            </TouchableOpacity>
           </View>
-
           <View style={styles.renderSecondView}>
             <Text style={styles.renderDurationText}>{item.duration}</Text>
             <Text style={styles.renderTypeText}>{item.type}</Text>

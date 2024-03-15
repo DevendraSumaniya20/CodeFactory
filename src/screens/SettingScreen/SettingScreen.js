@@ -24,6 +24,7 @@ import CustomSettingComponent from '../../components/CustomSettingComponent';
 import {KeyboardAwareScrollView} from 'react-native-keyboard-aware-scroll-view';
 import {
   Bell,
+  BellIcon,
   Email,
   Lock,
   Off,
@@ -185,7 +186,7 @@ const SettingScreen = ({route}) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       contentContainerStyle={{
         paddingBottom: moderateVerticalScale(150),
-        backgroundColor: '#fff',
+        backgroundColor: '#ff0000',
       }}
       scrollEnabled={true}
       showsVerticalScrollIndicator={false}>
@@ -210,7 +211,7 @@ const SettingScreen = ({route}) => {
             <ScrollView>
               <CustomSettingComponent
                 text={'Notifications'}
-                icon={<Bell />}
+                icon={<BellIcon />}
                 onToggle={handleNotificationToggle}
                 isOn={notificationToggle}
                 icon2={notificationToggle ? <On /> : <Off />}

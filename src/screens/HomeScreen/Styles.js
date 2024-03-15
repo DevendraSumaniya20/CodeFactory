@@ -7,7 +7,7 @@ import {
 } from 'react-native-size-matters';
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: Color.WHITE},
+  container: {flex: 1},
   subContainer: {
     flex: 1,
   },
@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 26,
     letterSpacing: -0.5,
-    color: Color.GRAY,
   },
   userTextStyle: {
     fontFamily: 'Rubik-Regular',
@@ -36,7 +35,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 32,
     letterSpacing: 0.2,
-    color: Color.BLACK,
+
     marginTop: moderateScale(4),
   },
   notificationView: {
@@ -55,8 +54,8 @@ const styles = StyleSheet.create({
   },
 
   renderItemImage: {
-    height: moderateScale(180),
-    width: moderateScale(343),
+    height: moderateVerticalScale(200),
+    width: moderateScale(200),
   },
   renderTouchableOpacity: {
     alignItems: 'center',
@@ -66,6 +65,7 @@ const styles = StyleSheet.create({
     paddingVertical: moderateScale(8),
     marginLeft: moderateScale(230),
     width: moderateScale(90),
+    marginTop: moderateVerticalScale(8),
   },
 
   renderTouchableText: {
@@ -74,7 +74,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 16,
     textAlign: 'right',
-    color: Color.WHITE,
   },
   renderSecondView: {
     marginHorizontal: moderateScale(16),
@@ -100,7 +99,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontFamily: 'Rubik-Regular',
     lineHeight: 21,
-    color: Color.BLACK,
   },
 
   categoryView: {

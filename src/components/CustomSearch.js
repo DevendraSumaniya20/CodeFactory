@@ -9,6 +9,7 @@ import {
 import {moderateScale, scale} from 'react-native-size-matters';
 import CustomIcon from './CustomIcon';
 import Color from '../constants/Color';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomSearch = ({
   placeholder = '',
@@ -19,12 +20,15 @@ const CustomSearch = ({
   rightIcon,
   autoFocus,
   onSubmitEditing,
+  placeholderTextColor,
 }) => {
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
+
   return (
-    <View style={styles.textInput}>
+    <View style={[styles.textInput, {borderColor: darkBorderColor}]}>
       <TextInput
         placeholder={placeholder}
-        style={{...styles.inputStyle, ...inputStyle}}
+        style={[styles.inputStyle, inputStyle]}
         onChangeText={onChangeText}
         secureTextEntry={secureTextEntry}
         autoFocus={autoFocus}
@@ -32,11 +36,12 @@ const CustomSearch = ({
         autoComplete="off"
         autoCorrect={false}
         onSubmitEditing={onSubmitEditing}
+        placeholderTextColor={placeholderTextColor}
       />
       {!!rightIcon && (
         <View style={styles.rightIconContainer}>
           <TouchableOpacity onPress={onPressRight}>
-            <CustomIcon name={rightIcon} size={20} color={'#000000'} />
+            <CustomIcon name={rightIcon} size={20} color={darkmodeColor} />
           </TouchableOpacity>
         </View>
       )}
@@ -49,7 +54,6 @@ export default CustomSearch;
 const styles = StyleSheet.create({
   inputStyle: {
     padding: moderateScale(12),
-    borderColor: Color.LIGHTGRAY,
     fontSize: scale(14),
     height: moderateScale(52),
     fontFamily: 'Rubik-Regular',

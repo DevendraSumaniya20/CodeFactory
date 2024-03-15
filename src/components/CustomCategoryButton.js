@@ -7,12 +7,16 @@ import {
 } from 'react-native-size-matters';
 import {moderateScaleVertical} from '../constants/responsiveSize';
 import Color from '../constants/Color';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomCategoryButton = ({text, onPress}) => {
+  const {darkmodeColor} = CustomTheme();
   return (
     <View style={{flex: 1}}>
       <TouchableOpacity style={styles.cardTouchble} onPress={onPress}>
-        <Text style={styles.cardTextStyle}>{text}</Text>
+        <Text style={[styles.cardTextStyle, {color: darkmodeColor}]}>
+          {text}
+        </Text>
       </TouchableOpacity>
     </View>
   );
@@ -35,11 +39,9 @@ const styles = StyleSheet.create({
   cardTextStyle: {
     fontFamily: 'Rubik-Regular',
     fontSize: scale(12),
-    fontWeight: '500',
+    fontWeight: '600',
     width: 'auto',
-
     lineHeight: 18,
-    color: Color.WHITE,
     textAlign: 'center',
     overflow: 'scroll',
   },
