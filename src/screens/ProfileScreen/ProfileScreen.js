@@ -26,6 +26,7 @@ import {
 } from 'react-native-size-matters';
 import CustomIcon from '../../components/CustomIcon';
 import CustomImage from '../../components/CustomImage';
+import CustomTheme from '../../constants/CustomTheme';
 
 const ProfileScreen = () => {
   const [image, setImage] = useState(ImagePath.STUDENT);
@@ -35,6 +36,8 @@ const ProfileScreen = () => {
   const dispatch = useDispatch();
 
   const cameraPermission = useSelector(state => state.cameraPermission);
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   const requestForCameraUse = () => {
     dispatch(cameraPermissionGiven());
@@ -110,12 +113,12 @@ const ProfileScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
       <SafeAreaView style={styles.subContainer}>
         <View style={styles.marginContainer}>
           <CustomHeader
             iconName={'chevron-back'}
-            color={Color.BLACK}
+            color={darkmodeColor}
             onPress={() => {
               navigation.goBack();
             }}
@@ -186,7 +189,7 @@ const ProfileScreen = () => {
             }}>
             <View
               style={{
-                backgroundColor: Color.WHITE,
+                backgroundColor: darkBackgroundColor,
                 paddingHorizontal: moderateScale(26),
                 paddingVertical: moderateScale(20),
                 width: moderateScale(400),
@@ -202,12 +205,7 @@ const ProfileScreen = () => {
                 onPress={() => {
                   setModalVisible(false);
                 }}>
-                <CustomIcon
-                  name={'close'}
-                  size={scale(20)}
-                  type="Ionicons"
-                  color={Color.BLACK}
-                />
+                <CustomIcon name={'close'} size={scale(20)} type="Ionicons" />
               </TouchableOpacity>
 
               <View
@@ -220,7 +218,7 @@ const ProfileScreen = () => {
                     alignItems: 'center',
                     borderWidth: 1,
                     borderRadius: moderateScale(16),
-                    borderColor: Color.BLACK,
+                    borderColor: darkBorderColor,
                     marginBottom: moderateVerticalScale(16),
                     gap: 10,
                   }}
@@ -232,7 +230,7 @@ const ProfileScreen = () => {
                     resizeMode={'contain'}
                   />
 
-                  <Text style={{fontSize: scale(16), color: Color.BLACK}}>
+                  <Text style={{fontSize: scale(16), color: darkmodeColor}}>
                     Take a photo
                   </Text>
                 </TouchableOpacity>
@@ -242,7 +240,7 @@ const ProfileScreen = () => {
                     alignItems: 'center',
                     borderWidth: 1,
                     borderRadius: moderateScale(16),
-                    borderColor: Color.BLACK,
+                    borderColor: darkBorderColor,
                     marginBottom: moderateVerticalScale(12),
                     gap: 10,
                   }}
@@ -254,7 +252,7 @@ const ProfileScreen = () => {
                     resizeMode={'contain'}
                   />
 
-                  <Text style={{fontSize: scale(16), color: Color.BLACK}}>
+                  <Text style={{fontSize: scale(16), color: darkmodeColor}}>
                     Choose From Gallery
                   </Text>
                 </TouchableOpacity>

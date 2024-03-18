@@ -7,7 +7,7 @@ import {
 } from 'react-native-size-matters';
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: Color.WHITE},
+  container: {flex: 1},
   subContainer: {
     flex: 1,
   },
@@ -47,16 +47,6 @@ const styles = StyleSheet.create({
   },
   menuItem: {
     marginVertical: moderateVerticalScale(16),
-  },
-  logoutView: {
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  logoutTextStyle: {
-    fontSize: scale(14),
-    fontWeight: '500',
-    fontFamily: 'Rubik-Regular',
-    color: Color.GRAY,
   },
 });
 

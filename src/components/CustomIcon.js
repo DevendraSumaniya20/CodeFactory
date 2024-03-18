@@ -16,6 +16,7 @@ import SimpleLineIcons from 'react-native-vector-icons/SimpleLineIcons';
 import Octicons from 'react-native-vector-icons/Octicons';
 import Zocial from 'react-native-vector-icons/Zocial';
 import Fontisto from 'react-native-vector-icons/Fontisto';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomIcon = ({
   name,
@@ -23,6 +24,7 @@ const CustomIcon = ({
   size = scale(16),
   type = 'Ionicons',
 }) => {
+  const {darkmodeColor} = CustomTheme();
   let IconComponent;
 
   switch (type) {
@@ -79,7 +81,7 @@ const CustomIcon = ({
       IconComponent = Ionicons;
   }
 
-  return <IconComponent name={name} color={color} size={size} />;
+  return <IconComponent name={name} color={darkmodeColor} size={size} />;
 };
 
 export default CustomIcon;

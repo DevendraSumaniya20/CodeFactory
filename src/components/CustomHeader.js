@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
     padding: moderateScale(6),
   },
   button: {
-    borderWidth: 0.5,
+    borderWidth: 1,
     borderRadius: 50,
     width: moderateScale(48),
     height: moderateScale(48),

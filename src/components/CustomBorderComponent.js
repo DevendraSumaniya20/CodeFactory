@@ -6,6 +6,7 @@ import {
   moderateVerticalScale,
   scale,
 } from 'react-native-size-matters';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomBorderComponent = ({
   text,
@@ -13,12 +14,22 @@ const CustomBorderComponent = ({
   inLineStyle,
   inLineTextStyle,
 }) => {
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
   return (
     <TouchableOpacity
-      style={[styles.customBorderComponentView, inLineStyle]}
+      style={[
+        styles.customBorderComponentView,
+        inLineStyle,
+        {borderColor: darkBorderColor},
+      ]}
       onPress={onPress}>
       <TouchableOpacity onPress={onPress}>
-        <Text style={[styles.customBorderComponentText, inLineTextStyle]}>
+        <Text
+          style={[
+            styles.customBorderComponentText,
+            inLineTextStyle,
+            {color: darkmodeColor},
+          ]}>
           {text}
         </Text>
       </TouchableOpacity>
@@ -32,8 +43,7 @@ const styles = StyleSheet.create({
   customBorderComponentView: {
     alignItems: 'center',
     justifyContent: 'center',
-    borderWidth: 1,
-    borderColor: Color.BLACK,
+    borderWidth: 0.5,
     paddingHorizontal: moderateScale(16),
     paddingVertical: moderateVerticalScale(24),
     borderRadius: moderateScale(16),
@@ -44,6 +54,5 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 32,
     letterSpacing: -0.5,
-    color: Color.BLACK,
   },
 });
