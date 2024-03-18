@@ -5,22 +5,38 @@ import {
   moderateVerticalScale,
   scale,
 } from 'react-native-size-matters';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomTopics = ({topicImage, topicName, progress, onPress}) => {
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
   return (
     <TouchableOpacity onPress={onPress}>
-      <View style={styles.container}>
+      <View
+        style={[
+          styles.container,
+          {
+            backgroundColor: darkBackgroundColor,
+            borderColor: darkBorderColor,
+          },
+        ]}>
         <View>
           <Image
-            resizeMethod="auto"
-            resizeMode="contain"
+            resizeMode="cover"
             source={topicImage}
-            style={styles.topicImageStyle}
+            style={[
+              styles.topicImageStyle,
+              {
+                borderRadius: moderateScale(10),
+              },
+            ]}
           />
         </View>
         <View style={styles.topicDetails}>
           <Text
-            style={[styles.topicNameTextStyle, {textTransform: 'capitalize'}]}>
+            style={[
+              styles.topicNameTextStyle,
+              {textTransform: 'capitalize', color: darkmodeColor},
+            ]}>
             {topicName}
           </Text>
           <View style={styles.progressBarContainer}>

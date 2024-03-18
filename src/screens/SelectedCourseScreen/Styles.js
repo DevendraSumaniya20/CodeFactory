@@ -7,7 +7,7 @@ import {
 } from 'react-native-size-matters';
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: Color.WHITE},
+  container: {flex: 1},
   subContainer: {
     flex: 1,
   },
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     top: '50%',
     left: '50%',
     transform: [{translateX: -40}, {translateY: -40}],
-    zIndex: 1, // Ensure the icon is above the image
+    zIndex: 1,
   },
   renderTouchableOpacity: {
     alignItems: 'center',
@@ -60,7 +60,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 16,
     textAlign: 'right',
-    color: Color.WHITE,
   },
   renderSecondView: {
     marginHorizontal: moderateScale(16),

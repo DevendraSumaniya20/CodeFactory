@@ -25,6 +25,7 @@ import NavigationStringPath from '../../constants/NavigationStringPath';
 
 import CustomIcon from '../../components/CustomIcon';
 import CustomTopics from '../../components/CustomTopics';
+import CustomTheme from '../../constants/CustomTheme';
 
 const SelectedCourseScreen = ({route}) => {
   const navigation = useNavigation();
@@ -36,6 +37,8 @@ const SelectedCourseScreen = ({route}) => {
   // console.log('Selected CourseScreen data', selectedCourse);
 
   const [progress, setProgress] = useState(0.5);
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   useEffect(() => {
     const progressInterval = setInterval(() => {
@@ -53,88 +56,90 @@ const SelectedCourseScreen = ({route}) => {
       <ScrollView
         style={{
           flex: 1,
-          backgroundColor: '#fff',
+          backgroundColor: darkBackgroundColor,
         }}
         contentContainerStyle={{
-          paddingBottom: moderateVerticalScale(700),
+          paddingBottom: moderateVerticalScale(100),
         }}
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
-          <SafeAreaView style={styles.subContainer}>
+        <View
+          style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
+          <SafeAreaView
+            style={[
+              styles.subContainer,
+              {backgroundColor: darkBackgroundColor},
+            ]}>
             <View style={styles.marginContainer}>
               <CustomHeader
                 iconName={'chevron-back'}
-                color={Color.BLACK}
                 onPress={() => {
                   navigation.goBack();
                 }}
                 text={selectedCourse?.type}
               />
 
-              <View
-                style={{
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                }}>
+              <View style={{alignItems: 'center', justifyContent: 'center'}}>
                 <View
                   style={{
-                    width: moderateScale(343),
-                    height: moderateVerticalScale(270),
-                    borderRadius: moderateScale(8),
-                    borderColor: Color.BLACK,
-                    borderWidth: 1,
                     alignItems: 'center',
                     marginTop: moderateVerticalScale(8),
                   }}>
-                  <Image
-                    source={selectedCourse.image}
-                    style={{
-                      width: moderateScale(343),
-                      height: moderateVerticalScale(190),
-                      borderRadius: moderateScale(8),
-                      resizeMode: 'contain',
-                    }}
-                  />
                   <View
-                    style={{
-                      alignItems: 'flex-end',
-                      marginRight: moderateScale(8),
-                    }}>
-                    <TouchableOpacity
-                      onPress={() => {
-                        Alert.alert('You can continue Course ');
-                      }}>
-                      <CustomIcon
-                        name={'caret-forward-circle-outline'}
-                        size={scale(70)}
-                        color={Color.LIGHTGREEEN}
-                      />
-                    </TouchableOpacity>
+                    style={[{alignItems: 'center', justifyContent: 'center'}]}>
+                    <Image
+                      resizeMode="cover"
+                      source={selectedCourse.image}
+                      style={{
+                        width: moderateScale(350),
+                        height: moderateVerticalScale(280),
+                        borderRadius: moderateScale(8),
+                      }}
+                    />
+
                     <View
                       style={{
-                        marginTop: moderateVerticalScale(8),
+                        position: 'absolute',
+                        top: '50%',
+                        left: '50%',
+                        transform: [
+                          {translateX: -scale(35)},
+                          {translateY: -scale(35)},
+                        ],
                       }}>
-                      <Text
-                        style={{
-                          fontSize: scale(24),
-                          fontWeight: '600',
-                          fontFamily: 'Rubik-Regular',
-                          color: Color.BLACK,
-                          marginVertical: moderateVerticalScale(8),
+                      <TouchableOpacity
+                        onPress={() => {
+                          Alert.alert('You can continue Course');
                         }}>
-                        {selectedCourse.type}
-                      </Text>
-                      <Text
-                        style={{
-                          fontSize: scale(16),
-                          fontWeight: '400',
-                          fontFamily: 'Rubik-Regular',
-                          color: Color.BLACK,
-                        }}>
-                        {selectedCourse.aboutCourseDetails}
-                      </Text>
+                        <CustomIcon
+                          name={'caret-forward-circle-outline'}
+                          size={scale(70)}
+                          color={Color.LIGHTGREEEN}
+                        />
+                      </TouchableOpacity>
                     </View>
+                  </View>
+
+                  <View style={{marginTop: moderateVerticalScale(8)}}>
+                    <Text
+                      style={{
+                        fontSize: scale(24),
+                        fontWeight: '600',
+                        fontFamily: 'Rubik-Regular',
+                        color: darkmodeColor,
+                        marginVertical: moderateVerticalScale(8),
+                      }}>
+                      {selectedCourse.type}
+                    </Text>
+                    <Text
+                      style={{
+                        fontSize: scale(16),
+                        fontWeight: '400',
+                        fontFamily: 'Rubik-Regular',
+                        color: darkmodeColor,
+                      }}>
+                      {selectedCourse.aboutCourseDetails}
+                    </Text>
                   </View>
 
                   <View style={{paddingBottom: moderateScale(8)}}>
