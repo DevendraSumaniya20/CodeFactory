@@ -7,7 +7,7 @@ import {
 } from 'react-native-size-matters';
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: Color.WHITE},
+  container: {flex: 1},
   subContainer: {
     flex: 1,
   },
@@ -22,7 +22,6 @@ const styles = StyleSheet.create({
     fontSize: scale(20),
     fontWeight: '700',
     fontFamily: 'Rubik-Regular',
-    color: Color.GRAY,
   },
 });
 

@@ -6,17 +6,28 @@ import {
   moderateVerticalScale,
   scale,
 } from 'react-native-size-matters';
+import CustomTheme from '../constants/CustomTheme';
 
 const CustomDetailsComponent = ({text1, text2, icon1, icon2, onPress}) => {
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
+
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        {backgroundColor: darkBackgroundColor, borderColor: darkBorderColor},
+      ]}>
       <View style={{flexDirection: 'row', alignItems: 'center'}}>
         <View style={styles.iconContainer}>
           <View style={styles.iconBackground}>{icon1}</View>
         </View>
-        <View style={styles.textContainer}>
-          <Text style={styles.text1}>{text1}</Text>
-          <Text style={styles.text2}>{text2}</Text>
+        <View
+          style={[
+            styles.textContainer,
+            {backgroundColor: darkBackgroundColor},
+          ]}>
+          <Text style={[styles.text1, {color: darkmodeColor}]}>{text1}</Text>
+          <Text style={[styles.text2, {color: darkmodeColor}]}>{text2}</Text>
         </View>
       </View>
       <TouchableOpacity onPress={onPress}>{icon2}</TouchableOpacity>
@@ -57,7 +68,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 26,
     letterSpacing: -0.5,
-    color: Color.BLACK,
   },
   text2: {
     fontFamily: 'Rubik-Regular',
@@ -65,6 +75,5 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     lineHeight: 26,
     letterSpacing: -0.5,
-    color: Color.GRAY,
   },
 });

@@ -42,6 +42,7 @@ import {
   setEmail,
   setPassword,
 } from '../../redux/Slices/authSlice';
+import CustomTheme from '../../constants/CustomTheme';
 
 const SettingScreen = ({route}) => {
   const navigation = useNavigation();
@@ -50,6 +51,8 @@ const SettingScreen = ({route}) => {
   const [userEmailState, setUserEmailState] = useState('');
 
   const {userEmail, userGoogleEmail, userGoogleName} = route?.params ?? {};
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   const dispatch = useDispatch();
 
@@ -186,16 +189,16 @@ const SettingScreen = ({route}) => {
       behavior={Platform.OS === 'ios' ? 'padding' : 'height'}
       contentContainerStyle={{
         paddingBottom: moderateVerticalScale(150),
-        backgroundColor: '#ff0000',
+        backgroundColor: darkBackgroundColor,
       }}
       scrollEnabled={true}
       showsVerticalScrollIndicator={false}>
-      <View style={styles.container}>
+      <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
         <SafeAreaView style={styles.subContainer}>
           <View style={styles.marginContainer}>
             <CustomHeader
               iconName={'chevron-back'}
-              color={Color.BLACK}
+              color={darkmodeColor}
               onPress={() => {
                 navigation.goBack();
               }}
@@ -208,63 +211,63 @@ const SettingScreen = ({route}) => {
               }}>
               <SettingSvg />
             </View>
-            <ScrollView>
-              <CustomSettingComponent
-                text={'Notifications'}
-                icon={<BellIcon />}
-                onToggle={handleNotificationToggle}
-                isOn={notificationToggle}
-                icon2={notificationToggle ? <On /> : <Off />}
-                inlineTextStyle={{
-                  color: notificationToggle ? '#000' : '#AAA',
-                }}
-              />
-              <View
-                style={{
-                  alignItems: 'baseline',
-                  height: moderateVerticalScale(21),
-                  marginBottom: moderateVerticalScale(16),
-                }}>
-                <CustomWelcomeText
-                  text={'Account information'}
-                  letterSpacing={-0.5}
-                  lineHeight={26}
-                  fontFamily={'Rubik-Regular'}
-                  fontWeight={'500'}
-                  color={Color.BLACK}
-                  fontSize={scale(20)}
-                />
-              </View>
-              <View>
-                <CustomDetailsComponent
-                  icon1={<Person />}
-                  text1={'Name'}
-                  text2={userDisplayName}
-                  icon2={<RightArrow />}
-                />
-                <CustomDetailsComponent
-                  icon1={<Email />}
-                  text1={'Email'}
-                  text2={userEmailState}
-                  icon2={<RightArrow />}
-                />
-                <CustomDetailsComponent
-                  icon1={<Lock />}
-                  text1={'Password'}
-                  text2={'Click here to change Password'}
-                  icon2={<RightArrow />}
-                />
-              </View>
 
-              <View style={styles.logoutView}>
-                <TouchableOpacity
-                  onPress={() => {
-                    handleLogoutButtonClick();
-                  }}>
-                  <Text style={styles.logoutTextStyle}>Log out</Text>
-                </TouchableOpacity>
-              </View>
-            </ScrollView>
+            <CustomSettingComponent
+              name={'bell-ring-outline'}
+              size={26}
+              type={'MaterialCommunityIcons'}
+              text={'Notifications'}
+              onToggle={handleNotificationToggle}
+              isOn={notificationToggle}
+              icon2={notificationToggle ? <On /> : <Off />}
+            />
+            <View
+              style={{
+                alignItems: 'baseline',
+                height: moderateVerticalScale(21),
+                marginBottom: moderateVerticalScale(16),
+              }}>
+              <CustomWelcomeText
+                text={'Account information'}
+                letterSpacing={-0.5}
+                lineHeight={26}
+                fontFamily={'Rubik-Regular'}
+                fontWeight={'500'}
+                color={darkmodeColor}
+                fontSize={scale(20)}
+              />
+            </View>
+            <View>
+              <CustomDetailsComponent
+                icon1={<Person />}
+                text1={'Name'}
+                text2={userDisplayName}
+                icon2={<RightArrow />}
+              />
+              <CustomDetailsComponent
+                icon1={<Email />}
+                text1={'Email'}
+                text2={userEmailState}
+                icon2={<RightArrow />}
+              />
+              <CustomDetailsComponent
+                icon1={<Lock />}
+                text1={'Password'}
+                text2={'Click here to change Password'}
+                icon2={<RightArrow />}
+              />
+            </View>
+
+            <View style={styles.logoutView}>
+              <TouchableOpacity
+                onPress={() => {
+                  handleLogoutButtonClick();
+                }}>
+                <Text style={[styles.logoutTextStyle, {color: darkmodeColor}]}>
+                  Log out
+                </Text>
+              </TouchableOpacity>
+            </View>
           </View>
         </SafeAreaView>
       </View>
