@@ -14,11 +14,12 @@ import {useNavigation} from '@react-navigation/native';
 import SelectedCourseScreen from '../screens/SelectedCourseScreen/SelectedCourseScreen';
 import CourseLessonScreen from '../screens/CourseLessonScreen/CourseLessonScreen';
 import CourseTestScreen from '../screens/CourseTestScreen/CourseTestScreen';
+import CustomTheme from '../constants/CustomTheme';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
-  const navigation = useNavigation();
+  const {darkmodeColor, darkBackgroundColor} = CustomTheme();
 
   const [initialRoute, setInitialRoute] = useState(
     NavigationStringPath.LOGINSCREEN,
@@ -89,8 +90,12 @@ const Navigation = () => {
 
       <Stack.Screen
         name={NavigationStringPath.TABSCREENS}
-        component={TabScreen}
-      />
+        options={{
+          headerShown: false,
+          contentStyle: {backgroundColor: darkBackgroundColor},
+        }}>
+        {props => <TabScreen {...props} darkmodeColor={darkmodeColor} />}
+      </Stack.Screen>
     </Stack.Navigator>
   );
 };

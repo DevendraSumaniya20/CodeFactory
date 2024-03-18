@@ -1,32 +1,42 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import FontAwesome6 from 'react-native-vector-icons/FontAwesome6';
 import Entypo from 'react-native-vector-icons/Entypo';
 import Feather from 'react-native-vector-icons/Feather';
-import {moderateScale, scale} from 'react-native-size-matters';
+import {
+  moderateScale,
+  moderateVerticalScale,
+  scale,
+} from 'react-native-size-matters';
 import Color from '../../constants/Color';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import HomeScreen from '../HomeScreen/HomeScreen';
 import SettingScreen from '../SettingScreen/SettingScreen';
 import ProfileScreen from '../ProfileScreen/ProfileScreen';
+import CustomTheme from '../../constants/CustomTheme';
 
 const Tab = createBottomTabNavigator();
 
 const TabScreen = ({userGoogleInfo}) => {
+  const {darkmodeColor, darkBackgroundColor, darkBorderColor} = CustomTheme();
+
   return (
     <Tab.Navigator
       screenOptions={{
-        tabBarActiveTintColor: Color.RED,
         headerShown: false,
         tabBarStyle: {
-          borderTopLeftRadius: moderateScale(20),
-          borderTopRightRadius: moderateScale(20),
-          height: moderateScale(56),
+          height: moderateVerticalScale(50),
+          paddingVertical: moderateScale(6),
+          backgroundColor: darkBackgroundColor,
+          borderTopLeftRadius: moderateScale(10),
+          borderTopRightRadius: moderateScale(10),
         },
         tabBarLabelStyle: {
           marginBottom: moderateScale(5),
           fontSize: scale(10),
+          color: darkmodeColor,
         },
+        tabBarActiveTintColor: Color.THEMECOLOR,
       }}>
       <Tab.Screen
         name={NavigationStringPath.HOMESCREEN}
