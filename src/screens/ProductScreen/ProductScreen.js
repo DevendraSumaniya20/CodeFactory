@@ -26,6 +26,7 @@ import RazorpayCheckout from 'react-native-razorpay';
 import {APIKey} from '../../config/APIKey';
 
 import NavigationStringPath from '../../constants/NavigationStringPath';
+import CustomTheme from '../../constants/CustomTheme';
 
 const ProductScreen = ({route}) => {
   const [storedCourses, setStoredCourses] = useState([]);
@@ -35,6 +36,8 @@ const ProductScreen = ({route}) => {
   const navigation = useNavigation();
 
   const {userGoogleInfo, name} = route.params;
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   useEffect(() => {
     const isLiked = storedCourses.some(course => course.id === item.id);
@@ -141,50 +144,49 @@ const ProductScreen = ({route}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
       <SafeAreaView style={styles.subContainer}>
         <View style={styles.marginContainer}>
-          <View>
-            <CustomHeader
-              iconName={'chevron-back'}
-              color={Color.BLACK}
-              onPress={() => {
-                navigation.goBack();
-              }}
-              text={item.type}
-            />
-          </View>
+          <CustomHeader
+            iconName={'chevron-back'}
+            color={darkmodeColor}
+            onPress={() => {
+              navigation.goBack();
+            }}
+            text={item.type}
+          />
+
           <View style={styles.renderMainView}>
-            <View
-              style={{
-                alignItems: 'flex-start',
-                paddingTop: moderateVerticalScale(8),
-                borderRadius: moderateScale(8),
-              }}>
+            <View style={{alignItems: 'center', justifyContent: 'center'}}>
               <Image
                 source={item.image}
-                resizeMode="contain"
-                resizeMethod="auto"
-                style={styles.renderItemImage}
+                resizeMode="cover"
+                style={[
+                  styles.renderItemImage,
+                  {
+                    marginVertical: moderateVerticalScale(16),
+                    borderRadius: moderateScale(20),
+                  },
+                ]}
               />
-
-              <TouchableOpacity style={styles.renderTouchableOpacity}>
-                <Text style={styles.renderTouchableText}> ₹ {item.Price}</Text>
-              </TouchableOpacity>
+              <View style={styles.renderTouchableOpacity}>
+                <Text
+                  style={[styles.renderTouchableText, {color: darkmodeColor}]}>
+                  ₹ {item.Price}
+                </Text>
+              </View>
             </View>
 
             <View
               style={{
                 alignItems: 'flex-start',
-                marginHorizontal: moderateScale(16),
-                marginTop: moderateVerticalScale(16),
+                marginHorizontal: moderateScale(8),
+                marginTop: moderateVerticalScale(8),
               }}>
               <CustomWelcomeText
                 text={'About the Course'}
-                color={Color.BLACK}
                 letterSpacing={-0.5}
                 lineHeight={32}
-                fontSize={scale(24)}
                 fontFamily="Rubik-Regular"
                 fontWeight="500"
               />
@@ -199,12 +201,11 @@ const ProductScreen = ({route}) => {
           <View
             style={{
               alignItems: 'flex-start',
-              marginHorizontal: moderateScale(16),
-              marginVertical: moderateVerticalScale(16),
+              marginHorizontal: moderateScale(8),
+              marginVertical: moderateVerticalScale(8),
             }}>
             <CustomWelcomeText
               text={'Duration'}
-              color={Color.BLACK}
               letterSpacing={-0.5}
               lineHeight={26}
               fontSize={scale(20)}
@@ -216,11 +217,10 @@ const ProductScreen = ({route}) => {
           </View>
           <View
             style={{
-              marginTop: moderateVerticalScale(36),
+              marginTop: moderateVerticalScale(40),
               alignItems: 'center',
               flexDirection: 'row',
               justifyContent: 'space-evenly',
-              gap: moderateScale(8),
             }}>
             <CustomButton
               inlineStyle={{
@@ -240,8 +240,7 @@ const ProductScreen = ({route}) => {
                 borderRadius: moderateScale(8),
                 alignItems: 'center',
                 justifyContent: 'center',
-                borderColor: Color.GRAY,
-                // borderWidth: 0.2,
+                borderColor: darkBorderColor,
                 padding: moderateScale(6),
                 marginLeft: moderateScale(8),
               }}>
@@ -251,7 +250,7 @@ const ProductScreen = ({route}) => {
                 </>
               ) : (
                 <>
-                  <Heart height={30} width={30} fill={'#000'} />
+                  <Heart height={30} width={30} fill={darkmodeColor} />
                 </>
               )}
             </TouchableOpacity>

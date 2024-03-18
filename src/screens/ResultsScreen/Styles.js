@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
   },
 
   renderItemImage: {
-    height: moderateVerticalScale(200),
-    width: moderateScale(200),
+    height: moderateVerticalScale(250),
+    width: moderateScale(300),
   },
   renderTouchableOpacity: {
     alignItems: 'center',

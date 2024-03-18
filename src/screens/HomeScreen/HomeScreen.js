@@ -171,18 +171,12 @@ const HomeScreen = () => {
                 },
               ]}
             />
-            <TouchableOpacity
-              style={styles.renderTouchableOpacity}
-              onPress={() => {
-                navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {
-                  item,
-                });
-              }}>
+            <View style={styles.renderTouchableOpacity}>
               <Text
                 style={[styles.renderTouchableText, {color: darkmodeColor}]}>
                 ₹ {item.Price}
               </Text>
-            </TouchableOpacity>
+            </View>
           </View>
           <View
             style={[
