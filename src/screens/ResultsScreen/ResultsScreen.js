@@ -7,7 +7,7 @@ import {
   Image,
   TouchableOpacity,
 } from 'react-native';
-import {moderateScale} from 'react-native-size-matters';
+import {moderateScale, moderateVerticalScale} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
 import styles from './Styles';
 import data from '../../constants/Data';
@@ -16,6 +16,7 @@ import _ from 'lodash';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import CustomIcon from '../../components/CustomIcon';
 import NavigationStringPath from '../../constants/NavigationStringPath';
+import CustomTheme from '../../constants/CustomTheme';
 
 const ResultsScreen = () => {
   const route = useRoute();
@@ -27,6 +28,8 @@ const ResultsScreen = () => {
 
   const routeSearchValue = route.params?.searchValue || '';
   // const routeFilteredData = route.params?.filteredData || [];
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   useEffect(() => {
     handleSearch(routeSearchValue);
@@ -61,30 +64,50 @@ const ResultsScreen = () => {
         onPress={() => {
           navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {item: item});
         }}>
-        <View style={styles.renderMainView}>
-          <View
-            style={{
-              alignItems: 'flex-start',
-              height: moderateScaleVertical(194),
-              paddingTop: moderateScale(8),
-              borderRadius: moderateScale(8),
-            }}>
+        <View
+          style={[
+            styles.renderMainView,
+            {
+              backgroundColor: darkBackgroundColor,
+              borderColor: darkBorderColor,
+            },
+          ]}>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Image
               source={item.image}
-              resizeMode="contain"
-              resizeMethod="auto"
-              style={styles.renderItemImage}
+              resizeMode="cover"
+              style={[
+                styles.renderItemImage,
+                {
+                  marginVertical: moderateVerticalScale(16),
+                  borderRadius: moderateScale(20),
+                },
+              ]}
             />
-
-            <TouchableOpacity style={styles.renderTouchableOpacity}>
-              <Text style={styles.renderTouchableText}>₹ {item.Price}</Text>
+            <TouchableOpacity
+              style={styles.renderTouchableOpacity}
+              onPress={() => {
+                navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {
+                  item,
+                });
+              }}>
+              <Text
+                style={[styles.renderTouchableText, {color: darkmodeColor}]}>
+                ₹ {item.Price}
+              </Text>
             </TouchableOpacity>
           </View>
-
-          <View style={styles.renderSecondView}>
+          <View
+            style={[
+              styles.renderSecondView,
+              {backgroundColor: darkBackgroundColor},
+            ]}>
             <Text style={styles.renderDurationText}>{item.duration}</Text>
-            <Text style={styles.renderTypeText}>{item.type}</Text>
-            <Text style={styles.renderOtherDetailsText}>
+            <Text style={[styles.renderTypeText, {color: darkmodeColor}]}>
+              {item.type}
+            </Text>
+            <Text
+              style={[styles.renderOtherDetailsText, {color: darkmodeColor}]}>
               {item.otherDetails}
             </Text>
           </View>
@@ -95,21 +118,29 @@ const ResultsScreen = () => {
 
   const renderHeader = () => {
     return (
-      <View style={styles.resultContainer}>
-        <Text style={styles.resultText}> {resultCount} Results</Text>
+      <View
+        style={[
+          styles.resultContainer,
+          {backgroundColor: darkBackgroundColor},
+        ]}>
+        <Text style={[styles.resultText, {color: darkmodeColor}]}>
+          {resultCount} Results
+        </Text>
       </View>
     );
   };
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.subContainer}>
+    <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
+      <SafeAreaView
+        style={[styles.subContainer, {backgroundColor: darkBackgroundColor}]}>
         <View style={styles.marginContainer}>
           <View style={{marginTop: moderateScale(12)}}>
             <View
               style={{
                 justifyContent: 'space-between',
                 flexDirection: 'row',
+                marginVertical: moderateVerticalScale(8),
               }}>
               <TouchableOpacity
                 style={{
@@ -119,25 +150,35 @@ const ResultsScreen = () => {
                   height: moderateScale(46),
                   alignItems: 'center',
                   justifyContent: 'center',
+                  borderColor: darkBorderColor,
                 }}
                 onPress={handleBackToHome}>
-                <CustomIcon name={'chevron-back'} size={16} />
+                <CustomIcon name={'chevron-back'} color={darkmodeColor} />
               </TouchableOpacity>
-              <View style={{paddingLeft: moderateScale(6)}} />
-              <CustomSearch
-                inputStyle={{
-                  width: moderateScale(260),
-                  padding: moderateScale(10),
-                }}
-                placeholder="Search Your Favorite Course"
-                onChangeText={handleSearch}
-                value={searchValue}
-                rightIcon={'search-outline'}
-              />
+
+              <View
+                style={{
+                  backgroundColor: darkBackgroundColor,
+                  borderColor: darkBorderColor,
+                  borderRadius: moderateScale(16),
+                  marginLeft: moderateScale(10),
+                }}>
+                <CustomSearch
+                  inputStyle={{
+                    width: '80%',
+                    paddingHorizontal: moderateScale(16),
+                  }}
+                  placeholder="Search Your Fav Course"
+                  placeholderTextColor={darkmodeColor}
+                  onChangeText={handleSearch}
+                  value={searchValue}
+                  rightIcon={'search-outline'}
+                />
+              </View>
             </View>
           </View>
 
-          <View style={{backgroundColor: '#FFF'}}>
+          <View style={[{backgroundColor: darkBackgroundColor}]}>
             {renderHeader()}
             <FlatList
               data={filteredData}

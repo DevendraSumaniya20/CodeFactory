@@ -7,7 +7,7 @@ import {
 } from 'react-native-size-matters';
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: Color.WHITE},
+  container: {flex: 1},
   subContainer: {
     flex: 1,
   },
@@ -29,7 +29,7 @@ const styles = StyleSheet.create({
     fontSize: scale(24),
     fontWeight: '500',
     lineHeight: 32,
-    color: Color.BLACK,
+
     letterSpacing: -0.5,
   },
 
@@ -41,8 +41,8 @@ const styles = StyleSheet.create({
   },
 
   renderItemImage: {
-    height: moderateScale(180),
-    width: moderateScale(343),
+    height: moderateVerticalScale(200),
+    width: moderateScale(200),
   },
   renderTouchableOpacity: {
     alignItems: 'center',
@@ -59,7 +59,6 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     lineHeight: 20,
     textAlign: 'right',
-    color: Color.WHITE,
   },
   renderSecondView: {
     marginHorizontal: moderateScale(16),
@@ -85,7 +84,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontFamily: 'Rubik-Regular',
     lineHeight: 21,
-    color: Color.BLACK,
   },
 
   categoryView: {
