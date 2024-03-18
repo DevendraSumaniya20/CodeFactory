@@ -11,8 +11,8 @@ import {
 import styles from './Styles';
 import CustomHeader from '../../components/CustomHeader';
 import Color from '../../constants/Color';
-import {useNavigation, useIsFocused} from '@react-navigation/native'; // Import useIsFocused
-import {CourseSavedSvg, NotSavedSvg} from '../../constants/SvgPath';
+import {useNavigation, useIsFocused} from '@react-navigation/native';
+import {NotSavedSvg} from '../../constants/SvgPath';
 import CustomWelcomeText from '../../components/CustomWelcomeText';
 import CustomDescriptionText from '../../components/CustomDescriptionText';
 import {
@@ -23,6 +23,7 @@ import {
 import CustomButton from '../../components/CustomButton';
 import {getData} from '../../utils/AsyncStorage';
 import NavigationStringPath from '../../constants/NavigationStringPath';
+import CustomTheme from '../../constants/CustomTheme';
 
 const CourseSavedScreen = ({route}) => {
   const navigation = useNavigation();
@@ -33,6 +34,8 @@ const CourseSavedScreen = ({route}) => {
   const [courseAvailable, setCourseAvailable] = useState(
     addedCourses.length > 0,
   );
+
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   useEffect(() => {
     const retrieveStoredCourses = async () => {
@@ -51,26 +54,38 @@ const CourseSavedScreen = ({route}) => {
         onPress={() => {
           navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {item: item});
         }}>
-        <View style={styles.renderMainView}>
+        <View
+          style={[
+            styles.renderMainView,
+            {
+              backgroundColor: darkBackgroundColor,
+              borderColor: darkBorderColor,
+            },
+          ]}>
           <View
             style={{
-              alignItems: 'flex-start',
-              height: moderateVerticalScale(194),
-              paddingTop: moderateScale(8),
-              borderRadius: moderateScale(8),
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingVertical: moderateVerticalScale(16),
             }}>
             <Image
               source={item.image}
-              resizeMode="contain"
-              resizeMethod="auto"
+              resizeMode="cover"
               style={styles.renderItemImage}
             />
           </View>
 
-          <View style={styles.renderSecondView}>
+          <View
+            style={[
+              styles.renderSecondView,
+              {backgroundColor: darkBackgroundColor},
+            ]}>
             <Text style={styles.renderDurationText}>{item.duration}</Text>
-            <Text style={styles.renderTypeText}>{item.type}</Text>
-            <Text style={styles.renderOtherDetailsText}>
+            <Text style={[styles.renderTypeText, {color: darkmodeColor}]}>
+              {item.type}
+            </Text>
+            <Text
+              style={[styles.renderOtherDetailsText, {color: darkmodeColor}]}>
               {item.otherDetails}
             </Text>
           </View>
@@ -80,19 +95,18 @@ const CourseSavedScreen = ({route}) => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
       <SafeAreaView style={styles.subContainer}>
         <View style={styles.marginContainer}>
           <CustomHeader
             iconName={'chevron-back'}
-            color={Color.BLACK}
             onPress={() => {
               navigation.goBack();
             }}
             text={'Saved Courses'}
           />
 
-          <View style={{backgroundColor: '#FFF'}}>
+          <View style={[{backgroundColor: darkBackgroundColor}]}>
             {storedCourses.length > 0 ? (
               <FlatList
                 data={storedCourses}
@@ -115,14 +129,12 @@ const CourseSavedScreen = ({route}) => {
                     fontSize={scale(24)}
                     letterSpacing={-0.5}
                     lineHeight={32}
-                    color={Color.BLACK}
                   />
                 </View>
                 <View style={styles.descriptionTextView}>
                   <CustomDescriptionText
                     fontsize={scale(14)}
                     lineHeight={21}
-                    color={Color.GRAY}
                     fontFamily="Rubik-Regular"
                     fontWeight="400"
                     text={'Try saving the course  '}
@@ -130,7 +142,6 @@ const CourseSavedScreen = ({route}) => {
                   <CustomDescriptionText
                     fontsize={scale(14)}
                     lineHeight={21}
-                    color={Color.GRAY}
                     fontFamily="Rubik-Regular"
                     fontWeight="400"
                     text={'after you will see Courses  '}
