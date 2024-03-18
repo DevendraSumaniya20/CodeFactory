@@ -7,7 +7,7 @@ import {
 } from 'react-native-size-matters';
 
 const styles = StyleSheet.create({
-  container: {flex: 1, backgroundColor: Color.WHITE},
+  container: {flex: 1},
   subContainer: {
     flex: 1,
   },
@@ -34,8 +34,8 @@ const styles = StyleSheet.create({
   },
 
   renderItemImage: {
-    height: moderateScale(190),
-    width: moderateScale(343),
+    height: moderateVerticalScale(260),
+    width: moderateScale(310),
   },
 
   iconContainer: {
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     top: '50%',
     left: '50%',
     transform: [{translateX: -40}, {translateY: -40}],
-    zIndex: 1, // Ensure the icon is above the image
+    zIndex: 1,
   },
   renderTouchableOpacity: {
     alignItems: 'center',

@@ -7,7 +7,7 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Alert, // Add this import
+  Alert,
 } from 'react-native';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import styles from './Styles';
@@ -27,15 +27,15 @@ import {getData, removeData} from '../../utils/AsyncStorage';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 
 import CustomIcon from '../../components/CustomIcon';
+import CustomTheme from '../../constants/CustomTheme';
 
 const YourCourseScreen = ({route}) => {
   const navigation = useNavigation();
 
   // const {item} = route.params || {};
 
-  // console.log('YourCourse Screen data ', item);
-
   const [storedCourses, setStoredCourses] = useState([]);
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   useEffect(() => {
     const retrieveStoredCourses = async () => {
@@ -76,6 +76,16 @@ const YourCourseScreen = ({route}) => {
   };
 
   const renderItem = ({item}) => {
+    const handleIconPress = () => {
+      navigation.navigate(NavigationStringPath.SELECTED_COURSE_SCREEN, {
+        selectedCourse: item,
+      });
+    };
+
+    const handleDeleteButtonPress = () => {
+      handleDelete(item);
+    };
+
     return (
       <TouchableOpacity
         activeOpacity={0.5}
@@ -84,46 +94,52 @@ const YourCourseScreen = ({route}) => {
             selectedCourse: item,
           });
         }}>
-        <View style={styles.renderMainView}>
+        <View
+          style={[
+            styles.renderMainView,
+            {
+              backgroundColor: darkBackgroundColor,
+              borderColor: darkBorderColor,
+            },
+          ]}>
           <View
             style={{
-              position: 'relative',
-              alignItems: 'flex-start',
-              height: moderateVerticalScale(194),
-              paddingTop: moderateScale(8),
-              borderRadius: moderateScale(8),
+              alignItems: 'center',
+              justifyContent: 'center',
+              paddingVertical: moderateVerticalScale(16),
             }}>
             <Image
               source={item.image}
-              resizeMode="contain"
-              resizeMethod="auto"
-              style={styles.renderItemImage}
+              resizeMode="cover"
+              style={[
+                styles.renderItemImage,
+                {
+                  borderRadius: moderateScale(20),
+                },
+              ]}
             />
             <TouchableOpacity
               style={styles.iconContainer}
-              onPress={() => {
-                navigation.navigate(
-                  NavigationStringPath.SELECTED_COURSE_SCREEN,
-                  {selectedCourse: item},
-                );
-              }}>
+              onPress={handleIconPress}>
               <CustomIcon
                 name={'caret-forward-circle-outline'}
                 size={scale(60)}
-                color="#FFF"
-                style={styles.iconStyle}
+                color={darkmodeColor}
               />
             </TouchableOpacity>
           </View>
           <View style={styles.renderSecondView}>
             <Text style={styles.renderDurationText}>{item.duration}</Text>
-            <Text style={styles.renderTypeText}>{item.type}</Text>
-            <Text style={styles.renderOtherDetailsText}>
+            <Text style={[styles.renderTypeText, {color: darkmodeColor}]}>
+              {item.type}
+            </Text>
+            <Text
+              style={[styles.renderOtherDetailsText, {color: darkmodeColor}]}>
               {item.otherDetails}
             </Text>
           </View>
           <CustomButton
-            onPress={() => handleDelete(item)}
+            onPress={handleDeleteButtonPress}
             inlineStyle={{width: moderateScale(300)}}
             text={'Delete'}
           />
@@ -133,19 +149,19 @@ const YourCourseScreen = ({route}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.subContainer}>
+    <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
+      <SafeAreaView
+        style={[styles.subContainer, {backgroundColor: darkBackgroundColor}]}>
         <View style={styles.marginContainer}>
           <CustomHeader
             iconName={'chevron-back'}
-            color={Color.BLACK}
             onPress={() => {
               navigation.goBack();
             }}
             text={'Your Courses'}
           />
 
-          <View style={{backgroundColor: '#FFF'}}>
+          <View style={[{backgroundColor: darkBackgroundColor}]}>
             {storedCourses.length > 0 ? (
               <FlatList
                 data={storedCourses}
@@ -158,7 +174,11 @@ const YourCourseScreen = ({route}) => {
               />
             ) : (
               <>
-                <View style={styles.imageView}>
+                <View
+                  style={[
+                    styles.imageView,
+                    {backgroundColor: darkBackgroundColor},
+                  ]}>
                   <CourseSavedSvg />
                 </View>
                 <View style={styles.welcomeTextView}>
@@ -168,14 +188,12 @@ const YourCourseScreen = ({route}) => {
                     fontSize={scale(24)}
                     letterSpacing={-0.5}
                     lineHeight={32}
-                    color={Color.BLACK}
                   />
                 </View>
                 <View style={styles.descriptionTextView}>
                   <CustomDescriptionText
                     fontsize={scale(14)}
                     lineHeight={21}
-                    color={Color.GRAY}
                     fontFamily="Rubik-Regular"
                     fontWeight="400"
                     text={'Try to Add the course  '}
@@ -183,7 +201,6 @@ const YourCourseScreen = ({route}) => {
                   <CustomDescriptionText
                     fontsize={scale(14)}
                     lineHeight={21}
-                    color={Color.GRAY}
                     fontFamily="Rubik-Regular"
                     fontWeight="400"
                     text={'after you will see your Courses '}
