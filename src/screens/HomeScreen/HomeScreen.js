@@ -12,7 +12,7 @@ import {
 import {moderateScale, moderateVerticalScale} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
 import styles from './Styles';
-import {BellIcon} from '../../constants/SvgPath';
+import {Bell, BellIcon} from '../../constants/SvgPath';
 import CustomCategoryButton from '../../components/CustomCategoryButton';
 import data from '../../constants/Data';
 import {moderateScaleVertical} from '../../constants/responsiveSize';
@@ -154,15 +154,21 @@ const HomeScreen = () => {
         <View
           style={[
             styles.renderMainView,
-            {backgroundColor: darkBackgroundColor},
+            {
+              backgroundColor: darkBackgroundColor,
+              borderColor: darkBorderColor,
+            },
           ]}>
-          <View style={{alignItems: 'center'}}>
+          <View style={{alignItems: 'center', justifyContent: 'center'}}>
             <Image
               source={item.image}
               resizeMode="cover"
               style={[
                 styles.renderItemImage,
-                {marginTop: moderateVerticalScale(8)},
+                {
+                  marginVertical: moderateVerticalScale(16),
+                  borderRadius: moderateScale(20),
+                },
               ]}
             />
             <TouchableOpacity
@@ -172,13 +178,23 @@ const HomeScreen = () => {
                   item,
                 });
               }}>
-              <Text style={styles.renderTouchableText}> ₹ {item.Price}</Text>
+              <Text
+                style={[styles.renderTouchableText, {color: darkmodeColor}]}>
+                ₹ {item.Price}
+              </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.renderSecondView}>
+          <View
+            style={[
+              styles.renderSecondView,
+              {backgroundColor: darkBackgroundColor},
+            ]}>
             <Text style={styles.renderDurationText}>{item.duration}</Text>
-            <Text style={styles.renderTypeText}>{item.type}</Text>
-            <Text style={styles.renderOtherDetailsText}>
+            <Text style={[styles.renderTypeText, {color: darkmodeColor}]}>
+              {item.type}
+            </Text>
+            <Text
+              style={[styles.renderOtherDetailsText, {color: darkmodeColor}]}>
               {item.otherDetails}
             </Text>
           </View>
@@ -190,29 +206,56 @@ const HomeScreen = () => {
   const onSubmitted = () => {};
 
   return (
-    <View style={styles.container}>
-      <SafeAreaView style={styles.subContainer}>
+    <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
+      <SafeAreaView
+        style={[styles.subContainer, {backgroundColor: darkBackgroundColor}]}>
         <View style={styles.marginContainer}>
-          <View style={styles.topHeaderView}>
+          <View
+            style={[
+              styles.topHeaderView,
+              {backgroundColor: darkBackgroundColor},
+            ]}>
             <View
               style={{
                 alignItems: 'flex-start',
               }}>
-              <Text style={styles.helloTextStyle}>{greeting}</Text>
+              <Text style={[styles.helloTextStyle, {color: darkmodeColor}]}>
+                {greeting}
+              </Text>
 
-              <Text style={styles.userTextStyle}>{name}</Text>
+              <Text style={[styles.userTextStyle, {color: darkmodeColor}]}>
+                {name}
+              </Text>
             </View>
-            <View style={styles.notificationView}>
-              <BellIcon width={moderateScale(24)} height={moderateScale(24)} />
+            <View
+              style={[
+                styles.notificationView,
+                {
+                  backgroundColor: darkBackgroundColor,
+                  borderColor: darkBorderColor,
+                },
+              ]}>
+              <Bell
+                width={moderateScale(24)}
+                height={moderateScale(24)}
+                fill={darkmodeColor}
+              />
             </View>
           </View>
-          <View style={{marginTop: moderateScale(12)}}>
+          <View
+            style={{
+              marginTop: moderateScale(12),
+              backgroundColor: darkBackgroundColor,
+              borderColor: darkBorderColor,
+              borderRadius: moderateScale(16),
+            }}>
             <CustomSearch
               inputStyle={{
                 width: '90%',
                 paddingHorizontal: moderateScale(16),
               }}
               placeholder="Search"
+              placeholderTextColor={darkmodeColor}
               onChangeText={handleInputWithDebounce}
               value={searchValue}
               rightIcon={'search-outline'}
@@ -225,8 +268,14 @@ const HomeScreen = () => {
             />
           </View>
 
-          <View style={styles.categoryView}>
-            <Text style={styles.categoryTextStyle}>Category :</Text>
+          <View
+            style={[
+              styles.categoryView,
+              {backgroundColor: darkBackgroundColor},
+            ]}>
+            <Text style={[styles.categoryTextStyle, {color: darkmodeColor}]}>
+              Category :
+            </Text>
             <ScrollView horizontal showsHorizontalScrollIndicator={false}>
               {getUniqueCategories().map(category => (
                 <CustomCategoryButton
@@ -237,7 +286,13 @@ const HomeScreen = () => {
               ))}
             </ScrollView>
           </View>
-          <View style={{backgroundColor: '#FFF'}}>
+          <View
+            style={[
+              {
+                backgroundColor: darkBackgroundColor,
+                borderColor: darkBorderColor,
+              },
+            ]}>
             <FlatList
               data={data}
               renderItem={renderItem}

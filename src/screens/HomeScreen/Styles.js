@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   renderTouchableText: {
     fontFamily: 'Rubik-Regular',
     fontSize: scale(14),
-    fontWeight: '500',
+    fontWeight: 'bold',
     lineHeight: 16,
     textAlign: 'right',
   },
