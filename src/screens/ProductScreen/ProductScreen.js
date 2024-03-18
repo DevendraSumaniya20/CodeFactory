@@ -103,7 +103,7 @@ const ProductScreen = ({route}) => {
           contact: '9191919191',
           name: name,
         },
-        theme: {color: Color.THEMECOLOR},
+        theme: {color: darkmodeColor, backgroundColor: darkBackgroundColor},
       };
 
       RazorpayCheckout.open(options)
@@ -192,7 +192,11 @@ const ProductScreen = ({route}) => {
               />
 
               <View style={styles.renderSecondView}>
-                <Text style={styles.renderOtherDetailsText}>
+                <Text
+                  style={[
+                    styles.renderOtherDetailsText,
+                    {color: darkmodeColor},
+                  ]}>
                   {item.aboutCourseDetails}
                 </Text>
               </View>
@@ -213,7 +217,7 @@ const ProductScreen = ({route}) => {
               fontWeight="500"
             />
 
-            <Text style={styles.renderDurationText}>{item.duration}</Text>
+            <Text style={[styles.renderDurationText, {}]}>{item.duration}</Text>
           </View>
           <View
             style={{
