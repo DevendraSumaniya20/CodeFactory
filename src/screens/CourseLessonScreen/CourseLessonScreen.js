@@ -20,29 +20,31 @@ import {
 
 import CustomBorderComponent from '../../components/CustomBorderComponent';
 import NavigationStringPath from '../../constants/NavigationStringPath';
+import CustomTheme from '../../constants/CustomTheme';
 
 const CourseLessonScreen = ({route}) => {
   const navigation = useNavigation();
 
-  const {selectedCourse, topicName, totalTopics, questions} =
-    route.params || {};
+  const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
+
+  const {selectedCourse, topicName, questions} = route.params || {};
   const [selectedComponent, setSelectedComponent] = useState('Lessons');
 
   return (
     <>
       <ScrollView
-        style={{flex: 1, backgroundColor: '#fff'}}
+        style={{flex: 1, backgroundColor: darkBackgroundColor}}
         contentContainerStyle={{
           paddingBottom: moderateVerticalScale(400),
         }}
         scrollEnabled={true}
         showsVerticalScrollIndicator={false}>
-        <View style={styles.container}>
+        <View
+          style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
           <SafeAreaView style={styles.subContainer}>
             <View style={styles.marginContainer}>
               <CustomHeader
                 iconName={'chevron-back'}
-                color={Color.BLACK}
                 onPress={() => {
                   navigation.goBack();
                 }}
@@ -55,21 +57,12 @@ const CourseLessonScreen = ({route}) => {
                     fontSize: scale(24),
                     fontWeight: '500',
                     textTransform: 'capitalize',
-                    color: Color.BLACK,
+                    color: darkmodeColor,
                     marginTop: moderateVerticalScale(16),
                     marginBottom: moderateVerticalScale(8),
                   }}>
                   {topicName}
                 </Text>
-                {/* <Text
-                  style={{
-                    marginBottom: moderateVerticalScale(8),
-                    color: Color.GRAY,
-                    fontWeight: '300',
-                    fontSize: scale(14),
-                  }}>
-                  3 of 4 Leassons
-                </Text> */}
               </View>
 
               <ScrollView horizontal showsHorizontalScrollIndicator={false}>
@@ -89,14 +82,17 @@ const CourseLessonScreen = ({route}) => {
                       borderTopRightRadius: moderateScale(1),
                       borderBottomRightRadius: moderateScale(1),
                       paddingVertical: moderateScale(12),
-                      backgroundColor: '#F8F2EE',
+                      backgroundColor: darkBackgroundColor,
                       width: moderateScale(120),
                       height: moderateVerticalScale(50),
                     }}
                     inLineTextStyle={{
                       fontWeight: '500',
                       textTransform: 'capitalize',
-                      color: selectedComponent === 'Lessons' ? 'black' : 'gray',
+                      color:
+                        selectedComponent === 'Lessons'
+                          ? Color.THEMECOLOR
+                          : Color.GRAY,
                     }}
                     onPress={() => setSelectedComponent('Lessons')}
                   />
@@ -106,14 +102,17 @@ const CourseLessonScreen = ({route}) => {
                     inLineStyle={{
                       borderRadius: 1,
                       paddingVertical: moderateScale(12),
-                      backgroundColor: '#F8F2EE',
+                      backgroundColor: darkBackgroundColor,
                       width: moderateScale(120),
                       height: moderateVerticalScale(50),
                     }}
                     inLineTextStyle={{
                       fontWeight: '500',
                       textTransform: 'capitalize',
-                      color: selectedComponent === 'Tests' ? 'black' : 'gray',
+                      color:
+                        selectedComponent === 'Tests'
+                          ? Color.THEMECOLOR
+                          : Color.GRAY,
                     }}
                     onPress={() => {
                       navigation.navigate(
@@ -135,7 +134,7 @@ const CourseLessonScreen = ({route}) => {
                       borderTopRightRadius: moderateScale(20),
                       borderBottomRightRadius: moderateScale(20),
                       paddingVertical: moderateScale(12),
-                      backgroundColor: '#F8F2EE',
+                      backgroundColor: darkBackgroundColor,
                       width: moderateScale(170),
                       height: moderateVerticalScale(50),
                     }}
@@ -143,7 +142,9 @@ const CourseLessonScreen = ({route}) => {
                       fontWeight: '500',
                       textTransform: 'capitalize',
                       color:
-                        selectedComponent === 'Discussion' ? 'black' : 'gray',
+                        selectedComponent === 'Discussion'
+                          ? Color.THEMECOLOR
+                          : Color.GRAY,
                     }}
                     onPress={() => setSelectedComponent('Discussion')}
                   />
@@ -152,47 +153,31 @@ const CourseLessonScreen = ({route}) => {
 
               <View
                 style={{
-                  width: moderateScale(343),
-                  height: moderateVerticalScale(250),
                   borderRadius: moderateScale(8),
-                  borderColor: Color.BLACK,
-                  borderWidth: 1,
+                  borderColor: darkBorderColor,
                   alignItems: 'center',
-                  marginTop: moderateVerticalScale(8),
+                  borderWidth: 1,
+                  justifyContent: 'center',
+                  padding: moderateScale(16),
+                  marginVertical: moderateVerticalScale(8),
                 }}>
                 <Image
                   source={selectedCourse.image}
                   style={{
-                    width: moderateScale(343),
-                    height: moderateVerticalScale(194),
-                    borderRadius: moderateScale(8),
-                    resizeMode: 'contain',
+                    width: moderateScale(320),
+                    height: moderateVerticalScale(250),
+                    borderRadius: moderateScale(20),
                   }}
                 />
               </View>
-              {/* <View
-                style={{
-                  alignItems: 'flex-end',
-                  marginRight: moderateScale(8),
-                }}>
-                <TouchableOpacity
-                  onPress={() => {
-                    Alert.alert('You can continue Course ');
-                  }}>
-                  <CustomIcon
-                    name={'caret-forward-circle-outline'}
-                    size={scale(60)}
-                    color={Color.LIGHTGREEEN}
-                  />
-                </TouchableOpacity>
-              </View> */}
+
               <Text
                 style={{
                   fontSize: scale(20),
                   marginTop: moderateVerticalScale(8),
                   fontWeight: '800',
                   fontFamily: 'Rubik-Regular',
-                  color: Color.BLACK,
+                  color: darkmodeColor,
                 }}>
                 Intoduction
               </Text>
@@ -202,7 +187,7 @@ const CourseLessonScreen = ({route}) => {
                   marginTop: moderateVerticalScale(4),
                   fontWeight: '400',
                   fontFamily: 'Rubik-Regular',
-                  color: Color.GRAY,
+                  color: darkmodeColor,
                 }}>
                 {selectedCourse.aboutCourseDetails}
               </Text>

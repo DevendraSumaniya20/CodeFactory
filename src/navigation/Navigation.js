@@ -15,6 +15,7 @@ import SelectedCourseScreen from '../screens/SelectedCourseScreen/SelectedCourse
 import CourseLessonScreen from '../screens/CourseLessonScreen/CourseLessonScreen';
 import CourseTestScreen from '../screens/CourseTestScreen/CourseTestScreen';
 import CustomTheme from '../constants/CustomTheme';
+import CourseResultScreen from '../screens/CourseResultScreen/CourseResultScreen';
 
 const Stack = createNativeStackNavigator();
 
@@ -86,6 +87,10 @@ const Navigation = () => {
       <Stack.Screen
         name={NavigationStringPath.COURSE_TESTSCREEN}
         component={CourseTestScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.COURSE_RESULTSCREEN}
+        component={CourseResultScreen}
       />
 
       <Stack.Screen

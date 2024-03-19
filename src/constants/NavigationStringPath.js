@@ -14,4 +14,5 @@ export default {
   FORGOTSCREEN: 'ForgotScreen',
   COURSE_SAVED_SCREEN: 'CourseSavedScreen',
   SELECTED_COURSE_SCREEN: 'SelectedCourseScreen',
+  COURSE_RESULTSCREEN: 'CourseResultScreen',
 };
