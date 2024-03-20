@@ -20,7 +20,7 @@ const CourseTestScreen = ({route}) => {
   const {topicName, questions, selectedCourse, resetQuiz} = route.params || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [timer, setTimer] = useState(15);
+  const [timer, setTimer] = useState(10);
   const [score, setScore] = useState(0);
   const navigation = useNavigation();
   const {darkmodeColor, darkBackgroundColor, darkBorderColor} = CustomTheme();
@@ -29,7 +29,7 @@ const CourseTestScreen = ({route}) => {
     if (resetQuiz) {
       setCurrentQuestionIndex(0);
       setSelectedAnswer(null);
-      setTimer(15);
+      setTimer(10);
       setScore(0);
     }
   }, [resetQuiz]);
@@ -40,7 +40,7 @@ const CourseTestScreen = ({route}) => {
         if (prevTimer === 0) {
           clearInterval(interval);
           handleTimeUp();
-          return 15;
+          return 10;
         }
         return prevTimer - 1;
       });
@@ -70,11 +70,11 @@ const CourseTestScreen = ({route}) => {
           totalScore: calculateTotalScore(),
           selectedCourse,
           topicName,
-          totalQuestions: questions.length, // Total questions passed to result screen
+          totalQuestions: questions.length,
           questions: questions,
         });
       }
-      setTimer(15);
+      setTimer(10);
     } else {
       Alert.alert(
         'No Answer Selected',
@@ -87,13 +87,14 @@ const CourseTestScreen = ({route}) => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(prevIndex => prevIndex + 1);
       setSelectedAnswer(null);
-      setTimer(15);
-      console.log("Time's up! Score:", score);
+      setTimer(10);
     } else {
-      navigation.navigate(NavigationStringPath.COURSE_RESULTSCREEN, {
-        totalScore: calculateTotalScore(),
-        totalQuestions: questions.length, // Total questions passed to result screen
-      });
+      setTimeout(() => {
+        navigation.navigate(NavigationStringPath.COURSE_RESULTSCREEN, {
+          totalScore: calculateTotalScore(),
+          totalQuestions: questions.length,
+        });
+      }, 0);
     }
   };
 
@@ -124,10 +125,8 @@ const CourseTestScreen = ({route}) => {
     ));
   };
 
-  // New feature: Progress Bar
   const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
 
-  // New feature: Question Number
   const questionNumber = currentQuestionIndex + 1;
 
   return (
@@ -160,7 +159,7 @@ const CourseTestScreen = ({route}) => {
                 }}>
                 {topicName}
               </Text>
-              {/* New feature: Progress Bar */}
+
               <View
                 style={[
                   styles.progressBar,
@@ -174,7 +173,7 @@ const CourseTestScreen = ({route}) => {
                   }}
                 />
               </View>
-              {/* New feature: Question Number */}
+
               <Text style={[styles.questionNumber, {color: darkmodeColor}]}>
                 Question {questionNumber}/{questions.length}
               </Text>

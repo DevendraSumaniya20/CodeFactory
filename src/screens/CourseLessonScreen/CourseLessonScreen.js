@@ -162,7 +162,7 @@ const CourseLessonScreen = ({route}) => {
                   marginVertical: moderateVerticalScale(8),
                 }}>
                 <Image
-                  source={selectedCourse.image}
+                  source={selectedCourse?.image}
                   style={{
                     width: moderateScale(320),
                     height: moderateVerticalScale(250),
@@ -189,7 +189,7 @@ const CourseLessonScreen = ({route}) => {
                   fontFamily: 'Rubik-Regular',
                   color: darkmodeColor,
                 }}>
-                {selectedCourse.aboutCourseDetails}
+                {selectedCourse?.aboutCourseDetails}
               </Text>
             </View>
           </SafeAreaView>
