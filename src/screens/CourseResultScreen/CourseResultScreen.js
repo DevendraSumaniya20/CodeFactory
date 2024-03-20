@@ -1,48 +1,60 @@
-import {StyleSheet, Text, View} from 'react-native';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
-import CustomButton from '../../components/CustomButton';
-import {useNavigation} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 
-const CourseResultScreen = ({route}) => {
-  const {totalScore, questions} = route.params || {};
-  const navigation = useNavigation();
-
-  const handleAgainButtonPress = () => {
-    navigation.navigate(NavigationStringPath.COURSE_TESTSCREEN, {
-      resetQuiz: true,
-    });
-  };
+const CourseResultScreen = ({route, navigation}) => {
+  const {totalScore, totalQuestions, selectedCourse, topicName, questions} =
+    route.params;
 
   return (
     <View style={styles.container}>
       <Text style={styles.heading}>Course Result</Text>
-      <Text style={styles.scoreText}>Your Score: {totalScore}</Text>
-      <CustomButton text={'Again'} onPress={handleAgainButtonPress} />
+      <Text style={styles.resultText}>Your Score: {totalScore}</Text>
+      <Text style={styles.resultText}>
+        Total Questions Answered: {totalQuestions}
+      </Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() =>
+          navigation.navigate(NavigationStringPath.COURSE_LESSONSCREEN, {
+            selectedCourse,
+            topicName,
+            questions,
+          })
+        }>
+        <Text style={styles.buttonText}>Retake Test</Text>
+      </TouchableOpacity>
     </View>
   );
 };
 
+export default CourseResultScreen;
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
     justifyContent: 'center',
+    alignItems: 'center',
+    paddingHorizontal: 20,
   },
   heading: {
     fontSize: 24,
     fontWeight: 'bold',
     marginBottom: 20,
   },
-  scoreText: {
+  resultText: {
     fontSize: 18,
     marginBottom: 10,
   },
-  zeroScoreText: {
-    color: 'red',
-    fontSize: 16,
-    marginTop: 10,
+  button: {
+    backgroundColor: '#2196F3',
+    padding: 15,
+    marginTop: 20,
+    borderRadius: 5,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: 'bold',
   },
 });
-
-export default CourseResultScreen;

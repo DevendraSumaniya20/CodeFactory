@@ -67,8 +67,11 @@ const CourseTestScreen = ({route}) => {
         setSelectedAnswer(null);
       } else {
         navigation.navigate(NavigationStringPath.COURSE_RESULTSCREEN, {
-          score,
           totalScore: calculateTotalScore(),
+          selectedCourse,
+          topicName,
+          totalQuestions: questions.length, // Total questions passed to result screen
+          questions: questions,
         });
       }
       setTimer(15);
@@ -89,6 +92,7 @@ const CourseTestScreen = ({route}) => {
     } else {
       navigation.navigate(NavigationStringPath.COURSE_RESULTSCREEN, {
         totalScore: calculateTotalScore(),
+        totalQuestions: questions.length, // Total questions passed to result screen
       });
     }
   };
