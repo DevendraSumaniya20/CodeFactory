@@ -19,8 +19,8 @@ const CourseTestScreen = ({route}) => {
   const {topicName, questions, selectedCourse, resetQuiz} = route.params || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  // Commenting out timer related state and effect
-  // const [timer, setTimer] = useState(15);
+
+  const [timer, setTimer] = useState(15);
   const [score, setScore] = useState(0);
   const navigation = useNavigation();
   const {darkmodeColor, darkBackgroundColor, darkBorderColor} = CustomTheme();
@@ -31,32 +31,31 @@ const CourseTestScreen = ({route}) => {
     }
   }, [resetQuiz]);
 
-  // Commenting out timer related effect
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setTimer(prevTimer => {
-  //       if (prevTimer === 0) {
-  //         clearInterval(interval);
-  //         handleTimeUp();
-  //         return 15;
-  //       } else if (prevTimer === 5 && selectedAnswer === null) {
-  //         Alert.alert(
-  //           'No Answer Selected',
-  //           'Please select an answer before continuing.',
-  //         );
-  //       }
-  //       return prevTimer - 1;
-  //     });
-  //   }, 1000);
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTimer(prevTimer => {
+        if (prevTimer === 0) {
+          clearInterval(interval);
+          handleTimeUp();
+          return 15;
+        } else if (prevTimer === 5 && selectedAnswer === null) {
+          Alert.alert(
+            'No Answer Selected',
+            'Please select an answer before continuing.',
+          );
+        }
+        return prevTimer - 1;
+      });
+    }, 1000);
 
-  //   return () => clearInterval(interval);
-  // }, [currentQuestionIndex, selectedAnswer]);
+    return () => clearInterval(interval);
+  }, [currentQuestionIndex, selectedAnswer]);
 
   const resetQuizState = () => {
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
-    // Resetting timer state
-    // setTimer(15);
+
+    setTimer(15);
     setScore(0);
   };
 
@@ -81,8 +80,8 @@ const CourseTestScreen = ({route}) => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
-      // Resetting timer state
-      // setTimer(15);
+
+      setTimer(15);
     } else {
       navigateToResultScreen();
     }
@@ -181,15 +180,15 @@ const CourseTestScreen = ({route}) => {
               <Text style={[styles.questionNumber, {color: darkmodeColor}]}>
                 Question {questionNumber}/{questions.length}
               </Text>
-              {/* Commenting out timer */}
-              {/* <View style={styles.timerContainer}>
+
+              <View style={styles.timerContainer}>
                 <Text style={[styles.timer, {color: darkmodeColor}]}>
                   {timer}
                 </Text>
-              </View> */}
-              {/* <Text style={[styles.scoreText, {color: darkmodeColor}]}>
+              </View>
+              <Text style={[styles.scoreText, {color: darkmodeColor}]}>
                 Score: {score}
-              </Text> */}
+              </Text>
             </View>
             <View
               style={[
