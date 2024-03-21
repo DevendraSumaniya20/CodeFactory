@@ -1,10 +1,18 @@
-import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import React from 'react';
+import {StyleSheet, Text, View, TouchableOpacity} from 'react-native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 
 const CourseResultScreen = ({route, navigation}) => {
   const {totalScore, totalQuestions, selectedCourse, topicName, questions} =
     route.params;
+
+  const handleRetakeTest = () => {
+    navigation.navigate(NavigationStringPath.COURSE_LESSONSCREEN, {
+      selectedCourse,
+      topicName,
+      questions,
+    });
+  };
 
   return (
     <View style={styles.container}>
@@ -13,15 +21,7 @@ const CourseResultScreen = ({route, navigation}) => {
       <Text style={styles.resultText}>
         Total Questions Answered: {totalQuestions}
       </Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() =>
-          navigation.navigate(NavigationStringPath.COURSE_LESSONSCREEN, {
-            selectedCourse,
-            topicName,
-            questions,
-          })
-        }>
+      <TouchableOpacity style={styles.button} onPress={handleRetakeTest}>
         <Text style={styles.buttonText}>Retake Test</Text>
       </TouchableOpacity>
     </View>

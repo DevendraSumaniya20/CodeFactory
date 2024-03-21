@@ -6,7 +6,6 @@ import {
   Text,
   TouchableOpacity,
   View,
-  Animated,
 } from 'react-native';
 import CustomHeader from '../../components/CustomHeader';
 import CustomTheme from '../../constants/CustomTheme';
@@ -27,10 +26,7 @@ const CourseTestScreen = ({route}) => {
 
   useEffect(() => {
     if (resetQuiz) {
-      setCurrentQuestionIndex(0);
-      setSelectedAnswer(null);
-      setTimer(10);
-      setScore(0);
+      resetQuizState();
     }
   }, [resetQuiz]);
 
@@ -40,41 +36,38 @@ const CourseTestScreen = ({route}) => {
         if (prevTimer === 0) {
           clearInterval(interval);
           handleTimeUp();
-          return 10;
+          return 15; // Change timer to 15 seconds
+        } else if (prevTimer === 5 && selectedAnswer === null) {
+          // If user hasn't selected an answer and 5 seconds remaining, show alert
+          Alert.alert(
+            'No Answer Selected',
+            'Please select an answer before continuing.',
+          );
         }
         return prevTimer - 1;
       });
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentQuestionIndex]);
+  }, [currentQuestionIndex, selectedAnswer]); // Update dependencies
+
+  const resetQuizState = () => {
+    setCurrentQuestionIndex(0);
+    setSelectedAnswer(null);
+    setTimer(10);
+    setScore(0);
+  };
 
   const handleAnswerSelection = optionIndex => setSelectedAnswer(optionIndex);
 
   const handleContinue = () => {
     if (selectedAnswer !== null) {
-      const correctAnswerIndex =
-        questions[currentQuestionIndex].correctAnswerIndex;
-      if (selectedAnswer === correctAnswerIndex) {
-        setScore(prevScore => prevScore + 10);
-        console.log('Correct Answer! Score:', score + 10);
-      } else {
-        setScore(0);
-        console.log('Incorrect Answer! Score: 0');
-      }
-      if (currentQuestionIndex < questions.length - 1) {
-        setCurrentQuestionIndex(currentQuestionIndex + 1);
-        setSelectedAnswer(null);
-      } else {
-        navigation.navigate(NavigationStringPath.COURSE_RESULTSCREEN, {
-          totalScore: calculateTotalScore(),
-          selectedCourse,
-          topicName,
-          totalQuestions: questions.length,
-          questions: questions,
-        });
-      }
-      setTimer(10);
+      // Calculate score here
+      const isCorrectAnswer =
+        selectedAnswer === questions[currentQuestionIndex].correctAnswerIndex;
+      const updatedScore = isCorrectAnswer ? score + 10 : 0;
+      setScore(updatedScore);
+      moveToNextQuestion();
     } else {
       Alert.alert(
         'No Answer Selected',
@@ -83,19 +76,32 @@ const CourseTestScreen = ({route}) => {
     }
   };
 
-  const handleTimeUp = () => {
+  const moveToNextQuestion = () => {
     if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex(prevIndex => prevIndex + 1);
+      setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
       setTimer(10);
     } else {
-      setTimeout(() => {
-        navigation.navigate(NavigationStringPath.COURSE_RESULTSCREEN, {
-          totalScore: calculateTotalScore(),
-          totalQuestions: questions.length,
-        });
-      }, 0);
+      navigateToResultScreen();
     }
+  };
+
+  const handleTimeUp = () => {
+    if (currentQuestionIndex < questions.length - 1) {
+      moveToNextQuestion();
+    } else {
+      navigateToResultScreen();
+    }
+  };
+
+  const navigateToResultScreen = () => {
+    navigation.navigate(NavigationStringPath.COURSE_RESULTSCREEN, {
+      totalScore: calculateTotalScore(),
+      totalQuestions: questions.length,
+      selectedCourse: {...selectedCourse},
+      topicName,
+      questions,
+    });
   };
 
   const calculateTotalScore = () => {
@@ -113,8 +119,8 @@ const CourseTestScreen = ({route}) => {
       <TouchableOpacity
         key={index}
         style={[
-          {backgroundColor: darkBackgroundColor, borderColor: darkBorderColor},
           styles.option,
+          {borderColor: darkBorderColor},
           selectedAnswer === index && styles.selectedOption,
         ]}
         onPress={() => handleAnswerSelection(index)}>
@@ -132,9 +138,7 @@ const CourseTestScreen = ({route}) => {
   return (
     <ScrollView
       style={{flex: 1, backgroundColor: darkBackgroundColor}}
-      contentContainerStyle={{
-        paddingBottom: moderateVerticalScale(400),
-      }}
+      contentContainerStyle={{paddingBottom: moderateVerticalScale(400)}}
       scrollEnabled={true}
       showsVerticalScrollIndicator={false}>
       <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
@@ -142,9 +146,7 @@ const CourseTestScreen = ({route}) => {
           <View style={styles.marginContainer}>
             <CustomHeader
               iconName={'chevron-back'}
-              onPress={() => {
-                navigation.goBack();
-              }}
+              onPress={() => navigation.goBack()}
               text={selectedCourse?.type}
             />
             <View style={{justifyContent: 'center', alignItems: 'center'}}>
@@ -177,14 +179,7 @@ const CourseTestScreen = ({route}) => {
               <Text style={[styles.questionNumber, {color: darkmodeColor}]}>
                 Question {questionNumber}/{questions.length}
               </Text>
-              <View
-                style={[
-                  styles.timerContainer,
-                  {
-                    backgroundColor: darkBackgroundColor,
-                    borderColor: darkBorderColor,
-                  },
-                ]}>
+              <View style={styles.timerContainer}>
                 <Text style={[styles.timer, {color: darkmodeColor}]}>
                   {timer}
                 </Text>
@@ -196,10 +191,7 @@ const CourseTestScreen = ({route}) => {
             <View
               style={[
                 styles.questionContainer,
-                {
-                  backgroundColor: darkBackgroundColor,
-                  borderColor: darkBorderColor,
-                },
+                {backgroundColor: darkBackgroundColor},
               ]}>
               <Text
                 style={[
@@ -221,12 +213,7 @@ const CourseTestScreen = ({route}) => {
                 renderOptions(questions[currentQuestionIndex]?.options)}
             </View>
 
-            <CustomButton
-              text={'Continue'}
-              onPress={() => {
-                handleContinue();
-              }}
-            />
+            <CustomButton text={'Continue'} onPress={handleContinue} />
           </View>
         </SafeAreaView>
       </View>
