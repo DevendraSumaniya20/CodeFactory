@@ -19,7 +19,8 @@ const CourseTestScreen = ({route}) => {
   const {topicName, questions, selectedCourse, resetQuiz} = route.params || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [timer, setTimer] = useState(15);
+  // Commenting out timer related state and effect
+  // const [timer, setTimer] = useState(15);
   const [score, setScore] = useState(0);
   const navigation = useNavigation();
   const {darkmodeColor, darkBackgroundColor, darkBorderColor} = CustomTheme();
@@ -30,30 +31,32 @@ const CourseTestScreen = ({route}) => {
     }
   }, [resetQuiz]);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimer(prevTimer => {
-        if (prevTimer === 0) {
-          clearInterval(interval);
-          handleTimeUp();
-          return 15;
-        } else if (prevTimer === 5 && selectedAnswer === null) {
-          Alert.alert(
-            'No Answer Selected',
-            'Please select an answer before continuing.',
-          );
-        }
-        return prevTimer - 1;
-      });
-    }, 1000);
+  // Commenting out timer related effect
+  // useEffect(() => {
+  //   const interval = setInterval(() => {
+  //     setTimer(prevTimer => {
+  //       if (prevTimer === 0) {
+  //         clearInterval(interval);
+  //         handleTimeUp();
+  //         return 15;
+  //       } else if (prevTimer === 5 && selectedAnswer === null) {
+  //         Alert.alert(
+  //           'No Answer Selected',
+  //           'Please select an answer before continuing.',
+  //         );
+  //       }
+  //       return prevTimer - 1;
+  //     });
+  //   }, 1000);
 
-    return () => clearInterval(interval);
-  }, [currentQuestionIndex, selectedAnswer]);
+  //   return () => clearInterval(interval);
+  // }, [currentQuestionIndex, selectedAnswer]);
 
   const resetQuizState = () => {
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
-    setTimer(15);
+    // Resetting timer state
+    // setTimer(15);
     setScore(0);
   };
 
@@ -78,7 +81,8 @@ const CourseTestScreen = ({route}) => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
-      setTimer(15);
+      // Resetting timer state
+      // setTimer(15);
     } else {
       navigateToResultScreen();
     }
@@ -123,7 +127,7 @@ const CourseTestScreen = ({route}) => {
         ]}
         onPress={() => handleAnswerSelection(index)}>
         <Text style={[styles.optionText, {color: darkmodeColor}]}>
-          {option.option} - {option.answer}
+          {option.option} . {option.answer}
         </Text>
       </TouchableOpacity>
     ));
@@ -136,7 +140,7 @@ const CourseTestScreen = ({route}) => {
   return (
     <ScrollView
       style={{flex: 1, backgroundColor: darkBackgroundColor}}
-      contentContainerStyle={{paddingBottom: moderateVerticalScale(400)}}
+      contentContainerStyle={{paddingBottom: moderateVerticalScale(100)}}
       scrollEnabled={true}
       showsVerticalScrollIndicator={false}>
       <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
@@ -177,14 +181,15 @@ const CourseTestScreen = ({route}) => {
               <Text style={[styles.questionNumber, {color: darkmodeColor}]}>
                 Question {questionNumber}/{questions.length}
               </Text>
-              <View style={styles.timerContainer}>
+              {/* Commenting out timer */}
+              {/* <View style={styles.timerContainer}>
                 <Text style={[styles.timer, {color: darkmodeColor}]}>
                   {timer}
                 </Text>
-              </View>
-              <Text style={[styles.scoreText, {color: darkmodeColor}]}>
+              </View> */}
+              {/* <Text style={[styles.scoreText, {color: darkmodeColor}]}>
                 Score: {score}
-              </Text>
+              </Text> */}
             </View>
             <View
               style={[
@@ -211,7 +216,11 @@ const CourseTestScreen = ({route}) => {
                 renderOptions(questions[currentQuestionIndex]?.options)}
             </View>
 
-            <CustomButton text={'Continue'} onPress={handleContinue} />
+            <CustomButton
+              text={'Continue'}
+              onPress={handleContinue}
+              inlineStyle={styles.continueButtonContainer}
+            />
           </View>
         </SafeAreaView>
       </View>

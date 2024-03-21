@@ -5,9 +5,11 @@ export default {
   WHITE: '#FFF',
   THEMECOLOR: '#E3562A',
   BLUE: '#65AAEA',
-  LIGHTGREEEN: '#038525',
+  // LIGHTGREEEN: '#038525',
+  LIGHTGREEEN: '#00994d',
   RED: '#EF4949',
   YELLOW: '#F2A03F',
   DETAILSBACKGROUND: '#AAC',
   Black: 'rgba(0, 0, 0, 0.5)',
+  LIGHTGREEEN2: 'rgba(4, 189, 96, 0.8)',
 };
