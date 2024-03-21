@@ -28,7 +28,7 @@ const CourseLessonScreen = ({route}) => {
   const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
   const {selectedCourse, topicName, questions} = route.params || {};
-  const [selectedComponent, setSelectedComponent] = useState('Lessons');
+  const [selectedComponent, setSelectedComponent] = useState('');
 
   return (
     <>
@@ -51,7 +51,14 @@ const CourseLessonScreen = ({route}) => {
                 text={selectedCourse?.type}
               />
 
-              <View style={{justifyContent: 'center', alignItems: 'center'}}>
+              <View
+                style={{
+                  justifyContent: 'center',
+                  alignItems: 'center',
+                  borderBottomWidth: 1,
+                  borderColor: darkBorderColor,
+                  marginBottom: moderateVerticalScale(8),
+                }}>
                 <Text
                   style={{
                     fontSize: scale(24),
@@ -65,91 +72,61 @@ const CourseLessonScreen = ({route}) => {
                 </Text>
               </View>
 
-              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-                <View
-                  style={{
-                    flexDirection: 'row',
-                    justifyContent: 'space-evenly',
-                    gap: moderateScale(4),
-                    flex: 1,
-                    width: 'auto',
-                  }}>
-                  <CustomBorderComponent
-                    text={'Lessons'}
-                    inLineStyle={{
-                      borderTopLeftRadius: moderateScale(20),
-                      borderBottomLeftRadius: moderateScale(20),
-                      borderTopRightRadius: moderateScale(1),
-                      borderBottomRightRadius: moderateScale(1),
-                      paddingVertical: moderateScale(12),
-                      backgroundColor: darkBackgroundColor,
-                      width: moderateScale(120),
-                      height: moderateVerticalScale(50),
-                    }}
-                    inLineTextStyle={{
-                      fontWeight: '500',
-                      textTransform: 'capitalize',
-                      color:
-                        selectedComponent === 'Lessons'
-                          ? Color.THEMECOLOR
-                          : Color.GRAY,
-                    }}
-                    onPress={() => setSelectedComponent('Lessons')}
-                  />
+              <View
+                style={{
+                  flexDirection: 'row',
+                  justifyContent: 'space-evenly',
+                  alignItems: 'center',
+                }}>
+                <CustomBorderComponent
+                  text={'Lessons'}
+                  inLineStyle={{
+                    borderRadius: moderateScale(10),
+                    paddingVertical: moderateScale(12),
+                    backgroundColor: darkBackgroundColor,
+                    width: moderateScale(150),
+                    height: moderateVerticalScale(50),
+                  }}
+                  inLineTextStyle={{
+                    fontWeight: '500',
+                    textTransform: 'capitalize',
+                    color:
+                      selectedComponent === 'Lessons'
+                        ? Color.THEMECOLOR
+                        : Color.GRAY,
+                  }}
+                  onPress={() => setSelectedComponent('Lessons')}
+                />
 
-                  <CustomBorderComponent
-                    text={'Tests'}
-                    inLineStyle={{
-                      borderRadius: 1,
-                      paddingVertical: moderateScale(12),
-                      backgroundColor: darkBackgroundColor,
-                      width: moderateScale(120),
-                      height: moderateVerticalScale(50),
-                    }}
-                    inLineTextStyle={{
-                      fontWeight: '500',
-                      textTransform: 'capitalize',
-                      color:
-                        selectedComponent === 'Tests'
-                          ? Color.THEMECOLOR
-                          : Color.GRAY,
-                    }}
-                    onPress={() => {
-                      navigation.navigate(
-                        NavigationStringPath.COURSE_TESTSCREEN,
-                        {
-                          selectedCourse,
-                          topicName,
-                          questions: questions,
-                        },
-                      );
-                    }}
-                  />
-
-                  <CustomBorderComponent
-                    text={'Discussion'}
-                    inLineStyle={{
-                      borderTopLeftRadius: moderateScale(1),
-                      borderBottomLeftRadius: moderateScale(1),
-                      borderTopRightRadius: moderateScale(20),
-                      borderBottomRightRadius: moderateScale(20),
-                      paddingVertical: moderateScale(12),
-                      backgroundColor: darkBackgroundColor,
-                      width: moderateScale(170),
-                      height: moderateVerticalScale(50),
-                    }}
-                    inLineTextStyle={{
-                      fontWeight: '500',
-                      textTransform: 'capitalize',
-                      color:
-                        selectedComponent === 'Discussion'
-                          ? Color.THEMECOLOR
-                          : Color.GRAY,
-                    }}
-                    onPress={() => setSelectedComponent('Discussion')}
-                  />
-                </View>
-              </ScrollView>
+                <CustomBorderComponent
+                  text={'Tests'}
+                  inLineStyle={{
+                    borderRadius: moderateScale(10),
+                    paddingVertical: moderateScale(12),
+                    backgroundColor: darkBackgroundColor,
+                    width: moderateScale(150),
+                    height: moderateVerticalScale(50),
+                  }}
+                  inLineTextStyle={{
+                    fontWeight: '500',
+                    textTransform: 'capitalize',
+                    color:
+                      selectedComponent === 'Lessons'
+                        ? Color.THEMECOLOR
+                        : Color.GRAY,
+                  }}
+                  onPress={() => {
+                    navigation.navigate(
+                      NavigationStringPath.COURSE_TESTSCREEN,
+                      {
+                        selectedCourse,
+                        topicName,
+                        questions: questions,
+                      },
+                    );
+                  }}
+                />
+              </View>
 
               <View
                 style={{

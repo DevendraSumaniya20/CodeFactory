@@ -35,6 +35,8 @@ const ProfileScreen = () => {
   const route = useRoute();
   const dispatch = useDispatch();
 
+  const {totalScore} = route.params || {};
+
   const cameraPermission = useSelector(state => state.cameraPermission);
 
   const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
@@ -112,6 +114,45 @@ const ProfileScreen = () => {
     }
   };
 
+  const handleAlert = async () => {
+    try {
+      const lastTestScore = await AsyncStorage.getItem('lastTestScore');
+
+      let resultScore = parseInt(lastTestScore) || 0;
+
+      if (totalScore !== undefined) {
+        resultScore = totalScore;
+      }
+
+      await AsyncStorage.setItem('lastTestScore', resultScore.toString());
+
+      Alert.alert(
+        'Show Result?',
+        'Do you want to navigate to the test screen?',
+        [
+          {
+            text: 'No',
+            onPress: () => {
+              if (lastTestScore !== null) {
+                Alert.alert(`Your last result is: ${lastTestScore}`);
+              } else {
+                Alert.alert('No previous test scores found.');
+              }
+            },
+          },
+          {
+            text: 'Yes',
+            onPress: () => {
+              navigation.navigate(NavigationStringPath.YOUR_COURSESSCREEN);
+            },
+          },
+        ],
+      );
+    } catch (error) {
+      console.error('Error handling alert:', error);
+    }
+  };
+
   return (
     <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
       <SafeAreaView style={styles.subContainer}>
@@ -166,7 +207,7 @@ const ProfileScreen = () => {
               <CustomBorderComponent
                 text={'Result'}
                 onPress={() => {
-                  Alert.alert('Your result ');
+                  handleAlert();
                 }}
               />
             </View>

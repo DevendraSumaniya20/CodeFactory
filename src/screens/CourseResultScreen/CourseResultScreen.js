@@ -7,6 +7,10 @@ const CourseResultScreen = ({route, navigation}) => {
     route.params;
 
   const handleRetakeTest = () => {
+    navigation.navigate(NavigationStringPath.PROFILESCREEN, {
+      totalScore,
+    });
+
     navigation.navigate(NavigationStringPath.COURSE_LESSONSCREEN, {
       selectedCourse,
       topicName,
