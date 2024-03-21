@@ -19,7 +19,7 @@ const CourseTestScreen = ({route}) => {
   const {topicName, questions, selectedCourse, resetQuiz} = route.params || {};
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [selectedAnswer, setSelectedAnswer] = useState(null);
-  const [timer, setTimer] = useState(10);
+  const [timer, setTimer] = useState(15);
   const [score, setScore] = useState(0);
   const navigation = useNavigation();
   const {darkmodeColor, darkBackgroundColor, darkBorderColor} = CustomTheme();
@@ -36,9 +36,8 @@ const CourseTestScreen = ({route}) => {
         if (prevTimer === 0) {
           clearInterval(interval);
           handleTimeUp();
-          return 15; // Change timer to 15 seconds
+          return 15;
         } else if (prevTimer === 5 && selectedAnswer === null) {
-          // If user hasn't selected an answer and 5 seconds remaining, show alert
           Alert.alert(
             'No Answer Selected',
             'Please select an answer before continuing.',
@@ -49,12 +48,12 @@ const CourseTestScreen = ({route}) => {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, [currentQuestionIndex, selectedAnswer]); // Update dependencies
+  }, [currentQuestionIndex, selectedAnswer]);
 
   const resetQuizState = () => {
     setCurrentQuestionIndex(0);
     setSelectedAnswer(null);
-    setTimer(10);
+    setTimer(15);
     setScore(0);
   };
 
@@ -62,7 +61,6 @@ const CourseTestScreen = ({route}) => {
 
   const handleContinue = () => {
     if (selectedAnswer !== null) {
-      // Calculate score here
       const isCorrectAnswer =
         selectedAnswer === questions[currentQuestionIndex].correctAnswerIndex;
       const updatedScore = isCorrectAnswer ? score + 10 : 0;
@@ -80,7 +78,7 @@ const CourseTestScreen = ({route}) => {
     if (currentQuestionIndex < questions.length - 1) {
       setCurrentQuestionIndex(currentQuestionIndex + 1);
       setSelectedAnswer(null);
-      setTimer(10);
+      setTimer(15);
     } else {
       navigateToResultScreen();
     }
