@@ -14,9 +14,7 @@ const CustomCategoryButton = ({text, onPress}) => {
   return (
     <View style={{flex: 1}}>
       <TouchableOpacity style={styles.cardTouchble} onPress={onPress}>
-        <Text style={[styles.cardTextStyle, {color: darkmodeColor}]}>
-          {text}
-        </Text>
+        <Text style={[styles.cardTextStyle, {color: Color.WHITE}]}>{text}</Text>
       </TouchableOpacity>
     </View>
   );

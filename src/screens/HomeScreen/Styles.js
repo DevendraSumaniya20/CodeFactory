@@ -35,8 +35,7 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     lineHeight: 32,
     letterSpacing: 0.2,
-
-    marginTop: moderateScale(4),
+    marginVertical: moderateScale(6),
   },
   notificationView: {
     borderRadius: moderateScale(100),

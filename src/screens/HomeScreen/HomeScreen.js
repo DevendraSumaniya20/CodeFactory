@@ -8,6 +8,8 @@ import {
   Image,
   TouchableOpacity,
   Alert,
+  Modal,
+  TouchableWithoutFeedback,
 } from 'react-native';
 import {moderateScale, moderateVerticalScale} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
@@ -22,6 +24,7 @@ import {auth} from '../../config/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomTheme from '../../constants/CustomTheme';
 import messaging from '@react-native-firebase/messaging';
+import Color from '../../constants/Color';
 
 const HomeScreen = () => {
   const route = useRoute();
@@ -32,31 +35,18 @@ const HomeScreen = () => {
   const [name, setName] = useState(route.params?.name ?? '');
   const [greeting, setGreeting] = useState('');
   const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
-  const [notificationColor, setNotificationColor] = useState('#ff0000'); // Red color for notifications
+  const [notificationColor, setNotificationColor] = useState('#ff0000');
+  const [notificationMessage, setNotificationMessage] = useState('');
+  const [isModalVisible, setIsModalVisible] = useState(false);
 
   const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
-  async function requestUserPermission() {
-    const authStatus = await messaging().requestPermission();
-    const enabled =
-      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
-      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
-
-    if (enabled) {
-      console.log('Authorization status:', authStatus);
-    }
-  }
-
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
-      // Increment the unread messages count
       setUnreadMessagesCount(prevCount => prevCount + 1);
-
-      // Set notification color to red
       setNotificationColor('#ff0000');
 
-      // Show alert or handle the new message
-      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+      handleMessage(remoteMessage);
     });
 
     return unsubscribe;
@@ -194,8 +184,7 @@ const HomeScreen = () => {
               ]}
             />
             <View style={styles.renderTouchableOpacity}>
-              <Text
-                style={[styles.renderTouchableText, {color: darkmodeColor}]}>
+              <Text style={[styles.renderTouchableText, {color: Color.WHITE}]}>
                 ₹ {item.Price}
               </Text>
             </View>
@@ -219,8 +208,36 @@ const HomeScreen = () => {
     );
   };
 
+  const handleMessage = remoteMessage => {
+    const {data, notification} = remoteMessage;
+    const messageBody = notification ? notification.body : data.body;
+    setNotificationMessage(messageBody);
+  };
+
+  const handleBellIconPress = () => {
+    setIsModalVisible(true);
+    setUnreadMessagesCount(0);
+  };
+
+  const modalContent = (
+    <View style={styles.modalContainer}>
+      <TouchableWithoutFeedback onPress={() => setIsModalVisible(false)}>
+        <View style={styles.modalContent}>
+          <Text style={styles.notificationMessage}>{notificationMessage}</Text>
+        </View>
+      </TouchableWithoutFeedback>
+    </View>
+  );
+
   return (
     <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={isModalVisible}
+        onRequestClose={() => setIsModalVisible(false)}>
+        {modalContent}
+      </Modal>
       <SafeAreaView
         style={[styles.subContainer, {backgroundColor: darkBackgroundColor}]}>
         <View style={styles.marginContainer}>
@@ -268,12 +285,12 @@ const HomeScreen = () => {
                         {
                           backgroundColor: 'red',
                           position: 'absolute',
-                          top: -8,
-                          right: -8,
+                          top: moderateVerticalScale(-8),
+                          right: moderateScale(-8),
                           zIndex: 1,
-                          borderRadius: 10,
-                          paddingHorizontal: 6,
-                          paddingVertical: 2,
+                          borderRadius: moderateScale(10),
+                          paddingHorizontal: moderateScale(6),
+                          paddingVertical: moderateVerticalScale(2),
                         },
                       ]}>
                       <Text
@@ -291,7 +308,6 @@ const HomeScreen = () => {
           </View>
           <View
             style={[
-              styles.marginContainer,
               {
                 backgroundColor: darkBackgroundColor,
                 borderColor: darkBorderColor,
