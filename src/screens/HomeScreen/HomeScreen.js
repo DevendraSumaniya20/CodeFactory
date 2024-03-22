@@ -12,28 +12,27 @@ import {
 import {moderateScale, moderateVerticalScale} from 'react-native-size-matters';
 import CustomSearch from '../../components/CustomSearch';
 import styles from './Styles';
-import {Bell, BellIcon} from '../../constants/SvgPath';
+import {Bell} from '../../constants/SvgPath';
 import CustomCategoryButton from '../../components/CustomCategoryButton';
 import data from '../../constants/Data';
 import _ from 'lodash';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
-import {auth, db} from '../../config/FirebaseAuth';
+import {auth} from '../../config/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomTheme from '../../constants/CustomTheme';
 import messaging from '@react-native-firebase/messaging';
 
 const HomeScreen = () => {
   const route = useRoute();
-
   const navigation = useNavigation();
-  const {userGoogleInfo} = route.params ?? {};
 
   const [searchValue, setSearchValue] = useState('');
   const [filteredData, setFilteredData] = useState(data);
   const [name, setName] = useState(route.params?.name ?? '');
   const [greeting, setGreeting] = useState('');
-  const [showSearchInput, setShowSearchInput] = useState(false);
+  const [unreadMessagesCount, setUnreadMessagesCount] = useState(0);
+  const [notificationColor, setNotificationColor] = useState('#ff0000'); // Red color for notifications
 
   const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
 
@@ -50,21 +49,17 @@ const HomeScreen = () => {
 
   useEffect(() => {
     const unsubscribe = messaging().onMessage(async remoteMessage => {
+      // Increment the unread messages count
+      setUnreadMessagesCount(prevCount => prevCount + 1);
+
+      // Set notification color to red
+      setNotificationColor('#ff0000');
+
+      // Show alert or handle the new message
       Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
     });
 
     return unsubscribe;
-  }, []);
-
-  const getToken = async () => {
-    await messaging().registerDeviceForRemoteMessages();
-    const token = await messaging().getToken();
-    console.log(token);
-  };
-
-  useEffect(() => {
-    getToken();
-    requestUserPermission();
   }, []);
 
   useEffect(() => {
@@ -74,7 +69,7 @@ const HomeScreen = () => {
         setName(displayName.charAt(0).toUpperCase() + displayName.slice(1));
         AsyncStorage.setItem('name', displayName);
       } else {
-        const googleName = userGoogleInfo?.user?.name ?? '';
+        const googleName = route.params?.userGoogleInfo?.user?.name ?? '';
         if (googleName) {
           setName(googleName.charAt(0).toUpperCase() + googleName.slice(1));
           AsyncStorage.setItem('name', googleName);
@@ -82,7 +77,7 @@ const HomeScreen = () => {
       }
     });
 
-    return () => unsubscribe();
+    return unsubscribe;
   }, [route.params]);
 
   useEffect(() => {
@@ -112,7 +107,6 @@ const HomeScreen = () => {
   };
 
   const handleInputWithDebounce = text => {
-    setShowSearchInput(false);
     setSearchValue(text);
     if (text.length >= 2) {
       filterData(text);
@@ -123,7 +117,6 @@ const HomeScreen = () => {
 
   const handleClearSearch = () => {
     setSearchValue('');
-    setShowSearchInput(false);
     setFilteredData(data);
   };
 
@@ -176,7 +169,7 @@ const HomeScreen = () => {
           navigation.navigate(NavigationStringPath.PRODUCTSCREEN, {
             item,
             price: filteredData[0].Price,
-            userGoogleInfo,
+            userGoogleInfo: route.params?.userGoogleInfo,
             name,
           })
         }>
@@ -226,8 +219,6 @@ const HomeScreen = () => {
     );
   };
 
-  const onSubmitted = () => {};
-
   return (
     <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
       <SafeAreaView
@@ -258,72 +249,108 @@ const HomeScreen = () => {
                   borderColor: darkBorderColor,
                 },
               ]}>
-              <Bell
-                width={moderateScale(24)}
-                height={moderateScale(24)}
-                fill={darkmodeColor}
-              />
+              <TouchableOpacity
+                onPress={() => setUnreadMessagesCount(0)}
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                }}>
+                <View style={{position: 'relative'}}>
+                  <Bell
+                    width={moderateScale(24)}
+                    height={moderateScale(24)}
+                    fill={darkmodeColor}
+                  />
+                  {unreadMessagesCount > 0 && (
+                    <View
+                      style={[
+                        styles.notificationBadge,
+                        {
+                          backgroundColor: 'red',
+                          position: 'absolute',
+                          top: -8,
+                          right: -8,
+                          zIndex: 1,
+                          borderRadius: 10,
+                          paddingHorizontal: 6,
+                          paddingVertical: 2,
+                        },
+                      ]}>
+                      <Text
+                        style={[
+                          styles.notificationBadgeText,
+                          {fontWeight: 'bold'},
+                        ]}>
+                        {unreadMessagesCount}
+                      </Text>
+                    </View>
+                  )}
+                </View>
+              </TouchableOpacity>
             </View>
           </View>
           <View
-            style={{
-              marginTop: moderateScale(12),
-              backgroundColor: darkBackgroundColor,
-              borderColor: darkBorderColor,
-              borderRadius: moderateScale(16),
-            }}>
-            <CustomSearch
-              inputStyle={{
-                width: '90%',
-                paddingHorizontal: moderateScale(16),
-              }}
-              placeholder="Search"
-              placeholderTextColor={darkmodeColor}
-              onChangeText={handleInputWithDebounce}
-              value={searchValue}
-              rightIcon={'search-outline'}
-              onPressRight={handleSearch}
-              onPressClear={handleClearSearch}
-              visible={showSearchInput}
-              onSubmitEditing={() => {
-                handleSearch();
-              }}
-            />
-          </View>
-
-          <View
             style={[
-              styles.categoryView,
-              {backgroundColor: darkBackgroundColor},
-            ]}>
-            <Text style={[styles.categoryTextStyle, {color: darkmodeColor}]}>
-              Category :
-            </Text>
-            <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-              {getUniqueCategories().map(category => (
-                <CustomCategoryButton
-                  key={category}
-                  text={`#${category}`}
-                  onPress={() => handleCategoryPress(category)}
-                />
-              ))}
-            </ScrollView>
-          </View>
-          <View
-            style={[
+              styles.marginContainer,
               {
                 backgroundColor: darkBackgroundColor,
                 borderColor: darkBorderColor,
               },
             ]}>
-            <FlatList
-              data={data}
-              renderItem={renderItem}
-              showsVerticalScrollIndicator={false}
-              contentContainerStyle={{
-                paddingBottom: moderateScale(350),
-              }}
-            />
+            <View
+              style={[
+                styles.searchView,
+                {backgroundColor: darkBackgroundColor},
+              ]}>
+              <CustomSearch
+                inputStyle={{
+                  width: '90%',
+                  paddingHorizontal: moderateScale(16),
+                }}
+                placeholder="Search"
+                placeholderTextColor={darkmodeColor}
+                onChangeText={handleInputWithDebounce}
+                value={searchValue}
+                rightIcon={'search-outline'}
+                onPressRight={handleSearch}
+                onPressClear={handleClearSearch}
+                onSubmitEditing={() => {
+                  handleSearch();
+                }}
+              />
+            </View>
+            <View
+              style={[
+                styles.categoryView,
+                {backgroundColor: darkBackgroundColor},
+              ]}>
+              <Text style={[styles.categoryTextStyle, {color: darkmodeColor}]}>
+                Category :
+              </Text>
+              <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+                {getUniqueCategories().map(category => (
+                  <CustomCategoryButton
+                    key={category}
+                    text={`#${category}`}
+                    onPress={() => handleCategoryPress(category)}
+                  />
+                ))}
+              </ScrollView>
+            </View>
+            <View
+              style={{
+                backgroundColor: darkBackgroundColor,
+                borderColor: darkBorderColor,
+              }}>
+              <FlatList
+                data={filteredData}
+                renderItem={renderItem}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                  paddingBottom: moderateScale(350),
+                }}
+              />
+            </View>
           </View>
         </View>
       </SafeAreaView>
