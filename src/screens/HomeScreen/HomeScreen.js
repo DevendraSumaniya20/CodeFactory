@@ -52,6 +52,15 @@ const HomeScreen = () => {
     return unsubscribe;
   }, []);
 
+  const getToken = async () => {
+    const token = await messaging().getToken();
+    console.log(token);
+  };
+
+  useEffect(() => {
+    getToken();
+  }, []);
+
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
