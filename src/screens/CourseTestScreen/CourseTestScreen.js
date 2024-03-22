@@ -164,15 +164,17 @@ const CourseTestScreen = ({route}) => {
               </Text>
 
               <View
-                style={[
-                  styles.progressBar,
-                  {backgroundColor: darkBackgroundColor},
-                ]}>
+                style={{
+                  backgroundColor: darkBackgroundColor,
+                  height: 8,
+                  width: '100%',
+                  marginBottom: 10,
+                }}>
                 <View
                   style={{
-                    width: `${progress}%`,
                     backgroundColor: '#007AFF',
-                    height: 8,
+                    height: '100%',
+                    width: `${progress}%`,
                   }}
                 />
               </View>
