@@ -15,14 +15,13 @@ import styles from './Styles';
 import {Bell, BellIcon} from '../../constants/SvgPath';
 import CustomCategoryButton from '../../components/CustomCategoryButton';
 import data from '../../constants/Data';
-import {moderateScaleVertical} from '../../constants/responsiveSize';
 import _ from 'lodash';
-import {debounce} from 'lodash';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
 import {auth, db} from '../../config/FirebaseAuth';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import CustomTheme from '../../constants/CustomTheme';
+import messaging from '@react-native-firebase/messaging';
 
 const HomeScreen = () => {
   const route = useRoute();
@@ -37,6 +36,36 @@ const HomeScreen = () => {
   const [showSearchInput, setShowSearchInput] = useState(false);
 
   const {darkmodeColor, darkBorderColor, darkBackgroundColor} = CustomTheme();
+
+  async function requestUserPermission() {
+    const authStatus = await messaging().requestPermission();
+    const enabled =
+      authStatus === messaging.AuthorizationStatus.AUTHORIZED ||
+      authStatus === messaging.AuthorizationStatus.PROVISIONAL;
+
+    if (enabled) {
+      console.log('Authorization status:', authStatus);
+    }
+  }
+
+  useEffect(() => {
+    const unsubscribe = messaging().onMessage(async remoteMessage => {
+      Alert.alert('A new FCM message arrived!', JSON.stringify(remoteMessage));
+    });
+
+    return unsubscribe;
+  }, []);
+
+  const getToken = async () => {
+    await messaging().registerDeviceForRemoteMessages();
+    const token = await messaging().getToken();
+    console.log(token);
+  };
+
+  useEffect(() => {
+    getToken();
+    requestUserPermission();
+  }, []);
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
