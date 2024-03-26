@@ -85,8 +85,7 @@ const ResultsScreen = () => {
               ]}
             />
             <View style={styles.renderTouchableOpacity}>
-              <Text
-                style={[styles.renderTouchableText, {color: darkmodeColor}]}>
+              <Text style={[styles.renderTouchableText, {color: '#fff'}]}>
                 ₹ {item.Price}
               </Text>
             </View>
