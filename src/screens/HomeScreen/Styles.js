@@ -121,11 +121,11 @@ const styles = StyleSheet.create({
   modalContent: {
     width: '80%',
     backgroundColor: '#FFFFFF',
-    padding: 20,
-    borderRadius: 10,
+    padding: moderateScale(20),
+    borderRadius: moderateScale(10),
   },
   notificationMessage: {
-    fontSize: 16,
+    fontSize: scale(16),
     textAlign: 'center',
   },
 });

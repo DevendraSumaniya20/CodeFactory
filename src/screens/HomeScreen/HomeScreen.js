@@ -7,7 +7,6 @@ import {
   ScrollView,
   Image,
   TouchableOpacity,
-  Alert,
   Modal,
   TouchableWithoutFeedback,
 } from 'react-native';
@@ -219,13 +218,24 @@ const HomeScreen = () => {
 
   const handleMessage = remoteMessage => {
     const {data, notification} = remoteMessage;
-    const messageBody = notification ? notification.body : data.body;
-    setNotificationMessage(messageBody, data, notification);
+    let messageBody = '';
+
+    if (notification && notification.body) {
+      messageBody += notification.body;
+    }
+
+    if (data && data.body) {
+      if (messageBody !== '') {
+        messageBody += '\n';
+      }
+      messageBody += data.body;
+    }
+
+    setNotificationMessage(messageBody);
   };
 
   const handleBellIconPress = () => {
     setUnreadMessagesCount(0);
-    setNotificationMessage(notificationMessage);
     setIsModalVisible(true);
 
     setTimeout(() => {
