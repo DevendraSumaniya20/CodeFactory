@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {
+  SafeAreaView,
   StyleSheet,
   Text,
   TextInput,
@@ -9,6 +10,9 @@ import {
 import CustomHeader from '../../components/CustomHeader';
 import {useNavigation} from '@react-navigation/native';
 import NavigationStringPath from '../../constants/NavigationStringPath';
+import styles from './Styles';
+import CustomButton from '../../components/CustomButton';
+import CustomTheme from '../../constants/CustomTheme';
 
 const EditScreen = ({route}) => {
   const {userDisplayName, userEmailState} = route.params;
@@ -20,6 +24,7 @@ const EditScreen = ({route}) => {
   const [updatedPassword, setUpdatedPassword] = useState('');
 
   const navigation = useNavigation();
+  const {darkBackgroundColor, darkBorderColor, darkmodeColor} = CustomTheme();
 
   useEffect(() => {
     setName(userDisplayName);
@@ -39,75 +44,71 @@ const EditScreen = ({route}) => {
   };
 
   return (
-    <View style={styles.container}>
-      <CustomHeader
-        iconName={'chevron-back'}
-        onPress={() => navigation.goBack()}
-        text={'Edit Information'}
-      />
-      <View style={styles.formContainer}>
-        <Text style={styles.label}>Name</Text>
-        <TextInput
-          style={styles.input}
-          value={updatedName !== '' ? updatedName : name}
-          onChangeText={text => setUpdatedName(text)}
-        />
-        <Text style={styles.label}>Email</Text>
-        <TextInput
-          style={styles.input}
-          value={updatedEmail !== '' ? updatedEmail : email}
-          onChangeText={text => setUpdatedEmail(text)}
-          keyboardType="email-address"
-          autoCapitalize="none"
-        />
-        <Text style={styles.label}>Password</Text>
-        <TextInput
-          style={styles.input}
-          value={updatedPassword !== '' ? updatedPassword : password}
-          onChangeText={text => setUpdatedPassword(text)}
-          secureTextEntry={true}
-        />
-        <TouchableOpacity style={styles.saveButton} onPress={handleSave}>
-          <Text style={styles.saveButtonText}>Save</Text>
-        </TouchableOpacity>
-      </View>
+    <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
+      <SafeAreaView
+        style={[styles.subContainer, {backgroundColor: darkBackgroundColor}]}>
+        <View style={styles.marginContainer}>
+          <CustomHeader
+            color={darkmodeColor}
+            iconName={'chevron-back'}
+            onPress={() => navigation.goBack()}
+            text={'Edit Information'}
+          />
+          <View style={styles.formContainer}>
+            <Text style={[styles.label, {color: darkmodeColor}]}>Name</Text>
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  backgroundColor: darkBackgroundColor,
+                  color: darkmodeColor,
+                  borderColor: darkBorderColor,
+                },
+              ]}
+              value={updatedName !== '' ? updatedName : name}
+              onChangeText={text => setUpdatedName(text)}
+            />
+            <Text style={[styles.label, {color: darkmodeColor}]}>Email</Text>
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  backgroundColor: darkBackgroundColor,
+                  color: darkmodeColor,
+                  borderColor: darkBorderColor,
+                },
+              ]}
+              value={updatedEmail !== '' ? updatedEmail : email}
+              onChangeText={text => setUpdatedEmail(text)}
+              keyboardType="email-address"
+              autoCapitalize="none"
+            />
+            <Text style={[styles.label, {color: darkmodeColor}]}>Password</Text>
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  backgroundColor: darkBackgroundColor,
+                  color: darkmodeColor,
+                  borderColor: darkBorderColor,
+                },
+              ]}
+              value={updatedPassword !== '' ? updatedPassword : password}
+              onChangeText={text => setUpdatedPassword(text)}
+              secureTextEntry={true}
+            />
+
+            <CustomButton
+              text={'Save'}
+              onPress={() => {
+                handleSave();
+              }}
+            />
+          </View>
+        </View>
+      </SafeAreaView>
     </View>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  formContainer: {
-    paddingHorizontal: 20,
-    paddingTop: 20,
-  },
-  label: {
-    fontSize: 16,
-    fontWeight: 'bold',
-    marginBottom: 5,
-  },
-  input: {
-    height: 40,
-    borderColor: 'gray',
-    borderWidth: 1,
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    marginBottom: 20,
-  },
-  saveButton: {
-    backgroundColor: 'blue',
-    borderRadius: 5,
-    paddingVertical: 10,
-    alignItems: 'center',
-  },
-  saveButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    fontWeight: 'bold',
-  },
-});
 
 export default EditScreen;

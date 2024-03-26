@@ -257,7 +257,13 @@ const HomeScreen = () => {
   );
 
   return (
-    <View style={[styles.container, {backgroundColor: darkBackgroundColor}]}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: darkBackgroundColor,
+        },
+      ]}>
       <Modal
         animationType="slide"
         transparent={true}
@@ -390,7 +396,7 @@ const HomeScreen = () => {
                 renderItem={renderItem}
                 showsVerticalScrollIndicator={false}
                 contentContainerStyle={{
-                  paddingBottom: moderateScale(350),
+                  paddingBottom: moderateScale(500),
                 }}
               />
             </View>
