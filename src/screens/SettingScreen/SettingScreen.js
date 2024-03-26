@@ -57,6 +57,15 @@ const SettingScreen = ({route}) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    if (route.params?.updatedName) {
+      setUserDisplayName(route.params.updatedName);
+    }
+    if (route.params?.updatedEmail) {
+      setUserEmailState(route.params.updatedEmail);
+    }
+  }, [route.params]);
+
+  useEffect(() => {
     getUserInfo();
     getLastNotificationToggleStatus();
   }, []);
@@ -243,11 +252,23 @@ const SettingScreen = ({route}) => {
                 text1={'Name'}
                 text2={userDisplayName}
                 icon2={<RightArrow />}
+                onPress={() => {
+                  navigation.navigate(NavigationStringPath.EDITSCREEN, {
+                    userDisplayName,
+                    userEmailState,
+                  });
+                }}
               />
               <CustomDetailsComponent
                 icon1={<Email />}
                 text1={'Email'}
                 text2={userEmailState}
+                onPress={() => {
+                  navigation.navigate(NavigationStringPath.EDITSCREEN, {
+                    userDisplayName,
+                    userEmailState,
+                  });
+                }}
                 icon2={<RightArrow />}
               />
               <CustomDetailsComponent
@@ -255,6 +276,12 @@ const SettingScreen = ({route}) => {
                 text1={'Password'}
                 text2={'Click here to change Password'}
                 icon2={<RightArrow />}
+                onPress={() => {
+                  navigation.navigate(NavigationStringPath.EDITSCREEN, {
+                    userDisplayName,
+                    userEmailState,
+                  });
+                }}
               />
             </View>
 

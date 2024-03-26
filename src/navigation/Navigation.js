@@ -16,15 +16,17 @@ import CourseLessonScreen from '../screens/CourseLessonScreen/CourseLessonScreen
 import CourseTestScreen from '../screens/CourseTestScreen/CourseTestScreen';
 import CustomTheme from '../constants/CustomTheme';
 import CourseResultScreen from '../screens/CourseResultScreen/CourseResultScreen';
+import {ActivityIndicator, View} from 'react-native';
+import EditScreen from '../screens/EditScreen/EditScreen';
 
 const Stack = createNativeStackNavigator();
 
 const Navigation = () => {
   const {darkmodeColor, darkBackgroundColor} = CustomTheme();
-
   const [initialRoute, setInitialRoute] = useState(
     NavigationStringPath.LOGINSCREEN,
   );
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
     const checkLoginStatus = async () => {
@@ -37,11 +39,21 @@ const Navigation = () => {
         }
       } catch (error) {
         console.error('Error checking login status:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
     checkLoginStatus();
   }, []);
+
+  if (isLoading) {
+    return (
+      <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+        <ActivityIndicator size="large" color="blue" />
+      </View>
+    );
+  }
 
   return (
     <Stack.Navigator
@@ -91,6 +103,10 @@ const Navigation = () => {
       <Stack.Screen
         name={NavigationStringPath.COURSE_RESULTSCREEN}
         component={CourseResultScreen}
+      />
+      <Stack.Screen
+        name={NavigationStringPath.EDITSCREEN}
+        component={EditScreen}
       />
 
       <Stack.Screen

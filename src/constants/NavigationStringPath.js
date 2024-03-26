@@ -15,4 +15,5 @@ export default {
   COURSE_SAVED_SCREEN: 'CourseSavedScreen',
   SELECTED_COURSE_SCREEN: 'SelectedCourseScreen',
   COURSE_RESULTSCREEN: 'CourseResultScreen',
+  EDITSCREEN: 'EditScreen',
 };
