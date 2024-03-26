@@ -112,6 +112,22 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     lineHeight: 21,
   },
+  modalContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: 'rgba(0, 0, 0, 0.5)',
+  },
+  modalContent: {
+    width: '80%',
+    backgroundColor: '#FFFFFF',
+    padding: 20,
+    borderRadius: 10,
+  },
+  notificationMessage: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
 });
 
 export default styles;

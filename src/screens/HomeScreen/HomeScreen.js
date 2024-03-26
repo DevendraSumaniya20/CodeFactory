@@ -54,7 +54,7 @@ const HomeScreen = () => {
 
   const getToken = async () => {
     const token = await messaging().getToken();
-    console.log(token);
+    // console.log(token);
   };
 
   useEffect(() => {
@@ -220,19 +220,27 @@ const HomeScreen = () => {
   const handleMessage = remoteMessage => {
     const {data, notification} = remoteMessage;
     const messageBody = notification ? notification.body : data.body;
-    setNotificationMessage(messageBody);
+    setNotificationMessage(messageBody, data, notification);
   };
 
   const handleBellIconPress = () => {
-    setIsModalVisible(true);
     setUnreadMessagesCount(0);
+    setNotificationMessage(notificationMessage);
+    setIsModalVisible(true);
+
+    setTimeout(() => {
+      setIsModalVisible(false);
+    }, 3000);
   };
 
   const modalContent = (
-    <View style={styles.modalContainer}>
+    <View style={[styles.modalContainer]}>
       <TouchableWithoutFeedback onPress={() => setIsModalVisible(false)}>
-        <View style={styles.modalContent}>
-          <Text style={styles.notificationMessage}>{notificationMessage}</Text>
+        <View
+          style={[styles.modalContent, {backgroundColor: darkBackgroundColor}]}>
+          <Text style={[styles.notificationMessage, {color: darkmodeColor}]}>
+            {notificationMessage}
+          </Text>
         </View>
       </TouchableWithoutFeedback>
     </View>
@@ -276,7 +284,7 @@ const HomeScreen = () => {
                 },
               ]}>
               <TouchableOpacity
-                onPress={() => setUnreadMessagesCount(0)}
+                onPress={() => handleBellIconPress()}
                 style={{
                   flexDirection: 'row',
                   alignItems: 'center',
